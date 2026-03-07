@@ -219,6 +219,30 @@ h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
 /* Footer */
 footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.78rem; border-top: 1px solid var(--border); margin-top: 2rem; }
 
+/* Latest Insights */
+.insights-intro { color: var(--muted); margin-bottom: 2rem; font-size: 1rem; }
+.insights-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem; }
+.insight-card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;
+  transition: border-color 0.3s, transform 0.2s; position: relative;
+}
+.insight-card:hover { transform: translateY(-3px); border-color: var(--ai); }
+.insight-source {
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  color: var(--ai);
+}
+.insight-card h3 { font-size: 0.95rem; line-height: 1.45; margin: 0; }
+.insight-summary { color: var(--muted); font-size: 0.84rem; line-height: 1.6; flex-grow: 1; }
+.insight-links { display: flex; gap: 0.5rem; margin-top: 0.3rem; }
+.insight-links a {
+  font-size: 0.75rem; padding: 0.25rem 0.7rem; border-radius: 6px;
+  text-decoration: none; color: var(--ai); border: 1px solid var(--ai-border);
+  background: var(--ai-bg); transition: all 0.2s;
+}
+.insight-links a:hover { background: var(--ai); color: #fff; }
+.insight-date { font-size: 0.72rem; color: var(--muted); opacity: 0.6; }
+
 /* Publication Links & Featured Book */
 .pub-item-featured { padding: 1rem 0; }
 .pub-featured-row { display: flex; gap: 1.2rem; align-items: flex-start; }
@@ -287,6 +311,7 @@ footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.78
   .two-col { grid-template-columns: 1fr; }
   .patents-summary { flex-direction: column; }
   .talks-grid { grid-template-columns: 1fr; }
+  .insights-grid { grid-template-columns: 1fr; }
   .engagement-grid { grid-template-columns: 1fr 1fr; }
   .hero-content h1 { font-size: 1.8rem; }
   .tagline-pillars { flex-direction: column; gap: 0.4rem; }
