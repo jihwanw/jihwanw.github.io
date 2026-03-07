@@ -173,6 +173,62 @@ h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
 /* Footer */
 footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.78rem; border-top: 1px solid var(--border); margin-top: 2rem; }
 
+/* Book Section: AI와 맥주 */
+.book-subtitle { color: var(--muted); font-size: 1.05rem; margin-bottom: 2rem; }
+
+.book-hero { display: grid; grid-template-columns: 240px 1fr; gap: 2rem; margin-bottom: 2.5rem; }
+
+.book-cover-placeholder {
+  width: 240px; height: 320px; border-radius: 12px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+  border: 1px solid var(--border);
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.8rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  transition: transform 0.3s;
+}
+.book-cover-placeholder:hover { transform: scale(1.03); }
+.book-emoji { font-size: 3rem; }
+.book-cover-title { color: var(--text); font-size: 1.3rem; font-weight: 700; }
+.book-cover-author { color: var(--muted); font-size: 0.85rem; }
+
+.book-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.8rem; line-height: 1.8; }
+.book-desc em { color: var(--ai); font-style: normal; font-weight: 600; }
+.book-highlight {
+  color: var(--finance); font-size: 1rem; font-weight: 600;
+  margin: 1rem 0; padding: 0.8rem 1rem; border-radius: 8px;
+  background: var(--finance-bg); border-left: 3px solid var(--finance);
+}
+
+.book-meta { display: flex; flex-wrap: wrap; gap: 0.8rem; margin: 1rem 0; }
+.book-meta-item { font-size: 0.82rem; color: var(--muted); background: var(--surface); padding: 0.3rem 0.7rem; border-radius: 6px; border: 1px solid var(--border); }
+
+.book-buy-links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
+
+.book-toc {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+  padding: 1.5rem; margin-bottom: 2rem;
+}
+.book-toc h3 { margin-bottom: 1rem; color: var(--text); }
+.toc-list { padding-left: 1.2rem; }
+.toc-list li { color: var(--muted); font-size: 0.88rem; padding: 0.35rem 0; border-bottom: 1px solid rgba(37,37,56,0.4); }
+.toc-list li:last-child { border-bottom: none; }
+
+.book-quotes { margin-bottom: 2rem; }
+.book-quotes h3 { margin-bottom: 1rem; color: var(--text); }
+.book-quote {
+  background: var(--surface); border-left: 3px solid var(--ai); border-radius: 0 10px 10px 0;
+  padding: 1.2rem 1.5rem; margin-bottom: 1rem;
+}
+.book-quote p { color: var(--text); font-size: 0.9rem; font-style: italic; line-height: 1.8; margin-bottom: 0.5rem; }
+.book-quote cite { color: var(--muted); font-size: 0.78rem; }
+
+.book-review-note {
+  color: var(--muted); font-size: 0.9rem; font-style: italic;
+  padding: 1rem 1.2rem; border-radius: 10px;
+  background: linear-gradient(135deg, var(--ai-bg), var(--finance-bg));
+  border: 1px solid var(--border);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .pillars-grid { grid-template-columns: 1fr; }
@@ -185,4 +241,6 @@ footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.78
   .pillar-divider { display: none; }
   section { padding: 3.5rem 0 2rem; }
   nav { gap: 0.7rem; }
+  .book-hero { grid-template-columns: 1fr; justify-items: center; }
+  .book-meta { flex-direction: column; }
 }
