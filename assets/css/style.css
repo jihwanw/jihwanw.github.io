@@ -44,7 +44,8 @@ h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
 .profile-photo { width: 150px; height: 150px; border-radius: 50%; background: var(--surface); border: 3px solid var(--border); margin: 0 auto 1.5rem; overflow: hidden; }
 .profile-photo img { width: 100%; height: 100%; object-fit: cover; }
 .hero-content h1 { font-size: 2.4rem; letter-spacing: -0.03em; margin-bottom: 0.3rem; }
-.affiliation { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.8rem; }
+.hero-tagline { color: var(--muted); font-size: 1.1rem; margin-bottom: 0.4rem; font-weight: 400; }
+.affiliation { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.8rem; opacity: 0.7; }
 
 /* Pillar Tags in Hero */
 .tagline-pillars { display: flex; align-items: center; justify-content: center; gap: 0.6rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
@@ -132,6 +133,18 @@ h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
 }
 .advisory-cta p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
 .advisory-cta .btn { margin: 0 0.3rem; }
+
+/* Advisory Engagements */
+.advisory-engagements { margin-top: 3rem; }
+.advisory-engagements h3 { font-size: 1.05rem; color: var(--text); margin-bottom: 1.2rem; letter-spacing: -0.01em; }
+.engagement-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.engagement-item {
+  background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+  padding: 1.2rem; transition: border-color 0.2s;
+}
+.engagement-item:hover { border-color: var(--ai-border); }
+.engagement-icon { font-size: 1.3rem; display: block; margin-bottom: 0.5rem; }
+.engagement-item p { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
 
 /* Pillar Pills */
 .pill { font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 10px; font-weight: 600; display: inline-block; }
@@ -242,6 +255,22 @@ footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.78
 .talk-ext-link { font-size: 0.78rem; color: var(--ai); text-decoration: none; float: right; transition: color 0.2s; }
 .talk-ext-link:hover { color: #8b83ff; }
 
+/* In the Press */
+.media-list { display: flex; flex-direction: column; gap: 0; }
+.media-item {
+  display: flex; align-items: baseline; gap: 1rem; padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.media-item:first-child { border-top: 1px solid var(--border); }
+.media-source {
+  font-size: 0.78rem; font-weight: 600; color: var(--ai); flex-shrink: 0; min-width: 80px;
+}
+.media-title {
+  font-size: 0.9rem; color: var(--text); text-decoration: none; transition: color 0.2s;
+}
+.media-title:hover { color: var(--ai); }
+.media-date { font-size: 0.78rem; color: var(--muted); margin-left: auto; flex-shrink: 0; }
+
 /* Responsive */
 @media (max-width: 768px) {
   .pillars-grid { grid-template-columns: 1fr; }
@@ -250,6 +279,7 @@ footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.78
   .two-col { grid-template-columns: 1fr; }
   .patents-summary { flex-direction: column; }
   .talks-grid { grid-template-columns: 1fr; }
+  .engagement-grid { grid-template-columns: 1fr 1fr; }
   .hero-content h1 { font-size: 1.8rem; }
   .tagline-pillars { flex-direction: column; gap: 0.4rem; }
   .pillar-divider { display: none; }
