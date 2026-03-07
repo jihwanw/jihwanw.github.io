@@ -108,6 +108,31 @@ h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
 .convergence-box p { color: var(--muted); font-size: 0.9rem; }
 .convergence-box em { color: var(--text); font-style: normal; font-weight: 600; }
 
+/* Advisory — MBB Style */
+.advisory-hero { margin-bottom: 3rem; }
+.advisory-hero h2 { font-size: 1.6rem; line-height: 1.4; letter-spacing: -0.02em; max-width: 640px; }
+.advisory-subtitle { color: var(--muted); font-size: 1rem; line-height: 1.9; margin-top: 1rem; max-width: 640px; }
+.advisory-subtitle br { display: block; }
+
+.advisory-capabilities { display: flex; flex-direction: column; gap: 0; }
+.capability-item {
+  padding: 2rem 0; border-bottom: 1px solid var(--border);
+}
+.capability-item:first-child { border-top: 1px solid var(--border); }
+.capability-header { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 0.8rem; }
+.capability-number { font-size: 0.78rem; font-weight: 700; color: var(--ai); letter-spacing: 0.05em; flex-shrink: 0; }
+.capability-item h3 { font-size: 1.05rem; color: var(--text); }
+.capability-item > p:nth-of-type(1) { color: var(--text); font-size: 0.95rem; font-style: italic; margin-bottom: 0.6rem; }
+.capability-answer { color: var(--muted); font-size: 0.9rem; line-height: 1.7; }
+
+.advisory-cta {
+  margin-top: 3rem; text-align: center; padding: 2.5rem;
+  border-radius: 12px; border: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--ai-bg), transparent);
+}
+.advisory-cta p { color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem; }
+.advisory-cta .btn { margin: 0 0.3rem; }
+
 /* Pillar Pills */
 .pill { font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 10px; font-weight: 600; display: inline-block; }
 .pill-ai { background: var(--ai-bg); color: var(--ai); border: 1px solid var(--ai-border); }
@@ -213,6 +238,9 @@ footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.78
 .talk-info h3 { font-size: 1rem; margin: 0.5rem 0 0.3rem; }
 .talk-venue { color: var(--ai); font-size: 0.82rem; margin-bottom: 0.4rem; }
 .talk-desc { color: var(--muted); font-size: 0.85rem; }
+.talk-card-noimg .talk-info { padding: 1.5rem; }
+.talk-ext-link { font-size: 0.78rem; color: var(--ai); text-decoration: none; float: right; transition: color 0.2s; }
+.talk-ext-link:hover { color: #8b83ff; }
 
 /* Responsive */
 @media (max-width: 768px) {
