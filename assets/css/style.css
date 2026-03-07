@@ -98,6 +98,7 @@ h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
 
 .pillar-evidence { display: flex; flex-direction: column; gap: 0.25rem; }
 .pillar-evidence span { font-size: 0.78rem; color: var(--muted); }
+.pillar-evidence span::before { content: '— '; opacity: 0.4; }
 
 /* Convergence Box */
 .convergence-box {
@@ -143,7 +144,10 @@ h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
   padding: 1.2rem; transition: border-color 0.2s;
 }
 .engagement-item:hover { border-color: var(--ai-border); }
-.engagement-icon { font-size: 1.3rem; display: block; margin-bottom: 0.5rem; }
+.engagement-icon {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--ai); display: block; margin-bottom: 0.5rem;
+}
 .engagement-item p { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
 
 /* Pillar Pills */
