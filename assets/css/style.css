@@ -172,7 +172,7 @@ h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
 
 /* Publications */
 .pub-category { color: var(--text); font-size: 1rem; margin: 1.8rem 0 0.6rem; padding-bottom: 0.35rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.5rem; }
-.pub-category-major { font-size: 1.15rem; margin-top: 2.5rem; border-bottom: 2px solid var(--accent); padding-bottom: 0.5rem; }
+.pub-category-major { font-size: 1.15rem; margin-top: 2.5rem; border-bottom: 2px solid var(--ai); padding-bottom: 0.5rem; }
 .pub-subcategory { color: var(--muted); font-size: 0.92rem; margin: 1.4rem 0 0.5rem; padding-bottom: 0.25rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.5rem; padding-left: 0.5rem; }
 .pub-list { list-style: none; }
 .pub-item { padding: 0.6rem 0; border-bottom: 1px solid rgba(37,37,56,0.5); display: flex; flex-direction: column; gap: 0.1rem; }
@@ -303,6 +303,52 @@ footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.78
 .media-title:hover { color: var(--ai); }
 .media-date { font-size: 0.78rem; color: var(--muted); margin-left: auto; flex-shrink: 0; }
 
+/* Featured In */
+.featured-in {
+  padding: 2.5rem 0 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+.featured-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  opacity: 0.6;
+  margin-bottom: 1.2rem;
+}
+.featured-logos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.featured-logo {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--muted);
+  opacity: 0.45;
+  letter-spacing: 0.02em;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+.featured-logo:hover {
+  opacity: 0.8;
+}
+
+/* Scroll Animations */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .pillars-grid { grid-template-columns: 1fr; }
@@ -312,7 +358,7 @@ footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.78
   .patents-summary { flex-direction: column; }
   .talks-grid { grid-template-columns: 1fr; }
   .insights-grid { grid-template-columns: 1fr; }
-  .engagement-grid { grid-template-columns: 1fr 1fr; }
+  .engagement-grid { grid-template-columns: 1fr; }
   .hero-content h1 { font-size: 1.8rem; }
   .tagline-pillars { flex-direction: column; gap: 0.4rem; }
   .pillar-divider { display: none; }
@@ -320,4 +366,6 @@ footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.78
   nav { gap: 0.7rem; }
   .book-hero { grid-template-columns: 1fr; justify-items: center; }
   .book-meta { flex-direction: column; }
+  .featured-logos { gap: 1rem; }
+  .featured-logo { font-size: 0.78rem; }
 }

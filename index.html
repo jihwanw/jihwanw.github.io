@@ -55,6 +55,21 @@
       </div>
     </section>
 
+    <!-- Featured In -->
+    <section id="featured-in" class="featured-in">
+      <p class="featured-label">Featured &amp; Cited In</p>
+      <div class="featured-logos">
+        <span class="featured-logo">Forbes</span>
+        <span class="featured-logo">동아비즈니스리뷰</span>
+        <span class="featured-logo">대한상공회의소</span>
+        <span class="featured-logo">KOITA</span>
+        <span class="featured-logo">한국데이터산업진흥원</span>
+        <span class="featured-logo">소프트웨어정책연구소</span>
+        <span class="featured-logo">KAIST</span>
+        <span class="featured-logo">IEEE</span>
+      </div>
+    </section>
+
     <!-- About -->
     <section id="about">
       <h2>About</h2>
@@ -729,5 +744,27 @@
   <footer>
     <p>&copy; 2026 Jihwan Woo</p>
   </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var targets = document.querySelectorAll(
+        'section:not(#hero), .pillar-card, .insight-card, .engagement-item, .talk-card, .stat-card, .edu-card, .capability-item, .media-item, .convergence-box, .featured-in'
+      );
+      targets.forEach(function (el) { el.classList.add('fade-in'); });
+
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var siblings = entry.target.parentElement.querySelectorAll('.fade-in');
+            var idx = Array.prototype.indexOf.call(siblings, entry.target);
+            var delay = Math.min(idx * 80, 320);
+            entry.target.style.transitionDelay = delay + 'ms';
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+      targets.forEach(function (el) { observer.observe(el); });
+    });
+  </script>
 </body>
 </html>
