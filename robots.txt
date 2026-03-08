@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://jihwanwoo.com/sitemap.xml
+Sitemap: https://jihwanw.github.io/sitemap.xml
