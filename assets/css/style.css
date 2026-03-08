@@ -169,6 +169,7 @@ h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
 .timeline-org { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.15rem; }
 .timeline-content p:last-child { color: var(--muted); font-size: 0.85rem; }
 .subsection-title { margin: 2rem 0 0.8rem; color: var(--ai); font-size: 1.05rem; }
+.activity-category { margin: 1.6rem 0 0.5rem; color: var(--muted); font-size: 0.9rem; font-weight: 600; letter-spacing: 0.03em; text-transform: uppercase; }
 
 /* Publications */
 .pub-category { color: var(--text); font-size: 1rem; margin: 1.8rem 0 0.6rem; padding-bottom: 0.35rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.5rem; }
