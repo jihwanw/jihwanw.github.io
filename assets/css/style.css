@@ -230,6 +230,12 @@ h3 { font-size: 1.05rem; margin-bottom: 0.35rem; }
 .edu-card h3 { font-size: 0.95rem; margin-bottom: 0.15rem; }
 .edu-card .timeline-org { margin-bottom: 0.6rem; }
 .edu-focus { color: var(--muted); font-size: 0.82rem; font-style: italic; }
+.edu-thesis-link {
+  display: inline-block; margin-top: 0.5rem; font-size: 0.78rem; color: var(--ai);
+  text-decoration: none; border: 1px solid var(--ai-border); background: var(--ai-bg);
+  padding: 0.2rem 0.6rem; border-radius: 6px; transition: all 0.2s;
+}
+.edu-thesis-link:hover { background: var(--ai); color: #fff; }
 
 /* Two Column */
 .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
