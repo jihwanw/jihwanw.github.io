@@ -52,16 +52,32 @@
     <nav>
       <a href="#about" class="nav-link">About</a>
       <a href="#advisory" class="nav-link">Advisory</a>
-      <a href="#insights" class="nav-link">Insights</a>
-      <a href="#pillars" class="nav-link">Research Pillars</a>
-      <a href="#experience" class="nav-link">Experience</a>
-      <a href="#publications" class="nav-link">Publications</a>
-      <a href="#talks" class="nav-link">Invited Talks</a>
-      <a href="#media" class="nav-link">In the Press</a>
-      <a href="#patents" class="nav-link">Patents</a>
-      <a href="#education" class="nav-link">Education</a>
+      <div class="nav-dropdown">
+        <a href="#pillars" class="nav-link">Research <span class="nav-arrow">▾</span></a>
+        <div class="nav-dropdown-menu">
+          <a href="#pillars">Research Pillars</a>
+          <a href="#insights">Insights</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#experience" class="nav-link">Career <span class="nav-arrow">▾</span></a>
+        <div class="nav-dropdown-menu">
+          <a href="#experience">Experience</a>
+          <a href="#education">Education</a>
+        </div>
+      </div>
+      <div class="nav-dropdown">
+        <a href="#publications" class="nav-link">Works <span class="nav-arrow">▾</span></a>
+        <div class="nav-dropdown-menu">
+          <a href="#publications">Publications</a>
+          <a href="#patents">Patents</a>
+          <a href="#talks">Invited Talks</a>
+          <a href="#media">In the Press</a>
+        </div>
+      </div>
       <a href="#contact" class="nav-link">Contact</a>
-      <a href="en/index.html" class="nav-link" style="color:var(--ai);">EN</a>
+      <span class="nav-divider"></span>
+      <a href="en/index.html" class="nav-link nav-lang">EN</a>
     </nav>
   </header>
 
