@@ -134,6 +134,7 @@
       cursor: pointer; transition: all 0.2s; white-space: nowrap; border: 1px solid;
     }
     .bubble:hover { transform: scale(1.08); }
+    a.bubble { text-decoration: none; }
     .bubble-key { color: var(--ai); background: var(--ai-bg); border-color: var(--ai-border); }
     .bubble-sub { color: var(--strategy); background: var(--strategy-bg); border-color: rgba(16,185,129,0.2); }
     .bubble-key:hover { background: rgba(108,99,255,0.15); }
@@ -145,14 +146,8 @@
     .bubble-legend-dot.sub { background: var(--strategy); }
 
     /* Accordion */
-    .theme-group-header { cursor: pointer; user-select: none; }
-    .theme-group-header::after {
-      content: '▾'; margin-left: auto; font-size: 0.8rem; color: var(--muted);
-      transition: transform 0.3s;
-    }
-    .theme-group-header.collapsed::after { transform: rotate(-90deg); }
-    .theme-group .company-grid { transition: max-height 0.4s ease, opacity 0.3s ease; overflow: hidden; }
-    .theme-group .company-grid.collapsed { max-height: 0; opacity: 0; padding: 0; margin: 0; }
+    .theme-group-header { user-select: none; }
+
     .expand-all-btn {
       display: inline-flex; align-items: center; gap: 0.3rem;
       font-size: 0.75rem; color: var(--ai); background: none; border: 1px solid var(--ai-border);
@@ -174,8 +169,10 @@
     <nav>
       <a href="../index.html" class="nav-link">← Home</a>
       <a href="#themes" class="nav-link">Key Themes</a>
+      <a href="#physical-ai" class="nav-link">Physical AI</a>
+      <a href="#sdv" class="nav-link">SDV</a>
       <a href="#companies" class="nav-link">50 Companies</a>
-      <a href="#robotaxi" class="nav-link">로보택시 체험</a>
+      <a href="#robotaxi" class="nav-link">로보택시</a>
       <a href="#analysis" class="nav-link">생각 정리</a>
     </nav>
   </header>
@@ -240,6 +237,176 @@
       </div>
     </section>
 
+    <!-- Physical AI Deep Dive -->
+    <section id="physical-ai">
+      <h2>PART 1. Physical AI — 지능이 몸을 얻다</h2>
+
+      <div class="analysis-box">
+        <h3>NVIDIA의 선언: "The Brain, The Body, The World"</h3>
+        <p>Jensen Huang의 키노트는 단순한 신제품 발표가 아니었다. 하나의 패러다임 전환 선언이었다. NVIDIA는 Physical AI를 세 층위로 정의했다:</p>
+      </div>
+
+      <!-- 3-Layer Visual -->
+      <div style="display:flex;gap:0.8rem;margin:1.5rem 0;flex-wrap:wrap;">
+        <div style="flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;">
+          <div style="font-size:1.8rem;margin-bottom:0.3rem;">🧠</div>
+          <div style="font-size:0.85rem;font-weight:700;color:var(--ai);margin-bottom:0.3rem;">The Brain</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">기반 지능 — Cosmos Reason 2가 물리적 속성(무게, 마찰력, 탄성)을 추론. 유리잔과 고무공을 집을 때 필요한 힘의 차이를 이해한다.</div>
+        </div>
+        <div style="flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;">
+          <div style="font-size:1.8rem;margin-bottom:0.3rem;">🦾</div>
+          <div style="font-size:0.85rem;font-weight:700;color:var(--ai);margin-bottom:0.3rem;">The Body</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">물리적 구현체 — 로봇, 자율주행차, 산업 기계. Cosmos Predict 2.5가 행동의 결과를 시뮬레이션 내에서 미리 평가한다.</div>
+        </div>
+        <div style="flex:1;min-width:200px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;">
+          <div style="font-size:1.8rem;margin-bottom:0.3rem;">🌍</div>
+          <div style="font-size:0.85rem;font-weight:700;color:var(--ai);margin-bottom:0.3rem;">The World</div>
+          <div style="font-size:0.78rem;color:var(--muted);line-height:1.6;">AI가 작동하는 실제 환경 — Cosmos 플랫폼이 가상 환경에서 무한한 시나리오를 생성. Sim-to-Real로 학습 속도를 기하급수적으로 높인다.</div>
+        </div>
+      </div>
+
+      <p style="color:var(--muted);font-size:0.92rem;line-height:1.8;margin-bottom:1rem;">하드웨어 측면에서는 차세대 AI 슈퍼칩 <em style="color:var(--text);font-style:normal;font-weight:600;">Vera Rubin</em>의 본격 양산이 발표됐다. GPU, CPU, NVLink 등을 통합한 6-Chip Co-design 아키텍처로, 추론 비용을 Blackwell 대비 1/10로 낮추겠다는 목표다. 자율주행 추론 모델 <em style="color:var(--text);font-style:normal;font-weight:600;">Alpamayo</em>의 오픈소스 공개도 함께 발표됐다 — 100억 파라미터 규모의 이 모델은 자율주행 차량의 추론 기반 의사결정을 가능하게 한다.</p>
+
+      <h3 style="margin:2rem 0 1rem;">🤖 로봇 혁명 — 50개 이상의 휴머노이드가 걷다</h3>
+      <p style="color:var(--muted);font-size:0.92rem;line-height:1.8;margin-bottom:1rem;">CES 2026 웨스트 홀은 사실상 로봇 박람회였다. 50개 이상의 휴머노이드 로봇이 전시됐다.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1rem 0;">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--ai);margin-bottom:0.3rem;">HYUNDAI × BOSTON DYNAMICS</div>
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">Atlas 휴머노이드</div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">2028년 제조 현장 투입 목표. SDF(Software Defined Factory) 개념과 연계해 조립 라인에서 부품 교체·품질 검사를 수행하는 청사진을 제시했다.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--strategy);margin-bottom:0.3rem;">UNITREE ROBOTICS</div>
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">G1 — <span style="color:var(--ai);">$13,500</span></div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">35kg, 3D LiDAR+카메라 탑재. 이 가격이면 휴머노이드의 대중화가 더 이상 먼 미래가 아니다.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--strategy);margin-bottom:0.3rem;">SANCTUARY AI</div>
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">Phoenix</div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">CEO가 직접 시연. 인간과 유사한 손 동작과 작업 수행 능력을 선보였다.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--strategy);margin-bottom:0.3rem;">LG ELECTRONICS</div>
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">CLOiD — Zero Labor Home</div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">세탁물 접기, 집안일 수행 등 일상 가사 노동을 대체하는 가정용 AI 로봇.</p>
+        </div>
+      </div>
+
+      <div class="expert-insight-bar" style="margin-top:1.5rem;">
+        <span class="insight-label">💡 현장 인사이트</span>
+        <p>Physical AI는 더 이상 연구소의 개념이 아니다. 제조, 물류, 농업, 가정까지 — AI가 물리적 세계에서 실제로 작동하는 시대가 열렸다. 경쟁 우위는 개별 부품이 아닌 <em>엔드-투-엔드 플랫폼 통합</em>에서 나온다.</p>
+      </div>
+    </section>
+
+    <!-- SDV Deep Dive -->
+    <section id="sdv">
+      <h2>PART 2. Software Defined Vehicle — 자동차의 OS 전환</h2>
+      <p style="color:var(--muted);font-size:0.95rem;line-height:1.9;margin-bottom:1.5rem;">
+        CES 2026에서 SDV는 더 이상 실험적 개념이 아니었다. 자동차 산업은 지금 스마트폰이 겪었던 iPhone/Android 모멘트를 통과하고 있다.
+      </p>
+
+      <!-- Market Stats -->
+      <div style="display:flex;gap:1rem;margin:1.5rem 0;flex-wrap:wrap;">
+        <div style="flex:1;min-width:180px;background:linear-gradient(135deg,var(--ai-bg),var(--strategy-bg));border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;">
+          <div style="font-size:1.6rem;font-weight:800;color:var(--ai);">$2,135억</div>
+          <div style="font-size:0.72rem;color:var(--muted);margin-top:0.2rem;">2024 SDV 시장</div>
+        </div>
+        <div style="flex:0 0 40px;display:flex;align-items:center;justify-content:center;color:var(--ai);font-size:1.2rem;">→</div>
+        <div style="flex:1;min-width:180px;background:linear-gradient(135deg,var(--ai-bg),var(--strategy-bg));border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;">
+          <div style="font-size:1.6rem;font-weight:800;color:var(--ai);">$1조 2,400억</div>
+          <div style="font-size:0.72rem;color:var(--muted);margin-top:0.2rem;">2030 SDV 시장 전망</div>
+        </div>
+        <div style="flex:1;min-width:180px;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;text-align:center;">
+          <div style="font-size:1.6rem;font-weight:800;color:var(--strategy);">3.4% → 90%</div>
+          <div style="font-size:0.72rem;color:var(--muted);margin-top:0.2rem;">차량 생산 중 SDV 비중 (2024→2029)</div>
+        </div>
+      </div>
+
+      <h3 style="margin:2rem 0 1rem;">SDV 5계층 아키텍처</h3>
+      <p style="color:var(--muted);font-size:0.88rem;line-height:1.7;margin-bottom:1rem;">CES 2026에서 확인된 SDV 기술 스택을 5개 계층으로 정리했다.</p>
+
+      <!-- 5-Layer Stack Diagram -->
+      <div style="display:flex;flex-direction:column;gap:2px;margin:1rem 0;">
+        <div style="background:linear-gradient(90deg,rgba(108,99,255,0.15),rgba(108,99,255,0.05));border:1px solid var(--ai-border);border-radius:8px 8px 2px 2px;padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.8rem;">
+          <span style="font-size:0.65rem;font-weight:700;color:var(--ai);min-width:60px;">LAYER 5</span>
+          <span style="font-size:0.85rem;font-weight:600;">Physical Embodiment</span>
+          <span style="font-size:0.75rem;color:var(--muted);margin-left:auto;">HMG · Caterpillar · Kia PBV</span>
+        </div>
+        <div style="background:linear-gradient(90deg,rgba(108,99,255,0.12),rgba(108,99,255,0.04));border:1px solid var(--border);border-radius:2px;padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.8rem;">
+          <span style="font-size:0.65rem;font-weight:700;color:var(--ai);min-width:60px;">LAYER 4</span>
+          <span style="font-size:0.85rem;font-weight:600;">Autonomous Agent</span>
+          <span style="font-size:0.75rem;color:var(--muted);margin-left:auto;">Waymo · Zoox · Cerence AI</span>
+        </div>
+        <div style="background:linear-gradient(90deg,rgba(108,99,255,0.09),rgba(108,99,255,0.03));border:1px solid var(--border);border-radius:2px;padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.8rem;">
+          <span style="font-size:0.65rem;font-weight:700;color:var(--ai);min-width:60px;">LAYER 3</span>
+          <span style="font-size:0.85rem;font-weight:600;">World Model & Perception</span>
+          <span style="font-size:0.75rem;color:var(--muted);margin-left:auto;">HERE · Hesai · NVIDIA Cosmos</span>
+        </div>
+        <div style="background:linear-gradient(90deg,rgba(108,99,255,0.06),rgba(108,99,255,0.02));border:1px solid var(--border);border-radius:2px;padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.8rem;">
+          <span style="font-size:0.65rem;font-weight:700;color:var(--ai);min-width:60px;">LAYER 2</span>
+          <span style="font-size:0.85rem;font-weight:600;">Digital Nervous System</span>
+          <span style="font-size:0.75rem;color:var(--muted);margin-left:auto;">QNX · Elektrobit · dSPACE</span>
+        </div>
+        <div style="background:linear-gradient(90deg,rgba(108,99,255,0.03),rgba(108,99,255,0.01));border:1px solid var(--border);border-radius:2px 2px 8px 8px;padding:0.8rem 1.2rem;display:flex;align-items:center;gap:0.8rem;">
+          <span style="font-size:0.65rem;font-weight:700;color:var(--ai);min-width:60px;">LAYER 1</span>
+          <span style="font-size:0.85rem;font-weight:600;">Silicon Foundation</span>
+          <span style="font-size:0.75rem;color:var(--muted);margin-left:auto;">Qualcomm · NVIDIA · Synopsys</span>
+        </div>
+      </div>
+
+      <h3 style="margin:2rem 0 1rem;">완성차 OEM의 SDV 전략</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1rem 0;">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--ai);margin-bottom:0.3rem;">KIA — PBV</div>
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">Platform Beyond Vehicle</div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">PV5(2026)는 Passenger·Cargo·Crew 3가지 변형. PV7(2027)은 800V 대형 물류 PBV. Easy Swap으로 택시→화물→캠핑카 전환 가능. 차량을 "제품"이 아닌 "플랫폼"으로 재정의했다.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--ai);margin-bottom:0.3rem;">BMW — iX3</div>
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">Alexa + LLM 통합</div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">"지금 기분에 맞는 음악 추천해줘" 같은 자연어 명령이 차량 내에서 자연스럽게 작동. 파노라믹 디스플레이로 내비·엔터·차량 제어를 하나로 통합.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--ai);margin-bottom:0.3rem;">SONY HONDA — AFEELA 1</div>
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">$89,900 · 2026 생산 시작</div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">Cloud AI 아키텍처 기반. 소프트웨어 업데이트로 차량 기능이 지속 진화. PlayStation 생태계 통합으로 "움직이는 엔터테인먼트 공간"을 지향.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--ai);margin-bottom:0.3rem;">VOLKSWAGEN — IDA</div>
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">ChatGPT 차량 통합</div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">"서울에서 가장 높은 빌딩은?" 같은 자연어 질문에 즉각 답변. LLM이 차량 인포테인먼트의 기본 인터페이스가 되고 있다.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.72rem;font-weight:700;color:var(--ai);margin-bottom:0.3rem;">GEELY / ZEEKR</div>
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">GEEA 3.0 + Xingrui LLM</div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">NVIDIA Thor/Orin 기반 도메인 컨트롤러. 차량·모바일·스마트홈을 하나의 AI 생태계로 통합. 단순한 중국 EV가 아닌 SDV 레퍼런스 OEM으로 부상.</p>
+        </div>
+      </div>
+
+      <h3 style="margin:2rem 0 1rem;">플랫폼 전쟁의 주역들</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin:1rem 0;">
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">Qualcomm — Snapdragon Digital Chassis</div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">BMW, GM 등 100개+ OEM 파트너십. Google과 10년 협력 확장. 2029년 자동차·IoT 매출 $220억 목표. Workbench로 SDV 개발자 클라우드 워크플로우 제공.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">BlackBerry QNX — QNX Everywhere</div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">QNX SDP 8.0을 비상업적 용도에 무료 제공. ISO 26262 ASIL-D 인증, 7,500개+ 고객사. SDV 시대의 핵심 OS 인프라.</p>
+        </div>
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.3rem;">Elektrobit — UI에서 하드웨어까지</div>
+          <p style="color:var(--muted);font-size:0.8rem;line-height:1.6;margin:0;">AMD SoC + Google Android Automotive OS + Gemini AI + Unreal Engine + HERE 내비를 통합한 차세대 디지털 콕핏. AWS 클라우드 기반 SDV 개발·테스트 환경.</p>
+        </div>
+      </div>
+
+      <div class="expert-insight-bar" style="margin-top:1.5rem;">
+        <span class="insight-label">💡 현장 인사이트</span>
+        <p>SDV 경쟁에서 승자는 단일 기술 돌파가 아닌 <em>전체 스택을 통제하고 최적화하는 기업</em>이다. Tesla와 Waymo가 선두에 있는 이유가 바로 여기에 있다. OS, 미들웨어, 소프트웨어 아키텍처, OTA 업데이트 역량이 OEM의 미래 경쟁력을 결정한다.</p>
+      </div>
+    </section>
+
+
     <!-- 50 Companies Section -->
     <section id="companies">
       <h2>🏢 CES 2026에서 주목한 기업 50</h2>
@@ -251,87 +418,87 @@
 
       <!-- Bubble Map Overview -->
       <div class="bubble-map">
-        <div class="bubble-map-title">50개 기업 한눈에 보기 <span style="font-weight:400;letter-spacing:0;text-transform:none;"> — 클릭하면 해당 테마로 이동</span></div>
+        <div class="bubble-map-title">50개 기업 한눈에 보기 <span style="font-weight:400;letter-spacing:0;text-transform:none;"> — 기업을 클릭하면 해당 테마로 이동합니다</span></div>
         <div class="bubble-cluster">
           <div class="bubble-cluster-label">🚗 Autonomous Driving</div>
           <div class="bubble-row">
-            <span class="bubble bubble-key" data-theme="theme-ad" onclick="(function(){var t=document.getElementById('theme-ad');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Waymo</span>
-            <span class="bubble bubble-key" data-theme="theme-ad" onclick="(function(){var t=document.getElementById('theme-ad');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Zoox</span>
-            <span class="bubble bubble-key" data-theme="theme-ad" onclick="(function(){var t=document.getElementById('theme-ad');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Mobileye</span>
-            <span class="bubble bubble-key" data-theme="theme-ad" onclick="(function(){var t=document.getElementById('theme-ad');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Imagry</span>
-            <span class="bubble bubble-key" data-theme="theme-ad" onclick="(function(){var t=document.getElementById('theme-ad');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Tensor Auto</span>
+            <a href="#theme-ad" class="bubble bubble-key">Waymo</a>
+            <a href="#theme-ad" class="bubble bubble-key">Zoox</a>
+            <a href="#theme-ad" class="bubble bubble-key">Mobileye</a>
+            <a href="#theme-ad" class="bubble bubble-key">Imagry</a>
+            <a href="#theme-ad" class="bubble bubble-key">Tensor Auto</a>
           </div>
         </div>
         <div class="bubble-cluster">
           <div class="bubble-cluster-label">⚡ EV & SDV Platforms</div>
           <div class="bubble-row">
-            <span class="bubble bubble-key" data-theme="theme-sdv" onclick="(function(){var t=document.getElementById('theme-sdv');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">HMG</span>
-            <span class="bubble bubble-key" data-theme="theme-sdv" onclick="(function(){var t=document.getElementById('theme-sdv');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Geely</span>
-            <span class="bubble bubble-key" data-theme="theme-sdv" onclick="(function(){var t=document.getElementById('theme-sdv');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">ZF</span>
-            <span class="bubble bubble-key" data-theme="theme-sdv" onclick="(function(){var t=document.getElementById('theme-sdv');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">KPIT</span>
-            <span class="bubble bubble-key" data-theme="theme-sdv" onclick="(function(){var t=document.getElementById('theme-sdv');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">HERE</span>
-            <span class="bubble bubble-key" data-theme="theme-sdv" onclick="(function(){var t=document.getElementById('theme-sdv');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">HL Mando</span>
-            <span class="bubble bubble-key" data-theme="theme-sdv" onclick="(function(){var t=document.getElementById('theme-sdv');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Mobis</span>
-            <span class="bubble bubble-key" data-theme="theme-sdv" onclick="(function(){var t=document.getElementById('theme-sdv');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">WIA</span>
+            <a href="#theme-sdv" class="bubble bubble-key">HMG</a>
+            <a href="#theme-sdv" class="bubble bubble-key">Geely</a>
+            <a href="#theme-sdv" class="bubble bubble-key">ZF</a>
+            <a href="#theme-sdv" class="bubble bubble-key">KPIT</a>
+            <a href="#theme-sdv" class="bubble bubble-key">HERE</a>
+            <a href="#theme-sdv" class="bubble bubble-key">HL Mando</a>
+            <a href="#theme-sdv" class="bubble bubble-key">Mobis</a>
+            <a href="#theme-sdv" class="bubble bubble-key">WIA</a>
           </div>
         </div>
         <div class="bubble-cluster">
           <div class="bubble-cluster-label">🖥️ OS & Middleware</div>
           <div class="bubble-row">
-            <span class="bubble bubble-key" data-theme="theme-os" onclick="(function(){var t=document.getElementById('theme-os');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">QNX</span>
-            <span class="bubble bubble-key" data-theme="theme-os" onclick="(function(){var t=document.getElementById('theme-os');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Elektrobit</span>
-            <span class="bubble bubble-key" data-theme="theme-os" onclick="(function(){var t=document.getElementById('theme-os');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Green Hills</span>
-            <span class="bubble bubble-key" data-theme="theme-os" onclick="(function(){var t=document.getElementById('theme-os');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Sonatus</span>
-            <span class="bubble bubble-key" data-theme="theme-os" onclick="(function(){var t=document.getElementById('theme-os');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">AWS</span>
+            <a href="#theme-os" class="bubble bubble-key">QNX</a>
+            <a href="#theme-os" class="bubble bubble-key">Elektrobit</a>
+            <a href="#theme-os" class="bubble bubble-key">Green Hills</a>
+            <a href="#theme-os" class="bubble bubble-key">Sonatus</a>
+            <a href="#theme-os" class="bubble bubble-key">AWS</a>
           </div>
         </div>
         <div class="bubble-cluster">
           <div class="bubble-cluster-label">🎯 UX · 🤖 Robotics</div>
           <div class="bubble-row">
-            <span class="bubble bubble-key" data-theme="theme-ux" onclick="(function(){var t=document.getElementById('theme-ux');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Cerence</span>
-            <span class="bubble bubble-key" data-theme="theme-ux" onclick="(function(){var t=document.getElementById('theme-ux');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">SoundHound</span>
-            <span class="bubble bubble-key" data-theme="theme-ux" onclick="(function(){var t=document.getElementById('theme-ux');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Smart Eye</span>
-            <span class="bubble bubble-key" data-theme="theme-ux" onclick="(function(){var t=document.getElementById('theme-ux');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">emotion3D</span>
-            <span class="bubble bubble-key" data-theme="theme-robot" onclick="(function(){var t=document.getElementById('theme-robot');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Doosan Robotics</span>
-            <span class="bubble bubble-key" data-theme="theme-robot" onclick="(function(){var t=document.getElementById('theme-robot');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Bucket Robotics</span>
+            <a href="#theme-ux" class="bubble bubble-key">Cerence</a>
+            <a href="#theme-ux" class="bubble bubble-key">SoundHound</a>
+            <a href="#theme-ux" class="bubble bubble-key">Smart Eye</a>
+            <a href="#theme-ux" class="bubble bubble-key">emotion3D</a>
+            <a href="#theme-robot" class="bubble bubble-key">Doosan Robotics</a>
+            <a href="#theme-robot" class="bubble bubble-key">Bucket Robotics</a>
           </div>
         </div>
         <div class="bubble-cluster">
           <div class="bubble-cluster-label">Sub Themes — Simulation · Chips · Sensors · Industry · Beyond</div>
           <div class="bubble-row">
-            <span class="bubble bubble-sub" data-theme="theme-sim" onclick="(function(){var t=document.getElementById('theme-sim');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Synopsys</span>
-            <span class="bubble bubble-sub" data-theme="theme-sim" onclick="(function(){var t=document.getElementById('theme-sim');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">dSPACE</span>
-            <span class="bubble bubble-sub" data-theme="theme-sim" onclick="(function(){var t=document.getElementById('theme-sim');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Cognata</span>
-            <span class="bubble bubble-sub" data-theme="theme-sim" onclick="(function(){var t=document.getElementById('theme-sim');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Foretellix</span>
-            <span class="bubble bubble-sub" data-theme="theme-chip" onclick="(function(){var t=document.getElementById('theme-chip');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">NVIDIA</span>
-            <span class="bubble bubble-sub" data-theme="theme-chip" onclick="(function(){var t=document.getElementById('theme-chip');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Qualcomm</span>
-            <span class="bubble bubble-sub" data-theme="theme-chip" onclick="(function(){var t=document.getElementById('theme-chip');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Hailo</span>
-            <span class="bubble bubble-sub" data-theme="theme-sensor" onclick="(function(){var t=document.getElementById('theme-sensor');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">AEye</span>
-            <span class="bubble bubble-sub" data-theme="theme-sensor" onclick="(function(){var t=document.getElementById('theme-sensor');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Hesai</span>
-            <span class="bubble bubble-sub" data-theme="theme-sensor" onclick="(function(){var t=document.getElementById('theme-sensor');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">RoboSense</span>
-            <span class="bubble bubble-sub" data-theme="theme-sensor" onclick="(function(){var t=document.getElementById('theme-sensor');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">LG Innotek</span>
-            <span class="bubble bubble-sub" data-theme="theme-sensor" onclick="(function(){var t=document.getElementById('theme-sensor');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">BOE</span>
-            <span class="bubble bubble-sub" data-theme="theme-sensor" onclick="(function(){var t=document.getElementById('theme-sensor');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Aeva</span>
-            <span class="bubble bubble-sub" data-theme="theme-sensor" onclick="(function(){var t=document.getElementById('theme-sensor');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Arbe</span>
-            <span class="bubble bubble-sub" data-theme="theme-sensor" onclick="(function(){var t=document.getElementById('theme-sensor');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Innoviz</span>
-            <span class="bubble bubble-sub" data-theme="theme-sensor" onclick="(function(){var t=document.getElementById('theme-sensor');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Lidwave</span>
-            <span class="bubble bubble-sub" data-theme="theme-industry" onclick="(function(){var t=document.getElementById('theme-industry');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">John Deere</span>
-            <span class="bubble bubble-sub" data-theme="theme-industry" onclick="(function(){var t=document.getElementById('theme-industry');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">CAT</span>
-            <span class="bubble bubble-sub" data-theme="theme-industry" onclick="(function(){var t=document.getElementById('theme-industry');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Kubota</span>
-            <span class="bubble bubble-sub" data-theme="theme-industry" onclick="(function(){var t=document.getElementById('theme-industry');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Brunswick</span>
-            <span class="bubble bubble-sub" data-theme="theme-industry" onclick="(function(){var t=document.getElementById('theme-industry');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Oshkosh</span>
-            <span class="bubble bubble-sub" data-theme="theme-beyond" onclick="(function(){var t=document.getElementById('theme-beyond');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Aptiv</span>
-            <span class="bubble bubble-sub" data-theme="theme-beyond" onclick="(function(){var t=document.getElementById('theme-beyond');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Valeo</span>
-            <span class="bubble bubble-sub" data-theme="theme-beyond" onclick="(function(){var t=document.getElementById('theme-beyond');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Electra</span>
-            <span class="bubble bubble-sub" data-theme="theme-beyond" onclick="(function(){var t=document.getElementById('theme-beyond');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Autofleet</span>
-            <span class="bubble bubble-sub" data-theme="theme-beyond" onclick="(function(){var t=document.getElementById('theme-beyond');if(!t)return;var g=t.querySelector('.company-grid'),h=t.querySelector('.theme-group-header');if(g&&g.classList.contains('collapsed')){g.classList.remove('collapsed');g.style.maxHeight=g.scrollHeight+'px';g.style.opacity='1';if(h)h.classList.remove('collapsed');}setTimeout(function(){t.scrollIntoView({behavior:'smooth',block:'start'});},100);})();">Donut Lab</span>
+            <a href="#theme-sim" class="bubble bubble-sub">Synopsys</a>
+            <a href="#theme-sim" class="bubble bubble-sub">dSPACE</a>
+            <a href="#theme-sim" class="bubble bubble-sub">Cognata</a>
+            <a href="#theme-sim" class="bubble bubble-sub">Foretellix</a>
+            <a href="#theme-chip" class="bubble bubble-sub">NVIDIA</a>
+            <a href="#theme-chip" class="bubble bubble-sub">Qualcomm</a>
+            <a href="#theme-chip" class="bubble bubble-sub">Hailo</a>
+            <a href="#theme-sensor" class="bubble bubble-sub">AEye</a>
+            <a href="#theme-sensor" class="bubble bubble-sub">Hesai</a>
+            <a href="#theme-sensor" class="bubble bubble-sub">RoboSense</a>
+            <a href="#theme-sensor" class="bubble bubble-sub">LG Innotek</a>
+            <a href="#theme-sensor" class="bubble bubble-sub">BOE</a>
+            <a href="#theme-sensor" class="bubble bubble-sub">Aeva</a>
+            <a href="#theme-sensor" class="bubble bubble-sub">Arbe</a>
+            <a href="#theme-sensor" class="bubble bubble-sub">Innoviz</a>
+            <a href="#theme-sensor" class="bubble bubble-sub">Lidwave</a>
+            <a href="#theme-industry" class="bubble bubble-sub">John Deere</a>
+            <a href="#theme-industry" class="bubble bubble-sub">CAT</a>
+            <a href="#theme-industry" class="bubble bubble-sub">Kubota</a>
+            <a href="#theme-industry" class="bubble bubble-sub">Brunswick</a>
+            <a href="#theme-industry" class="bubble bubble-sub">Oshkosh</a>
+            <a href="#theme-beyond" class="bubble bubble-sub">Aptiv</a>
+            <a href="#theme-beyond" class="bubble bubble-sub">Valeo</a>
+            <a href="#theme-beyond" class="bubble bubble-sub">Electra</a>
+            <a href="#theme-beyond" class="bubble bubble-sub">Autofleet</a>
+            <a href="#theme-beyond" class="bubble bubble-sub">Donut Lab</a>
           </div>
         </div>
         <div class="bubble-legend">
           <span><span class="bubble-legend-dot key"></span> Key Theme</span>
           <span><span class="bubble-legend-dot sub"></span> Sub Theme</span>
         </div>
-        <button class="expand-all-btn" id="expandAllBtn" style="margin-top: 1rem;">▾ 전체 상세 보기</button>
+        
       </div>
 
 
@@ -815,22 +982,57 @@
     <!-- Expert Analysis -->
     <section id="analysis">
       <h2>현장에서 정리한 생각</h2>
+
       <div class="analysis-box">
         <h3>패러다임 전환: Digital AI → Physical AI</h3>
-        <p>지난 3년간 AI 산업은 LLM과 생성형 AI에 집중했다. 텍스트를 생성하고, 이미지를 만들고, 코드를 작성하는 — 모두 <em>디지털 세계 안에서의 AI</em>였다. CES 2026은 그 다음 장을 열었다. AI가 물리 세계를 이해하고, 그 안에서 행동하는 <em>Physical AI</em>의 시대다.</p>
-        <p>NVIDIA의 Cosmos가 물리 법칙을 시뮬레이션하고, Alpamayo가 도로 위에서 추론하며, Boston Dynamics의 Atlas가 공장에서 작업을 수행한다. 이것은 단순한 기술 데모가 아니라, AI 산업의 <em>가치 창출 방식이 근본적으로 바뀌고 있다</em>는 신호다.</p>
+        <p>지난 3년간 AI 산업은 LLM과 생성형 AI에 집중했다. 텍스트를 생성하고, 이미지를 만들고, 코드를 작성하는 — 모두 디지털 세계 안에서의 AI였다. CES 2026은 그 다음 장을 열었다. AI가 물리 세계를 이해하고, 그 안에서 행동하는 <em>Physical AI</em>의 시대.</p>
+        <p>NVIDIA의 Cosmos가 물리 법칙을 시뮬레이션하고, Alpamayo가 도로 위에서 추론하며, Atlas가 공장에서 작업을 수행하는 것을 직접 봤다. AI 산업의 가치 창출 방식이 근본적으로 바뀌고 있다는 신호를 현장에서 체감했다.</p>
       </div>
-      <h3 style="margin: 2rem 0 1rem;">산업적 함의</h3>
-      <ul class="implication-list">
-        <li><span class="impl-icon">🏭</span><div class="impl-content"><h4>제조·물류의 AI 자동화 가속</h4><p>Physical AI는 제조 라인의 품질 검사, 물류 센터의 피킹·패킹, 위험 환경의 작업 대체를 현실로 만든다. 로봇이 "보고 판단하고 행동하는" 능력을 갖추면서, AI ROI가 소프트웨어를 넘어 하드웨어 영역으로 확장된다.</p></div></li>
-        <li><span class="impl-icon">🚗</span><div class="impl-content"><h4>자율주행의 상용화 임계점</h4><p>Zoox의 실제 서비스 운영은 자율주행이 기술 검증 단계를 넘어섰음을 보여준다. 다만 운행 구간의 제한, 엣지 케이스 대응, 규제 프레임워크 등 해결해야 할 과제는 여전히 존재한다. 핵심은 "완벽한 기술"이 아니라 "충분히 안전한 서비스"로의 전환이다.</p></div></li>
-        <li><span class="impl-icon">💻</span><div class="impl-content"><h4>AI 인프라의 분산화</h4><p>On-Device AI의 부상은 클라우드 중심 AI 아키텍처에 변화를 예고한다. 모든 추론을 클라우드로 보내는 대신, 디바이스에서 1차 처리하고 클라우드와 협업하는 하이브리드 AI 아키텍처가 표준이 될 것이다.</p></div></li>
-        <li><span class="impl-icon">📺</span><div class="impl-content"><h4>AI-First 하드웨어 설계</h4><p>디스플레이, 가전, 자동차 — 모든 하드웨어가 AI를 전제로 설계되기 시작했다. 이는 하드웨어 기업의 경쟁력이 "부품 스펙"에서 "AI 알고리즘 역량"으로 이동하고 있음을 의미한다.</p></div></li>
-      </ul>
-      <div class="analysis-box" style="margin-top: 2rem;">
-        <h3>결론: AI는 이제 "사용하는 것"이 아니라 "살아가는 것"이다</h3>
+
+      <h3 style="margin:2rem 0 1rem;">CES 2026이 남긴 다섯 가지 메시지</h3>
+
+      <div style="display:flex;flex-direction:column;gap:0.8rem;margin:1rem 0;">
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <span style="font-size:1.4rem;font-weight:800;color:var(--ai);flex-shrink:0;line-height:1;">01</span>
+          <div>
+            <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.2rem;">AI는 이제 생각만 하지 않는다 — 움직이고, 감지하고, 행동한다</div>
+            <p style="color:var(--muted);font-size:0.82rem;line-height:1.6;margin:0;">자율주행차, 로봇, 산업 기계가 인지-판단-행동을 연결하는 공통의 구현 지능 스택(Embodied Intelligence Stack)을 공유하기 시작했다.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <span style="font-size:1.4rem;font-weight:800;color:var(--ai);flex-shrink:0;line-height:1;">02</span>
+          <div>
+            <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.2rem;">경쟁의 중심이 부품에서 플랫폼 통합으로 이동했다</div>
+            <p style="color:var(--muted);font-size:0.82rem;line-height:1.6;margin:0;">개별 센서나 칩이 아니라 엔드-투-엔드 플랫폼을 누가 장악하느냐가 승부를 가른다.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <span style="font-size:1.4rem;font-weight:800;color:var(--ai);flex-shrink:0;line-height:1;">03</span>
+          <div>
+            <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.2rem;">SDV는 자동차 산업의 OS 전쟁이다</div>
+            <p style="color:var(--muted);font-size:0.82rem;line-height:1.6;margin:0;">미들웨어, 소프트웨어 아키텍처, OTA 업데이트 역량이 OEM의 미래 경쟁력을 결정한다.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <span style="font-size:1.4rem;font-weight:800;color:var(--ai);flex-shrink:0;line-height:1;">04</span>
+          <div>
+            <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.2rem;">인간 중심 사용자 경험이 진정한 차별화 요소다</div>
+            <p style="color:var(--muted);font-size:0.82rem;line-height:1.6;margin:0;">속도나 자율성만으로는 부족하다. 안전, 신뢰, 설명 가능성, 직관적 사용성이 소프트웨어 진화의 완성점이다.</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:1rem;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem;">
+          <span style="font-size:1.4rem;font-weight:800;color:var(--ai);flex-shrink:0;line-height:1;">05</span>
+          <div>
+            <div style="font-size:0.92rem;font-weight:700;margin-bottom:0.2rem;">Physical AI는 모빌리티를 넘어 문명 인프라가 된다</div>
+            <p style="color:var(--muted);font-size:0.82rem;line-height:1.6;margin:0;">제조, 에너지, 헬스케어, 도시, 농업까지 — AI는 모든 산업 변혁의 핵심 엔진이다.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="analysis-box" style="margin-top:2rem;">
+        <h3>결론</h3>
         <p>CES 2026이 보여준 미래는, AI가 앱이나 서비스가 아니라 <em>환경 그 자체</em>가 되는 세상이다. 우리가 타는 차, 보는 TV, 사는 집, 일하는 공장 — 모든 물리적 공간에 AI가 내재화된다. 기업에게 이것은 "AI를 도입할 것인가"가 아니라 <em>"AI 없이 경쟁할 수 있는가"</em>라는 질문으로 바뀌었음을 의미한다.</p>
-        <p>기술 전략가의 관점에서, 지금 가장 중요한 것은 Physical AI 시대에 맞는 새로운 가치 창출 모델을 설계하는 것이다. 소프트웨어 AI의 성공 공식이 하드웨어 AI에 그대로 적용되지는 않을 것이기 때문이다.</p>
+        <p>승자는 플랫폼을 통제하고, 소프트웨어를 장악하며, 인간 경험을 설계하는 자다.</p>
       </div>
     </section>
     <!-- Author Card -->
@@ -869,75 +1071,11 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => { s.classList.add('fade-in'); observer.observe(s); });
 
-    // Accordion: start collapsed, toggle on click
-    document.querySelectorAll('.theme-group').forEach(group => {
-      const header = group.querySelector('.theme-group-header');
-      const grid = group.querySelector('.company-grid');
-      if (!header || !grid) return;
-      grid.classList.add('collapsed');
-      grid.style.maxHeight = '0';
-      grid.style.opacity = '0';
-      header.classList.add('collapsed');
-      header.addEventListener('click', function() {
-        if (grid.classList.contains('collapsed')) {
-          grid.classList.remove('collapsed');
-          grid.style.maxHeight = grid.scrollHeight + 'px';
-          grid.style.opacity = '1';
-          header.classList.remove('collapsed');
-        } else {
-          grid.classList.add('collapsed');
-          grid.style.maxHeight = '0';
-          grid.style.opacity = '0';
-          header.classList.add('collapsed');
-        }
-      });
-    });
 
-    // Bubble click: scroll to theme + expand
-    document.querySelectorAll('.bubble[data-theme]').forEach(function(bubble) {
-      bubble.addEventListener('click', function() {
-        var themeId = this.getAttribute('data-theme');
-        var target = document.getElementById(themeId);
-        if (!target) return;
-        var grid = target.querySelector('.company-grid');
-        var header = target.querySelector('.theme-group-header');
-        if (grid && grid.classList.contains('collapsed')) {
-          grid.classList.remove('collapsed');
-          grid.style.maxHeight = grid.scrollHeight + 'px';
-          grid.style.opacity = '1';
-          if (header) header.classList.remove('collapsed');
-        }
-        setTimeout(function() {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 50);
-      });
-    });
 
-    // Expand/Collapse all button
-    var expandBtn = document.getElementById('expandAllBtn');
-    var allExpanded = false;
-    if (expandBtn) {
-      expandBtn.addEventListener('click', function() {
-        allExpanded = !allExpanded;
-        document.querySelectorAll('.theme-group').forEach(function(group) {
-          var grid = group.querySelector('.company-grid');
-          var header = group.querySelector('.theme-group-header');
-          if (!grid) return;
-          if (allExpanded) {
-            grid.classList.remove('collapsed');
-            grid.style.maxHeight = grid.scrollHeight + 'px';
-            grid.style.opacity = '1';
-            if (header) header.classList.remove('collapsed');
-          } else {
-            grid.classList.add('collapsed');
-            grid.style.maxHeight = '0';
-            grid.style.opacity = '0';
-            if (header) header.classList.add('collapsed');
-          }
-        });
-        expandBtn.textContent = allExpanded ? '▴ 전체 접기' : '▾ 전체 상세 보기';
-      });
-    }
+
+
+
   </script>
 </body>
 </html>

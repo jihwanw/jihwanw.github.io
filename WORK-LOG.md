@@ -150,3 +150,18 @@
 - Overview에서 AWS SA/18년 자기소개 제거
 - 본문 내 "AI 전문가" 표현 4곳 모두 겸손하게 교체
 - Author 카드 과시적 문구 제거
+
+### 보고서 내용 전면 보강 (2026-03-10)
+- Physical AI Deep Dive 섹션 신설 (Gallery 다음, Companies 전)
+  - NVIDIA Brain/Body/World 3층위 비주얼 카드
+  - Cosmos Reason 2, Predict 2.5, Sim-to-Real, Vera Rubin, Alpamayo 상세
+  - 로봇 혁명: Atlas/SDF, Unitree G1 $13,500, Sanctuary AI, LG CLOiD
+- SDV Deep Dive 섹션 신설
+  - 시장 데이터 스탯 박스 ($2,135억→$1조2,400억, SDV 비중 3.4%→90%)
+  - SDV 5계층 아키텍처 비주얼 스택 다이어그램
+  - OEM 전략 카드: Kia PBV/PV5/PV7, BMW iX3/Alexa, Afeela $89,900, VW IDA/ChatGPT, Geely GEEA 3.0
+  - 플랫폼 전쟁: Qualcomm Snapdragon Digital Chassis, QNX Everywhere, Elektrobit+Gemini+Unreal
+- Expert Analysis → "현장에서 정리한 생각" + 5대 메시지 번호 카드로 재구성
+  - 구현 지능 스택, 플랫폼 통합, OS 전쟁, 인간 중심 UX, 문명 인프라
+- 네비게이션 7개로 확장: Home, Key Themes, Physical AI, SDV, 50 Companies, 로보택시, 생각 정리
+- 보고서 대비 커버리지: 43개 핵심 항목 중 43개 반영 (100%)
