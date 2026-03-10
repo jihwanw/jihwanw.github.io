@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CES 2026 — AI 전문가의 시선 | Jihwan Woo</title>
+  <meta name="description" content="CES 2026 현장 리포트. Physical AI, 자율주행, 로보틱스 — AI 전문가 우지환이 본 기술의 미래.">
+  <meta property="og:title" content="CES 2026 — AI 전문가의 시선">
+  <meta property="og:description" content="Physical AI의 시대가 열렸다. CES 2026 현장에서 목격한 AI 기술의 전환점.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://jihwanw.github.io/ces2026/KakaoTalk_Photo_2026-03-10-00-01-57 001.jpeg">
+  <link rel="canonical" href="https://jihwanw.github.io/ces2026/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
+  <link rel="stylesheet" href="../assets/css/style.css">
+  <style>
+    .ces-hero {
+      min-height: 70vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 6rem 1.5rem 3rem; position: relative;
+    }
+    .ces-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(108,99,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .ces-badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--ai); border: 1px solid var(--ai-border);
+      background: var(--ai-bg); padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem;
+    }
+    .ces-hero h1 { font-size: 2.6rem; letter-spacing: -0.03em; margin-bottom: 0.5rem; line-height: 1.2; }
+    .ces-hero h1 span { color: var(--ai); }
+    .ces-subtitle { color: var(--muted); font-size: 1.1rem; max-width: 600px; margin: 0 auto 0.8rem; }
+    .ces-meta { color: var(--muted); font-size: 0.82rem; opacity: 0.6; }
+    .theme-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin: 2rem 0; }
+    .theme-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem; transition: border-color 0.3s, transform 0.2s;
+    }
+    .theme-card:hover { transform: translateY(-3px); border-color: var(--ai-border); }
+    .theme-number { font-size: 0.72rem; font-weight: 700; color: var(--ai); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+    .theme-card h3 { font-size: 1.05rem; margin-bottom: 0.4rem; }
+    .theme-card p { color: var(--muted); font-size: 0.88rem; line-height: 1.7; }
+    .theme-highlight { color: var(--text); font-weight: 600; }
+    .gallery { margin: 2rem 0; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+    .gallery-item {
+      border-radius: 10px; overflow: hidden; aspect-ratio: 4/3;
+      border: 1px solid var(--border); cursor: pointer; transition: transform 0.3s, border-color 0.3s;
+    }
+    .gallery-item:hover { transform: scale(1.03); border-color: var(--ai-border); }
+    .gallery-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .gallery-item-wide { grid-column: span 2; aspect-ratio: 16/9; }
+    .zoox-section { margin: 3rem 0; }
+    .zoox-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin: 1.5rem 0; }
+    .zoox-video { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); background: var(--surface); }
+    .zoox-video video { width: 100%; display: block; }
+    .zoox-video-caption { padding: 0.8rem 1rem; color: var(--muted); font-size: 0.82rem; }
+    .analysis-box {
+      background: linear-gradient(135deg, var(--ai-bg), var(--strategy-bg));
+      border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin: 2rem 0;
+    }
+    .analysis-box h3 { font-size: 1.15rem; margin-bottom: 0.8rem; }
+    .analysis-box p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.8rem; }
+    .analysis-box p:last-child { margin-bottom: 0; }
+    .analysis-box em { color: var(--text); font-style: normal; font-weight: 600; }
+    .implication-list { list-style: none; margin: 1.5rem 0; display: flex; flex-direction: column; gap: 0.8rem; }
+    .implication-list li {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.2rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .impl-icon { font-size: 1.4rem; flex-shrink: 0; line-height: 1; }
+    .impl-content h4 { font-size: 0.95rem; margin-bottom: 0.2rem; }
+    .impl-content p { color: var(--muted); font-size: 0.85rem; line-height: 1.6; }
+    .back-home {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--ai); text-decoration: none; font-size: 0.88rem; margin-bottom: 2rem; transition: opacity 0.2s;
+    }
+    .back-home:hover { opacity: 0.7; }
+    .lightbox {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.92); backdrop-filter: blur(8px);
+      align-items: center; justify-content: center; cursor: pointer;
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img { max-width: 90vw; max-height: 90vh; border-radius: 8px; object-fit: contain; }
+    /* 50 Companies */
+    .companies-intro { color: var(--muted); font-size: 0.95rem; line-height: 1.9; margin-bottom: 2rem; }
+    .companies-intro em { color: var(--text); font-style: normal; font-weight: 600; }
+    .theme-group { margin-bottom: 2.5rem; }
+    .theme-group-header {
+      display: flex; align-items: center; gap: 0.7rem; margin-bottom: 1rem;
+      padding-bottom: 0.6rem; border-bottom: 1px solid var(--border);
+    }
+    .theme-group-icon { font-size: 1.3rem; }
+    .theme-group-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ai); }
+    .theme-group-title { font-size: 1.05rem; font-weight: 700; }
+    .company-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+    .company-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.2rem 1.3rem; transition: border-color 0.3s, transform 0.2s;
+    }
+    .company-card:hover { transform: translateY(-2px); border-color: var(--ai-border); }
+    .company-card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
+    .company-name { font-size: 0.95rem; font-weight: 700; }
+    .company-tag {
+      font-size: 0.62rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 0.15rem 0.5rem; border-radius: 10px; white-space: nowrap;
+    }
+    .tag-key { color: var(--ai); background: var(--ai-bg); border: 1px solid var(--ai-border); }
+    .tag-sub { color: var(--strategy); background: var(--strategy-bg); border: 1px solid rgba(16,185,129,0.2); }
+    .company-desc { color: var(--muted); font-size: 0.82rem; line-height: 1.65; margin-bottom: 0.5rem; }
+    .company-highlight { font-size: 0.78rem; color: var(--text); line-height: 1.6; padding-top: 0.4rem; border-top: 1px solid var(--border); }
+    .company-highlight strong { color: var(--ai); font-weight: 600; }
+    .expert-insight-bar {
+      background: linear-gradient(135deg, var(--ai-bg), var(--strategy-bg));
+      border: 1px solid var(--border); border-radius: 10px; padding: 1.3rem 1.5rem; margin: 1.5rem 0 2rem;
+    }
+    .expert-insight-bar p { color: var(--muted); font-size: 0.88rem; line-height: 1.75; margin: 0; }
+    .expert-insight-bar em { color: var(--text); font-style: normal; font-weight: 600; }
+    .expert-insight-bar .insight-label {
+      font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--ai); margin-bottom: 0.4rem; display: block;
+    }
+    @media (max-width: 768px) {
+      .ces-hero h1 { font-size: 1.8rem; }
+      .theme-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item-wide { grid-column: span 2; }
+      .zoox-grid { grid-template-columns: 1fr; }
+      .company-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../index.html" class="nav-link">← Home</a>
+      <a href="#themes" class="nav-link">Key Themes</a>
+      <a href="#gallery" class="nav-link">Gallery</a>
+      <a href="#companies" class="nav-link">50 Companies</a>
+      <a href="#zoox" class="nav-link">Zoox 탑승기</a>
+      <a href="#analysis" class="nav-link">Expert View</a>
+    </nav>
+  </header>
+  <main>
+    <section class="ces-hero">
+      <div class="hero-content">
+        <span class="ces-badge">Field Report</span>
+        <h1>CES 2026:<br><span>Physical AI</span>의 시대가 열리다</h1>
+        <p class="ces-subtitle">AI가 스크린을 벗어나 물리 세계로 나왔다.<br>라스베이거스 현장에서 목격한 기술의 전환점.</p>
+        <p class="ces-meta">January 7–10, 2026 · Las Vegas Convention Center · by Jihwan Woo</p>
+      </div>
+    </section>
+    <section id="overview">
+      <a href="../index.html" class="back-home">← 메인으로 돌아가기</a>
+      <h2>올해 CES의 메시지는 명확했다</h2>
+      <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.9; margin-bottom: 1.5rem;">
+        CES 2026은 AI가 더 이상 소프트웨어 안에 머물지 않는다는 것을 선언한 행사였다.
+        NVIDIA Jensen Huang의 키노트가 그 시작이었다. 그는 <em style="color:var(--text);font-style:normal;font-weight:600;">"Physical AI"</em>라는 키워드로
+        AI가 물리 세계를 인식하고, 추론하고, 행동하는 시대의 도래를 선언했다.
+        쇼 플로어 곳곳에서 로봇이 걸어 다니고, 자율주행차가 도로를 달리고,
+        AI 칩이 디바이스 안에서 직접 추론을 수행하는 모습이 그 선언을 뒷받침했다.
+      </p>
+      <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.9;">
+        AWS AI/ML Senior Specialist SA로서, 그리고 18년간 AI 연구·개발과 기술 전략을 넘나들어 온 시각에서,
+        올해 CES에서 주목한 네 가지 핵심 테마와 현장의 기록을 공유한다.
+      </p>
+    </section>
+    <section id="themes">
+      <h2>Four Key Themes</h2>
+      <div class="theme-grid">
+        <div class="theme-card">
+          <div class="theme-number">THEME 01</div>
+          <h3>Physical AI — AI가 몸을 갖다</h3>
+          <p>NVIDIA는 <span class="theme-highlight">Vera Rubin GPU</span>와 물리 세계 시뮬레이션 모델 <span class="theme-highlight">Cosmos</span>, 자율주행 추론 모델 <span class="theme-highlight">Alpamayo</span>를 공개했다. Jensen Huang은 이를 "AI의 ChatGPT 모먼트"에 비유하며, 디지털 AI에서 물리적 AI로의 전환을 선언했다. Hyundai의 Boston Dynamics Atlas 휴머노이드 로봇 시연은 그 비전의 실체를 보여줬다.</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-number">THEME 02</div>
+          <h3>자율주행 — 로보택시의 현재</h3>
+          <p>Amazon의 <span class="theme-highlight">Zoox</span>가 라스베이거스에서 실제 무인 로보택시 서비스를 운영 중이었다. 핸들도 페달도 없는 차량에 직접 탑승해 봤다. Uber·Lucid·Nuro 연합의 로보택시도 공개되었고, 자율주행은 더 이상 데모가 아닌 <span class="theme-highlight">상용 서비스</span>의 단계에 진입했다.</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-number">THEME 03</div>
+          <h3>On-Device AI — 클라우드에서 엣지로</h3>
+          <p>Intel의 차세대 <span class="theme-highlight">Core Ultra</span>, AMD의 새로운 AI 칩, Lenovo의 AI PC 라인업까지 — AI 추론이 클라우드에서 디바이스로 내려오고 있다. NPU 성능 경쟁이 본격화되면서, 프라이버시와 지연시간 문제를 동시에 해결하는 <span class="theme-highlight">로컬 AI</span> 시대가 가속되고 있다.</p>
+        </div>
+        <div class="theme-card">
+          <div class="theme-number">THEME 04</div>
+          <h3>디스플레이 혁신 — AI가 화질을 만든다</h3>
+          <p>Samsung의 <span class="theme-highlight">130인치 Micro RGB</span> TV, LG의 <span class="theme-highlight">OLED evo W6</span> 월페이퍼 TV, TCL의 SQD Mini-LED까지. 주목할 점은 화질 개선의 핵심이 패널 자체가 아닌 <span class="theme-highlight">AI 업스케일링과 화질 최적화 알고리즘</span>이라는 것이다. 디스플레이도 AI-first 시대에 진입했다.</p>
+        </div>
+      </div>
+    </section>
+    <section id="gallery">
+      <h2>현장 스케치</h2>
+      <p style="color: var(--muted); margin-bottom: 1.5rem; font-size: 0.92rem;">CES 2026 쇼 플로어와 라스베이거스 현장의 기록.</p>
+      <div class="gallery-grid">
+        <div class="gallery-item gallery-item-wide"><img src="KakaoTalk_Photo_2026-03-10-00-01-57 001.jpeg" alt="CES 2026 현장" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-01-57 003.jpeg" alt="CES 2026 전시장" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-01-57 005.jpeg" alt="CES 2026 쇼 플로어" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-01-58 007.jpeg" alt="CES 2026 전시" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-30 001.jpeg" alt="CES 2026 AI 전시" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-31 002.jpeg" alt="CES 2026 기술 전시" loading="lazy" /></div>
+        <div class="gallery-item gallery-item-wide"><img src="KakaoTalk_Photo_2026-03-10-00-03-31 005.jpeg" alt="CES 2026 메인 홀" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-31 007.jpeg" alt="CES 2026 부스" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-31 009.jpeg" alt="CES 2026 로보틱스" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-32 010.jpeg" alt="CES 2026 자율주행" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-32 012.jpeg" alt="CES 2026 디스플레이" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-32 014.jpeg" alt="CES 2026 혁신 기술" loading="lazy" /></div>
+      </div>
+    </section>
+
+    <!-- 50 Companies Section -->
+    <section id="companies">
+      <h2>🏢 AI 전문가가 선정한 CES 2026 주목 기업 50</h2>
+      <p class="companies-intro">
+        CES 2026 쇼 플로어를 직접 걸으며, 그리고 사전·사후 리서치를 통해 <em>Physical AI와 SDV(Software-Defined Vehicle) 시대</em>를 이끌 50개 기업을 선정했다.
+        단순한 기업 나열이 아니라, 각 기업이 왜 중요한지, 그들의 기술이 산업 전환에 어떻게 기여하는지를 AI 전문가의 시각에서 분석한다.
+        현장에서 느낀 것은, 올해 CES의 주인공은 완성차 OEM이 아니라 <em>그 뒤의 소프트웨어·센서·플랫폼 기업들</em>이었다는 것이다.
+      </p>
+
+      <!-- KEY THEME 1: Autonomous Driving -->
+      <div class="theme-group">
+        <div class="theme-group-header">
+          <span class="theme-group-icon">🚗</span>
+          <div><span class="theme-group-label">KEY THEME 01</span><div class="theme-group-title">Autonomous Driving — 자율주행의 최전선</div></div>
+        </div>
+        <div class="company-grid">
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Waymo</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">Alphabet 산하 자율주행 기업. L4 자율주행 로보택시를 피닉스, 샌프란시스코, LA, 오스틴에서 상용 운영 중.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> Waymo는 주간 유료 탑승 15만 건을 돌파하며 세계 최대 자율주행 서비스로 자리매김. Hyundai와 파트너십을 통해 IONIQ 5 기반 자율주행차 도입을 발표했다. <strong>왜 중요한가:</strong> 자율주행의 "서비스화" 가능성을 실증하는 유일한 대규모 사례.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Zoox</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">Amazon 산하. 핸들·페달 없는 양방향 좌석 설계의 전용 로보택시 차량을 자체 제작·운영.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 라스베이거스에서 실제 무인 로보택시 서비스 운영. 100만 마일 이상 자율주행, 30만+ 탑승객 기록. 직접 탑승 체험 완료. <strong>왜 중요한가:</strong> "차량 설계부터 서비스까지" 수직 통합 모델의 가능성을 보여주는 유일한 기업.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Mobileye</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">Intel 산하 ADAS/자율주행 칩·소프트웨어 기업. EyeQ 시리즈 칩으로 글로벌 ADAS 시장 점유율 1위.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 차세대 EyeQ™ Ultra 칩 기반 L4 자율주행 시스템과 Mobileye Drive™ 플랫폼을 공개. 카메라 중심 자율주행으로 LiDAR 의존도를 낮추는 전략. <strong>왜 중요한가:</strong> 자율주행의 "민주화" — 고가 센서 없이도 고수준 자율주행을 가능하게 하는 비용 혁신.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Imagry</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">이스라엘 기반 자율주행 소프트웨어 스타트업. HD 맵 없이 실시간 비전 기반 자율주행을 구현.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 맵리스(Mapless) 자율주행 기술 시연. 사전 매핑 없이 카메라만으로 도로 환경을 실시간 인식·판단. <strong>왜 중요한가:</strong> HD 맵 구축·유지 비용이 자율주행 확산의 병목인 상황에서, 맵리스 접근은 스케일링의 핵심 열쇠.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Tensor Auto</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">AI 기반 자율주행 소프트웨어 기업. End-to-End 딥러닝 기반 자율주행 스택 개발.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> End-to-End 신경망 기반 자율주행 데모 공개. 센서 입력에서 주행 명령까지 단일 모델로 처리하는 아키텍처. <strong>왜 중요한가:</strong> 모듈형 자율주행 스택의 한계를 넘어, Tesla FSD와 유사한 E2E 접근이 업계 트렌드로 부상.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEY THEME 2: Next-gen EV & SDV -->
+      <div class="theme-group">
+        <div class="theme-group-header">
+          <span class="theme-group-icon">⚡</span>
+          <div><span class="theme-group-label">KEY THEME 02</span><div class="theme-group-title">Next-gen EV Platforms & SDV — 소프트웨어 정의 차량</div></div>
+        </div>
+        <div class="company-grid">
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Hyundai Motor Group</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">현대·기아·제네시스를 아우르는 글로벌 자동차 그룹. SDV 전환과 로보틱스에 대규모 투자 중.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> Boston Dynamics Atlas 휴머노이드 로봇 시연, Waymo와 IONIQ 5 자율주행 파트너십, SDV 플랫폼 ccOS 공개. <strong>왜 중요한가:</strong> 자동차 OEM이 "모빌리티+로보틱스" 통합 플랫폼 기업으로 전환하는 가장 적극적인 사례.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Geely Auto</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">중국 최대 민영 자동차 그룹. Volvo, Polestar, Lotus, Zeekr 등을 산하에 둔 글로벌 모빌리티 기업.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> Zeekr 브랜드의 AI 기반 스마트 콕핏과 자율주행 기술 시연. Flyme Auto OS 기반 차량-스마트폰 생태계 통합. <strong>왜 중요한가:</strong> 중국 EV 기업의 글로벌 확장과 소프트웨어 생태계 전략의 선두 주자.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">ZF Group</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">독일 기반 글로벌 자동차 부품 Tier-1 기업. 섀시, 파워트레인, ADAS, 자율주행 기술 공급.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 차세대 자율주행 미들웨어 플랫폼과 AI 기반 섀시 제어 시스템 공개. 소프트웨어 정의 섀시(Software-Defined Chassis) 컨셉 발표. <strong>왜 중요한가:</strong> Tier-1 부품사가 하드웨어에서 소프트웨어 플랫폼 기업으로 전환하는 산업 구조 변화의 상징.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">KPIT Technologies</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">인도 기반 자동차 소프트웨어 엔지니어링 기업. SDV, ADAS, 전동화 소프트웨어 개발 전문.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AUTOSAR Adaptive 기반 SDV 미들웨어와 AI 기반 ADAS 소프트웨어 솔루션 시연. <strong>왜 중요한가:</strong> SDV 전환에서 소프트웨어 엔지니어링 수요가 폭증하는 가운데, 자동차 SW 전문 기업의 전략적 가치가 급상승.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">HERE Technologies</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">글로벌 위치 데이터·맵 플랫폼 기업. 자율주행용 HD 맵과 위치 기반 서비스 제공.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 자율주행·ADAS용 실시간 HD 맵 업데이트 플랫폼과 차량 내 위치 인텔리전스 솔루션 공개. <strong>왜 중요한가:</strong> 자율주행과 SDV의 "디지털 트윈 도로"를 구축하는 핵심 인프라 기업. 데이터가 곧 경쟁력.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">HL Mando</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">한국 기반 글로벌 자동차 부품 기업. 브레이크, 조향, ADAS 등 섀시 시스템 전문.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> Steer-by-Wire, Brake-by-Wire 등 차세대 바이와이어(by-wire) 기술과 통합 섀시 제어 플랫폼 공개. <strong>왜 중요한가:</strong> SDV 시대에 기계식 연결을 전자식으로 대체하는 바이와이어 기술은 자율주행의 물리적 기반.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Hyundai Mobis</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">현대차그룹 핵심 부품 계열사. 전장, ADAS, 램프, 콕핏 모듈 등 미래차 핵심 부품 공급.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 홀로그래픽 윈드실드 디스플레이, AI 기반 운전자 모니터링, 모듈형 e-코너 시스템 시연. <strong>왜 중요한가:</strong> 부품사에서 "모빌리티 솔루션 기업"으로의 전환. 차량의 눈(센서)과 뇌(AI)를 동시에 공급하는 통합 역량.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Hyundai WIA</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">현대차그룹 계열 방산·자동차 부품 기업. 엔진, 등속조인트, 자율주행 부품 제조.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 자율주행 차량용 정밀 구동 부품과 로보틱스용 감속기 기술 전시. <strong>왜 중요한가:</strong> Physical AI 시대에 로봇과 자율주행차의 "관절과 근육" 역할을 하는 정밀 기계 부품의 전략적 가치.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expert Insight Bar 1 -->
+      <div class="expert-insight-bar">
+        <span class="insight-label">💡 Expert Insight</span>
+        <p>AI는 더 이상 생각만 하지 않는다 — <em>움직이고, 감지하고, 행동한다.</em> CES 2026에서 가장 명확했던 메시지는 AI가 디지털 세계를 넘어 물리 세계의 핵심 엔진이 되었다는 것이다. 자율주행과 SDV는 그 전환의 최전선이며, 경쟁의 중심은 부품에서 <em>플랫폼 통합</em>으로 이동했다.</p>
+      </div>
+
+      <!-- KEY THEME 3: OS & Middleware -->
+      <div class="theme-group">
+        <div class="theme-group-header">
+          <span class="theme-group-icon">🖥️</span>
+          <div><span class="theme-group-label">KEY THEME 03</span><div class="theme-group-title">OS & Middleware for Vehicles and Robots</div></div>
+        </div>
+        <div class="company-grid">
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">BlackBerry (QNX)</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">차량용 실시간 운영체제(RTOS) 시장 지배자. 전 세계 2.55억 대 이상의 차량에 QNX 탑재.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> QNX SDP 8.0 기반 SDV 플랫폼과 디지털 콕핏 솔루션 시연. ADAS·자율주행용 안전 인증(ISO 26262) RTOS. <strong>왜 중요한가:</strong> SDV의 "운영체제 전쟁"에서 안전성과 실시간성을 동시에 보장하는 QNX는 사실상의 산업 표준.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Elektrobit</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">Continental 산하 자동차 소프트웨어 기업. AUTOSAR, 차량 OS, OTA 업데이트 솔루션 전문.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> EB corbos Linux 기반 SDV 소프트웨어 플랫폼과 클라우드 연동 OTA 솔루션 공개. <strong>왜 중요한가:</strong> 차량이 "바퀴 달린 컴퓨터"가 되면서, 자동차 OS와 미들웨어는 스마트폰의 Android/iOS에 해당하는 전략적 레이어.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Green Hills Software</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">미국 기반 안전 인증 RTOS 기업. INTEGRITY RTOS로 항공·국방·자동차 분야 안전 필수 시스템 공급.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> INTEGRITY RTOS 기반 자율주행 안전 플랫폼과 가상화 기술 시연. <strong>왜 중요한가:</strong> 자율주행에서 "소프트웨어 결함 = 인명 사고"인 환경에서, 안전 인증 RTOS는 타협할 수 없는 기반 기술.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Sonatus</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">실리콘밸리 기반 차량 소프트웨어 플랫폼 스타트업. 차량 데이터 관리와 소프트웨어 오케스트레이션.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 차량 내 소프트웨어 동적 배포·관리 플랫폼과 실시간 차량 데이터 파이프라인 시연. <strong>왜 중요한가:</strong> SDV의 핵심은 "출고 후에도 소프트웨어로 차량을 진화시키는 것." Sonatus는 그 오케스트레이션 레이어를 제공.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">AWS for Automotive</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">Amazon Web Services의 자동차 산업 특화 클라우드 서비스. 커넥티드카, SDV, 자율주행 클라우드 인프라.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AWS IoT FleetWise, 차량 디지털 트윈, 자율주행 시뮬레이션 클라우드 플랫폼 시연. <strong>왜 중요한가:</strong> SDV 시대에 차량은 클라우드와 상시 연결된 엣지 디바이스. 클라우드 인프라는 SDV 생태계의 "보이지 않는 엔진."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEY THEME 4: UX & Human-centric Mobility -->
+      <div class="theme-group">
+        <div class="theme-group-header">
+          <span class="theme-group-icon">🎯</span>
+          <div><span class="theme-group-label">KEY THEME 04</span><div class="theme-group-title">UX & Human-centric Mobility Experience</div></div>
+        </div>
+        <div class="company-grid">
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Cerence AI</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">차량용 AI 어시스턴트 전문 기업. 음성 인식, 자연어 처리, 차량 내 대화형 AI 플랫폼.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> CaLLM™ 대규모 언어 모델 기반 차량 AI 어시스턴트와 멀티모달 인터랙션 시연. <strong>왜 중요한가:</strong> SDV 시대의 차별화는 "운전 성능"이 아니라 "탑승 경험." 차량 내 AI UX가 브랜드 충성도를 결정하는 시대.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">SoundHound AI</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">음성 AI 플랫폼 기업. 자동차, 레스토랑, IoT 등 다양한 산업에 음성 AI 솔루션 제공.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 차량용 음성 AI 어시스턴트의 실시간 다국어 지원과 복합 질의 처리 기능 시연. <strong>왜 중요한가:</strong> 운전 중 손과 눈을 사용할 수 없는 환경에서, 음성은 가장 자연스러운 인터페이스. 음성 AI의 정확도가 UX를 좌우.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Smart Eye</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">스웨덴 기반 운전자 모니터링 시스템(DMS) 전문 기업. 시선 추적, 졸음 감지, 주의력 분석.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AI 기반 Interior Sensing 플랫폼으로 운전자·탑승자 상태를 실시간 분석. Euro NCAP 대응 DMS 솔루션. <strong>왜 중요한가:</strong> 자율주행 Level 2~3에서 "운전자가 언제 개입해야 하는가"를 판단하는 핵심 안전 기술.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">emotion3D</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">오스트리아 기반 차량 내부 3D 인식 기업. 탑승자 자세·감정·행동 인식 AI.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 3D 카메라 기반 탑승자 감정·자세 인식과 개인화된 차량 환경 자동 조절 시연. <strong>왜 중요한가:</strong> 미래 모빌리티의 진정한 차별화는 "차가 나를 이해하는 것." 감정 인식 AI는 인간 중심 UX의 최전선.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEY THEME 5: Robotics -->
+      <div class="theme-group">
+        <div class="theme-group-header">
+          <span class="theme-group-icon">🤖</span>
+          <div><span class="theme-group-label">KEY THEME 05</span><div class="theme-group-title">Robotics — 휴머노이드·산업·서비스 로봇</div></div>
+        </div>
+        <div class="company-grid">
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Doosan Robotics</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">한국 기반 협동 로봇(Cobot) 전문 기업. 제조, F&B, 물류 등 다양한 산업에 로봇 솔루션 공급.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AI 비전 기반 협동 로봇과 서비스 로봇 라인업 시연. 바리스타 로봇, 팔레타이징 로봇 등 실용적 응용 사례 전시. <strong>왜 중요한가:</strong> Physical AI의 가장 직접적인 구현체. "AI가 몸을 갖는다"는 것의 산업적 실체.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Bucket Robotics</span><span class="company-tag tag-key">Key</span></div>
+            <p class="company-desc">건설·중장비 자율화 로봇 스타트업. 굴삭기 등 중장비의 AI 자율 운전 기술 개발.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AI 기반 자율 굴삭 로봇 시연. 위험한 건설 현장에서 무인 중장비 운영 기술 공개. <strong>왜 중요한가:</strong> 건설·광업 등 위험 환경의 자동화는 Physical AI의 가장 높은 ROI 영역 중 하나.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expert Insight Bar 2 -->
+      <div class="expert-insight-bar">
+        <span class="insight-label">💡 Expert Insight</span>
+        <p>SDV(Software-Defined Vehicle)는 자동차 산업의 <em>운영체제 전환</em>이다. 과거 PC가 하드웨어에서 Windows/Mac으로, 스마트폰이 피처폰에서 iOS/Android로 전환했듯이, 자동차도 기계 중심에서 소프트웨어 중심으로 재정의되고 있다. 이 전환에서 <em>인간 중심 사용자 경험이 진정한 차별화 요소</em>가 된다.</p>
+      </div>
+
+      <!-- SUB-KEY THEME 1: AD Software & Simulation -->
+      <div class="theme-group">
+        <div class="theme-group-header">
+          <span class="theme-group-icon">🧪</span>
+          <div><span class="theme-group-label">SUB-KEY THEME 01</span><div class="theme-group-title">Autonomous Driving Software & Simulation</div></div>
+        </div>
+        <div class="company-grid">
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Synopsys</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">글로벌 EDA(전자설계자동화) 및 반도체 IP 기업. 자동차 칩 설계·검증 도구 제공.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 자율주행 SoC 설계·검증용 AI 기반 EDA 도구와 가상 프로토타이핑 플랫폼 시연. <strong>왜 중요한가:</strong> 자율주행 칩의 복잡도가 기하급수적으로 증가하면서, AI 기반 칩 설계 자동화가 개발 속도의 핵심 병목 해소.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">dSPACE</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">독일 기반 자동차 시뮬레이션·테스트 기업. HIL(Hardware-in-the-Loop) 시뮬레이션 글로벌 리더.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> ADAS/자율주행 가상 검증 플랫폼 SIMPHERA와 센서 시뮬레이션 도구 공개. <strong>왜 중요한가:</strong> 자율주행 차량을 실제 도로에서 수십억 마일 테스트하는 것은 불가능. 시뮬레이션이 유일한 스케일링 경로.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Cognata</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">이스라엘 기반 자율주행 시뮬레이션 기업. AI 기반 대규모 자율주행 시나리오 생성·테스트.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 디지털 트윈 도시 기반 자율주행 시뮬레이션과 합성 데이터 생성 플랫폼 시연. <strong>왜 중요한가:</strong> 실제 주행 데이터의 한계를 합성 데이터로 극복. "데이터 공장"이 자율주행 개발의 새로운 인프라.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Foretellix</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">이스라엘 기반 자율주행 검증 플랫폼 기업. 시나리오 기반 자율주행 안전성 검증 자동화.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 자율주행 안전성 검증 자동화 플랫폼과 규제 대응 시나리오 라이브러리 공개. <strong>왜 중요한가:</strong> 자율주행의 상용화 병목은 기술이 아니라 "안전성 입증." 체계적 검증 플랫폼이 규제 승인의 열쇠.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-KEY THEME 2: AI Chips & Computing -->
+      <div class="theme-group">
+        <div class="theme-group-header">
+          <span class="theme-group-icon">🔲</span>
+          <div><span class="theme-group-label">SUB-KEY THEME 02</span><div class="theme-group-title">Automotive AI Chips & Computing Platforms</div></div>
+        </div>
+        <div class="company-grid">
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">NVIDIA</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">GPU·AI 컴퓨팅의 절대 강자. 자율주행(DRIVE), 로보틱스(Isaac), AI 인프라(DGX) 전 영역 지배.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> Vera Rubin GPU, 물리 시뮬레이션 모델 Cosmos, 자율주행 추론 모델 Alpamayo 공개. Jensen Huang이 "Physical AI의 ChatGPT 모먼트"를 선언. <strong>왜 중요한가:</strong> AI 시대의 "인텔." 자율주행·로보틱스·시뮬레이션의 컴퓨팅 인프라를 독점적으로 공급.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Qualcomm</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">모바일 AP 1위 기업이 자동차·IoT·XR로 확장. Snapdragon Ride/Cockpit 플랫폼으로 차량 진출.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> Snapdragon Ride Flex SoC로 ADAS와 디지털 콕핏을 단일 칩에 통합. 차량용 AI 추론 성능 대폭 강화. <strong>왜 중요한가:</strong> 스마트폰에서 검증된 저전력 고성능 AI 칩 역량을 자동차로 이식. NVIDIA와의 차량용 AI 칩 양강 구도 형성.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Hailo</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">이스라엘 기반 엣지 AI 칩 기업. 저전력 고성능 AI 프로세서로 자동차·보안·산업용 엣지 AI 구현.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> Hailo-10 AI 프로세서 기반 차량 엣지 AI 솔루션과 실시간 비전 처리 데모. <strong>왜 중요한가:</strong> 모든 차량에 NVIDIA급 GPU를 탑재할 수는 없다. 저전력 엣지 AI 칩이 자율주행의 "대중화"를 가능하게 한다.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-KEY THEME 3: Advanced Sensors & Components -->
+      <div class="theme-group">
+        <div class="theme-group-header">
+          <span class="theme-group-icon">📡</span>
+          <div><span class="theme-group-label">SUB-KEY THEME 03</span><div class="theme-group-title">Advanced Sensors & Components</div></div>
+        </div>
+        <div class="company-grid">
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">AEye</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">미국 기반 적응형 LiDAR 기업. 소프트웨어 정의 LiDAR로 상황에 따라 스캔 패턴을 동적 조절.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 4Sight™ 적응형 LiDAR 플랫폼으로 장거리 물체 감지와 동적 ROI 스캐닝 시연. <strong>왜 중요한가:</strong> 고정 패턴 LiDAR의 한계를 넘어, "AI가 어디를 볼지 결정하는" 지능형 센서의 등장.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Hesai Technology</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">중국 기반 글로벌 LiDAR 기업. 자율주행·ADAS용 고성능 LiDAR 센서 대량 생산.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 차세대 초박형 LiDAR AT512와 장거리 LiDAR OT128 시연. 양산 가격 경쟁력 강조. <strong>왜 중요한가:</strong> LiDAR 가격이 수만 달러에서 수백 달러로 하락하면서, 자율주행 센서의 "대중화 임계점" 도달.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">RoboSense</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">중국 기반 스마트 LiDAR 기업. AI 소프트웨어 내장형 LiDAR로 인식·판단 통합 솔루션 제공.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AI 기반 스마트 LiDAR 센서와 자율주행 인식 소프트웨어 통합 솔루션 시연. <strong>왜 중요한가:</strong> 센서가 단순히 "데이터를 수집"하는 것을 넘어 "데이터를 이해"하는 시대. 센서+AI 통합이 새로운 경쟁 축.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">LG Innotek</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">LG그룹 핵심 부품 계열사. 카메라 모듈, 차량용 센서, 통신 모듈 등 첨단 부품 제조.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 자율주행용 고해상도 카메라 모듈과 ToF(Time-of-Flight) 센서, 차량용 5G 통신 모듈 전시. <strong>왜 중요한가:</strong> 자율주행차의 "눈"을 만드는 기업. 카메라 해상도와 센서 정밀도가 인식 성능을 직접 결정.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">BOE Varitronix</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">BOE 그룹 산하 차량용 디스플레이 전문 기업. 계기판, HUD, 인포테인먼트 디스플레이 공급.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 차세대 차량용 OLED 디스플레이, 투명 디스플레이, AR-HUD 기술 시연. <strong>왜 중요한가:</strong> SDV 시대에 차량 내부는 "이동하는 스크린." 디스플레이가 차량 UX의 물리적 인터페이스.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Aeva</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">미국 기반 FMCW LiDAR 기업. 주파수 변조 연속파 방식으로 속도·거리를 동시 측정.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> Aeries II FMCW LiDAR 센서로 장거리 고정밀 4D 인식(거리+속도+반사율+편광) 시연. <strong>왜 중요한가:</strong> 기존 ToF LiDAR 대비 태양광 간섭에 강하고 속도 정보를 직접 측정. 차세대 LiDAR 기술의 유력 후보.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Arbe Robotics</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">이스라엘 기반 4D 이미징 레이더 기업. 초고해상도 레이더로 LiDAR급 인식 성능 구현.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> Phoenix 4D 이미징 레이더로 2,000+ 가상 채널 기반 초고해상도 레이더 인식 시연. <strong>왜 중요한가:</strong> 레이더는 날씨·조명에 무관하게 작동하는 유일한 센서. 4D 이미징 레이더가 LiDAR를 보완·대체할 가능성.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Innoviz Technologies</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">이스라엘 기반 고성능 솔리드스테이트 LiDAR 기업. BMW 등 프리미엄 OEM에 LiDAR 공급.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> InnovizTwo LiDAR 센서의 양산 모델과 자율주행 인식 소프트웨어 InnovizAPP 시연. <strong>왜 중요한가:</strong> 프리미엄 OEM 양산 채택은 LiDAR가 "옵션"에서 "필수"로 전환되고 있다는 시장 신호.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Lidwave</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">프랑스 기반 반도체 통합 LiDAR 스타트업. CMOS 공정으로 LiDAR를 칩 수준으로 소형화.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 반도체 집적 LiDAR-on-Chip 기술 시연. 기존 LiDAR 대비 획기적 소형화·저가화. <strong>왜 중요한가:</strong> LiDAR가 "장비"에서 "칩"으로 진화하면, 모든 디바이스에 3D 인식 능력을 부여할 수 있다.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expert Insight Bar 3 -->
+      <div class="expert-insight-bar">
+        <span class="insight-label">💡 Expert Insight</span>
+        <p>AI는 모든 산업의 변혁을 가속하는 <em>핵심 엔진</em>이다. 센서가 더 정밀해지고, 칩이 더 강력해지고, 시뮬레이션이 더 정교해지면서 — Physical AI의 기술 스택이 완성되어 가고 있다. 이제 남은 질문은 "기술이 가능한가"가 아니라 <em>"어떤 비즈니스 모델로 가치를 창출할 것인가"</em>이다.</p>
+      </div>
+
+      <!-- SUB-KEY THEME 4: Industry AI -->
+      <div class="theme-group">
+        <div class="theme-group-header">
+          <span class="theme-group-icon">🏗️</span>
+          <div><span class="theme-group-label">SUB-KEY THEME 04</span><div class="theme-group-title">Industry AI — 산업 현장의 AI 혁신</div></div>
+        </div>
+        <div class="company-grid">
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">John Deere</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">세계 최대 농기계 기업. AI·자율주행 기술을 농업에 적용하는 선두 주자.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AI 비전 기반 자율 농업 장비와 정밀 농업(Precision Agriculture) 플랫폼 시연. 잡초 자동 감지·제거 시스템 공개. <strong>왜 중요한가:</strong> 농업은 Physical AI의 가장 큰 시장 중 하나. 노동력 부족과 식량 안보 문제를 AI가 직접 해결.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Caterpillar</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">세계 최대 건설·광업 장비 기업. 자율 운반 트럭과 AI 기반 현장 관리 시스템 운영.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AI 기반 자율 광산 운반 시스템과 건설 현장 디지털 트윈 플랫폼 시연. <strong>왜 중요한가:</strong> 광산·건설 현장의 자율화는 안전과 효율을 동시에 달성. Physical AI의 산업적 ROI가 가장 명확한 영역.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Kubota</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">일본 기반 글로벌 농기계·건설기계 기업. 소형 농기계와 스마트 농업 솔루션 전문.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AI 기반 자율 농업 로봇과 스마트 농업 데이터 플랫폼 시연. 소규모 농가를 위한 자동화 솔루션. <strong>왜 중요한가:</strong> 대규모 농장뿐 아니라 소규모 농가까지 AI 농업을 확산시키는 "농업 AI의 민주화."</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Brunswick</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">세계 최대 해양 레저 기업. 보트·요트용 자율 항해와 커넥티드 해양 기술 개발.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AI 기반 자율 도킹 시스템과 해양 자율 항해 기술 시연. ADAS 개념을 해양으로 확장. <strong>왜 중요한가:</strong> 자율주행 기술이 도로를 넘어 해양으로 확장. Physical AI의 적용 범위가 "모든 이동 수단"으로 확대.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Oshkosh</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">미국 기반 특수 차량 기업. 군용, 소방, 공항, 건설용 특수 목적 차량 제조.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 자율 공항 제설차, AI 기반 소방차 운영 시스템 등 특수 환경 자율화 기술 시연. <strong>왜 중요한가:</strong> 극한 환경에서의 자율화는 인간의 안전을 직접 보호. Physical AI의 사회적 가치가 가장 높은 영역.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SUB-KEY THEME 5: Beyond Mobility -->
+      <div class="theme-group">
+        <div class="theme-group-header">
+          <span class="theme-group-icon">🔋</span>
+          <div><span class="theme-group-label">SUB-KEY THEME 05</span><div class="theme-group-title">Beyond Mobility — 모빌리티 생태계의 확장</div></div>
+        </div>
+        <div class="company-grid">
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Aptiv</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">아일랜드 기반 글로벌 자동차 기술 기업. 차량 전장 아키텍처, ADAS, 커넥티비티 솔루션 전문.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 차세대 SDV 전장 아키텍처 Smart Vehicle Architecture™와 AI 기반 ADAS 플랫폼 시연. <strong>왜 중요한가:</strong> SDV의 "신경계"를 설계하는 기업. 차량 내 수천 개 ECU를 통합하는 전장 아키텍처가 SDV 전환의 물리적 기반.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Valeo</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">프랑스 기반 글로벌 자동차 부품 Tier-1 기업. ADAS, 전동화, 조명, 열관리 시스템 공급.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> 3세대 LiDAR SCALA 3와 AI 기반 자율 발렛 파킹, 차량 내 3D 인식 시스템 시연. <strong>왜 중요한가:</strong> 양산형 LiDAR를 최초로 공급한 기업. 센서에서 소프트웨어까지 수직 통합하는 Tier-1의 진화 방향을 보여준다.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Electra Vehicles</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">미국 기반 배터리 AI 스타트업. AI로 배터리 성능 최적화·수명 예측·안전 관리.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AI 기반 배터리 관리 시스템(BMS)으로 배터리 수명 30% 연장, 충전 최적화 기술 시연. <strong>왜 중요한가:</strong> EV의 핵심 비용이자 성능 병목인 배터리를 AI로 최적화. 하드웨어를 바꾸지 않고 소프트웨어로 성능을 개선하는 SDV 철학의 배터리 버전.</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Autofleet</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">이스라엘 기반 차량 플릿 최적화 플랫폼. AI로 차량 배차·경로·운영을 실시간 최적화.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AI 기반 플릿 오케스트레이션 플랫폼으로 자율주행 차량 플릿 관리 솔루션 시연. <strong>왜 중요한가:</strong> 자율주행차가 늘어나면 "개별 차량"이 아닌 "플릿 전체"를 최적화하는 AI가 핵심. 모빌리티의 "운영체제."</div>
+          </div>
+          <div class="company-card">
+            <div class="company-card-head"><span class="company-name">Donut Lab</span><span class="company-tag tag-sub">Sub</span></div>
+            <p class="company-desc">한국 기반 모빌리티 AI 스타트업. AI 기반 주차·발렛 자동화 솔루션 개발.</p>
+            <div class="company-highlight"><strong>CES 2026:</strong> AI 자율 발렛 파킹 시스템과 스마트 주차장 관리 플랫폼 시연. <strong>왜 중요한가:</strong> 자율주행의 "라스트 마일"은 주차. 도심 주차 문제를 AI로 해결하는 것은 자율주행 생태계의 필수 퍼즐.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Final Expert Insight -->
+      <div class="expert-insight-bar" style="margin-top: 2rem;">
+        <span class="insight-label">💡 Expert Insight — 종합</span>
+        <p>50개 기업을 관통하는 하나의 메시지가 있다. 자율주행차가 도로를 달리고, 로봇이 공장에서 일하고, AI 칩이 디바이스 안에서 추론한다. <em>AI가 소프트웨어를 넘어 물리 세계의 운영체제가 되고 있다.</em> 이 전환에서 승자는 단일 기술이 아니라 <em>센서-칩-소프트웨어-플랫폼을 통합하는 기업</em>이 될 것이다. CES 2026은 그 통합 경쟁의 서막이었다.</p>
+      </div>
+    </section>
+
+    <!-- Zoox Experience -->
+    <section id="zoox">
+      <h2>🚗 Zoox 로보택시, 직접 타보다</h2>
+      <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.9; margin-bottom: 1.5rem;">
+        CES 기간 중 라스베이거스에서 운행 중인 Amazon의 자율주행 로보택시 <em style="color:var(--text);font-style:normal;font-weight:600;">Zoox</em>에 직접 탑승했다.
+        핸들도 페달도 없다. 운전석 자체가 존재하지 않는다.
+        양쪽에 마주보는 좌석이 배치되어 있고, 차량 상단의 360도 LiDAR와 카메라 어레이가 주변 환경을 실시간으로 인식한다.
+        Zoox 앱에서 목적지를 설정하면 차량이 스스로 도착하고, 문이 자동으로 슬라이딩 오픈된다.
+        좌석에 앉으면 좌석 내 디스플레이에서 온도, 음악, 경로 정보를 직접 조작할 수 있다.
+      </p>
+      <div class="zoox-grid">
+        <div class="zoox-video">
+          <video controls preload="metadata" poster="KakaoTalk_Photo_2026-03-10-00-03-32 017.jpeg">
+            <source src="KakaoTalk_Video_2026-03-10-00-24-28.mp4" type="video/mp4">
+          </video>
+          <div class="zoox-video-caption">🎬 Zoox 차량 내부에서 직접 촬영한 탑승 영상</div>
+        </div>
+        <div class="zoox-video">
+          <video controls preload="metadata" poster="KakaoTalk_Photo_2026-03-10-00-03-33 018.jpeg">
+            <source src="KakaoTalk_Video_2026-03-10-00-24-35.mp4" type="video/mp4">
+          </video>
+          <div class="zoox-video-caption">🎬 Zoox가 라스베이거스 도로를 자율주행하는 모습</div>
+        </div>
+      </div>
+      <p style="color: var(--muted); font-size: 0.95rem; line-height: 1.9; margin: 1.5rem 0;">
+        영상에서 볼 수 있듯이, Zoox는 라스베이거스의 실제 도로 위에서 일반 차량들 사이를 달린다.
+        신호를 인식하고, 차선을 변경하고, 보행자를 감지해 멈추는 과정이 자연스럽다.
+        차 안에 앉아 있으면 "운전자가 없다"는 사실을 잊게 될 정도로 주행이 부드럽다.
+        다만 아직 운행 구간은 라스베이거스 내 약 8개 지점 사이로 제한되어 있고,
+        정해진 경로 위주로 운행된다는 점은 현재의 한계다.
+      </p>
+      <div class="gallery-grid" style="margin-top: 1.2rem;">
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-32 017.jpeg" alt="Zoox 로보택시 외관" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-33 018.jpeg" alt="Zoox 차량 내부 좌석" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-33 021.jpeg" alt="Zoox 자율주행 중" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-33 023.jpeg" alt="Zoox 탑승 경험" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-33 026.jpeg" alt="Zoox 라스베이거스 도로" loading="lazy" /></div>
+        <div class="gallery-item"><img src="KakaoTalk_Photo_2026-03-10-00-03-34 027.jpeg" alt="Zoox 자율주행 체험" loading="lazy" /></div>
+        <div class="gallery-item gallery-item-wide"><img src="KakaoTalk_Photo_2026-03-10-00-03-34 029.jpeg" alt="Zoox 로보택시 전경" loading="lazy" /></div>
+      </div>
+      <div class="analysis-box" style="margin-top: 2rem; background: linear-gradient(135deg, var(--ai-bg), var(--finance-bg));">
+        <h3>탑승 후 인사이트: 무인 자율주행의 미래는 어디까지 왔는가</h3>
+        <p>직접 타보기 전까지 자율주행은 "기술적으로 가능하다"는 수준의 이해였다. 하지만 핸들 없는 차에 앉아 라스베이거스 도로를 달리는 순간, <em>자율주행이 "서비스"로서 작동하고 있다</em>는 현실을 체감했다. 2026년 3월 기준 Zoox는 라스베이거스와 샌프란시스코에서 100만 마일 이상의 자율주행, 30만 명 이상의 탑승객을 기록했다.</p>
+        <p>그러나 냉정하게 보면, 아직 갈 길이 멀다. 운행 구간이 제한적이고, 예측 가능한 경로 위주로 운행된다. Forbes의 리뷰에서도 지적되었듯이, 한 번의 탑승으로 기술의 완성도를 판단할 수는 없지만, <em>한 번의 실수로 미완성을 드러낼 수는 있다.</em> 자율주행의 핵심 과제는 "완벽한 기술"이 아니라 <em>"충분히 안전한 서비스"로의 전환</em>이다.</p>
+        <p>AI 전문가의 관점에서 세 가지를 짚고 싶다:</p>
+      </div>
+      <ul class="implication-list">
+        <li><span class="impl-icon">🧠</span><div class="impl-content"><h4>Perception → Reasoning의 전환</h4><p>기존 자율주행은 "인식(Perception)" 중심이었다 — 차선을 보고, 신호를 읽고, 장애물을 감지하는 것. 하지만 Zoox와 NVIDIA Alpamayo가 보여주는 방향은 "추론(Reasoning)"이다. 모호한 상황에서 인간 운전자처럼 판단하는 능력. 이것이 Level 4 이상의 자율주행을 가능하게 하는 핵심 기술 전환점이다.</p></div></li>
+        <li><span class="impl-icon">🏙️</span><div class="impl-content"><h4>도시 인프라와의 공진화</h4><p>Zoox가 라스베이거스에서 먼저 서비스를 시작한 것은 우연이 아니다. 격자형 도로, 넓은 차선, 상대적으로 단순한 교통 패턴 — 도시 인프라가 자율주행에 유리한 환경이다. 자율주행의 확산은 기술만의 문제가 아니라, 도시 설계·규제·보험 등 생태계 전체의 공진화를 필요로 한다.</p></div></li>
+        <li><span class="impl-icon">💰</span><div class="impl-content"><h4>모빌리티 비즈니스 모델의 재편</h4><p>운전자가 사라지면 모빌리티의 비용 구조가 근본적으로 바뀐다. 인건비가 전체 운영비의 60~70%를 차지하는 택시·물류 산업에서, 자율주행은 단순한 기술 혁신이 아니라 비즈니스 모델의 재편이다. Zoox가 2026년 유료 서비스 전환을 예고한 것은 이 경제성이 임계점에 도달하고 있다는 신호다.</p></div></li>
+      </ul>
+    </section>
+
+    <!-- Expert Analysis -->
+    <section id="analysis">
+      <h2>AI 전문가의 시선</h2>
+      <div class="analysis-box">
+        <h3>패러다임 전환: Digital AI → Physical AI</h3>
+        <p>지난 3년간 AI 산업은 LLM과 생성형 AI에 집중했다. 텍스트를 생성하고, 이미지를 만들고, 코드를 작성하는 — 모두 <em>디지털 세계 안에서의 AI</em>였다. CES 2026은 그 다음 장을 열었다. AI가 물리 세계를 이해하고, 그 안에서 행동하는 <em>Physical AI</em>의 시대다.</p>
+        <p>NVIDIA의 Cosmos가 물리 법칙을 시뮬레이션하고, Alpamayo가 도로 위에서 추론하며, Boston Dynamics의 Atlas가 공장에서 작업을 수행한다. 이것은 단순한 기술 데모가 아니라, AI 산업의 <em>가치 창출 방식이 근본적으로 바뀌고 있다</em>는 신호다.</p>
+      </div>
+      <h3 style="margin: 2rem 0 1rem;">산업적 함의</h3>
+      <ul class="implication-list">
+        <li><span class="impl-icon">🏭</span><div class="impl-content"><h4>제조·물류의 AI 자동화 가속</h4><p>Physical AI는 제조 라인의 품질 검사, 물류 센터의 피킹·패킹, 위험 환경의 작업 대체를 현실로 만든다. 로봇이 "보고 판단하고 행동하는" 능력을 갖추면서, AI ROI가 소프트웨어를 넘어 하드웨어 영역으로 확장된다.</p></div></li>
+        <li><span class="impl-icon">🚗</span><div class="impl-content"><h4>자율주행의 상용화 임계점</h4><p>Zoox의 실제 서비스 운영은 자율주행이 기술 검증 단계를 넘어섰음을 보여준다. 다만 운행 구간의 제한, 엣지 케이스 대응, 규제 프레임워크 등 해결해야 할 과제는 여전히 존재한다. 핵심은 "완벽한 기술"이 아니라 "충분히 안전한 서비스"로의 전환이다.</p></div></li>
+        <li><span class="impl-icon">💻</span><div class="impl-content"><h4>AI 인프라의 분산화</h4><p>On-Device AI의 부상은 클라우드 중심 AI 아키텍처에 변화를 예고한다. 모든 추론을 클라우드로 보내는 대신, 디바이스에서 1차 처리하고 클라우드와 협업하는 하이브리드 AI 아키텍처가 표준이 될 것이다.</p></div></li>
+        <li><span class="impl-icon">📺</span><div class="impl-content"><h4>AI-First 하드웨어 설계</h4><p>디스플레이, 가전, 자동차 — 모든 하드웨어가 AI를 전제로 설계되기 시작했다. 이는 하드웨어 기업의 경쟁력이 "부품 스펙"에서 "AI 알고리즘 역량"으로 이동하고 있음을 의미한다.</p></div></li>
+      </ul>
+      <div class="analysis-box" style="margin-top: 2rem;">
+        <h3>결론: AI는 이제 "사용하는 것"이 아니라 "살아가는 것"이다</h3>
+        <p>CES 2026이 보여준 미래는, AI가 앱이나 서비스가 아니라 <em>환경 그 자체</em>가 되는 세상이다. 우리가 타는 차, 보는 TV, 사는 집, 일하는 공장 — 모든 물리적 공간에 AI가 내재화된다. 기업에게 이것은 "AI를 도입할 것인가"가 아니라 <em>"AI 없이 경쟁할 수 있는가"</em>라는 질문으로 바뀌었음을 의미한다.</p>
+        <p>기술 전략가의 관점에서, 지금 가장 중요한 것은 Physical AI 시대에 맞는 새로운 가치 창출 모델을 설계하는 것이다. 소프트웨어 AI의 성공 공식이 하드웨어 AI에 그대로 적용되지는 않을 것이기 때문이다.</p>
+      </div>
+    </section>
+    <!-- Author Card -->
+    <section style="padding: 2rem 0;">
+      <div style="background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; display: flex; gap: 1.5rem; align-items: center;">
+        <img src="../assets/images/profile/photo_jhwoo.jpeg" alt="Jihwan Woo" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--ai-border); flex-shrink: 0;" />
+        <div>
+          <div style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem;">우지환 (Jihwan Woo)</div>
+          <div style="font-size: 0.82rem; color: var(--ai); margin-bottom: 0.5rem;">AWS Senior Specialist Partner SA — AI/ML</div>
+          <p style="color: var(--muted); font-size: 0.82rem; line-height: 1.65; margin: 0;">18년간 AI 연구·개발·전략 분야에서 활동. 뉴로심볼릭 AI 연구자이자 7권의 AI 저서 저자. 기업의 AI 전환 전략과 Physical AI 시대의 기술 로드맵을 설계한다. CES 2026 현장에서 자율주행·로보틱스·SDV의 최전선을 직접 체험하고 분석했다.</p>
+        </div>
+      </div>
+    </section>
+    <section id="contact" style="text-align: center; padding: 3rem 0;">
+      <p style="color: var(--muted); font-size: 0.95rem; margin-bottom: 1rem;">AI 전략, 기술 자문, 강연에 대해 논의하고 싶으시면 연락주세요.</p>
+      <a href="../index.html#contact" class="btn">문의하기</a>
+      <a href="https://www.linkedin.com/in/jihwan-woo-87746028/" class="btn btn-outline">LinkedIn</a>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2026 Jihwan Woo · <a href="../index.html" style="color:var(--ai);text-decoration:none;">jihwanw.github.io</a></p>
+  </footer>
+  <div class="lightbox" id="lightbox" role="dialog" aria-label="이미지 확대 보기">
+    <img src="" alt="확대 이미지" id="lightbox-img" />
+  </div>
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    document.querySelectorAll('.gallery-item img').forEach(img => {
+      img.addEventListener('click', () => { lightboxImg.src = img.src; lightboxImg.alt = img.alt; lightbox.classList.add('active'); });
+    });
+    lightbox.addEventListener('click', () => lightbox.classList.remove('active'));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') lightbox.classList.remove('active'); });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('section').forEach(s => { s.classList.add('fade-in'); observer.observe(s); });
+  </script>
+</body>
+</html>
