@@ -126,3 +126,9 @@
 - Zoox + Waymo를 하나의 `<section id="robotaxi">` 로 통합
   - 상단에 로보택시 체험 인트로 추가
   - Zoox 서브섹션 (h3) + Waymo 서브섹션 (h3) + "Zoox vs Waymo 전략 대비" 분석 박스
+
+### Waymo/Vegas Loop 사진 정리 (2026-03-10)
+- Waymo 사진 7장 → 2장(017, 018)으로 축소
+- Vegas Loop 사진(021) 확인 — 이미 Vegas Loop 섹션에 배치됨
+- 불필요 사진 참조(023, 026, 027, 029) 제거 완료
+- Vegas Loop 섹션: The Boring Company의 지하 터널 루프 체험 + AI 통합 모빌리티 인사이트
