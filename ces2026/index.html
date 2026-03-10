@@ -122,6 +122,43 @@
       font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;
       color: var(--ai); margin-bottom: 0.4rem; display: block;
     }
+    /* Bubble Map */
+    .bubble-map { margin: 2rem 0 2.5rem; }
+    .bubble-map-title { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ai); margin-bottom: 1rem; }
+    .bubble-cluster { margin-bottom: 1.2rem; }
+    .bubble-cluster-label { font-size: 0.7rem; font-weight: 600; color: var(--muted); margin-bottom: 0.4rem; padding-left: 0.2rem; }
+    .bubble-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .bubble {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 0.3rem 0.7rem; border-radius: 20px; font-size: 0.72rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; white-space: nowrap; border: 1px solid;
+    }
+    .bubble:hover { transform: scale(1.08); }
+    .bubble-key { color: var(--ai); background: var(--ai-bg); border-color: var(--ai-border); }
+    .bubble-sub { color: var(--strategy); background: var(--strategy-bg); border-color: rgba(16,185,129,0.2); }
+    .bubble-key:hover { background: rgba(108,99,255,0.15); }
+    .bubble-sub:hover { background: rgba(16,185,129,0.12); }
+    .bubble-legend { display: flex; gap: 1rem; margin-top: 0.8rem; font-size: 0.68rem; color: var(--muted); }
+    .bubble-legend span { display: flex; align-items: center; gap: 0.3rem; }
+    .bubble-legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .bubble-legend-dot.key { background: var(--ai); }
+    .bubble-legend-dot.sub { background: var(--strategy); }
+
+    /* Accordion */
+    .theme-group-header { cursor: pointer; user-select: none; }
+    .theme-group-header::after {
+      content: '▾'; margin-left: auto; font-size: 0.8rem; color: var(--muted);
+      transition: transform 0.3s;
+    }
+    .theme-group-header.collapsed::after { transform: rotate(-90deg); }
+    .theme-group .company-grid { transition: max-height 0.4s ease, opacity 0.3s ease; overflow: hidden; }
+    .theme-group .company-grid.collapsed { max-height: 0; opacity: 0; padding: 0; margin: 0; }
+    .expand-all-btn {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      font-size: 0.75rem; color: var(--ai); background: none; border: 1px solid var(--ai-border);
+      padding: 0.3rem 0.8rem; border-radius: 16px; cursor: pointer; transition: all 0.2s;
+    }
+    .expand-all-btn:hover { background: var(--ai-bg); }
     @media (max-width: 768px) {
       .ces-hero h1 { font-size: 1.8rem; }
       .theme-grid { grid-template-columns: 1fr; }
@@ -212,8 +249,94 @@
         현장에서 느낀 것은, 올해 CES의 주인공은 완성차 OEM이 아니라 <em>그 뒤의 소프트웨어·센서·플랫폼 기업들</em>이었다는 것이다.
       </p>
 
+      <!-- Bubble Map Overview -->
+      <div class="bubble-map">
+        <div class="bubble-map-title">50개 기업 한눈에 보기 <span style="font-weight:400;letter-spacing:0;text-transform:none;"> — 클릭하면 해당 테마로 이동</span></div>
+        <div class="bubble-cluster">
+          <div class="bubble-cluster-label">🚗 Autonomous Driving</div>
+          <div class="bubble-row">
+            <span class="bubble bubble-key" data-theme="theme-ad">Waymo</span>
+            <span class="bubble bubble-key" data-theme="theme-ad">Zoox</span>
+            <span class="bubble bubble-key" data-theme="theme-ad">Mobileye</span>
+            <span class="bubble bubble-key" data-theme="theme-ad">Imagry</span>
+            <span class="bubble bubble-key" data-theme="theme-ad">Tensor Auto</span>
+          </div>
+        </div>
+        <div class="bubble-cluster">
+          <div class="bubble-cluster-label">⚡ EV & SDV Platforms</div>
+          <div class="bubble-row">
+            <span class="bubble bubble-key" data-theme="theme-sdv">HMG</span>
+            <span class="bubble bubble-key" data-theme="theme-sdv">Geely</span>
+            <span class="bubble bubble-key" data-theme="theme-sdv">ZF</span>
+            <span class="bubble bubble-key" data-theme="theme-sdv">KPIT</span>
+            <span class="bubble bubble-key" data-theme="theme-sdv">HERE</span>
+            <span class="bubble bubble-key" data-theme="theme-sdv">HL Mando</span>
+            <span class="bubble bubble-key" data-theme="theme-sdv">Mobis</span>
+            <span class="bubble bubble-key" data-theme="theme-sdv">WIA</span>
+          </div>
+        </div>
+        <div class="bubble-cluster">
+          <div class="bubble-cluster-label">🖥️ OS & Middleware</div>
+          <div class="bubble-row">
+            <span class="bubble bubble-key" data-theme="theme-os">QNX</span>
+            <span class="bubble bubble-key" data-theme="theme-os">Elektrobit</span>
+            <span class="bubble bubble-key" data-theme="theme-os">Green Hills</span>
+            <span class="bubble bubble-key" data-theme="theme-os">Sonatus</span>
+            <span class="bubble bubble-key" data-theme="theme-os">AWS</span>
+          </div>
+        </div>
+        <div class="bubble-cluster">
+          <div class="bubble-cluster-label">🎯 UX · 🤖 Robotics</div>
+          <div class="bubble-row">
+            <span class="bubble bubble-key" data-theme="theme-ux">Cerence</span>
+            <span class="bubble bubble-key" data-theme="theme-ux">SoundHound</span>
+            <span class="bubble bubble-key" data-theme="theme-ux">Smart Eye</span>
+            <span class="bubble bubble-key" data-theme="theme-ux">emotion3D</span>
+            <span class="bubble bubble-key" data-theme="theme-robot">Doosan Robotics</span>
+            <span class="bubble bubble-key" data-theme="theme-robot">Bucket Robotics</span>
+          </div>
+        </div>
+        <div class="bubble-cluster">
+          <div class="bubble-cluster-label">Sub Themes — Simulation · Chips · Sensors · Industry · Beyond</div>
+          <div class="bubble-row">
+            <span class="bubble bubble-sub" data-theme="theme-sim">Synopsys</span>
+            <span class="bubble bubble-sub" data-theme="theme-sim">dSPACE</span>
+            <span class="bubble bubble-sub" data-theme="theme-sim">Cognata</span>
+            <span class="bubble bubble-sub" data-theme="theme-sim">Foretellix</span>
+            <span class="bubble bubble-sub" data-theme="theme-chip">NVIDIA</span>
+            <span class="bubble bubble-sub" data-theme="theme-chip">Qualcomm</span>
+            <span class="bubble bubble-sub" data-theme="theme-chip">Hailo</span>
+            <span class="bubble bubble-sub" data-theme="theme-sensor">AEye</span>
+            <span class="bubble bubble-sub" data-theme="theme-sensor">Hesai</span>
+            <span class="bubble bubble-sub" data-theme="theme-sensor">RoboSense</span>
+            <span class="bubble bubble-sub" data-theme="theme-sensor">LG Innotek</span>
+            <span class="bubble bubble-sub" data-theme="theme-sensor">BOE</span>
+            <span class="bubble bubble-sub" data-theme="theme-sensor">Aeva</span>
+            <span class="bubble bubble-sub" data-theme="theme-sensor">Arbe</span>
+            <span class="bubble bubble-sub" data-theme="theme-sensor">Innoviz</span>
+            <span class="bubble bubble-sub" data-theme="theme-sensor">Lidwave</span>
+            <span class="bubble bubble-sub" data-theme="theme-industry">John Deere</span>
+            <span class="bubble bubble-sub" data-theme="theme-industry">CAT</span>
+            <span class="bubble bubble-sub" data-theme="theme-industry">Kubota</span>
+            <span class="bubble bubble-sub" data-theme="theme-industry">Brunswick</span>
+            <span class="bubble bubble-sub" data-theme="theme-industry">Oshkosh</span>
+            <span class="bubble bubble-sub" data-theme="theme-beyond">Aptiv</span>
+            <span class="bubble bubble-sub" data-theme="theme-beyond">Valeo</span>
+            <span class="bubble bubble-sub" data-theme="theme-beyond">Electra</span>
+            <span class="bubble bubble-sub" data-theme="theme-beyond">Autofleet</span>
+            <span class="bubble bubble-sub" data-theme="theme-beyond">Donut Lab</span>
+          </div>
+        </div>
+        <div class="bubble-legend">
+          <span><span class="bubble-legend-dot key"></span> Key Theme</span>
+          <span><span class="bubble-legend-dot sub"></span> Sub Theme</span>
+        </div>
+        <button class="expand-all-btn" id="expandAllBtn" style="margin-top: 1rem;">▾ 전체 상세 보기</button>
+      </div>
+
+
       <!-- KEY THEME 1: Autonomous Driving -->
-      <div class="theme-group">
+      <div class="theme-group" id="theme-ad">
         <div class="theme-group-header">
           <span class="theme-group-icon">🚗</span>
           <div><span class="theme-group-label">KEY THEME 01</span><div class="theme-group-title">Autonomous Driving — 자율주행의 최전선</div></div>
@@ -248,7 +371,7 @@
       </div>
 
       <!-- KEY THEME 2: Next-gen EV & SDV -->
-      <div class="theme-group">
+      <div class="theme-group" id="theme-sdv">
         <div class="theme-group-header">
           <span class="theme-group-icon">⚡</span>
           <div><span class="theme-group-label">KEY THEME 02</span><div class="theme-group-title">Next-gen EV Platforms & SDV — 소프트웨어 정의 차량</div></div>
@@ -304,7 +427,7 @@
       </div>
 
       <!-- KEY THEME 3: OS & Middleware -->
-      <div class="theme-group">
+      <div class="theme-group" id="theme-os">
         <div class="theme-group-header">
           <span class="theme-group-icon">🖥️</span>
           <div><span class="theme-group-label">KEY THEME 03</span><div class="theme-group-title">OS & Middleware for Vehicles and Robots</div></div>
@@ -339,7 +462,7 @@
       </div>
 
       <!-- KEY THEME 4: UX & Human-centric Mobility -->
-      <div class="theme-group">
+      <div class="theme-group" id="theme-ux">
         <div class="theme-group-header">
           <span class="theme-group-icon">🎯</span>
           <div><span class="theme-group-label">KEY THEME 04</span><div class="theme-group-title">UX & Human-centric Mobility Experience</div></div>
@@ -369,7 +492,7 @@
       </div>
 
       <!-- KEY THEME 5: Robotics -->
-      <div class="theme-group">
+      <div class="theme-group" id="theme-robot">
         <div class="theme-group-header">
           <span class="theme-group-icon">🤖</span>
           <div><span class="theme-group-label">KEY THEME 05</span><div class="theme-group-title">Robotics — 휴머노이드·산업·서비스 로봇</div></div>
@@ -395,7 +518,7 @@
       </div>
 
       <!-- SUB-KEY THEME 1: AD Software & Simulation -->
-      <div class="theme-group">
+      <div class="theme-group" id="theme-sim">
         <div class="theme-group-header">
           <span class="theme-group-icon">🧪</span>
           <div><span class="theme-group-label">SUB-KEY THEME 01</span><div class="theme-group-title">Autonomous Driving Software & Simulation</div></div>
@@ -425,7 +548,7 @@
       </div>
 
       <!-- SUB-KEY THEME 2: AI Chips & Computing -->
-      <div class="theme-group">
+      <div class="theme-group" id="theme-chip">
         <div class="theme-group-header">
           <span class="theme-group-icon">🔲</span>
           <div><span class="theme-group-label">SUB-KEY THEME 02</span><div class="theme-group-title">Automotive AI Chips & Computing Platforms</div></div>
@@ -450,7 +573,7 @@
       </div>
 
       <!-- SUB-KEY THEME 3: Advanced Sensors & Components -->
-      <div class="theme-group">
+      <div class="theme-group" id="theme-sensor">
         <div class="theme-group-header">
           <span class="theme-group-icon">📡</span>
           <div><span class="theme-group-label">SUB-KEY THEME 03</span><div class="theme-group-title">Advanced Sensors & Components</div></div>
@@ -511,7 +634,7 @@
       </div>
 
       <!-- SUB-KEY THEME 4: Industry AI -->
-      <div class="theme-group">
+      <div class="theme-group" id="theme-industry">
         <div class="theme-group-header">
           <span class="theme-group-icon">🏗️</span>
           <div><span class="theme-group-label">SUB-KEY THEME 04</span><div class="theme-group-title">Industry AI — 산업 현장의 AI 혁신</div></div>
@@ -546,7 +669,7 @@
       </div>
 
       <!-- SUB-KEY THEME 5: Beyond Mobility -->
-      <div class="theme-group">
+      <div class="theme-group" id="theme-beyond">
         <div class="theme-group-header">
           <span class="theme-group-icon">🔋</span>
           <div><span class="theme-group-label">SUB-KEY THEME 05</span><div class="theme-group-title">Beyond Mobility — 모빌리티 생태계의 확장</div></div>
@@ -745,6 +868,69 @@
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => { s.classList.add('fade-in'); observer.observe(s); });
+
+    // Accordion: start collapsed
+    document.querySelectorAll('.theme-group .company-grid').forEach(grid => {
+      grid.classList.add('collapsed');
+      grid.style.maxHeight = '0';
+    });
+    document.querySelectorAll('.theme-group-header').forEach(header => {
+      header.classList.add('collapsed');
+      header.addEventListener('click', () => {
+        const grid = header.nextElementSibling;
+        if (!grid || !grid.classList.contains('company-grid')) return;
+        const isCollapsed = grid.classList.contains('collapsed');
+        if (isCollapsed) {
+          grid.classList.remove('collapsed');
+          grid.style.maxHeight = grid.scrollHeight + 'px';
+          header.classList.remove('collapsed');
+        } else {
+          grid.classList.add('collapsed');
+          grid.style.maxHeight = '0';
+          header.classList.add('collapsed');
+        }
+      });
+    });
+
+    // Bubble click → scroll to theme + expand
+    document.querySelectorAll('.bubble').forEach(bubble => {
+      bubble.addEventListener('click', () => {
+        const themeId = bubble.dataset.theme;
+        const target = document.getElementById(themeId);
+        if (!target) return;
+        const grid = target.querySelector('.company-grid');
+        const header = target.querySelector('.theme-group-header');
+        if (grid && grid.classList.contains('collapsed')) {
+          grid.classList.remove('collapsed');
+          grid.style.maxHeight = grid.scrollHeight + 'px';
+          if (header) header.classList.remove('collapsed');
+        }
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    // Expand/Collapse all
+    const expandBtn = document.getElementById('expandAllBtn');
+    let allExpanded = false;
+    if (expandBtn) {
+      expandBtn.addEventListener('click', () => {
+        allExpanded = !allExpanded;
+        document.querySelectorAll('.theme-group .company-grid').forEach(grid => {
+          if (allExpanded) {
+            grid.classList.remove('collapsed');
+            grid.style.maxHeight = grid.scrollHeight + 'px';
+          } else {
+            grid.classList.add('collapsed');
+            grid.style.maxHeight = '0';
+          }
+        });
+        document.querySelectorAll('.theme-group-header').forEach(h => {
+          if (allExpanded) h.classList.remove('collapsed');
+          else h.classList.add('collapsed');
+        });
+        expandBtn.textContent = allExpanded ? '▴ 전체 접기' : '▾ 전체 상세 보기';
+      });
+    }
   </script>
 </body>
 </html>
