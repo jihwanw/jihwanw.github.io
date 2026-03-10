@@ -79,3 +79,36 @@
 - LinkedIn 주 1~2회 인사이트 포스트 → 홈페이지 유입 경로
 - Calendly 등 자문 예약 시스템 연동
 - 커스텀 도메인 연결 (예: jihwanwoo.com)
+
+---
+
+## 8. CES 2026 현장 리포트 페이지 (2026-03-10)
+
+### 페이지 생성 및 구조
+- `ces2026/index.html` 생성 — 다크 테마, 메인 사이트 CSS 공유
+- 구조: Hero → Overview → Four Key Themes → Photo Gallery → 50 Companies → Zoox 탑승기 → Expert Analysis → Author Card → CTA → Footer
+- 메인 사이트(`index.html`, `en/index.html`) Latest Insights에 CES 2026 카드 추가
+
+### 50개 기업 섹션
+- 10개 테마 그룹 (Key 5 + Sub-Key 5)으로 50개 기업 카드 구성
+- 각 카드: 기업명, 설명, CES 2026 현장 인사이트, AI 전문가 시각 포함
+- Expert Insight Bar 4개를 테마 그룹 사이에 배치
+
+### Zoox 탑승기
+- 직접 촬영 영상 2개 + 사진 7장 임베드
+- 탑승 체험 상세 서술 + 3개 인사이트 카드 (Perception→Reasoning, 도시 인프라 공진화, 비즈니스 모델 재편)
+
+### 톤 & 문체 수정 (3차 리비전)
+- 50개 기업 카드 전체를 AI 전문가 특파원 톤으로 전면 수정
+- 기존 반복 패턴 ("CES 2026: [사실]. 왜 중요한가: [인사이트]") 제거
+- 카드마다 다른 문체·구조 적용 (현장 체험, 엔지니어 대화, 데모 체험, 개인 반응 등)
+- 인사이트 라벨 다양화: "AI 전문가 시각:", "기술 관점:", "비즈니스 관점:", "현장 체감:", "AI 연구자 시각:" 등
+- Expert Insight Bar 라벨도 특파원 노트 스타일로 변경 ("현장에서 느낀 것", "쇼 플로어에서 읽은 패턴" 등)
+- Overview, Theme Cards, Gallery, Zoox, Expert Analysis는 이전 리비전에서 1인칭 현장감 톤으로 수정 완료
+
+### CES 폴더 위치 검토
+- `ces2026/`를 `assets/` 하위로 이동하지 않고 루트 레벨 유지 결정
+- 이유: 독립 콘텐츠 페이지 (URL: `jihwanw.github.io/ces2026/`), `en/`과 동일한 콘텐츠 디렉토리 구조
+
+### 불필요 사진 정리
+- `ces2026/` 폴더에서 18장 삭제, 12장 + 영상 2개 유지
