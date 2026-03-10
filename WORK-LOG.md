@@ -112,3 +112,17 @@
 
 ### 불필요 사진 정리
 - `ces2026/` 폴더에서 18장 삭제, 12장 + 영상 2개 유지
+
+### Zoox/Waymo 사진 분리 (2026-03-10)
+- 기존 Zoox 섹션에서 Waymo 사진(017~029)을 분리하여 별도 Waymo 섹션 신설
+- Zoox 섹션: 실제 Zoox 사진 6장(001, 002, 005, 007, 009, 010) + 영상 2개 + 탑승 인사이트 3개
+- Waymo 섹션: Waymo 사진 7장(017~029) + "Zoox vs Waymo: 두 가지 자율주행 전략의 대비" 분석 박스
+- 상단 갤러리에서 Zoox/Waymo 사진 제거 (각 전용 섹션으로 이동)
+- 네비게이션에 Waymo 링크 추가
+
+### 네비게이션 UX 개선 (2026-03-10)
+- 네비 항목 7개 → 5개로 정리: Home, Key Themes, 50 Companies, 로보택시 체험, Expert View
+- Gallery 네비 항목 제거 (스크롤로 자연스럽게 노출)
+- Zoox + Waymo를 하나의 `<section id="robotaxi">` 로 통합
+  - 상단에 로보택시 체험 인트로 추가
+  - Zoox 서브섹션 (h3) + Waymo 서브섹션 (h3) + "Zoox vs Waymo 전략 대비" 분석 박스
