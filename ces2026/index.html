@@ -869,64 +869,71 @@
     }, { threshold: 0.1 });
     document.querySelectorAll('section').forEach(s => { s.classList.add('fade-in'); observer.observe(s); });
 
-    // Accordion: start collapsed
-    document.querySelectorAll('.theme-group .company-grid').forEach(grid => {
+    // Accordion: start collapsed, toggle on click
+    document.querySelectorAll('.theme-group').forEach(group => {
+      const header = group.querySelector('.theme-group-header');
+      const grid = group.querySelector('.company-grid');
+      if (!header || !grid) return;
       grid.classList.add('collapsed');
       grid.style.maxHeight = '0';
-    });
-    document.querySelectorAll('.theme-group-header').forEach(header => {
+      grid.style.opacity = '0';
       header.classList.add('collapsed');
-      header.addEventListener('click', () => {
-        const grid = header.nextElementSibling;
-        if (!grid || !grid.classList.contains('company-grid')) return;
-        const isCollapsed = grid.classList.contains('collapsed');
-        if (isCollapsed) {
+      header.addEventListener('click', function() {
+        if (grid.classList.contains('collapsed')) {
           grid.classList.remove('collapsed');
           grid.style.maxHeight = grid.scrollHeight + 'px';
+          grid.style.opacity = '1';
           header.classList.remove('collapsed');
         } else {
           grid.classList.add('collapsed');
           grid.style.maxHeight = '0';
+          grid.style.opacity = '0';
           header.classList.add('collapsed');
         }
       });
     });
 
-    // Bubble click → scroll to theme + expand
-    document.querySelectorAll('.bubble').forEach(bubble => {
-      bubble.addEventListener('click', () => {
-        const themeId = bubble.dataset.theme;
-        const target = document.getElementById(themeId);
+    // Bubble click: scroll to theme + expand
+    document.querySelectorAll('.bubble[data-theme]').forEach(function(bubble) {
+      bubble.addEventListener('click', function() {
+        var themeId = this.getAttribute('data-theme');
+        var target = document.getElementById(themeId);
         if (!target) return;
-        const grid = target.querySelector('.company-grid');
-        const header = target.querySelector('.theme-group-header');
+        var grid = target.querySelector('.company-grid');
+        var header = target.querySelector('.theme-group-header');
         if (grid && grid.classList.contains('collapsed')) {
           grid.classList.remove('collapsed');
           grid.style.maxHeight = grid.scrollHeight + 'px';
+          grid.style.opacity = '1';
           if (header) header.classList.remove('collapsed');
         }
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(function() {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 50);
       });
     });
 
-    // Expand/Collapse all
-    const expandBtn = document.getElementById('expandAllBtn');
-    let allExpanded = false;
+    // Expand/Collapse all button
+    var expandBtn = document.getElementById('expandAllBtn');
+    var allExpanded = false;
     if (expandBtn) {
-      expandBtn.addEventListener('click', () => {
+      expandBtn.addEventListener('click', function() {
         allExpanded = !allExpanded;
-        document.querySelectorAll('.theme-group .company-grid').forEach(grid => {
+        document.querySelectorAll('.theme-group').forEach(function(group) {
+          var grid = group.querySelector('.company-grid');
+          var header = group.querySelector('.theme-group-header');
+          if (!grid) return;
           if (allExpanded) {
             grid.classList.remove('collapsed');
             grid.style.maxHeight = grid.scrollHeight + 'px';
+            grid.style.opacity = '1';
+            if (header) header.classList.remove('collapsed');
           } else {
             grid.classList.add('collapsed');
             grid.style.maxHeight = '0';
+            grid.style.opacity = '0';
+            if (header) header.classList.add('collapsed');
           }
-        });
-        document.querySelectorAll('.theme-group-header').forEach(h => {
-          if (allExpanded) h.classList.remove('collapsed');
-          else h.classList.add('collapsed');
         });
         expandBtn.textContent = allExpanded ? '▴ 전체 접기' : '▾ 전체 상세 보기';
       });
