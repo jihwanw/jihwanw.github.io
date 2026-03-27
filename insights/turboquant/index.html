@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TurboQuant — AI 메모리의 방정식을 다시 쓰다 | Jihwan Woo</title>
+  <meta name="description" content="구글이 공개한 TurboQuant 기술 해설. KV 캐시 메모리 6배 절감, 속도 8배 향상, 정확도 손실 제로. AI 반도체·클라우드·온디바이스 밸류 체인 전체에 미칠 파급력 분석.">
+  <meta property="og:title" content="TurboQuant — AI 메모리의 방정식을 다시 쓰다">
+  <meta property="og:description" content="구글 TurboQuant 기술 해설과 AI 산업 밸류 체인 파급력 분석.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://jihwanw.github.io/insights/turboquant/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    html { scroll-padding-top: 4rem; }
+
+    /* Hero */
+    .tq-hero {
+      min-height: 60vh; display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 6rem 1.5rem 3rem; position: relative;
+    }
+    .tq-hero::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 30%, rgba(108,99,255,0.10) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .tq-badge {
+      display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.15em; color: var(--ai); border: 1px solid var(--ai-border);
+      background: var(--ai-bg); padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem;
+    }
+    .tq-hero h1 { font-size: 2.4rem; letter-spacing: -0.03em; margin-bottom: 0.6rem; line-height: 1.25; }
+    .tq-hero h1 span { color: var(--ai); }
+    .tq-subtitle { color: var(--muted); font-size: 1.05rem; max-width: 620px; margin: 0 auto 1rem; line-height: 1.7; }
+    .tq-meta { color: var(--muted); font-size: 0.82rem; opacity: 0.6; }
+
+    /* Article body */
+    .tq-article { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .tq-article h2 {
+      font-size: 1.35rem; margin: 3rem 0 1rem; padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--ai-border); color: var(--text);
+    }
+    .tq-article h3 { font-size: 1.1rem; margin: 2rem 0 0.8rem; color: var(--text); }
+    .tq-article p { color: var(--muted); font-size: 0.94rem; line-height: 1.9; margin-bottom: 1.2rem; }
+    .tq-article em { color: var(--text); font-style: normal; font-weight: 600; }
+
+    /* Stats row */
+    .tq-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0;
+    }
+    .tq-stat {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.5rem; text-align: center; transition: border-color 0.3s, transform 0.2s;
+    }
+    .tq-stat:hover { transform: translateY(-2px); border-color: var(--ai-border); }
+    .tq-stat-number { font-size: 2rem; font-weight: 800; color: var(--ai); display: block; }
+    .tq-stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; display: block; }
+
+    /* Highlight box */
+    .tq-highlight {
+      background: linear-gradient(135deg, var(--ai-bg), var(--strategy-bg));
+      border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; margin: 2rem 0;
+    }
+    .tq-highlight h3 { font-size: 1.05rem; margin: 0 0 0.8rem; color: var(--text); }
+    .tq-highlight p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.8rem; }
+    .tq-highlight p:last-child { margin-bottom: 0; }
+
+    /* Value chain cards */
+    .tq-chain { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.5rem 0; }
+    .tq-chain-item {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+      padding: 1.2rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start;
+      transition: border-color 0.3s;
+    }
+    .tq-chain-item:hover { border-color: var(--ai-border); }
+    .tq-chain-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; margin-top: 0.1rem; }
+    .tq-chain-content h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--text); }
+    .tq-chain-content p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin: 0; }
+
+    /* Diagram */
+    .tq-diagram {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 12px;
+      padding: 2rem; margin: 2rem 0; text-align: center;
+    }
+    .tq-diagram-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ai); margin-bottom: 1.2rem; }
+    .tq-flow { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+    .tq-flow-step {
+      background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 8px;
+      padding: 0.6rem 1rem; font-size: 0.82rem; font-weight: 600; color: var(--text);
+    }
+    .tq-flow-arrow { color: var(--ai); font-size: 1.1rem; }
+
+    /* Paper links */
+    .tq-papers { margin: 2rem 0; }
+    .tq-paper {
+      display: flex; gap: 1rem; align-items: flex-start; padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tq-paper:last-child { border-bottom: none; }
+    .tq-paper-icon { font-size: 0.75rem; font-weight: 700; color: var(--ai); background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 6px; padding: 0.3rem 0.6rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .tq-paper-info { flex: 1; }
+    .tq-paper-title { font-size: 0.92rem; font-weight: 600; color: var(--text); display: block; margin-bottom: 0.2rem; }
+    .tq-paper-venue { font-size: 0.82rem; color: var(--muted); }
+    .tq-paper-link { font-size: 0.82rem; color: var(--ai); text-decoration: none; margin-left: 0.5rem; }
+    .tq-paper-link:hover { text-decoration: underline; }
+
+    /* Tags */
+    .tq-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 2rem 0 1rem; }
+    .tq-tag {
+      font-size: 0.72rem; color: var(--muted); background: var(--surface);
+      border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.8rem;
+    }
+
+    /* Back link */
+    .back-home {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      color: var(--ai); text-decoration: none; font-size: 0.88rem; margin-bottom: 2rem; transition: opacity 0.2s;
+    }
+    .back-home:hover { opacity: 0.7; }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .tq-hero h1 { font-size: 1.8rem; }
+      .tq-stats { grid-template-columns: 1fr; }
+      .tq-flow { flex-direction: column; }
+      .tq-flow-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../index.html#insights" class="nav-link">Insights</a>
+      <span class="nav-divider"></span>
+      <a href="../../en/insights/turboquant/index.html" class="nav-link nav-lang">EN</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tq-hero">
+      <div>
+        <span class="tq-badge">AI Infrastructure · Deep Dive</span>
+        <h1><span>TurboQuant</span> — AI 메모리의<br>방정식을 다시 쓰다</h1>
+        <p class="tq-subtitle">구글이 공개한 KV 캐시 압축 기술의 원리와, 반도체부터 온디바이스까지 AI 밸류 체인 전체에 미칠 파급력을 분석합니다.</p>
+        <p class="tq-meta">Jihwan Woo · 2026년 3월</p>
+      </div>
+    </section>
+
+    <article class="tq-article">
+      <a href="../../index.html#insights" class="back-home">← 홈으로</a>
+
+      <div class="tq-stats">
+        <div class="tq-stat"><span class="tq-stat-number">6×</span><span class="tq-stat-label">메모리 절감</span></div>
+        <div class="tq-stat"><span class="tq-stat-number">8×</span><span class="tq-stat-label">어텐션 속도 향상</span></div>
+        <div class="tq-stat"><span class="tq-stat-number">0</span><span class="tq-stat-label">정확도 손실</span></div>
+      </div>
+
+      <p>구글이 지난주 공개한 TurboQuant 논문 때문에 반도체 주가가 흔들렸습니다. SK하이닉스가 이틀 만에 7.3% 빠졌고, 삼성전자도 4.7% 하락했습니다. 클라우드플레어 CEO 매튜 프린스는 "이건 구글판 딥시크"라고까지 했습니다.</p>
+      <p>그런데 정작 이 기술이 뭔지 제대로 설명하는 글은 많지 않더군요. 최대한 쉽게 풀어보겠습니다.</p>
+
+      <!-- KV Cache -->
+      <h2>AI의 기억 창고, KV 캐시란 무엇인가</h2>
+
+      <p>AI에게 "아까 말한 그 건으로 계약서 초안 작성해줘"라고 하면, AI는 '아까 말한 그 건'이 뭔지 기억하고 있어야 합니다. 기억이 없으면 매번 처음부터 다시 설명해야 하니까요. 이 기억 공간을 <em>KV 캐시(Key-Value Cache)</em>라고 부릅니다.</p>
+
+      <p>우리가 흔히 아는 브라우저 캐시나 CPU 캐시와는 다릅니다. 일반적인 캐시는 자주 쓰는 데이터를 임시 저장해서 속도를 높이는 장치인 반면, KV 캐시의 Key와 Value는 트랜스포머 AI의 핵심인 <em>어텐션(Attention) 메커니즘</em>에서 나옵니다.</p>
+
+      <p>쉽게 비유하면 이렇습니다. AI가 새 단어를 생성할 때마다 "지금까지 나온 모든 단어 중에서 어디에 주목해야 하지?"라고 질문합니다. 이때 현재 단어가 던지는 질문이 Query(질의)이고, 이전 단어들이 갖고 있는 정보가 Key(색인)와 Value(내용)입니다. 도서관에서 책을 찾는 것과 비슷한데, Query는 "경제 위기 관련 책 찾아줘"라는 요청이고, Key는 각 책의 제목과 키워드(어떤 책인지 식별하는 정보), Value는 그 책의 실제 내용입니다.</p>
+
+      <div class="tq-diagram">
+        <div class="tq-diagram-title">어텐션 메커니즘의 구조</div>
+        <div class="tq-flow">
+          <div class="tq-flow-step">Query (질의)</div>
+          <span class="tq-flow-arrow">×</span>
+          <div class="tq-flow-step">Key (색인)</div>
+          <span class="tq-flow-arrow">→</span>
+          <div class="tq-flow-step">유사도 점수</div>
+          <span class="tq-flow-arrow">×</span>
+          <div class="tq-flow-step">Value (내용)</div>
+          <span class="tq-flow-arrow">→</span>
+          <div class="tq-flow-step">출력</div>
+        </div>
+      </div>
+
+      <p>문제는 대화가 길어질수록 이 도서관이 계속 커진다는 겁니다. 새 단어가 나올 때마다 이전 모든 단어의 Key와 Value를 저장해둬야 하니까요. 매번 처음부터 다시 계산하면 너무 느리기 때문에 캐시에 쌓아두는 건데, 이게 GPU 메모리를 엄청나게 잡아먹습니다. 70억 파라미터짜리 모델이 128K 토큰을 처리하면 KV 캐시만 수십 GB에 달하고, <em>전체 GPU 메모리의 80% 이상</em>이 여기에 쓰일 정도입니다.</p>
+
+      <p>비유하자면 이렇습니다. 회의록을 작성하는 비서가 있는데, 이 비서가 회의 참석자의 모든 발언을 한 글자도 빠짐없이 속기록으로 남기고 있는 겁니다. 회의가 3시간이면 속기록이 수백 페이지가 됩니다. 나중에 "아까 김 부장이 뭐라고 했지?" 하고 찾으려면 수백 페이지를 다 뒤져야 하니 느려질 수밖에 없습니다.</p>
+
+      <!-- TurboQuant -->
+      <h2>TurboQuant는 어떻게 다른가</h2>
+
+      <p>기존의 양자화 기술은 이 속기록을 줄여보려고 했지만, 줄이는 과정에서 "이 페이지는 몇 번째 줄부터 몇 번째 줄까지입니다"라는 색인표를 따로 붙여야 했습니다. 책은 얇아지는데 색인표가 두꺼워지는 셈이죠. 이게 <em>1~2비트의 숨은 오버헤드</em>입니다.</p>
+
+      <p>TurboQuant는 이 문제를 완전히 다른 방식으로 접근합니다. 두 단계로 나뉩니다.</p>
+
+      <h3>1단계: PolarQuant — 극좌표 변환</h3>
+
+      <p>여기서 핵심적인 수학적 사실이 하나 있습니다. AI가 다루는 벡터는 수백~수천 차원인데, 차원이 이렇게 높아지면 신기한 현상이 생깁니다. 원점에서 각 데이터까지의 거리는 모든 좌표값의 제곱을 더한 뒤 제곱근을 취한 값인데, 차원이 수백 개가 되면 이 값이 통계적으로 평균 근처에 수렴합니다. 동전을 두 번 던지면 결과가 들쭉날쭉하지만, 천 번 던지면 앞면 비율이 거의 50%에 수렴하는 것과 같은 원리입니다.</p>
+
+      <p>결과적으로 거의 모든 데이터 포인트가 원점에서 비슷한 거리에 몰리게 됩니다. 지구본 위의 도시들이 전부 지구 중심에서 같은 거리에 있는 것처럼요.</p>
+
+      <div class="tq-highlight">
+        <h3>PolarQuant의 핵심 아이디어</h3>
+        <p>기존 방식은 각 축 방향의 좌표값을 일일이 저장하고, 값의 범위가 달라질 때마다 경계값을 별도로 기록해야 했습니다. 하지만 데이터가 어차피 구 표면 위에 몰려 있다면, <em>반지름은 거의 같으니 간단히 처리하고 방향(각도)만 정밀하게 기록</em>하면 됩니다. 극좌표 변환을 하는 거죠. 이렇게 하면 기존에 매번 따로 저장해야 했던 정규화 상수, 즉 색인표가 필요 없어집니다.</p>
+      </div>
+
+      <h3>2단계: QJL — 1비트 오류 보정</h3>
+
+      <p>Johnson-Lindenstrauss는 "고차원 데이터를 저차원으로 투영해도 데이터 간 거리가 보존된다"는 수학 정리를 만든 두 수학자의 이름이고, 여기에 양자화(Quantized)를 결합한 기법입니다.</p>
+
+      <p>PolarQuant로 압축하고 나면 아주 미세한 오차가 남는데, QJL은 이걸 딱 <em>1비트</em>로 보정합니다. 1비트니까 표현할 수 있는 건 딱 두 가지뿐입니다. "오차가 위로 벗어났다(+1)" 혹은 "아래로 벗어났다(-1)". 오차가 얼마나 큰지는 기록하지 않고, 어느 쪽으로 틀어졌는지 방향만 남기는 겁니다. 그런데 이 1비트가 단순한 보정값이 아니라, <em>수학적으로 설계된 오류 검출 장치</em>입니다. 마치 책의 교정쇄에서 빨간 펜으로 틀린 글자만 콕콕 찍어주는 것과 비슷합니다.</p>
+
+      <div class="tq-diagram">
+        <div class="tq-diagram-title">TurboQuant 파이프라인</div>
+        <div class="tq-flow">
+          <div class="tq-flow-step">원본 KV 캐시<br><small style="color:var(--muted)">FP16 · 16bit</small></div>
+          <span class="tq-flow-arrow">→</span>
+          <div class="tq-flow-step">PolarQuant<br><small style="color:var(--muted)">극좌표 변환</small></div>
+          <span class="tq-flow-arrow">→</span>
+          <div class="tq-flow-step">QJL 보정<br><small style="color:var(--muted)">1bit 오류 검출</small></div>
+          <span class="tq-flow-arrow">→</span>
+          <div class="tq-flow-step">압축 캐시<br><small style="color:var(--muted)">~3bit · 6× 절감</small></div>
+        </div>
+      </div>
+
+      <p>이 두 가지를 합친 게 TurboQuant이고, <em>KAIST 한인수 교수가 QJL 알고리즘 설계를 주도</em>했습니다. 결과는 꽤 놀랍습니다. 메모리 6배 이상 절감, H100 GPU에서 어텐션 연산 속도 8배 향상, 그러면서 정확도 손실은 제로. 재학습도 필요 없습니다. 그냥 기존 모델에 바로 적용할 수 있습니다.</p>
+
+      <p>이 <em>'재학습 불필요(data-oblivious)'</em>라는 특성은 실무에서 상당히 중요합니다. 모델을 다시 훈련시키지 않아도 되니까, 기존 시스템에 플러그인처럼 꽂으면 되는 겁니다.</p>
+
+      <p>그리고 하나 더. 메모리를 6배 줄이고 연산을 8배 빠르게 한다는 건, 그만큼 전력 소비도 줄어든다는 뜻입니다. AI 데이터센터의 전력 소비가 전 세계적 이슈가 된 지금, 이건 단순한 성능 지표가 아니라 <em>지속가능성의 문제</em>이기도 합니다. 인간의 뇌가 약 20와트로 작동하는 반면, 대규모 AI 추론에는 메가와트 단위의 전력이 필요합니다. TurboQuant 같은 효율화 기술이 이 격차를 조금이라도 좁힐 수 있다면, 그 자체로 의미가 있습니다.</p>
+
+      <!-- Value Chain -->
+      <h2>밸류 체인 전체가 흔들린다</h2>
+
+      <p>제가 더 주목하는 건 기술 자체보다 이게 AI 산업의 밸류 체인 전체에 미칠 파급력입니다.</p>
+
+      <div class="tq-chain">
+        <div class="tq-chain-item">
+          <span class="tq-chain-icon">🔬</span>
+          <div class="tq-chain-content">
+            <h4>반도체 레이어</h4>
+            <p>단기적으로 시장이 놀란 건 당연합니다. 같은 성능을 내는 데 메모리가 1/6만 필요하다면, HBM 수요가 줄어드는 것 아니냐는 공포죠. 하지만 경제학에서 말하는 <em>제본스의 역설(Jevons Paradox)</em>이 여기에 해당합니다. 19세기에 증기기관의 효율이 좋아지면 석탄 소비가 줄어들 줄 알았는데, 실제로는 정반대였습니다. 효율이 좋아지니까 증기기관을 쓸 수 있는 곳이 폭발적으로 늘어나서 석탄 소비가 오히려 급증한 겁니다. 다만 수요의 성격이 바뀝니다. "고용량"에서 "고효율"로.</p>
+          </div>
+        </div>
+        <div class="tq-chain-item">
+          <span class="tq-chain-icon">⚡</span>
+          <div class="tq-chain-content">
+            <h4>GPU/가속기 레이어</h4>
+            <p>오히려 호재입니다. TurboQuant의 8배 속도 향상은 H100의 4비트 모드에서 나온 결과입니다. 이건 NVIDIA의 저비트 연산 가속 하드웨어가 더 중요해진다는 뜻이고, 차세대 GPU 설계에서 저비트 양자화 지원이 핵심 스펙이 될 겁니다. 하드웨어와 알고리즘의 공진화가 가속됩니다.</p>
+          </div>
+        </div>
+        <div class="tq-chain-item">
+          <span class="tq-chain-icon">☁️</span>
+          <div class="tq-chain-content">
+            <h4>클라우드 인프라 레이어</h4>
+            <p>가장 직접적인 수혜자입니다. AWS, GCP, Azure 입장에서 같은 GPU 클러스터로 6배 더 긴 컨텍스트를 서빙할 수 있다면, 이건 곧바로 마진 개선입니다. 특히 장문맥 추론 서비스의 가격 구조가 완전히 달라질 수 있습니다.</p>
+          </div>
+        </div>
+        <div class="tq-chain-item">
+          <span class="tq-chain-icon">🧠</span>
+          <div class="tq-chain-content">
+            <h4>AI 모델 개발사 레이어</h4>
+            <p>설계 자유도가 확 넓어집니다. 메모리 제약 때문에 컨텍스트 길이를 제한하거나, 모델 크기를 타협하던 부분이 해소됩니다. 100만 토큰 컨텍스트가 비용 현실적으로 가능해지면, 지금과는 질적으로 다른 AI 서비스가 나올 수 있습니다. 책 한 권을 통째로 읽고 대화하는 AI, 며칠치 회의록을 전부 기억하는 AI 비서 같은 것들이요.</p>
+          </div>
+        </div>
+        <div class="tq-chain-item">
+          <span class="tq-chain-icon">📱</span>
+          <div class="tq-chain-content">
+            <h4>엣지/온디바이스 레이어</h4>
+            <p>가장 큰 변화가 올 곳입니다. 3비트 KV 캐시가 현실화되면 스마트폰에서도 32K 이상의 컨텍스트를 처리할 수 있게 됩니다. 지금은 클라우드에 의존해야 하는 AI 기능들이 기기 안에서 돌아가게 되는 거죠. 이건 통신 비용, 지연 시간, 프라이버시 문제를 한꺼번에 해결합니다.</p>
+          </div>
+        </div>
+        <div class="tq-chain-item">
+          <span class="tq-chain-icon">🔍</span>
+          <div class="tq-chain-content">
+            <h4>벡터 검색 인프라</h4>
+            <p>상대적으로 덜 주목받고 있지만, 장기적으로 더 클 수 있습니다. TurboQuant는 수십억 개 벡터의 인덱싱 시간을 거의 0으로 만들면서 기존 PQ(Product Quantization)보다 높은 재현율을 보여줬습니다. RAG 파이프라인, 추천 시스템, 시맨틱 검색 엔진 전반의 비용 구조를 바꿀 수 있습니다.</p>
+          </div>
+        </div>
+      </div>
+
+      <p>빅테크만의 이야기가 아닙니다. 지금까지 70B급 모델을 돌리려면 고가의 GPU를 여러 대 묶어야 했는데, TurboQuant가 적용되면 RTX 4090 두 대로도 가능해집니다. 이건 대학 연구실이나 스타트업처럼 리소스가 제한된 팀에게 완전히 다른 세상을 열어줍니다. <em>AI가 자본력 있는 소수의 전유물에서 벗어나 더 넓은 생태계로 확산되는 계기</em>가 될 수 있습니다.</p>
+
+      <!-- 냉정한 시선 -->
+      <h2>냉정한 시선도 필요하다</h2>
+
+      <p>솔직히 말하면, 아직 논문 단계입니다. 공식 오픈소스 구현도 없고, 상용화까지는 시간이 걸립니다. llama.cpp 커뮤니티에서 통합 논의가 시작됐고, 누군가 GPT-5.4로 25분 만에 MLX 구현을 해냈다는 이야기도 있지만, 프로덕션 레벨과 논문 데모 사이에는 항상 간극이 있습니다.</p>
+
+      <p>또 하나 냉정하게 봐야 할 점이 있습니다. 업계 전문가들의 분석에 따르면, 기존에 이미 배포된 양자화 기술들(SmoothQuant, AWQ, 슬라이딩 윈도우 캐시 등)이 상당 부분의 쉬운 이득을 이미 흡수한 상태입니다. 기본 양자화로 2~3배, 아웃라이어 처리까지 하면 3~4배, TurboQuant가 여기서 4~4.5배까지 끌어올리는 구조인데, 남은 개선 여지는 점점 좁아지고 있습니다. <em>KV 캐시 압축이 정보이론적 천장에 가까워지고 있다는 것</em>, 그 자체가 이 논문의 진짜 메시지일 수 있습니다.</p>
+
+      <p>그래서 다음 큰 도약은 압축만으로는 오지 않을 겁니다. 아키텍처 자체의 변화, 혹은 우리가 아직 상상하지 못한 다른 경로가 필요할 겁니다. 어쩌면 KV 캐시를 6배 압축하는 것보다, KV 캐시 자체가 필요 없는 아키텍처가 등장하는 게 더 근본적인 해결일 수도 있습니다. 현재의 오토리그레시브 방식, 즉 토큰을 하나씩 순차적으로 생성하면서 이전 토큰을 전부 기억해야 하는 구조 자체가 비효율의 근원이라는 시각도 있으니까요.</p>
+
+      <div class="tq-highlight">
+        <h3>핵심 메시지</h3>
+        <p>TurboQuant는 현재 패러다임 안에서의 최적화이고, 패러다임 자체를 바꾸는 연구는 또 다른 축에서 진행되고 있습니다. 하지만 그 전까지, TurboQuant는 현재 AI 인프라의 비용 방정식을 다시 쓸 수 있는 <em>가장 현실적인 기술</em>입니다.</p>
+        <p>그리고 이 핵심 알고리즘을 KAIST 한인수 교수가 설계했다는 사실은, 한국 AI 연구의 위상이 어디까지 와 있는지를 보여주는 좋은 사례라고 생각합니다.</p>
+      </div>
+
+      <p>한 가지 더 생각해볼 점이 있습니다. AI 효율이 높아져서 확산이 빨라지면, 그에 따른 사회적 리스크 관리도 함께 논의되어야 합니다. 더 싸고 빠른 AI가 더 많은 곳에 배포된다는 건, 오용 가능성도 그만큼 넓어진다는 뜻이니까요.</p>
+
+      <p>ICLR 2026(4월, 브라질)과 AISTATS 2026(5월, 모로코)에서의 발표가 기대됩니다.</p>
+
+      <!-- Papers -->
+      <h2>관련 논문</h2>
+      <div class="tq-papers">
+        <div class="tq-paper">
+          <span class="tq-paper-icon">PDF</span>
+          <div class="tq-paper-info">
+            <span class="tq-paper-title">TurboQuant: Online Vector Quantization with Near-optimal Distortion Rate</span>
+            <span class="tq-paper-venue">Google Research · arXiv: 2504.19874</span>
+            <a href="https://arxiv.org/abs/2504.19874" target="_blank" rel="noopener" class="tq-paper-link">arXiv →</a>
+          </div>
+        </div>
+        <div class="tq-paper">
+          <span class="tq-paper-icon">PDF</span>
+          <div class="tq-paper-info">
+            <span class="tq-paper-title">PolarQuant: Quantizing KV Caches with Polar Transformation</span>
+            <span class="tq-paper-venue">Google Research · arXiv: 2502.02617 · AISTATS 2026</span>
+            <a href="https://arxiv.org/abs/2502.02617" target="_blank" rel="noopener" class="tq-paper-link">arXiv →</a>
+          </div>
+        </div>
+        <div class="tq-paper">
+          <span class="tq-paper-icon">PDF</span>
+          <div class="tq-paper-info">
+            <span class="tq-paper-title">QJL: 1-Bit Quantized JL Transform for KV Cache Quantization with Zero Overhead</span>
+            <span class="tq-paper-venue">Google Research · ICLR 2026</span>
+            <a href="https://arxiv.org/abs/2406.03482" target="_blank" rel="noopener" class="tq-paper-link">arXiv →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="tq-tags">
+        <span class="tq-tag">#TurboQuant</span>
+        <span class="tq-tag">#AI</span>
+        <span class="tq-tag">#LLM</span>
+        <span class="tq-tag">#Google</span>
+        <span class="tq-tag">#KAIST</span>
+        <span class="tq-tag">#양자화</span>
+        <span class="tq-tag">#KVCache</span>
+        <span class="tq-tag">#AIInfrastructure</span>
+        <span class="tq-tag">#반도체</span>
+        <span class="tq-tag">#VectorSearch</span>
+      </div>
+
+    </article>
+  </main>
+
+  <footer style="text-align:center;padding:2rem 1.5rem;color:var(--muted);font-size:0.78rem;border-top:1px solid var(--border);">
+    © 2026 Jihwan Woo · <a href="../../index.html" style="color:var(--ai);text-decoration:none;">jihwanw.github.io</a>
+  </footer>
+</body>
+</html>
