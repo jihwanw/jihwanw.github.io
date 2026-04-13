@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>하네스 엔지니어링 — 모델이 아니라 시스템이 에이전트를 만든다 | Jihwan Woo</title>
+  <meta name="description" content="AI 에이전트의 성능을 좌우하는 건 모델의 지능이 아니라, 그 지능을 감싸는 시스템 설계다. OpenAI, Anthropic, LangChain의 실험이 증명한 하네스 엔지니어링의 개념과 실전 원칙.">
+  <meta property="og:title" content="하네스 엔지니어링 — 모델이 아니라 시스템이 에이전트를 만든다">
+  <meta property="og:description" content="OpenAI Codex 팀의 100만 줄 실험, LangChain의 25단계 도약. AI 에이전트 성능의 진짜 열쇠는 하네스에 있다.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://jihwanw.github.io/insights/harness-engineering/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    html { scroll-padding-top: 4rem; }
+    .he-hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 1.5rem 3rem; position: relative; }
+    .he-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(108,99,255,0.10) 0%, transparent 70%); pointer-events: none; }
+    .he-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ai); border: 1px solid var(--ai-border); background: var(--ai-bg); padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
+    .he-hero h1 { font-size: 2.4rem; letter-spacing: -0.03em; margin-bottom: 0.6rem; line-height: 1.25; }
+    .he-hero h1 span { color: var(--ai); }
+    .he-subtitle { color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 auto 1rem; line-height: 1.7; }
+    .he-meta { color: var(--muted); font-size: 0.82rem; opacity: 0.6; }
+    .he-article { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .he-article h2 { font-size: 1.35rem; margin: 3rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--ai-border); color: var(--text); }
+    .he-article h3 { font-size: 1.1rem; margin: 2rem 0 0.8rem; color: var(--text); }
+    .he-article p { color: var(--muted); font-size: 0.94rem; line-height: 1.9; margin-bottom: 1.2rem; }
+    .he-article em { color: var(--text); font-style: normal; font-weight: 600; }
+    .he-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+    .he-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; transition: border-color 0.3s, transform 0.2s; }
+    .he-stat:hover { transform: translateY(-2px); border-color: var(--ai-border); }
+    .he-stat-number { font-size: 2rem; font-weight: 800; color: var(--ai); display: block; }
+    .he-stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; display: block; }
+    .he-highlight { background: linear-gradient(135deg, var(--ai-bg), var(--strategy-bg)); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; margin: 2rem 0; }
+    .he-highlight h3 { font-size: 1.05rem; margin: 0 0 0.8rem; color: var(--text); }
+    .he-highlight p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.8rem; }
+    .he-highlight p:last-child { margin-bottom: 0; }
+    .he-chain { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.5rem 0; }
+    .he-chain-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.3s; }
+    .he-chain-item:hover { border-color: var(--ai-border); }
+    .he-chain-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; margin-top: 0.1rem; }
+    .he-chain-content h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--text); }
+    .he-chain-content p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin: 0; }
+    .he-diagram { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+    .he-diagram-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ai); margin-bottom: 1.2rem; }
+    .he-flow { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+    .he-flow-step { background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.82rem; font-weight: 600; color: var(--text); }
+    .he-flow-plus { color: var(--ai); font-size: 1.4rem; font-weight: 700; }
+    .he-flow-arrow { color: var(--ai); font-size: 1.1rem; }
+    .he-quote { border-left: 3px solid var(--ai); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--surface); border-radius: 0 8px 8px 0; }
+    .he-quote p { font-size: 0.92rem; color: var(--text); font-style: italic; margin: 0; line-height: 1.8; }
+    .he-quote cite { font-size: 0.78rem; color: var(--muted); font-style: normal; display: block; margin-top: 0.5rem; }
+    .he-refs { margin: 2rem 0; }
+    .he-ref { display: flex; gap: 1rem; align-items: flex-start; padding: 0.8rem 0; border-bottom: 1px solid var(--border); }
+    .he-ref:last-child { border-bottom: none; }
+    .he-ref-num { font-size: 0.72rem; font-weight: 700; color: var(--ai); background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 6px; padding: 0.2rem 0.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .he-ref-info { flex: 1; font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .he-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 2rem 0 1rem; }
+    .he-tag { font-size: 0.72rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.8rem; }
+    .back-home { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--ai); text-decoration: none; font-size: 0.88rem; margin-bottom: 2rem; transition: opacity 0.2s; }
+    .back-home:hover { opacity: 0.7; }
+    @media (max-width: 600px) { .he-hero h1 { font-size: 1.8rem; } .he-stats { grid-template-columns: 1fr; } .he-flow { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../index.html#insights" class="nav-link">Insights</a>
+      <span class="nav-divider"></span>
+      <a href="../../en/insights/harness-engineering/index.html" class="nav-link nav-lang">EN</a>
+    </nav>
+  </header>
+  <main>
+    <section class="he-hero">
+      <div>
+        <span class="he-badge">AI Engineering · Deep Dive</span>
+        <h1><span>하네스 엔지니어링</span> —<br>모델이 아니라 시스템이<br>에이전트를 만든다</h1>
+        <p class="he-subtitle">AI 에이전트의 성능을 좌우하는 건 모델의 지능이 아니라, 그 지능을 감싸는 시스템 설계다. OpenAI, Anthropic, LangChain의 실험이 증명한 새로운 엔지니어링 패러다임.</p>
+        <p class="he-meta">우지환 · 주간기술동향 · 2026년 4월</p>
+      </div>
+    </section>
+    <article class="he-article">
+      <a href="../../index.html#insights" class="back-home">← 홈으로</a>
+      <div class="he-stats">
+        <div class="he-stat"><span class="he-stat-number">100만</span><span class="he-stat-label">줄 · 코드 직접 타이핑 0</span></div>
+        <div class="he-stat"><span class="he-stat-number">25↑</span><span class="he-stat-label">단계 순위 상승 · 모델 변경 없이</span></div>
+        <div class="he-stat"><span class="he-stat-number">1/10</span><span class="he-stat-label">수작업 대비 소요 시간</span></div>
+      </div>
+
+      <p>2026년 2월, OpenAI Codex 팀이 흥미로운 실험 결과를 공개했습니다. 엔지니어 3명이 5개월간 코드를 단 한 줄도 직접 타이핑하지 않고, 약 100만 줄 규모의 프로덕션 애플리케이션을 만들어냈다는 것입니다. 비슷한 시기, LangChain은 코딩 에이전트 벤치마크 Terminal Bench 2.0에서 AI 모델을 교체하지 않고 모델 주변의 시스템만 손봐서 순위를 30위권에서 5위권으로 25단계나 끌어올렸습니다.</p>
+      <p>이 두 사례의 공통점은 분명합니다. <em>AI의 성능을 끌어올린 것은 더 똑똑한 모델이 아니라, 모델을 감싸는 시스템 설계</em>였습니다.</p>
+
+      <h2>하네스란 무엇인가</h2>
+
+      <p>'하네스(harness)'라는 단어는 원래 말에게 씌우는 마구(馬具)를 뜻합니다. 아무리 힘이 센 말이라도 마구 없이는 밭을 갈 수 없습니다. 마구가 말의 힘을 올바른 방향으로 전달해야 비로소 쓸모 있는 일이 됩니다. AI 에이전트도 마찬가지입니다.</p>
+
+      <div class="he-diagram">
+        <div class="he-diagram-title">에이전트의 공식</div>
+        <div class="he-flow">
+          <div class="he-flow-step">Agent</div>
+          <span class="he-flow-plus">=</span>
+          <div class="he-flow-step">Model</div>
+          <span class="he-flow-plus">+</span>
+          <div class="he-flow-step">Harness</div>
+        </div>
+      </div>
+
+      <p><em>모델이 아닌 모든 것이 하네스</em>입니다. AI에게 주는 역할 설명, AI가 사용할 수 있는 도구 목록, 코드를 안전하게 실행할 수 있는 격리 환경, 작업 진행 상황을 기록하는 메모리, 작업 결과를 자동으로 검증하는 장치까지 전부 포함됩니다. 날것의 AI 모델은 에이전트가 아닙니다. 하네스가 기억, 도구, 검증, 제약 조건을 부여해야 비로소 에이전트가 됩니다.</p>
+
+      <p>이 개념에 처음 이름을 붙인 사람은 HashiCorp 공동창립자 Mitchell Hashimoto입니다. 그는 하네스 엔지니어링을 이렇게 정의했습니다.</p>
+
+      <div class="he-quote">
+        <p>"에이전트가 실수할 때마다, 그 실수가 다시는 발생하지 않도록 엔지니어링하는 것."</p>
+        <cite>— Mitchell Hashimoto, HashiCorp 공동창립자</cite>
+      </div>
+
+      <h2>왜 모델만으로는 부족한가</h2>
+
+      <p>Anthropic의 연구팀이 겪은 일이 대표적입니다. 최고 성능 모델인 Claude Opus 4.5에게 "claude.ai와 비슷한 웹 애플리케이션을 만들어"라고 시켰더니, 같은 실패가 반복됐습니다. 모든 것을 한꺼번에 해치우려다 기억 용량이 바닥나서 절반만 만들다 멈추거나, 어느 정도 진행한 뒤 "다 된 것 같은데요"라며 성급하게 완료를 선언해버린 것입니다.</p>
+
+      <p>이것은 모델이 멍청해서 벌어진 일이 아닙니다. 교대 근무하는 직원을 떠올려보면 이해가 쉽습니다. 매번 새 직원이 이전 근무자의 기억 없이 출근하는데, 인수인계 문서도 없고, 진행 상황 보드도 없다면 아무리 유능한 사람이라도 제대로 일하기 어렵습니다. <em>문제는 AI의 두뇌가 아니라, AI가 일하는 환경</em>에 있었습니다.</p>
+
+      <div class="he-highlight">
+        <h3>기존 접근법의 한계</h3>
+        <p><em>프롬프트 엔지니어링</em> — 시험 직전에 요령을 알려주는 것. 단발성 답변에는 효과적이지만, 수십 단계 작업에서는 한계.</p>
+        <p><em>파인튜닝</em> — 수학 과외를 시키는 것. 지식은 늘지만, 연필과 계산기를 가져다주지는 않음.</p>
+        <p><em>RAG</em> — 오픈북 시험. 정보 제공에 국한되며, 코드 실행이나 오류 수정은 불가.</p>
+        <p><em>모델 교체</em> — 더 똑똑한 학생을 데려오는 것. LangChain 실험이 정면 반박: 모델 변경 없이 25단계 상승.</p>
+        <p>하네스 엔지니어링은 <em>시험장 환경 자체를 설계</em>하는 것입니다. 조용한 시험장, 정리된 책상, 필요한 도구, 실수를 알려주는 감독관까지.</p>
+      </div>
+
+      <h2>하네스의 5대 구성 요소</h2>
+
+      <div class="he-chain">
+        <div class="he-chain-item">
+          <span class="he-chain-icon">📁</span>
+          <div class="he-chain-content">
+            <h4>파일시스템과 지속적 저장소</h4>
+            <p>에이전트의 '업무 노트'이자 Git은 '수정 이력이 남는 공유 문서'. Anthropic이 도입한 claude-progress.txt가 좋은 예입니다. 각 세션이 자신이 한 일을 기록하고, 다음 세션이 이 파일을 읽어 현재 상태를 파악합니다. 교대 근무자의 인수인계 노트와 같은 원리입니다.</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">🔒</span>
+          <div class="he-chain-content">
+            <h4>코드 실행과 샌드박스</h4>
+            <p>AI가 만든 코드를 보호 장치 없이 실행하면 위험합니다. 어린이 모래 놀이터(sandbox)처럼, AI가 샌드박스 안에서 코드를 실행하면 실제 시스템에는 영향을 주지 않습니다. 격리된 환경에서 안전하게 실행하고, 허용된 명령만 실행하며, 네트워크를 제한합니다.</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">🧹</span>
+          <div class="he-chain-content">
+            <h4>컨텍스트 관리 — 컨텍스트 부패와의 전쟁</h4>
+            <p>Chroma의 연구에 따르면, 모든 모델이 입력 정보가 늘어날수록 추론 능력이 떨어집니다. LangChain은 이를 "컨텍스트 부패(Context Rot)"라고 부릅니다. 대응 전략: <em>컴팩션</em>(핵심만 요약), <em>도구 호출 오프로딩</em>(결과 요약만 보여주고 원본은 파일에), <em>스킬</em>(필요할 때만 관련 지침 로드). HumanLayer의 원칙이 인상적입니다 — "성공은 조용히, 실패만 시끄럽게."</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">🛡️</span>
+          <div class="he-chain-content">
+            <h4>서브 에이전트와 컨텍스트 격리</h4>
+            <p>큰 컨텍스트 윈도우는 더 큰 건초더미일 뿐, 바늘을 찾는 능력이 좋아지는 게 아닙니다. 서브 에이전트가 조사와 시행착오의 잡음을 전부 흡수하고, 메인 에이전트에게는 최종 결과만 전달합니다. 팀장이 팀원에게 조사를 맡기고 결과 보고서만 받는 것과 같은 "정보 방화벽"입니다.</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">⚙️</span>
+          <div class="he-chain-content">
+            <h4>훅과 백프레셔</h4>
+            <p>자동차의 계기판과 경고등. AI가 코드 작성을 마칠 때마다 자동으로 문법 검사와 테스트가 실행됩니다. Anthropic은 Claude에게 브라우저 자동화 테스트 도구를 제공했더니, 코드만 봐서는 발견할 수 없었던 버그를 직접 찾아 수정했습니다. HumanLayer의 결론: <em>"에이전트의 작업 성공 확률은 자기 검증 능력과 강하게 상관된다."</em></p>
+          </div>
+        </div>
+      </div>
+
+      <h2>실전 사례와 결과</h2>
+
+      <h3>OpenAI Codex — "1,000페이지 매뉴얼이 아니라 지도를 줘라"</h3>
+      <p>엔지니어 3명이 5개월간 1,500개의 코드 변경 요청을 처리하여 약 100만 줄의 프로덕션 애플리케이션을 완성했습니다. 핵심은 AI에게 세세한 지시를 쏟아붓는 대신, <em>코드베이스 자체에 규칙을 녹여넣은 것</em>입니다. 내비게이션에 비유하면, 경로를 외우게 하는 대신 잘못된 길로 들어서면 자동으로 경로를 재탐색하게 만든 것입니다.</p>
+
+      <h3>LangChain — 하네스만 바꿔도 25단계</h3>
+      <p>동일한 AI 모델을 사용하면서 하네스만 개선하여 Terminal Bench 2.0 점수를 52.8에서 66.5로 끌어올렸습니다. 집중한 영역은 세 가지: <em>시스템 프롬프트, 도구 구성, 미들웨어</em>. 수십 가지 조정 가능한 요소 중에서 이 세 가지에 의도적으로 집중하여 최적화 공간을 압축한 것이 성공의 열쇠였습니다.</p>
+
+      <h3>Anthropic — 만드는 AI와 검사하는 AI의 분리</h3>
+      <p>한 번에 하나의 기능만 작업하게 하고, '만드는 AI'와 '검사하는 AI'를 분리했습니다. 만드는 AI가 코드를 작성하면 검사하는 AI가 실제 사용자처럼 화면을 열어보고 테스트하여 피드백을 줍니다. 요리사가 음식을 만들고 별도의 시식 담당자가 맛을 평가하는 것과 같습니다.</p>
+
+      <h2>실전 원칙</h2>
+
+      <div class="he-chain">
+        <div class="he-chain-item">
+          <span class="he-chain-icon">1</span>
+          <div class="he-chain-content">
+            <h4>실패에서 시작하라</h4>
+            <p>이상적인 하네스를 미리 설계하려 하지 말고, AI가 실패할 때마다 그 실패를 구조적으로 방지하는 장치를 하나씩 추가하라. "일단 작업을 시키고, 실제로 실패한 경우에만 하네스를 건드려라."</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">2</span>
+          <div class="he-chain-content">
+            <h4>적게 넣어라</h4>
+            <p>ETH Zurich 연구: AI가 자동 생성한 설정 파일은 성능을 오히려 떨어뜨리면서 비용만 20% 이상 높였고, 사람이 작성한 파일도 겨우 4% 개선. 코드베이스 구조나 폴더 목록은 아무 도움이 되지 않았습니다. AI가 스스로 알 수 없는 최소한의 지침만 넣으세요.</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">3</span>
+          <div class="he-chain-content">
+            <h4>도구를 과하게 연결하지 마라</h4>
+            <p>도구를 많이 연결할수록 도구 설명이 AI의 기억 공간을 차지하여 정작 중요한 작업 지시를 밀어냅니다. CLI가 이미 훈련 데이터에 충분히 포함된 도구라면, 복잡한 연결 대신 CLI를 쓰라고 프롬프트하는 편이 낫습니다.</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">4</span>
+          <div class="he-chain-content">
+            <h4>점진적 작업을 강제하라</h4>
+            <p>Anthropic 실험에서 가장 큰 개선을 가져온 변화: AI에게 한 번에 하나의 기능만 작업하게 하고, 각 작업이 끝나면 저장과 진행 노트를 남기게 하여 다음 세션이 깨끗한 상태에서 시작할 수 있게 한 것.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>흥미로운 역설, 그리고 냉정한 시선</h2>
+
+      <p>오늘날의 최전선 AI 모델은 특정 하네스 안에서 추가 훈련됩니다. 그런데 역설적으로, Terminal Bench 2.0에서 Claude Opus 4.6은 <em>자신이 훈련된 하네스 안에서 33위</em>를 기록했지만, <em>다른 하네스에서는 5위권</em>까지 올라갔습니다. 모델이 자기 하네스에 지나치게 적응하여 유연성을 잃을 수 있다는 뜻입니다. 기본 하네스를 그대로 쓰는 것이 최선이 아닐 수 있습니다.</p>
+
+      <p>한편, 냉정하게 봐야 할 점도 있습니다. 1980년대 전문가 시스템이 정확히 같은 경로를 걸었습니다. 규칙 기반 추론 엔진의 성능이 부족하자 주변에 점점 더 복잡한 규칙을 쌓았고, 결국 유지보수가 불가능해져 통째로 대체됐습니다. 하네스가 복잡해질수록 하네스 자체의 버그와 유지보수 비용이 발생하며, 에이전트가 하네스의 제약을 우회하는 현상도 이미 관찰되고 있습니다.</p>
+
+      <div class="he-highlight">
+        <h3>핵심 메시지</h3>
+        <p>소프트웨어 엔지니어의 일이 "코드를 작성하는 것"에서 <em>"AI가 코드를 올바르게 작성할 수 있는 환경을 설계하는 것"</em>으로 이동하고 있습니다. Chad Fowler는 이를 "엄밀함의 재배치(Relocating Rigor)"라고 표현했습니다.</p>
+        <p>당장 내일 코딩 에이전트가 기대만큼 작동하지 않는다면, 모델을 탓하기 전에 하네스를 점검해보세요. <em>"모델은 아마 괜찮다. 하네스의 문제일 뿐이다."</em></p>
+      </div>
+
+      <h2>참고문헌</h2>
+      <div class="he-refs">
+        <div class="he-ref"><span class="he-ref-num">1</span><div class="he-ref-info">OpenAI, "Harness Engineering: Leveraging Codex in an Agent-First World," OpenAI Blog, Feb. 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">2</span><div class="he-ref-info">V. Trivedy, "Improving Deep Agents with Harness Engineering," LangChain Blog, Feb. 18, 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">3</span><div class="he-ref-info">V. Trivedy, "The Anatomy of an Agent Harness," LangChain Blog, Mar. 11, 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">4</span><div class="he-ref-info">M. Hashimoto, "My AI Adoption Journey," Mitchell Hashimoto Blog, Feb. 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">5</span><div class="he-ref-info">Anthropic, "Effective Harnesses for Long-Running Agents," Anthropic Engineering Blog, Apr. 4, 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">6</span><div class="he-ref-info">HumanLayer, "Skill Issue: Harness Engineering for Coding Agents," HumanLayer Blog, Mar. 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">7</span><div class="he-ref-info">K. Hong et al., "Context Rot: How Increasing Input Tokens Impacts LLM Performance," Chroma Research, Jul. 2025.</div></div>
+        <div class="he-ref"><span class="he-ref-num">8</span><div class="he-ref-info">B. Böckeler, "Harness Engineering for Coding Agent Users," Martin Fowler Blog, Apr. 2, 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">9</span><div class="he-ref-info">ETH Zurich and LogicStar.ai, "Evaluating AGENTS.md," Feb. 2026.</div></div>
+      </div>
+
+      <div class="he-tags">
+        <span class="he-tag">#HarnessEngineering</span>
+        <span class="he-tag">#AIAgent</span>
+        <span class="he-tag">#LLM</span>
+        <span class="he-tag">#OpenAI</span>
+        <span class="he-tag">#Anthropic</span>
+        <span class="he-tag">#LangChain</span>
+        <span class="he-tag">#SoftwareEngineering</span>
+        <span class="he-tag">#ContextRot</span>
+        <span class="he-tag">#CodingAgent</span>
+      </div>
+    </article>
+  </main>
+  <footer style="text-align:center;padding:2rem 1.5rem;color:var(--muted);font-size:0.78rem;border-top:1px solid var(--border);">
+    © 2026 Jihwan Woo · <a href="../../index.html" style="color:var(--ai);text-decoration:none;">jihwanw.github.io</a>
+  </footer>
+</body>
+</html>

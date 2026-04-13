@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Harness Engineering — It's the System, Not the Model, That Makes the Agent | Jihwan Woo</title>
+  <meta name="description" content="AI agent performance depends not on model intelligence, but on the system design wrapping that intelligence. Lessons from OpenAI, Anthropic, and LangChain.">
+  <meta property="og:title" content="Harness Engineering — It's the System, Not the Model, That Makes the Agent">
+  <meta property="og:description" content="OpenAI's 1M-line experiment, LangChain's 25-rank leap. The real key to AI agent performance is the harness.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://jihwanw.github.io/en/insights/harness-engineering/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <style>
+    html { scroll-padding-top: 4rem; }
+    .he-hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 1.5rem 3rem; position: relative; }
+    .he-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(108,99,255,0.10) 0%, transparent 70%); pointer-events: none; }
+    .he-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ai); border: 1px solid var(--ai-border); background: var(--ai-bg); padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
+    .he-hero h1 { font-size: 2.4rem; letter-spacing: -0.03em; margin-bottom: 0.6rem; line-height: 1.25; }
+    .he-hero h1 span { color: var(--ai); }
+    .he-subtitle { color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 auto 1rem; line-height: 1.7; }
+    .he-meta { color: var(--muted); font-size: 0.82rem; opacity: 0.6; }
+    .he-article { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .he-article h2 { font-size: 1.35rem; margin: 3rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--ai-border); color: var(--text); }
+    .he-article h3 { font-size: 1.1rem; margin: 2rem 0 0.8rem; color: var(--text); }
+    .he-article p { color: var(--muted); font-size: 0.94rem; line-height: 1.9; margin-bottom: 1.2rem; }
+    .he-article em { color: var(--text); font-style: normal; font-weight: 600; }
+    .he-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+    .he-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; transition: border-color 0.3s, transform 0.2s; }
+    .he-stat:hover { transform: translateY(-2px); border-color: var(--ai-border); }
+    .he-stat-number { font-size: 2rem; font-weight: 800; color: var(--ai); display: block; }
+    .he-stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; display: block; }
+    .he-highlight { background: linear-gradient(135deg, var(--ai-bg), var(--strategy-bg)); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; margin: 2rem 0; }
+    .he-highlight h3 { font-size: 1.05rem; margin: 0 0 0.8rem; color: var(--text); }
+    .he-highlight p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.8rem; }
+    .he-highlight p:last-child { margin-bottom: 0; }
+    .he-chain { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.5rem 0; }
+    .he-chain-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.3s; }
+    .he-chain-item:hover { border-color: var(--ai-border); }
+    .he-chain-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; margin-top: 0.1rem; }
+    .he-chain-content h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--text); }
+    .he-chain-content p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin: 0; }
+    .he-diagram { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+    .he-diagram-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ai); margin-bottom: 1.2rem; }
+    .he-flow { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+    .he-flow-step { background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.82rem; font-weight: 600; color: var(--text); }
+    .he-flow-plus { color: var(--ai); font-size: 1.4rem; font-weight: 700; }
+    .he-flow-arrow { color: var(--ai); font-size: 1.1rem; }
+    .he-quote { border-left: 3px solid var(--ai); padding: 1rem 1.5rem; margin: 1.5rem 0; background: var(--surface); border-radius: 0 8px 8px 0; }
+    .he-quote p { font-size: 0.92rem; color: var(--text); font-style: italic; margin: 0; line-height: 1.8; }
+    .he-quote cite { font-size: 0.78rem; color: var(--muted); font-style: normal; display: block; margin-top: 0.5rem; }
+    .he-refs { margin: 2rem 0; }
+    .he-ref { display: flex; gap: 1rem; align-items: flex-start; padding: 0.8rem 0; border-bottom: 1px solid var(--border); }
+    .he-ref:last-child { border-bottom: none; }
+    .he-ref-num { font-size: 0.72rem; font-weight: 700; color: var(--ai); background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 6px; padding: 0.2rem 0.5rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .he-ref-info { flex: 1; font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+    .he-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 2rem 0 1rem; }
+    .he-tag { font-size: 0.72rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.8rem; }
+    .back-home { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--ai); text-decoration: none; font-size: 0.88rem; margin-bottom: 2rem; transition: opacity 0.2s; }
+    .back-home:hover { opacity: 0.7; }
+    @media (max-width: 600px) { .he-hero h1 { font-size: 1.8rem; } .he-stats { grid-template-columns: 1fr; } .he-flow { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../index.html#insights" class="nav-link">Insights</a>
+      <span class="nav-divider"></span>
+      <a href="../../../insights/harness-engineering/index.html" class="nav-link nav-lang">KR</a>
+    </nav>
+  </header>
+  <main>
+    <section class="he-hero">
+      <div>
+        <span class="he-badge">AI Engineering · Deep Dive</span>
+        <h1><span>Harness Engineering</span> —<br>It's the System, Not the Model,<br>That Makes the Agent</h1>
+        <p class="he-subtitle">AI agent performance depends not on model intelligence, but on the system design wrapping that intelligence. A new engineering paradigm proven by OpenAI, Anthropic, and LangChain.</p>
+        <p class="he-meta">Jihwan Woo · Weekly Tech Trends · April 2026</p>
+      </div>
+    </section>
+    <article class="he-article">
+      <a href="../../index.html#insights" class="back-home">← Home</a>
+      <div class="he-stats">
+        <div class="he-stat"><span class="he-stat-number">1M</span><span class="he-stat-label">Lines · Zero Manual Typing</span></div>
+        <div class="he-stat"><span class="he-stat-number">25↑</span><span class="he-stat-label">Rank Jump · No Model Change</span></div>
+        <div class="he-stat"><span class="he-stat-number">1/10</span><span class="he-stat-label">Time vs. Manual Work</span></div>
+      </div>
+
+      <p>In February 2026, the OpenAI Codex team revealed a striking experiment: 3 engineers built a production application of roughly 1 million lines over 5 months without typing a single line of code themselves. Around the same time, LangChain jumped 25 ranks on the Terminal Bench 2.0 coding agent benchmark — from 30th to 5th — by only modifying the system around the model, not the model itself.</p>
+      <p>The common thread is clear: <em>what elevated AI performance wasn't a smarter model, but the system design wrapping the model</em>.</p>
+
+      <h2>What Is a Harness?</h2>
+
+      <p>The word "harness" originally refers to the tack placed on a horse. No matter how powerful the horse, it can't plow a field without a harness directing its strength in the right direction. AI agents are the same.</p>
+
+      <div class="he-diagram">
+        <div class="he-diagram-title">The Agent Equation</div>
+        <div class="he-flow">
+          <div class="he-flow-step">Agent</div>
+          <span class="he-flow-plus">=</span>
+          <div class="he-flow-step">Model</div>
+          <span class="he-flow-plus">+</span>
+          <div class="he-flow-step">Harness</div>
+        </div>
+      </div>
+
+      <p><em>Everything that isn't the model is the harness.</em> System prompts, tool definitions, sandboxed execution environments, memory for tracking progress, automatic verification of results — all of it. A raw LLM is not an agent. It becomes one only when a harness provides memory, tools, verification, and constraints.</p>
+
+      <p>The person who first named this concept was Mitchell Hashimoto, co-founder of HashiCorp:</p>
+
+      <div class="he-quote">
+        <p>"Every time the agent makes a mistake, engineer it so that mistake never happens again."</p>
+        <cite>— Mitchell Hashimoto, Co-founder of HashiCorp</cite>
+      </div>
+
+      <h2>Why Models Alone Aren't Enough</h2>
+
+      <p>Anthropic's research team experienced this firsthand. When they asked their top model, Claude Opus 4.5, to "build a web application similar to claude.ai," the same failures repeated: the agent tried to do everything at once, ran out of context, and left half-finished code — or declared "looks done" prematurely after partial progress.</p>
+
+      <p>This wasn't because the model was unintelligent. Imagine a shift worker arriving each day with no memory of the previous shift, no handoff notes, no progress board. Even the most capable person would struggle. <em>The problem wasn't the AI's brain — it was the AI's working environment.</em></p>
+
+      <div class="he-highlight">
+        <h3>Limitations of Existing Approaches</h3>
+        <p><em>Prompt Engineering</em> — Like giving exam tips right before the test. Effective for one-shot answers, but limited across multi-step tasks.</p>
+        <p><em>Fine-tuning</em> — Like hiring a math tutor. Increases knowledge, but doesn't provide pencils and calculators.</p>
+        <p><em>RAG</em> — Like an open-book exam. Limited to information provision; can't execute code or fix errors.</p>
+        <p><em>Model Upgrade</em> — Like bringing a smarter student. LangChain's experiment directly refuted this: 25-rank improvement with zero model changes.</p>
+        <p>Harness engineering <em>designs the exam room itself</em> — quiet environment, organized desk, right tools, and a proctor who catches mistakes.</p>
+      </div>
+
+      <h2>The 5 Core Components of a Harness</h2>
+
+      <div class="he-chain">
+        <div class="he-chain-item">
+          <span class="he-chain-icon">📁</span>
+          <div class="he-chain-content">
+            <h4>Filesystem & Persistent Storage</h4>
+            <p>The agent's "work notebook" — Git adds version-controlled shared documents. Anthropic's claude-progress.txt is a prime example: each session records what it did, and the next session reads it to understand current state. Like shift workers leaving handoff notes.</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">🔒</span>
+          <div class="he-chain-content">
+            <h4>Code Execution & Sandbox</h4>
+            <p>Running agent-generated code without protection is risky. Like a children's sandbox — whatever the AI does inside doesn't affect the real system. Isolated execution, allow-listed commands, restricted networking.</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">🧹</span>
+          <div class="he-chain-content">
+            <h4>Context Management — Fighting Context Rot</h4>
+            <p>Chroma's research shows all models degrade as input grows. LangChain calls this "Context Rot." Countermeasures: <em>Compaction</em> (summarize to essentials), <em>Tool call offloading</em> (show summaries, store full output in files), <em>Skills</em> (load instructions only when needed). HumanLayer's principle: "Success is quiet, failure is loud."</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">🛡️</span>
+          <div class="he-chain-content">
+            <h4>Sub-agents & Context Isolation</h4>
+            <p>A larger context window is just a bigger haystack — it doesn't improve needle-finding ability. Sub-agents absorb all the noise from research and trial-and-error, delivering only clean results to the main agent. An "information firewall" — like a manager delegating research to team members and receiving only the summary report.</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">⚙️</span>
+          <div class="he-chain-content">
+            <h4>Hooks & Back-pressure</h4>
+            <p>Like a car's dashboard and warning lights. Automatic linting and testing after every code completion. Anthropic gave Claude browser automation testing tools, and it found UI bugs invisible in code alone. HumanLayer's conclusion: <em>"Agent success rate strongly correlates with self-verification capability."</em></p>
+          </div>
+        </div>
+      </div>
+
+      <h2>Real-World Cases & Results</h2>
+
+      <h3>OpenAI Codex — "Give a Map, Not a 1,000-Page Manual"</h3>
+      <p>3 engineers processed 1,500 PRs to complete ~1M lines of production code over 5 months. The key: instead of flooding the AI with detailed instructions, they <em>embedded rules into the codebase itself</em>. Like installing a GPS that auto-reroutes on wrong turns, rather than making the driver memorize directions.</p>
+
+      <h3>LangChain — 25 Ranks from Harness Alone</h3>
+      <p>Using the same AI model, harness-only improvements pushed Terminal Bench 2.0 scores from 52.8 to 66.5. Three focus areas: <em>system prompts, tool configuration, middleware</em>. Deliberately compressing the optimization space to these three levers was the key to success.</p>
+
+      <h3>Anthropic — Separating the Builder from the Inspector</h3>
+      <p>Enforced one feature at a time, and separated the "building AI" from the "inspecting AI." The builder writes code; the inspector opens the browser like a real user and tests. Like a chef cooking while a separate taster evaluates the dish.</p>
+
+      <h2>Practical Principles</h2>
+
+      <div class="he-chain">
+        <div class="he-chain-item">
+          <span class="he-chain-icon">1</span>
+          <div class="he-chain-content">
+            <h4>Start from Failure</h4>
+            <p>Don't try to design the ideal harness upfront. Each time the AI fails, add a structural safeguard to prevent that specific failure. "Ship first, fix the harness only when it actually breaks."</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">2</span>
+          <div class="he-chain-content">
+            <h4>Put in Less</h4>
+            <p>ETH Zurich research: AI-generated config files actually degraded performance while increasing costs 20%+. Human-written files improved only 4%. Codebase overviews and directory listings were useless — AI can explore repositories on its own. Only include the minimum guidance the AI can't discover itself.</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">3</span>
+          <div class="he-chain-content">
+            <h4>Don't Over-connect Tools</h4>
+            <p>More tools means more tool descriptions consuming the AI's context budget, crowding out actual task instructions. If a CLI is already well-represented in training data, prompt the agent to use the CLI instead of wiring up complex integrations.</p>
+          </div>
+        </div>
+        <div class="he-chain-item">
+          <span class="he-chain-icon">4</span>
+          <div class="he-chain-content">
+            <h4>Enforce Incremental Work</h4>
+            <p>The single biggest improvement in Anthropic's experiments: making the AI work on one feature at a time, committing and leaving progress notes after each task so the next session starts clean.</p>
+          </div>
+        </div>
+      </div>
+
+      <h2>A Fascinating Paradox, and a Sober Perspective</h2>
+
+      <p>Today's frontier models are post-trained within specific harnesses. Yet paradoxically, on Terminal Bench 2.0, Claude Opus 4.6 scored <em>33rd in its own training harness</em> but climbed to <em>top 5 in a different harness</em>. Models can overfit to their own harness and lose flexibility. The default harness may not be your best option.</p>
+
+      <p>A sober note: 1980s Expert Systems walked this exact path. When rule-based engines fell short, engineers piled on ever-more-complex rules until the systems became unmaintainable and were replaced wholesale. As harnesses grow complex, they develop their own bugs and maintenance costs. Agents circumventing harness constraints is already being observed.</p>
+
+      <div class="he-highlight">
+        <h3>Key Takeaway</h3>
+        <p>The software engineer's job is shifting from "writing code" to <em>"designing environments where AI can write code correctly."</em> Chad Fowler calls this "Relocating Rigor."</p>
+        <p>If your coding agent isn't performing as expected tomorrow, check the harness before blaming the model. <em>"The model is probably fine. It's a harness problem."</em></p>
+      </div>
+
+      <h2>References</h2>
+      <div class="he-refs">
+        <div class="he-ref"><span class="he-ref-num">1</span><div class="he-ref-info">OpenAI, "Harness Engineering: Leveraging Codex in an Agent-First World," OpenAI Blog, Feb. 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">2</span><div class="he-ref-info">V. Trivedy, "Improving Deep Agents with Harness Engineering," LangChain Blog, Feb. 18, 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">3</span><div class="he-ref-info">V. Trivedy, "The Anatomy of an Agent Harness," LangChain Blog, Mar. 11, 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">4</span><div class="he-ref-info">M. Hashimoto, "My AI Adoption Journey," Mitchell Hashimoto Blog, Feb. 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">5</span><div class="he-ref-info">Anthropic, "Effective Harnesses for Long-Running Agents," Anthropic Engineering Blog, Apr. 4, 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">6</span><div class="he-ref-info">HumanLayer, "Skill Issue: Harness Engineering for Coding Agents," HumanLayer Blog, Mar. 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">7</span><div class="he-ref-info">K. Hong et al., "Context Rot: How Increasing Input Tokens Impacts LLM Performance," Chroma Research, Jul. 2025.</div></div>
+        <div class="he-ref"><span class="he-ref-num">8</span><div class="he-ref-info">B. Böckeler, "Harness Engineering for Coding Agent Users," Martin Fowler Blog, Apr. 2, 2026.</div></div>
+        <div class="he-ref"><span class="he-ref-num">9</span><div class="he-ref-info">ETH Zurich and LogicStar.ai, "Evaluating AGENTS.md," Feb. 2026.</div></div>
+      </div>
+
+      <div class="he-tags">
+        <span class="he-tag">#HarnessEngineering</span>
+        <span class="he-tag">#AIAgent</span>
+        <span class="he-tag">#LLM</span>
+        <span class="he-tag">#OpenAI</span>
+        <span class="he-tag">#Anthropic</span>
+        <span class="he-tag">#LangChain</span>
+        <span class="he-tag">#SoftwareEngineering</span>
+        <span class="he-tag">#ContextRot</span>
+        <span class="he-tag">#CodingAgent</span>
+      </div>
+    </article>
+  </main>
+  <footer style="text-align:center;padding:2rem 1.5rem;color:var(--muted);font-size:0.78rem;border-top:1px solid var(--border);">
+    © 2026 Jihwan Woo · <a href="../../index.html" style="color:var(--ai);text-decoration:none;">jihwanw.github.io</a>
+  </footer>
+</body>
+</html>
