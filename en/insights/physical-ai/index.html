@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Physical AI Explained — When AI Leaves the Screen and Enters the Real World | Jihwan Woo</title>
-  <meta name="description" content="What is Physical AI? AI that sees, decides, and acts in the physical world. VLA/VLM models, core components, and industry applications explained simply.">
+  <meta name="description" content="What is Physical AI? The 5 stages of implementation, VLA/VLM models, Value Chain analysis, and industry applications — explained simply.">
   <meta property="og:title" content="Physical AI Explained — When AI Leaves the Screen and Enters the Real World">
   <meta property="og:description" content="ChatGPT explains how to make coffee. Physical AI actually makes it. The technology poised to transform $50T in physical industries.">
   <meta property="og:type" content="article">
@@ -24,6 +24,7 @@
     .pa-article{max-width:760px;margin:0 auto;padding:0 1.5rem 4rem}
     .pa-article h2{font-size:1.35rem;margin:3rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid var(--ai-border);color:var(--text)}
     .pa-article h3{font-size:1.1rem;margin:2rem 0 .8rem;color:var(--text)}
+    .pa-article h4{font-size:1rem;margin:1.5rem 0 .6rem;color:var(--text)}
     .pa-article p{color:var(--muted);font-size:.94rem;line-height:1.9;margin-bottom:1.2rem}
     .pa-article em{color:var(--text);font-style:normal;font-weight:600}
     .pa-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0}
@@ -50,11 +51,25 @@
     .pa-table th{background:var(--ai-bg);color:var(--text);font-weight:700;padding:.6rem .8rem;text-align:left;border:1px solid var(--border)}
     .pa-table td{padding:.6rem .8rem;border:1px solid var(--border);color:var(--muted);vertical-align:top}
     .pa-table tr:hover td{background:var(--surface)}
+    .pa-vc{display:grid;grid-template-columns:1fr;gap:1.2rem;margin:1.5rem 0}
+    .pa-vc-layer{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:border-color .3s}
+    .pa-vc-layer:hover{border-color:var(--ai-border)}
+    .pa-vc-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+    .pa-vc-num{font-size:.72rem;font-weight:700;color:var(--ai);background:var(--ai-bg);border:1px solid var(--ai-border);border-radius:6px;padding:.2rem .6rem}
+    .pa-vc-title{font-size:1.05rem;font-weight:700;color:var(--text)}
+    .pa-vc-desc{color:var(--muted);font-size:.88rem;line-height:1.7;margin-bottom:1rem}
+    .pa-vc-players{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem}
+    .pa-vc-player{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.8rem}
+    .pa-vc-player h5{font-size:.85rem;color:var(--text);margin-bottom:.3rem}
+    .pa-vc-player p{font-size:.78rem;color:var(--muted);line-height:1.5;margin:0}
     .pa-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:2rem 0 1rem}
     .pa-tag{font-size:.72rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:.25rem .8rem}
     .back-home{display:inline-flex;align-items:center;gap:.4rem;color:var(--ai);text-decoration:none;font-size:.88rem;margin-bottom:2rem;transition:opacity .2s}
     .back-home:hover{opacity:.7}
-    @media(max-width:600px){.pa-hero h1{font-size:1.8rem}.pa-stats{grid-template-columns:1fr}.pa-flow{flex-direction:column}.pa-flow-arrow{transform:rotate(90deg)}.pa-table{font-size:.75rem}}
+    .pa-refs{margin:2rem 0}
+    .pa-ref{font-size:.82rem;color:var(--muted);line-height:1.6;padding:.4rem 0;border-bottom:1px solid var(--border)}
+    .pa-ref:last-child{border-bottom:none}
+    @media(max-width:600px){.pa-hero h1{font-size:1.8rem}.pa-stats{grid-template-columns:1fr}.pa-flow{flex-direction:column}.pa-flow-arrow{transform:rotate(90deg)}.pa-table{font-size:.75rem}.pa-vc-players{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -71,21 +86,23 @@
       <p class="pa-subtitle">ChatGPT explains how to make coffee. Physical AI actually makes it. The technology poised to transform $50 trillion in physical industries, explained simply.</p>
       <p class="pa-meta">Jihwan Woo · April 2026</p>
     </div></section>
+
     <article class="pa-article">
       <a href="../../index.html#insights" class="back-home">← Home</a>
+
       <div class="pa-stats">
         <div class="pa-stat"><span class="pa-stat-number">$50T</span><span class="pa-stat-label">Physical Industry Economy</span></div>
         <div class="pa-stat"><span class="pa-stat-number">10M</span><span class="pa-stat-label">Factories Worldwide</span></div>
         <div class="pa-stat"><span class="pa-stat-number">1.5B</span><span class="pa-stat-label">Cars & Trucks</span></div>
       </div>
 
-      <h2>What Is Physical AI?</h2>
+      <h2>1. What Is Physical AI?</h2>
       <p>When you ask ChatGPT to "make me coffee," it explains the process beautifully. But it can't actually brew a cup — because ChatGPT exists only in the digital world.</p>
       <p><em>Physical AI</em> breaks through this limitation. AI that sees with eyes (cameras, sensors), thinks with a brain (AI models), and acts with hands and feet (robot arms, wheels). That's Physical AI.</p>
 
       <table class="pa-table">
         <tr><th>Type</th><th>What It Does</th><th>Examples</th></tr>
-        <tr><td>Traditional AI (ChatGPT, etc.)</td><td>Generates digital outputs</td><td>Writing, drawing, coding</td></tr>
+        <tr><td>Traditional AI (ChatGPT, etc.)</td><td>Generates digital outputs (text, images)</td><td>Writing, drawing, coding</td></tr>
         <tr><td>Physical AI</td><td>Acts directly in the real world</td><td>Picking objects, autonomous driving, factory assembly</td></tr>
       </table>
 
@@ -94,11 +111,20 @@
         <p>Physical AI is an intelligent system that <em>perceives the environment through sensors</em>, <em>makes decisions with AI</em>, and <em>takes direct action in the physical world through actuators</em>.</p>
       </div>
 
-      <h2>How Is It Different from Robotics and Agentic AI?</h2>
+      <h2>2. How Is It Different from Robotics and Agentic AI?</h2>
+
+      <h3>Traditional Robotics: "Robots that only follow orders"</h3>
+      <p>Think of a factory welding robot. It precisely repeats "move arm from point A to B, weld for 3 seconds." But if a part shifts by just 1cm, it can't adapt on its own. A human must reprogram it.</p>
+
+      <h3>Agentic AI: "A digital assistant that thinks for itself"</h3>
+      <p>Agentic AI plans autonomously and uses multiple tools to complete tasks. "Book my business trip next week" triggers flight search → hotel booking → calendar entry. But it <em>only operates within the digital world</em>.</p>
+
+      <h3>Physical AI: "AI that decides and acts in the real world"</h3>
+      <p>Physical AI adds <em>physical action capability</em> to Agentic AI's autonomous decision-making.</p>
 
       <table class="pa-table">
         <tr><th></th><th>Traditional Robotics</th><th>Agentic AI</th><th>Physical AI</th></tr>
-        <tr><td>Analogy</td><td>Chef who only follows recipes</td><td>Manager who plans menus and takes orders (outside the kitchen)</td><td>Chef who improvises based on the situation</td></tr>
+        <tr><td>Analogy</td><td>Chef who only follows recipes</td><td>Manager who plans menus (outside the kitchen)</td><td>Chef who improvises on the spot</td></tr>
         <tr><td>Perception</td><td>❌ Fixed coordinates only</td><td>✅ Digital data</td><td>✅ Physical environment (cameras, sensors)</td></tr>
         <tr><td>Decision</td><td>❌ Pre-programmed sequence</td><td>✅ Autonomous</td><td>✅ Autonomous</td></tr>
         <tr><td>Action</td><td>✅ Physical (repetitive only)</td><td>❌ Digital only</td><td>✅ Physical (adaptive)</td></tr>
@@ -107,95 +133,285 @@
 
       <p>The key difference in one line: <em>Physical AI = Agentic AI's brain + Robotics' body</em></p>
 
-      <h2>5 Core Stages of Building Physical AI</h2>
+      <h2>3. The 5 Core Stages of Building Physical AI</h2>
+
+      <p>Building Physical AI is like raising a child. Just as a child learns to walk step by step, AI must progressively learn the physical world. And this process isn't one-and-done — it forms a flywheel that improves with each cycle of experience.</p>
 
       <div class="pa-diagram">
-        <div class="pa-diagram-title">Physical AI Flywheel</div>
+        <div class="pa-diagram-title">Physical AI Flywheel — A Self-Improving Cycle</div>
         <div class="pa-flow">
-          <div class="pa-flow-step">① Data Collection</div>
+          <div class="pa-flow-step">① Data Collection<br><small style="color:var(--muted)">Real + Synthetic</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">② Model Training</div>
+          <div class="pa-flow-step">② Model Training<br><small style="color:var(--muted)">Imitation + RL</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">③ Simulation</div>
+          <div class="pa-flow-step">③ Simulation<br><small style="color:var(--muted)">Digital Twin</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">④ Sim-to-Real</div>
+          <div class="pa-flow-step">④ Sim-to-Real<br><small style="color:var(--muted)">Real-World Deploy</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">⑤ Autonomous Ops</div>
+          <div class="pa-flow-step">⑤ Autonomous Ops<br><small style="color:var(--muted)">Agent Orchestration</small></div>
           <span class="pa-flow-arrow">↻</span>
         </div>
       </div>
 
-      <div class="pa-chain">
-        <div class="pa-chain-item"><span class="pa-chain-icon">📊</span><div class="pa-chain-content"><h4>① Data — Gathering Experience</h4><p>Collecting real data (factory cameras, sensors, LiDAR) and synthetic data (AI-generated in virtual environments). NVIDIA's Cosmos World Foundation Model auto-generates thousands of scenario variations from small amounts of real footage.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🧠</span><div class="pa-chain-content"><h4>② Training — Learning Skills</h4><p>Training VLA models through imitation learning (learning from human demonstrations) and reinforcement learning (finding optimal methods through trial and error). VLA integrates Vision + Language + Action.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🎮</span><div class="pa-chain-content"><h4>③ Simulation — Practicing in Virtual Worlds</h4><p>Extensive practice in digital twins (virtual replicas of reality). Like pilots training hundreds of hours in flight simulators before actual flights.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🌉</span><div class="pa-chain-content"><h4>④ Sim-to-Real — Bridging the Gap</h4><p>Reducing the subtle differences between virtual and real worlds (Sim-to-Real Gap) through Domain Randomization, then deploying optimized models to robot edge computers.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🤖</span><div class="pa-chain-content"><h4>⑤ Agentic Orchestration — Autonomous Operation</h4><p>Multiple AI agents collaborate for task planning, anomaly detection, human-robot cooperation, and self-improvement to autonomously handle complex operations.</p></div></div>
-      </div>
-
-      <h2>The Brain of Physical AI: VLM and VLA</h2>
+      <h3>① Data — "Gathering Experience"</h3>
+      <p>Just as a child needs many experiences to learn about the world, Physical AI needs vast amounts of data. There are two main types.</p>
+      <p><em>Real data</em> comes from factory cameras, LiDAR (sensors that scan surroundings in 3D using lasers), and tactile sensors. This is experience data accumulated as robots actually pick up objects or navigate spaces.</p>
+      <p><em>Synthetic data</em> is training data generated by AI in virtual environments. For example, taking one object photo and generating thousands of variations by changing lighting, angles, and backgrounds. This is especially valuable when real data collection is expensive or dangerous — you can't cause actual accidents to train a self-driving car, so you create tens of thousands of virtual accident scenarios instead.</p>
 
       <div class="pa-highlight">
-        <h3>VLM vs VLA — The Core Difference</h3>
-        <p><em>VLM (Vision-Language Model)</em> — "AI that sees and understands." The commentator analyzing the game. Sees images, responds with text.</p>
-        <p><em>VLA (Vision-Language-Action Model)</em> — "AI that sees, understands, and acts." The player on the field. Takes images and instructions, generates robot action commands.</p>
-        <p>In real systems, VLM sees the big picture and plans (the coach), while VLA executes the actions (the player).</p>
+        <h3>NVIDIA Cosmos — AI That Understands Physics</h3>
+        <p>NVIDIA's <em>Cosmos</em> is a World Foundation Model that auto-generates thousands of scenario variations from small amounts of real footage, <em>consistent with physical laws</em>. Trained on 9+ trillion tokens, Cosmos 2.5 (released March 2026) supports longer videos and diverse viewpoints. The key isn't just generating plausible-looking footage — it understands and reflects gravity, friction, and collisions.</p>
       </div>
 
-      <h3>Key VLA Models Compared</h3>
+      <h3>② Training — "Learning Skills"</h3>
+      <p>The collected data trains AI models. Physical AI uses two core learning methods.</p>
+      <p><em>Imitation Learning</em>: AI learns by watching human demonstrations. A person wearing a VR headset shows how to pick up objects, and the robot learns those motions. Like learning to cook by watching a chef.</p>
+      <p><em>Reinforcement Learning</em>: AI finds optimal methods through trial and error. A robot learning to walk by attempting millions of times in a virtual environment. Like learning to ride a bicycle by falling and getting back up repeatedly.</p>
+
+      <div class="pa-highlight">
+        <h3>VLA Models — The Core Brain of Physical AI</h3>
+        <p>The critical model here is the <em>VLA (Vision-Language-Action)</em> model. It integrates Vision (understanding what the camera sees) + Language (understanding human instructions) + Action (converting to physical movements).</p>
+        <p>Say "Pick up the red cup and place it on the table," and the VLA model combines visual information with the language instruction to generate robot arm movements.</p>
+      </div>
+
+      <h3>③ Simulation — "Practicing in Virtual Worlds"</h3>
+      <p>Testing directly with real robots is expensive and risky. So robots first practice extensively in <em>digital twins</em> — virtual replicas of reality.</p>
+      <p>Like pilots training hundreds of hours in flight simulators before actual flights. The difference is scale: simulation can train thousands of robots simultaneously, and safely test dangerous scenarios (collisions, falls, extreme environments).</p>
+      <p>NVIDIA's <em>Isaac Sim</em> trains robots in virtual factories that are 3D replicas of real ones. <em>Omniverse</em> is the underlying platform for building these digital twins, enabling multiple teams to collaborate in the same virtual environment simultaneously.</p>
+
+      <h3>④ Sim-to-Real — "Applying Virtual Lessons to Reality"</h3>
+      <p>Virtual and real worlds have subtle but important differences — light reflections, friction, sensor noise. This gap is called the <em>Sim-to-Real Gap</em>, and closing it is one of Physical AI's core challenges.</p>
+      <p>The key technique is <em>Domain Randomization</em>: randomly varying lighting, colors, and physics parameters (friction, weight, elasticity) during simulation training. An AI that has experienced sufficiently diverse virtual environments treats the real world as "just another variation." Like a tennis player who has practiced on every type of court adapting to any surface.</p>
+      <p>Trained models are optimized (made lightweight) and deployed to edge computers on the robots. Real-world experience data is collected again to improve the model — this is where the flywheel cycles back.</p>
+
+      <h3>⑤ Agentic Orchestration — "Autonomous Operation"</h3>
+      <p>A single robot doesn't do everything alone. Multiple AI agents divide roles and collaborate.</p>
+      <div class="pa-chain">
+        <div class="pa-chain-item"><span class="pa-chain-icon">📋</span><div class="pa-chain-content"><h4>Task Planning Agent</h4><p>Decomposes large tasks into smaller steps. "Organize the warehouse" becomes "classify items → relocate → stack."</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🚨</span><div class="pa-chain-content"><h4>Anomaly Detection Agent</h4><p>Automatically responds to problems. If equipment vibration is abnormal, it stops immediately and alerts the manager.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🤝</span><div class="pa-chain-content"><h4>Human-Robot Collaboration Agent</h4><p>Converts natural language commands into robot actions. Say "move that box" and it executes.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🔄</span><div class="pa-chain-content"><h4>Self-Improvement Agent</h4><p>Analyzes failure experiences to improve its own learning. If it dropped an object, it adjusts its grip strategy.</p></div></div>
+      </div>
+
+      <h2>4. The Brain of Physical AI: VLM and VLA Models</h2>
+
+      <p>The most important technology in Physical AI is the AI model itself — the robot's "brain." These models fall into two main categories.</p>
+
+      <div class="pa-diagram">
+        <div class="pa-diagram-title">VLM vs VLA</div>
+        <div class="pa-flow">
+          <div class="pa-flow-step">VLM<br><small style="color:var(--muted)">See & Understand → Text Output</small><br><small style="color:var(--muted)">🎙️ Commentator</small></div>
+          <span class="pa-flow-arrow" style="font-size:1.5rem">⟷</span>
+          <div class="pa-flow-step">VLA<br><small style="color:var(--muted)">See & Understand → Action Output</small><br><small style="color:var(--muted)">⚽ Player</small></div>
+        </div>
+      </div>
+
+      <p><em>VLM (Vision-Language Model)</em> sees images and understands human language to respond with text. It has "eyes and ears but no hands or feet." Show it a factory photo and ask "Is this part defective?" — it answers "Yes, there's a scratch on the upper left."</p>
+
+      <p><em>VLA (Vision-Language-Action Model)</em> adds "action output" to VLM. Show it a table photo and say "Pick up the red cup" — the robot arm actually picks up the red cup.</p>
+
+      <p>In real Physical AI systems, VLM and VLA work together. VLM sees the big picture and plans (System 2: slow thinking), while VLA executes actions quickly (System 1: fast reflexes). Like a soccer coach (VLM) setting strategy while players (VLA) execute on the field.</p>
+
+      <h3>Key VLA Models — "Robot Brains" Compared</h3>
       <table class="pa-table">
-        <tr><th>Model</th><th>Developer</th><th>Key Feature</th><th>Best For</th></tr>
-        <tr><td>GR00T N1/N1.5</td><td>NVIDIA</td><td>Dual system (slow thinking + fast reflexes)</td><td>Humanoid robots</td></tr>
-        <tr><td>π0 / π0.5</td><td>Physical Intelligence</td><td>One model controls diverse robots</td><td>General-purpose, home</td></tr>
-        <tr><td>Gemini Robotics 1.5</td><td>Google DeepMind</td><td>"Think then act" reasoning</td><td>Complex decision tasks</td></tr>
-        <tr><td>OpenVLA</td><td>Stanford, UC Berkeley</td><td>7B params, fully open-source</td><td>Research, prototyping</td></tr>
-        <tr><td>SmolVLA</td><td>Hugging Face</td><td>450M params, runs on laptops</td><td>Low-cost, education</td></tr>
-        <tr><td>Octo</td><td>UC Berkeley</td><td>27M–93M, flexible generalist policy</td><td>Research, multi-platform</td></tr>
+        <tr><th>Model</th><th>Developer</th><th>Size</th><th>Key Feature</th><th>Best For</th></tr>
+        <tr><td>GR00T N1/N1.5</td><td>NVIDIA</td><td>~1B</td><td>Dual system — Eagle VLM (slow thinking) + Diffusion Transformer (fast reflexes). Full NVIDIA Isaac ecosystem integration</td><td>Humanoid robots</td></tr>
+        <tr><td>π0 / π0.5</td><td>Physical Intelligence</td><td>~7B</td><td>One model controls diverse robots. π0.5 works in never-before-seen environments ("open world generalization")</td><td>General-purpose, home</td></tr>
+        <tr><td>Gemini Robotics 1.5</td><td>Google DeepMind</td><td>—</td><td>"Think then act" — shows reasoning process before acting. Integrated with Boston Dynamics Atlas</td><td>Complex decision tasks</td></tr>
+        <tr><td>OpenVLA</td><td>Stanford, UC Berkeley</td><td>7B</td><td>Fully open-source. Trained on 970K real robot episodes. 16.5% higher success rate than 55B closed model (RT-2-X)</td><td>Research, prototyping</td></tr>
+        <tr><td>SmolVLA</td><td>Hugging Face + DeepMind</td><td>450M</td><td>Runs on a regular laptop (MacBook). Performance comparable to 10× larger models</td><td>Low-cost, education, edge</td></tr>
+        <tr><td>Octo</td><td>UC Berkeley</td><td>27M~93M</td><td>Transformer-based Diffusion Policy. Trained on 800K robot episodes. Quick fine-tuning for new robots</td><td>Research, multi-platform</td></tr>
       </table>
 
-      <h2>Industry Applications</h2>
-      <div class="pa-chain">
-        <div class="pa-chain-item"><span class="pa-chain-icon">🏭</span><div class="pa-chain-content"><h4>Manufacturing — Completing the Smart Factory</h4><p>Part recognition and auto-assembly, AI vision quality inspection, automatic equipment calibration. BMW saves ~$1M annually with AI robots. New product lines adapt without reprogramming.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">📦</span><div class="pa-chain-content"><h4>Logistics — The Warehouse Revolution</h4><p>Amazon already operates 1M+ Physical AI robots in warehouses. Automated picking, sorting, packing. Logistics AI market projected to reach $549B by 2033.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🚗</span><div class="pa-chain-content"><h4>Automotive — Physical AI in Motion</h4><p>Level 4–5 autonomous driving, AI robots in manufacturing, automated vehicle inspection. Rivian processes petabytes of autonomous driving data on AWS.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🏥</span><div class="pa-chain-content"><h4>Healthcare — More Precise Medicine</h4><p>Surgical assistance robots, hospital logistics robots, rehabilitation aids. AI medical devices achieving 116% efficiency improvement.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">⚡</span><div class="pa-chain-content"><h4>Energy/Infrastructure — Robots in Dangerous Places</h4><p>ANYbotics' ANYmal autonomously inspects oil & gas facilities. Wind turbines, power lines. 24/7 continuous monitoring.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🌾</span><div class="pa-chain-content"><h4>Agriculture — Precision Farming Realized</h4><p>Autonomous harvesting robots, drone-based crop monitoring, weed removal robots. Solving labor shortages and reducing pesticide use.</p></div></div>
-      </div>
-
-      <h2>Key Players</h2>
+      <h3>Key VLM Models — "Robot Eyes and Judgment"</h3>
       <table class="pa-table">
-        <tr><th>Company</th><th>Role</th><th>Key Products/Services</th></tr>
-        <tr><td>NVIDIA</td><td>Core Platform Provider</td><td>Omniverse, Isaac Sim, Cosmos, GR00T, Jetson Thor</td></tr>
-        <tr><td>AWS</td><td>Cloud Infrastructure</td><td>SageMaker HyperPod, Bedrock, IoT Greengrass</td></tr>
-        <tr><td>Google DeepMind</td><td>AI Research Frontier</td><td>Gemini Robotics, Boston Dynamics collaboration</td></tr>
-        <tr><td>Tesla</td><td>Humanoid Mass Production</td><td>Optimus (50K–100K units target for 2026)</td></tr>
-        <tr><td>Figure AI</td><td>General-Purpose Humanoid</td><td>Figure 02/03, deployed at BMW factories</td></tr>
-        <tr><td>Physical Intelligence</td><td>General-Purpose VLA</td><td>π0 / π0.5</td></tr>
+        <tr><th>Model</th><th>Developer</th><th>Size</th><th>Physical AI Application</th></tr>
+        <tr><td>Qwen2.5-VL</td><td>Alibaba</td><td>3B~72B</td><td>Factory quality inspection, construction site video analysis (+60% accuracy at Bedrock Robotics)</td></tr>
+        <tr><td>PaliGemma 2</td><td>Google</td><td>3B</td><td>Object recognition, scene understanding, vision backbone for VLA models</td></tr>
+        <tr><td>Eagle-2</td><td>NVIDIA</td><td>Various</td><td>Vision-language module for GR00T N1. Handles environment perception and language understanding for humanoids</td></tr>
+        <tr><td>NVIDIA Cosmos</td><td>NVIDIA</td><td>2B~14B</td><td>World Foundation Model — synthetic training data generation, scenario simulation, 30-second predictive video</td></tr>
       </table>
 
       <div class="pa-highlight">
-        <h3>The Big Picture</h3>
-        <p>Physical AI isn't just "smarter robots." It's the beginning of a new era where AI crosses the boundary of the digital world to <em>directly see, decide, and act in the physical world we live in</em>.</p>
-        <p>10 million factories, 200,000 warehouses, 1.5 billion vehicles worldwide — Physical AI can be applied to all of them. CES 2026 featured a record 38 humanoid robot companies.</p>
+        <h3>Which Model Should You Choose?</h3>
+        <p>Physical AI is evolving rapidly with new models constantly emerging. What matters isn't finding "one perfect model" but <em>selecting and combining models suited to your use case</em>. Like picking the right tool from a toolbox for each job.</p>
       </div>
+
+      <h2>5. Core Components of Physical AI</h2>
+      <table class="pa-table">
+        <tr><th>Component</th><th>Role</th><th>Simple Analogy</th></tr>
+        <tr><td>Sensors (cameras, LiDAR, tactile)</td><td>Environment perception</td><td>Robot's eyes, ears, skin</td></tr>
+        <tr><td>AI Models (VLA, VLM)</td><td>Decision-making</td><td>Robot's brain</td></tr>
+        <tr><td>Simulation Engine</td><td>Virtual training environment</td><td>Robot's practice room</td></tr>
+        <tr><td>World Foundation Model</td><td>AI that understands physics</td><td>Robot's common sense about physics</td></tr>
+        <tr><td>Edge Computing</td><td>Real-time on-site AI processing</td><td>Robot's reflexes</td></tr>
+        <tr><td>Cloud Infrastructure</td><td>Large-scale training & data storage</td><td>Robot's school and library</td></tr>
+        <tr><td>Actuators (motors, joints)</td><td>Physical action execution</td><td>Robot's arms and legs</td></tr>
+      </table>
+
+      <h2>6. Physical AI Value Chain — Who Builds What</h2>
+
+      <p>Physical AI can't be built by a single company alone. From semiconductors to cloud, AI models, simulation, and robot hardware — multiple layers must interlock. Here's a look at the key players and their roles at each layer.</p>
+
+      <div class="pa-diagram">
+        <div class="pa-diagram-title">Physical AI Value Chain</div>
+        <div class="pa-flow">
+          <div class="pa-flow-step">L1 Semiconductors<br><small style="color:var(--muted)">GPU · Edge Chips</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">L2 Cloud<br><small style="color:var(--muted)">Training · Storage</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">L3 AI Models<br><small style="color:var(--muted)">VLA · VLM</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">L4 Simulation<br><small style="color:var(--muted)">Digital Twin</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">L5 Robot HW<br><small style="color:var(--muted)">Humanoid · AMR</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">L6 Industry<br><small style="color:var(--muted)">Mfg · Logistics</small></div>
+        </div>
+      </div>
+
+      <div class="pa-vc">
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L1</span><span class="pa-vc-title">Semiconductors & Computing Hardware</span></div>
+          <p class="pa-vc-desc">The foundation of Physical AI. Both cloud GPUs for large-scale training and edge chips mounted on robots for real-time inference are essential.</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>NVIDIA</h5><p>H100/B200 (training GPUs), Jetson Thor/Orin (robot edge AI computers). Core hardware supplier for the entire Physical AI stack.</p></div>
+            <div class="pa-vc-player"><h5>Qualcomm</h5><p>Robotics RB series. Low-power edge AI chips for small robots and drones.</p></div>
+            <div class="pa-vc-player"><h5>Intel</h5><p>Gaudi accelerators, RealSense depth cameras. Industrial vision systems.</p></div>
+          </div>
+        </div>
+
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L2</span><span class="pa-vc-title">Cloud Infrastructure & Data Platforms</span></div>
+          <p class="pa-vc-desc">Handles large-scale AI model training, simulation execution, and petabyte-scale sensor data storage. The hub of the feedback loop where robots send field data to the cloud for model improvement.</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>AWS</h5><p>SageMaker HyperPod (large-scale training), AWS Batch (parallel simulation), Bedrock (AI model access), IoT Greengrass (edge deployment), S3/EFS (data storage). Deep NVIDIA integration for Cloud-to-Edge full stack.</p></div>
+            <div class="pa-vc-player"><h5>Microsoft Azure</h5><p>Azure AI, Azure Digital Twins. Partnering with NVIDIA for manufacturing Physical AI solutions.</p></div>
+            <div class="pa-vc-player"><h5>Google Cloud</h5><p>Vertex AI, TPU clusters. Robot AI training infrastructure linked to DeepMind research.</p></div>
+          </div>
+        </div>
+
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L3</span><span class="pa-vc-title">AI Models & Foundation Models</span></div>
+          <p class="pa-vc-desc">The robot's brain. Develops core AI models that perceive environments (VLM), generate actions (VLA), and understand the physical world (World Models).</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>NVIDIA</h5><p>GR00T N1/N1.5 (humanoid VLA), Cosmos (World Foundation Model), Eagle-2 (VLM). The most comprehensive model stack.</p></div>
+            <div class="pa-vc-player"><h5>Google DeepMind</h5><p>Gemini Robotics 1.5 (VLA), PaliGemma 2 (VLM). Reasoning-first approach: "think then act."</p></div>
+            <div class="pa-vc-player"><h5>Physical Intelligence</h5><p>π0 / π0.5. General-purpose robot control VLA. $600M+ raised. Handles complex everyday tasks like folding laundry.</p></div>
+            <div class="pa-vc-player"><h5>Hugging Face</h5><p>SmolVLA (450M, ultra-lightweight). LeRobot dataset. Center of the open-source ecosystem.</p></div>
+            <div class="pa-vc-player"><h5>Stanford / UC Berkeley</h5><p>OpenVLA (7B, open-source), Octo (27M~93M). Academia-led open research.</p></div>
+          </div>
+        </div>
+
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L4</span><span class="pa-vc-title">Simulation & Digital Twins</span></div>
+          <p class="pa-vc-desc">Platforms that replicate reality virtually to train robots safely and affordably. Core infrastructure for synthetic data generation, reinforcement learning, and sim-to-real transfer.</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>NVIDIA Omniverse</h5><p>Digital twin construction platform. 3D replicas of real factories. Multiple teams collaborate in the same virtual environment.</p></div>
+            <div class="pa-vc-player"><h5>NVIDIA Isaac Sim / Lab</h5><p>Isaac Sim: robot simulation environment. Isaac Lab: GPU-accelerated RL framework. Simultaneous training of thousands of robots.</p></div>
+            <div class="pa-vc-player"><h5>MathWorks (Simulink)</h5><p>Control system simulation. Motor, sensor, and control algorithm design for industrial robots.</p></div>
+            <div class="pa-vc-player"><h5>Unity / Unreal Engine</h5><p>Game engine-based simulation. Strong in visually realistic environment construction.</p></div>
+          </div>
+        </div>
+
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L5</span><span class="pa-vc-title">Robot Hardware & Platforms</span></div>
+          <p class="pa-vc-desc">AI's "body." Diverse physical platforms including humanoids, industrial robot arms, autonomous mobile robots (AMR), and self-driving vehicles.</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>Tesla</h5><p>Optimus humanoid. 50K–100K unit production target for 2026. Priority deployment in auto factories.</p></div>
+            <div class="pa-vc-player"><h5>Boston Dynamics</h5><p>Atlas (electric humanoid). Google DeepMind AI onboard. Most advanced bipedal locomotion technology.</p></div>
+            <div class="pa-vc-player"><h5>Figure AI</h5><p>Figure 02/03. Deployed at BMW factories. General-purpose humanoid. ~$39B valuation.</p></div>
+            <div class="pa-vc-player"><h5>Agility Robotics</h5><p>Digit. Bipedal robot for logistics warehouses. Testing at Amazon facilities.</p></div>
+            <div class="pa-vc-player"><h5>ABB / FANUC / KUKA</h5><p>Industrial robot arms. Integrating Physical AI into existing industrial robots. Workhorses of global factories.</p></div>
+            <div class="pa-vc-player"><h5>Universal Robots</h5><p>Collaborative robots (Cobots). Small robots that work alongside humans. SME manufacturing floors.</p></div>
+            <div class="pa-vc-player"><h5>ANYbotics</h5><p>ANYmal quadruped robot. Autonomous inspection of oil & gas facilities and hazardous environments.</p></div>
+          </div>
+        </div>
+
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L6</span><span class="pa-vc-title">Industry Application & System Integration</span></div>
+          <p class="pa-vc-desc">The layer that deploys and operates Physical AI in actual industrial settings. Domain expertise and system integration capabilities are key.</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>Amazon</h5><p>1M+ Physical AI robots operating in logistics warehouses. Largest-scale real-world deployment of automated picking, sorting, and packing.</p></div>
+            <div class="pa-vc-player"><h5>BMW</h5><p>Figure AI humanoids deployed in factories. ~$1M annual savings from AI robots. Manufacturing Physical AI pioneer.</p></div>
+            <div class="pa-vc-player"><h5>Waymo / Zoox</h5><p>Level 4 autonomous robotaxis. Physical AI on the road. Integration of sensor fusion + AI decision-making + vehicle control.</p></div>
+            <div class="pa-vc-player"><h5>Bedrock Robotics</h5><p>Autonomous heavy equipment for construction sites. +60% accuracy improvement with Qwen2.5-VL.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pa-highlight">
+        <h3>NVIDIA's Unique Position</h3>
+        <p>NVIDIA is the only company simultaneously dominating L1 (GPUs, edge chips) → L3 (GR00T, Cosmos) → L4 (Omniverse, Isaac). When CEO Jensen Huang declared "The ChatGPT moment for Physical AI has arrived" at CES 2025, this vertical integration strategy was the foundation. ABB, FANUC, KUKA, Figure AI, Agility, and other global robotics companies are all building Physical AI on the NVIDIA platform.</p>
+      </div>
+
+      <h2>7. Industry Applications and Benefits</h2>
+
+      <div class="pa-chain">
+        <div class="pa-chain-item"><span class="pa-chain-icon">🏭</span><div class="pa-chain-content"><h4>Manufacturing — Completing the Smart Factory</h4><p>Part recognition and auto-assembly, AI vision quality inspection (higher accuracy than humans), automatic equipment calibration. BMW saves ~$1M annually with AI robots. New product lines adapt without reprogramming. 24/7 non-stop operation.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">📦</span><div class="pa-chain-content"><h4>Logistics — The Warehouse Revolution</h4><p>Amazon operates 1M+ Physical AI robots in warehouses. Automated picking, sorting, packing. Solving labor shortages in harsh environments like cold storage. Logistics AI market projected to reach $549B by 2033.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🚗</span><div class="pa-chain-content"><h4>Automotive — Physical AI in Motion</h4><p>Level 4–5 autonomous vehicles (Waymo, Zoox), AI robots in manufacturing (welding, painting, assembly), automated vehicle inspection (UVeye). Rivian processes petabytes of autonomous driving data on AWS.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🏥</span><div class="pa-chain-content"><h4>Healthcare — More Precise Medicine</h4><p>Surgical assistance robots (more precise incisions and suturing), hospital logistics robots, rehabilitation aids. AI medical devices achieving 116% efficiency improvement. Reducing repetitive workload for medical staff.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">⚡</span><div class="pa-chain-content"><h4>Energy/Infrastructure — Robots in Dangerous Places</h4><p>ANYbotics' ANYmal autonomously inspects oil & gas facilities. Wind turbines, power lines, hazardous facility inspection. 24/7 continuous monitoring. Worker safety ensured (no human entry into dangerous environments).</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🌾</span><div class="pa-chain-content"><h4>Agriculture — Precision Farming Realized</h4><p>Autonomous harvesting robots, drone-based crop monitoring, weed removal robots. Solving labor shortages, reducing pesticide use (precision spraying), optimizing yields.</p></div></div>
+      </div>
+
+      <h2>8. The Big Picture</h2>
+
+      <p>Physical AI has the potential to transform the <em>$50 trillion</em> physical industry economy.</p>
+
+      <div class="pa-diagram">
+        <div class="pa-diagram-title">Worldwide, there are...</div>
+        <div class="pa-flow">
+          <div class="pa-flow-step">🏭 10M<br><small style="color:var(--muted)">Factories</small></div>
+          <div class="pa-flow-step">📦 200K<br><small style="color:var(--muted)">Warehouses</small></div>
+          <div class="pa-flow-step">🚗 1.5B<br><small style="color:var(--muted)">Cars & Trucks</small></div>
+          <div class="pa-flow-step">📹 1.5B<br><small style="color:var(--muted)">Commercial Cameras</small></div>
+          <div class="pa-flow-step">🤖 Billions<br><small style="color:var(--muted)">Future Humanoids</small></div>
+        </div>
+      </div>
+
+      <p>Physical AI can be applied to all of these.</p>
+      <p>As of 2026: Robotics attracted ~€37.9B in investment in 2025. The humanoid robot market is projected to reach $38B by 2035. Deloitte assesses Physical AI is "transitioning from experimentation to large-scale deployment." CES 2026 featured a record 38 humanoid robot companies.</p>
+
+      <h2>9. Summary: Physical AI at a Glance</h2>
 
       <div class="pa-diagram">
         <div class="pa-diagram-title">Physical AI Core Architecture</div>
         <div class="pa-flow">
-          <div class="pa-flow-step">Perceive<br><small style="color:var(--muted)">Cameras · Sensors</small></div>
+          <div class="pa-flow-step">Perceive<br><small style="color:var(--muted)">Cameras · LiDAR · Sensors</small></div>
           <span class="pa-flow-arrow">→</span>
           <div class="pa-flow-step">Decide<br><small style="color:var(--muted)">VLA/VLM Models</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">Act<br><small style="color:var(--muted)">Robot Arms · Wheels</small></div>
+          <div class="pa-flow-step">Act<br><small style="color:var(--muted)">Robot Arms · Wheels · Joints</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">Learn<br><small style="color:var(--muted)">Experience Data</small></div>
+          <div class="pa-flow-step">Learn<br><small style="color:var(--muted)">Experience Data Collection</small></div>
           <span class="pa-flow-arrow">↻</span>
         </div>
       </div>
 
+      <div class="pa-highlight">
+        <h3>Key Takeaway</h3>
+        <p>Physical AI isn't just "smarter robots." It's the beginning of a new era where AI crosses the boundary of the digital world to <em>directly see, decide, and act in the physical world we live in</em>.</p>
+        <p>Factories, warehouses, roads, hospitals, farms — every physical space in our lives is becoming safer, more efficient, and more intelligent.</p>
+      </div>
+
+      <h2>References</h2>
+      <div class="pa-refs">
+        <div class="pa-ref">NVIDIA Physical AI Partners — <a href="https://nvidianews.nvidia.com/news/nvidia-and-global-robotics-leaders-take-physical-ai-to-the-real-world" target="_blank" rel="noopener" style="color:var(--ai)">nvidianews.nvidia.com</a></div>
+        <div class="pa-ref">Deloitte, "Physical AI: The moment of acceleration" (2026) — <a href="https://www.deloitte.com/ap/en/about/press-room/physical-ai-powering-smart-manufacturing.html" target="_blank" rel="noopener" style="color:var(--ai)">deloitte.com</a></div>
+        <div class="pa-ref">BCG, "How Physical AI Is Reshaping Robotics Today" (2026) — <a href="https://www.bcg.com/publications/2026/how-physical-ai-is-reshaping-robotics-today" target="_blank" rel="noopener" style="color:var(--ai)">bcg.com</a></div>
+        <div class="pa-ref">MIT Technology Review, "Why physical AI is becoming manufacturing's next advantage" (2026) — <a href="https://www.technologyreview.com/2026/03/13/1134184/why-physical-ai-is-becoming-manufacturings-next-advantage/" target="_blank" rel="noopener" style="color:var(--ai)">technologyreview.com</a></div>
+        <div class="pa-ref">NVIDIA Cosmos World Foundation Models — <a href="https://developer.nvidia.com/cosmos" target="_blank" rel="noopener" style="color:var(--ai)">developer.nvidia.com</a></div>
+        <div class="pa-ref">NVIDIA GR00T N1.5 — <a href="https://research.nvidia.com/labs/gear/gr00t-n1_5/" target="_blank" rel="noopener" style="color:var(--ai)">research.nvidia.com</a></div>
+        <div class="pa-ref">Physical Intelligence π0 / π0.5 — <a href="https://physicalintelligence.company/blog/pi05" target="_blank" rel="noopener" style="color:var(--ai)">physicalintelligence.company</a></div>
+        <div class="pa-ref">Google DeepMind Gemini Robotics 1.5 — <a href="https://deepmind.google/discover/blog/gemini-robotics-15-brings-ai-agents-into-the-physical-world/" target="_blank" rel="noopener" style="color:var(--ai)">deepmind.google</a></div>
+        <div class="pa-ref">OpenVLA — <a href="https://openvla.github.io/" target="_blank" rel="noopener" style="color:var(--ai)">openvla.github.io</a></div>
+        <div class="pa-ref">Hugging Face SmolVLA — <a href="https://huggingface.co/blog/smolvla" target="_blank" rel="noopener" style="color:var(--ai)">huggingface.co</a></div>
+      </div>
+
       <div class="pa-tags">
-        <span class="pa-tag">#PhysicalAI</span><span class="pa-tag">#Robotics</span><span class="pa-tag">#VLA</span><span class="pa-tag">#VLM</span><span class="pa-tag">#NVIDIA</span><span class="pa-tag">#Humanoid</span><span class="pa-tag">#DigitalTwin</span><span class="pa-tag">#AutonomousDriving</span><span class="pa-tag">#SmartFactory</span><span class="pa-tag">#AI</span>
+        <span class="pa-tag">#PhysicalAI</span><span class="pa-tag">#Robotics</span><span class="pa-tag">#VLA</span><span class="pa-tag">#VLM</span><span class="pa-tag">#NVIDIA</span><span class="pa-tag">#Humanoid</span><span class="pa-tag">#DigitalTwin</span><span class="pa-tag">#SimToReal</span><span class="pa-tag">#AutonomousDriving</span><span class="pa-tag">#SmartFactory</span><span class="pa-tag">#Cosmos</span><span class="pa-tag">#GR00T</span><span class="pa-tag">#ValueChain</span>
       </div>
     </article>
   </main>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Physical AI, 쉽게 이해하기 — AI가 현실 세계로 나오다 | Jihwan Woo</title>
-  <meta name="description" content="Physical AI란 무엇인가? AI가 화면을 떠나 현실 세계에서 보고, 판단하고, 행동하는 시대. VLA/VLM 모델, 핵심 구성요소, 산업 적용 사례를 쉽게 풀어봅니다.">
+  <meta name="description" content="Physical AI란 무엇인가? AI가 화면을 떠나 현실 세계에서 보고, 판단하고, 행동하는 시대. 구현 5단계, VLA/VLM 모델, Value Chain, 산업 적용 사례를 쉽게 풀어봅니다.">
   <meta property="og:title" content="Physical AI, 쉽게 이해하기 — AI가 현실 세계로 나오다">
   <meta property="og:description" content="ChatGPT는 커피 만드는 법을 설명하지만, Physical AI는 직접 커피를 내립니다. 50조 달러 물리 산업을 바꿀 기술을 쉽게 풀어봅니다.">
   <meta property="og:type" content="article">
@@ -51,11 +51,25 @@
     .pa-table th{background:var(--ai-bg);color:var(--text);font-weight:700;padding:.6rem .8rem;text-align:left;border:1px solid var(--border)}
     .pa-table td{padding:.6rem .8rem;border:1px solid var(--border);color:var(--muted);vertical-align:top}
     .pa-table tr:hover td{background:var(--surface)}
+    .pa-vc{display:grid;grid-template-columns:1fr;gap:1.2rem;margin:1.5rem 0}
+    .pa-vc-layer{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;transition:border-color .3s}
+    .pa-vc-layer:hover{border-color:var(--ai-border)}
+    .pa-vc-header{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+    .pa-vc-num{font-size:.72rem;font-weight:700;color:var(--ai);background:var(--ai-bg);border:1px solid var(--ai-border);border-radius:6px;padding:.2rem .6rem}
+    .pa-vc-title{font-size:1.05rem;font-weight:700;color:var(--text)}
+    .pa-vc-desc{color:var(--muted);font-size:.88rem;line-height:1.7;margin-bottom:1rem}
+    .pa-vc-players{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.6rem}
+    .pa-vc-player{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:.8rem}
+    .pa-vc-player h5{font-size:.85rem;color:var(--text);margin-bottom:.3rem}
+    .pa-vc-player p{font-size:.78rem;color:var(--muted);line-height:1.5;margin:0}
     .pa-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:2rem 0 1rem}
     .pa-tag{font-size:.72rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:.25rem .8rem}
     .back-home{display:inline-flex;align-items:center;gap:.4rem;color:var(--ai);text-decoration:none;font-size:.88rem;margin-bottom:2rem;transition:opacity .2s}
     .back-home:hover{opacity:.7}
-    @media(max-width:600px){.pa-hero h1{font-size:1.8rem}.pa-stats{grid-template-columns:1fr}.pa-flow{flex-direction:column}.pa-flow-arrow{transform:rotate(90deg)}.pa-table{font-size:.75rem}}
+    .pa-refs{margin:2rem 0}
+    .pa-ref{font-size:.82rem;color:var(--muted);line-height:1.6;padding:.4rem 0;border-bottom:1px solid var(--border)}
+    .pa-ref:last-child{border-bottom:none}
+    @media(max-width:600px){.pa-hero h1{font-size:1.8rem}.pa-stats{grid-template-columns:1fr}.pa-flow{flex-direction:column}.pa-flow-arrow{transform:rotate(90deg)}.pa-table{font-size:.75rem}.pa-vc-players{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
@@ -72,22 +86,25 @@
       <p class="pa-subtitle">ChatGPT는 커피 만드는 법을 설명하지만, Physical AI는 직접 커피를 내립니다. 50조 달러 물리 산업을 바꿀 기술을 쉽게 풀어봅니다.</p>
       <p class="pa-meta">우지환 · 2026년 4월</p>
     </div></section>
+
     <article class="pa-article">
       <a href="../../index.html#insights" class="back-home">← 홈으로</a>
+
       <div class="pa-stats">
         <div class="pa-stat"><span class="pa-stat-number">$50T</span><span class="pa-stat-label">물리 산업 경제 규모</span></div>
         <div class="pa-stat"><span class="pa-stat-number">1,000만</span><span class="pa-stat-label">전 세계 공장 수</span></div>
         <div class="pa-stat"><span class="pa-stat-number">15억</span><span class="pa-stat-label">자동차 · 트럭</span></div>
       </div>
 
-      <h2>Physical AI란 무엇인가?</h2>
+      <!-- ==================== 1. 정의 ==================== -->
+      <h2>1. Physical AI란 무엇인가?</h2>
       <p>여러분이 ChatGPT에게 "커피 만들어줘"라고 말하면, ChatGPT는 커피 만드는 방법을 아주 잘 설명해 줍니다. 하지만 실제로 커피를 내려주지는 못합니다. 왜냐하면 ChatGPT는 디지털 세계에만 존재하기 때문입니다.</p>
       <p><em>Physical AI</em>는 이 한계를 넘어서는 기술입니다. AI가 눈(카메라, 센서)으로 주변을 보고, 머리(AI 모델)로 판단하고, 손과 발(로봇 팔, 바퀴)로 실제 행동을 하는 것. 이것이 Physical AI입니다.</p>
 
       <table class="pa-table">
         <tr><th>구분</th><th>하는 일</th><th>예시</th></tr>
-        <tr><td>기존 AI (ChatGPT 등)</td><td>디지털 결과물 생성</td><td>글쓰기, 그림 그리기, 코딩</td></tr>
-        <tr><td>Physical AI</td><td>현실 세계에서 직접 행동</td><td>물건 집기, 자율주행, 공장 조립</td></tr>
+        <tr><td>기존 AI (ChatGPT 등)</td><td>텍스트, 이미지 등 디지털 결과물 생성</td><td>글쓰기, 그림 그리기, 코딩</td></tr>
+        <tr><td>Physical AI</td><td>현실 세계에서 직접 행동 수행</td><td>물건 집기, 자율주행, 공장 조립</td></tr>
       </table>
 
       <div class="pa-highlight">
@@ -95,11 +112,21 @@
         <p>Physical AI는 <em>센서로 환경을 인식</em>하고, <em>AI로 판단</em>하며, <em>물리적 장치로 현실 세계에 직접 행동</em>하는 지능형 시스템입니다.</p>
       </div>
 
-      <h2>기존 로보틱스, Agentic AI와 뭐가 다른가?</h2>
+      <!-- ==================== 2. 차이점 ==================== -->
+      <h2>2. 기존 로보틱스, Agentic AI와 뭐가 다른가?</h2>
+
+      <h3>기존 로보틱스: "시킨 대로만 하는 로봇"</h3>
+      <p>공장의 용접 로봇을 떠올려 보세요. 이 로봇은 "A 지점에서 B 지점으로 팔을 움직여 3초간 용접"이라는 명령을 정확히 반복합니다. 하지만 부품 위치가 1cm만 달라져도 스스로 대응하지 못합니다. 사람이 다시 프로그래밍해야 합니다.</p>
+
+      <h3>Agentic AI: "스스로 생각하고 일하는 디지털 비서"</h3>
+      <p>Agentic AI는 목표를 주면 스스로 계획을 세우고, 여러 도구를 활용해 작업을 완수하는 AI입니다. "다음 주 출장 일정 잡아줘"라고 하면, 항공편 검색 → 호텔 예약 → 캘린더 등록까지 알아서 처리합니다. 하지만 <em>디지털 세계 안에서만 활동</em>합니다.</p>
+
+      <h3>Physical AI: "현실 세계에서 스스로 판단하고 행동하는 AI"</h3>
+      <p>Physical AI는 Agentic AI의 자율적 판단 능력에 <em>물리적 행동 능력</em>을 더한 것입니다.</p>
 
       <table class="pa-table">
         <tr><th></th><th>기존 로보틱스</th><th>Agentic AI</th><th>Physical AI</th></tr>
-        <tr><td>비유</td><td>레시피대로만 요리하는 셰프</td><td>메뉴 기획부터 주문까지 하는 매니저 (주방 밖)</td><td>상황 보고 즉석에서 요리하는 셰프</td></tr>
+        <tr><td>비유</td><td>레시피대로만 요리하는 셰프</td><td>메뉴 기획~주문까지 하는 매니저 (주방 밖)</td><td>상황 보고 즉석에서 요리하는 셰프</td></tr>
         <tr><td>인식</td><td>❌ 정해진 좌표만</td><td>✅ 디지털 데이터</td><td>✅ 물리 환경 (카메라, 센서)</td></tr>
         <tr><td>판단</td><td>❌ 프로그래밍된 순서</td><td>✅ 자율 판단</td><td>✅ 자율 판단</td></tr>
         <tr><td>행동</td><td>✅ 물리적 (반복만)</td><td>❌ 디지털만</td><td>✅ 물리적 (적응적)</td></tr>
@@ -108,95 +135,300 @@
 
       <p>핵심 차이를 한마디로: <em>Physical AI = Agentic AI의 두뇌 + 로보틱스의 몸</em></p>
 
-      <h2>Physical AI를 만드는 5가지 핵심 과정</h2>
+      <!-- ==================== 3. 구현 5단계 ==================== -->
+      <h2>3. Physical AI를 만드는 5가지 핵심 과정</h2>
+
+      <p>Physical AI를 구현하는 것은 마치 "아이를 키우는 것"과 비슷합니다. 아이가 걸음마를 배우듯, AI도 단계적으로 물리 세계를 배워야 합니다. 그리고 이 과정은 한 번으로 끝나지 않고, 경험이 쌓일수록 더 잘하게 되는 순환 구조(플라이휠)를 이룹니다.</p>
 
       <div class="pa-diagram">
-        <div class="pa-diagram-title">Physical AI 플라이휠</div>
+        <div class="pa-diagram-title">Physical AI 플라이휠 — 순환하며 진화하는 구조</div>
         <div class="pa-flow">
-          <div class="pa-flow-step">① 데이터 수집</div>
+          <div class="pa-flow-step">① 데이터 수집<br><small style="color:var(--muted)">실제 + 합성</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">② 모델 학습</div>
+          <div class="pa-flow-step">② 모델 학습<br><small style="color:var(--muted)">모방 + 강화</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">③ 시뮬레이션</div>
+          <div class="pa-flow-step">③ 시뮬레이션<br><small style="color:var(--muted)">디지털 트윈</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">④ Sim-to-Real</div>
+          <div class="pa-flow-step">④ Sim-to-Real<br><small style="color:var(--muted)">현실 적용</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">⑤ 자율 운영</div>
+          <div class="pa-flow-step">⑤ 자율 운영<br><small style="color:var(--muted)">에이전트 협업</small></div>
           <span class="pa-flow-arrow">↻</span>
         </div>
       </div>
 
-      <div class="pa-chain">
-        <div class="pa-chain-item"><span class="pa-chain-icon">📊</span><div class="pa-chain-content"><h4>① 데이터 — 경험을 모으는 단계</h4><p>실제 데이터(공장 카메라, 센서, LiDAR)와 합성 데이터(가상 환경에서 AI가 생성)를 수집합니다. NVIDIA Cosmos 같은 World Foundation Model은 소량의 실제 영상으로부터 수천 가지 변형 시나리오를 자동 생성합니다.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🧠</span><div class="pa-chain-content"><h4>② 학습 — 기술을 익히는 단계</h4><p>모방 학습(사람의 시범을 따라 배움)과 강화 학습(시행착오로 최적의 방법을 찾음)으로 VLA 모델을 훈련합니다. VLA는 Vision(보기) + Language(이해) + Action(행동)을 통합한 모델입니다.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🎮</span><div class="pa-chain-content"><h4>③ 시뮬레이션 — 가상에서 연습하는 단계</h4><p>디지털 트윈(현실의 쌍둥이)에서 충분히 연습합니다. 비행기 조종사가 실제 비행 전에 시뮬레이터에서 수백 시간 연습하는 것과 같습니다.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🌉</span><div class="pa-chain-content"><h4>④ Sim-to-Real — 현실에 적용하는 단계</h4><p>가상과 현실의 미묘한 차이(Sim-to-Real Gap)를 Domain Randomization 등으로 줄이고, 최적화된 모델을 로봇의 엣지 컴퓨터에 배포합니다.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🤖</span><div class="pa-chain-content"><h4>⑤ 에이전트 오케스트레이션 — 자율 운영 단계</h4><p>작업 계획, 이상 감지, 인간-로봇 협업, 자기 개선 등 여러 AI 에이전트가 협력하여 복잡한 작업을 자율적으로 수행합니다.</p></div></div>
-      </div>
-
-      <h2>Physical AI의 두뇌: VLM과 VLA</h2>
+      <h3>① 데이터 — "경험을 모으는 단계"</h3>
+      <p>아이가 세상을 배우려면 많은 경험이 필요하듯, Physical AI도 방대한 데이터가 필요합니다. 데이터는 크게 두 종류입니다.</p>
+      <p><em>실제 데이터</em>는 공장 카메라, LiDAR(레이저로 주변을 3D로 스캔하는 센서), 촉각 센서 등에서 수집합니다. 로봇이 실제로 물건을 집거나 이동하면서 쌓는 경험 데이터입니다.</p>
+      <p><em>합성 데이터(Synthetic Data)</em>는 가상 환경에서 AI가 만들어낸 학습용 데이터입니다. 예를 들어, 하나의 물체 사진을 조명, 각도, 배경을 수천 가지로 바꿔가며 가상 이미지를 생성합니다. 실제 데이터 수집이 비싸고 위험할 때 특히 유용합니다. 자율주행차가 보행자 사고 상황을 학습하려면 실제로 사고를 낼 수는 없으니, 가상으로 수만 가지 사고 시나리오를 만들어 학습시키는 것입니다.</p>
 
       <div class="pa-highlight">
-        <h3>VLM vs VLA — 핵심 차이</h3>
-        <p><em>VLM (Vision-Language Model)</em> — "보고 이해하는 AI". 경기를 분석하는 해설자. 이미지를 보고 텍스트로 답변합니다.</p>
-        <p><em>VLA (Vision-Language-Action Model)</em> — "보고, 이해하고, 행동하는 AI". 직접 뛰는 선수. 이미지와 지시를 받아 로봇 행동 명령을 생성합니다.</p>
-        <p>실제 시스템에서는 VLM이 큰 그림을 보고 계획을 세우면(감독), VLA가 실제 동작을 실행합니다(선수).</p>
+        <h3>NVIDIA Cosmos — 물리 법칙을 이해하는 AI</h3>
+        <p>NVIDIA의 <em>Cosmos</em>는 World Foundation Model이라 불리는 특별한 AI입니다. 소량의 실제 영상으로부터 수천 가지 변형 시나리오를 <em>물리 법칙에 맞게</em> 자동 생성합니다. 9조 개 이상의 토큰으로 학습되었으며, 2026년 3월 출시된 Cosmos 2.5는 더 긴 영상과 다양한 시점을 지원합니다. 단순히 그럴듯한 영상을 만드는 것이 아니라, 중력, 마찰, 충돌 같은 물리 법칙을 이해하고 반영한다는 점이 핵심입니다.</p>
       </div>
 
-      <h3>주요 VLA 모델 비교</h3>
+      <h3>② 학습 — "기술을 익히는 단계"</h3>
+      <p>수집한 데이터로 AI 모델을 훈련시킵니다. Physical AI에서는 두 가지 핵심 학습 방법이 있습니다.</p>
+      <p><em>모방 학습(Imitation Learning)</em>은 사람이 시범을 보이면 AI가 따라 배우는 방식입니다. VR 헤드셋을 쓴 사람이 물건을 집는 동작을 보여주면, 로봇이 그 동작을 학습합니다. 요리를 배울 때 셰프의 동작을 따라 하는 것과 같습니다.</p>
+      <p><em>강화 학습(Reinforcement Learning)</em>은 AI가 시행착오를 통해 스스로 최적의 방법을 찾는 방식입니다. 가상 환경에서 수백만 번 시도하며 걷기를 배우는 로봇이 대표적입니다. 자전거 타기를 배울 때 넘어지고 일어나기를 반복하며 균형 감각을 익히는 것과 비슷합니다.</p>
+
+      <div class="pa-highlight">
+        <h3>VLA 모델 — Physical AI의 핵심 두뇌</h3>
+        <p>여기서 중요한 모델이 <em>VLA (Vision-Language-Action)</em> 모델입니다. Vision(카메라로 본 것을 이해) + Language(사람의 말을 이해) + Action(실제 행동으로 변환)을 통합한 모델입니다.</p>
+        <p>"빨간 컵을 집어서 테이블 위에 놓아줘"라고 말하면, VLA 모델이 시각 정보와 언어 지시를 결합해 로봇 팔의 움직임을 생성합니다.</p>
+      </div>
+
+      <h3>③ 시뮬레이션 — "가상 세계에서 연습하는 단계"</h3>
+      <p>실제 로봇으로 바로 테스트하면 비용도 많이 들고 위험합니다. 그래서 <em>디지털 트윈</em>(현실의 쌍둥이)이라는 가상 환경에서 먼저 충분히 연습합니다.</p>
+      <p>비행기 조종사가 실제 비행 전에 비행 시뮬레이터에서 수백 시간 연습하는 것과 같습니다. 차이점은 규모입니다. 시뮬레이션에서는 수천 대의 로봇을 동시에 가상으로 훈련할 수 있고, 실제로는 위험한 상황(충돌, 낙하, 극한 환경)도 안전하게 테스트할 수 있습니다.</p>
+      <p>NVIDIA의 <em>Isaac Sim</em>은 실제 공장을 3D로 똑같이 복제한 가상 공장에서 로봇을 훈련시키는 플랫폼입니다. <em>Omniverse</em>는 이 디지털 트윈을 구축하는 기반 플랫폼으로, 여러 팀이 동시에 같은 가상 환경에서 협업할 수 있게 합니다.</p>
+
+      <h3>④ Sim-to-Real — "가상에서 배운 것을 현실에 적용하는 단계"</h3>
+      <p>가상 세계와 현실 세계는 미묘하지만 중요한 차이가 있습니다. 빛의 반사, 마찰력, 센서 노이즈 등이 다릅니다. 이 차이를 <em>Sim-to-Real Gap(시뮬레이션-현실 격차)</em>이라 부르며, 이를 줄이는 것이 Physical AI의 핵심 과제 중 하나입니다.</p>
+      <p>주요 해결 기법이 <em>Domain Randomization</em>입니다. 시뮬레이션에서 조명, 색상, 물리 파라미터(마찰, 무게, 탄성)를 랜덤하게 바꿔가며 학습시킵니다. 충분히 다양한 가상 환경을 경험한 AI에게 현실 세계는 "또 하나의 변형"에 불과하게 됩니다. 비유하자면, 다양한 코트에서 연습한 테니스 선수가 어떤 코트에서든 적응하는 것과 같습니다.</p>
+      <p>학습된 모델은 최적화(경량화)되어 로봇에 탑재된 엣지 컴퓨터에 배포됩니다. 현실에서의 경험 데이터는 다시 수집되어 모델을 개선하는 데 사용됩니다. 이것이 플라이휠이 순환하는 지점입니다.</p>
+
+      <h3>⑤ 에이전트 오케스트레이션 — "자율적으로 운영하는 단계"</h3>
+      <p>하나의 로봇이 모든 것을 혼자 하는 것이 아닙니다. 여러 AI 에이전트가 역할을 나누어 협력합니다.</p>
+      <div class="pa-chain">
+        <div class="pa-chain-item"><span class="pa-chain-icon">📋</span><div class="pa-chain-content"><h4>작업 계획 에이전트</h4><p>큰 작업을 작은 단계로 분해합니다. "창고 정리"라는 목표를 "물건 분류 → 위치 이동 → 적재"로 나눕니다.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🚨</span><div class="pa-chain-content"><h4>이상 감지 에이전트</h4><p>문제 발생 시 자동 대응합니다. 설비 진동이 비정상이면 즉시 정지하고 관리자에게 알립니다.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🤝</span><div class="pa-chain-content"><h4>인간-로봇 협업 에이전트</h4><p>사람의 자연어 명령을 로봇 행동으로 변환합니다. "저 박스 옮겨줘"라고 말하면 실행합니다.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🔄</span><div class="pa-chain-content"><h4>자기 개선 에이전트</h4><p>실패 경험을 분석하여 스스로 학습을 개선합니다. 물건을 떨어뜨렸다면 그립 방식을 조정합니다.</p></div></div>
+      </div>
+
+      <!-- ==================== 4. VLM과 VLA ==================== -->
+      <h2>4. Physical AI의 두뇌: VLM과 VLA 모델</h2>
+
+      <p>Physical AI에서 가장 중요한 기술 중 하나가 바로 AI 모델입니다. 로봇의 "두뇌" 역할을 하는 이 모델들은 크게 두 종류로 나뉩니다.</p>
+
+      <div class="pa-diagram">
+        <div class="pa-diagram-title">VLM vs VLA</div>
+        <div class="pa-flow">
+          <div class="pa-flow-step">VLM<br><small style="color:var(--muted)">보고 이해 → 텍스트 출력</small><br><small style="color:var(--muted)">🎙️ 해설자</small></div>
+          <span class="pa-flow-arrow" style="font-size:1.5rem">⟷</span>
+          <div class="pa-flow-step">VLA<br><small style="color:var(--muted)">보고 이해 → 행동 출력</small><br><small style="color:var(--muted)">⚽ 선수</small></div>
+        </div>
+      </div>
+
+      <p><em>VLM (Vision-Language Model)</em>은 이미지를 보고 사람의 말을 이해해서 텍스트로 대답하는 AI입니다. "눈과 귀는 있지만 손발은 없는" 모델입니다. 공장 사진을 보여주고 "이 부품에 결함이 있나요?"라고 물으면 "네, 왼쪽 상단에 스크래치가 있습니다"라고 답합니다.</p>
+
+      <p><em>VLA (Vision-Language-Action Model)</em>은 VLM에 "행동 출력"을 추가한 모델입니다. 테이블 위 사진을 보여주고 "빨간 컵을 집어줘"라고 하면, 로봇 팔이 실제로 빨간 컵을 집는 동작을 수행합니다.</p>
+
+      <p>실제 Physical AI 시스템에서는 VLM과 VLA가 함께 일합니다. VLM이 "큰 그림"을 보고 계획을 세우면 (System 2: 느린 사고), VLA가 실제 동작을 빠르게 실행합니다 (System 1: 빠른 반사). 축구에서 감독(VLM)이 전략을 짜고, 선수(VLA)가 실행하는 것과 같습니다.</p>
+
+      <h3>주요 VLA 모델 — "로봇의 두뇌" 비교</h3>
       <table class="pa-table">
-        <tr><th>모델</th><th>개발사</th><th>특징</th><th>적합한 용도</th></tr>
-        <tr><td>GR00T N1/N1.5</td><td>NVIDIA</td><td>이중 시스템 구조 (느린 사고 + 빠른 반사)</td><td>휴머노이드 로봇</td></tr>
-        <tr><td>π0 / π0.5</td><td>Physical Intelligence</td><td>다양한 로봇을 하나의 모델로 제어</td><td>범용 로봇, 가정용</td></tr>
-        <tr><td>Gemini Robotics 1.5</td><td>Google DeepMind</td><td>"생각하고 나서 행동" 추론 능력</td><td>복잡한 판단 작업</td></tr>
-        <tr><td>OpenVLA</td><td>Stanford, UC Berkeley</td><td>7B 파라미터, 완전 오픈소스</td><td>연구, 프로토타이핑</td></tr>
-        <tr><td>SmolVLA</td><td>Hugging Face</td><td>450M 파라미터, 노트북에서 실행 가능</td><td>저비용, 교육용</td></tr>
-        <tr><td>Octo</td><td>UC Berkeley</td><td>27M~93M, 유연한 범용 정책 모델</td><td>연구, 다양한 플랫폼</td></tr>
+        <tr><th>모델</th><th>개발사</th><th>크기</th><th>핵심 특징</th><th>적합한 용도</th></tr>
+        <tr><td>GR00T N1/N1.5</td><td>NVIDIA</td><td>~1B</td><td>이중 시스템 구조 — Eagle VLM(느린 사고) + Diffusion Transformer(빠른 반사). NVIDIA Isaac 생태계 완벽 통합</td><td>휴머노이드 로봇</td></tr>
+        <tr><td>π0 / π0.5</td><td>Physical Intelligence</td><td>~7B</td><td>하나의 모델로 다양한 로봇 제어. π0.5는 처음 가보는 환경에서도 작동하는 "오픈 월드 일반화" 능력</td><td>범용 로봇, 가정용</td></tr>
+        <tr><td>Gemini Robotics 1.5</td><td>Google DeepMind</td><td>—</td><td>"생각하고 나서 행동" — 행동 전 추론 과정을 보여줌. Boston Dynamics Atlas와 통합</td><td>복잡한 판단 작업</td></tr>
+        <tr><td>OpenVLA</td><td>Stanford, UC Berkeley</td><td>7B</td><td>완전 오픈소스. 97만 개 실제 로봇 에피소드로 학습. 55B 비공개 모델(RT-2-X)보다 16.5% 높은 성공률</td><td>연구, 프로토타이핑</td></tr>
+        <tr><td>SmolVLA</td><td>Hugging Face + DeepMind</td><td>450M</td><td>일반 노트북(MacBook)에서도 실행 가능. 10배 큰 모델과 비슷한 성능</td><td>저비용, 교육용, 엣지</td></tr>
+        <tr><td>Octo</td><td>UC Berkeley</td><td>27M~93M</td><td>Transformer 기반 Diffusion Policy. 80만 개 로봇 에피소드로 학습. 새 로봇에 빠르게 미세조정</td><td>연구, 다양한 플랫폼</td></tr>
       </table>
 
-      <h2>산업별 적용 사례</h2>
-      <div class="pa-chain">
-        <div class="pa-chain-item"><span class="pa-chain-icon">🏭</span><div class="pa-chain-content"><h4>제조업 — 스마트 팩토리의 완성</h4><p>부품 인식·자동 조립, AI 비전 품질 검사, 설비 이상 자동 보정. BMW는 AI 로봇으로 연간 약 100만 달러 절감. 새 제품 라인 전환 시 재프로그래밍 없이 AI가 적응합니다.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">📦</span><div class="pa-chain-content"><h4>물류/유통 — 창고의 혁명</h4><p>Amazon은 이미 100만 대 이상의 Physical AI 로봇을 창고에서 운영. 피킹, 분류, 포장 자동화. 물류 AI 시장은 2033년까지 5,490억 달러 규모로 성장 전망.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🚗</span><div class="pa-chain-content"><h4>자동차/자율주행 — 움직이는 Physical AI</h4><p>레벨 4~5 자율주행, 제조 공정 AI 로봇, 차량 품질 검사 자동화. Rivian은 AWS를 활용해 페타바이트 규모의 자율주행 데이터를 처리합니다.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🏥</span><div class="pa-chain-content"><h4>헬스케어 — 더 정밀한 의료</h4><p>수술 보조 로봇, 병원 내 물품 운반, 재활 보조. AI 의료 기기로 효율성 116% 향상 사례.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">⚡</span><div class="pa-chain-content"><h4>에너지/인프라 — 위험한 곳을 로봇이 대신</h4><p>ANYbotics의 ANYmal이 석유·가스 시설 자율 점검. 풍력 터빈, 송전탑 등 위험 시설 검사. 24시간 연속 모니터링.</p></div></div>
-        <div class="pa-chain-item"><span class="pa-chain-icon">🌾</span><div class="pa-chain-content"><h4>농업 — 정밀 농업의 실현</h4><p>자율 수확 로봇, 드론 기반 작물 모니터링, 잡초 제거 로봇. 노동력 부족 해결과 농약 사용량 감소.</p></div></div>
-      </div>
-
-      <h2>주요 플레이어</h2>
+      <h3>주요 VLM 모델 — "로봇의 눈과 판단력"</h3>
       <table class="pa-table">
-        <tr><th>기업</th><th>역할</th><th>핵심 제품/서비스</th></tr>
-        <tr><td>NVIDIA</td><td>핵심 플랫폼 제공자</td><td>Omniverse, Isaac Sim, Cosmos, GR00T, Jetson Thor</td></tr>
-        <tr><td>AWS</td><td>클라우드 인프라</td><td>SageMaker HyperPod, Bedrock, IoT Greengrass</td></tr>
-        <tr><td>Google DeepMind</td><td>AI 연구 최전선</td><td>Gemini Robotics, Boston Dynamics 협업</td></tr>
-        <tr><td>Tesla</td><td>휴머노이드 양산</td><td>Optimus (2026년 5만~10만 대 목표)</td></tr>
-        <tr><td>Figure AI</td><td>범용 휴머노이드</td><td>Figure 02/03, BMW 공장 배치</td></tr>
-        <tr><td>Physical Intelligence</td><td>범용 VLA 모델</td><td>π0 / π0.5</td></tr>
+        <tr><th>모델</th><th>개발사</th><th>크기</th><th>Physical AI 활용</th></tr>
+        <tr><td>Qwen2.5-VL</td><td>Alibaba</td><td>3B~72B</td><td>공장 품질 검사, 건설 현장 비디오 분석 (Bedrock Robotics 사례에서 +60% 정확도 향상)</td></tr>
+        <tr><td>PaliGemma 2</td><td>Google</td><td>3B</td><td>물체 인식, 장면 이해, VLA 모델의 비전 백본으로 활용</td></tr>
+        <tr><td>Eagle-2</td><td>NVIDIA</td><td>다양</td><td>GR00T N1의 비전-언어 모듈. 휴머노이드 로봇의 환경 인식과 언어 이해 담당</td></tr>
+        <tr><td>NVIDIA Cosmos</td><td>NVIDIA</td><td>2B~14B</td><td>World Foundation Model — 합성 학습 데이터 생성, 시나리오 시뮬레이션, 30초 예측 비디오 생성</td></tr>
       </table>
 
       <div class="pa-highlight">
-        <h3>큰 그림</h3>
-        <p>Physical AI는 단순히 "더 똑똑한 로봇"이 아닙니다. AI가 디지털 세계의 울타리를 넘어 우리가 사는 물리적 세계에서 <em>직접 보고, 판단하고, 행동하는 새로운 시대의 시작</em>입니다.</p>
-        <p>전 세계 1,000만 개의 공장, 20만 개의 물류 창고, 15억 대의 자동차 — 이 모든 곳에 Physical AI가 적용될 수 있습니다. CES 2026에서 38개 휴머노이드 로봇 기업이 전시된 것은 역대 최다 기록입니다.</p>
+        <h3>어떤 모델을 선택해야 할까?</h3>
+        <p>Physical AI 분야는 빠르게 발전하고 있어서 새로운 모델이 계속 등장합니다. 중요한 것은 "하나의 완벽한 모델"이 아니라, <em>용도에 맞는 모델을 선택하고 조합하는 것</em>입니다. 공구함에서 상황에 맞는 도구를 꺼내 쓰는 것처럼요.</p>
       </div>
+
+      <!-- ==================== 5. 핵심 구성요소 ==================== -->
+      <h2>5. Physical AI의 핵심 구성요소</h2>
+      <table class="pa-table">
+        <tr><th>구성요소</th><th>역할</th><th>쉬운 비유</th></tr>
+        <tr><td>센서 (카메라, LiDAR, 촉각 등)</td><td>환경 인식</td><td>로봇의 눈, 귀, 피부</td></tr>
+        <tr><td>AI 모델 (VLA, VLM 등)</td><td>판단과 의사결정</td><td>로봇의 두뇌</td></tr>
+        <tr><td>시뮬레이션 엔진</td><td>가상 훈련 환경</td><td>로봇의 연습실</td></tr>
+        <tr><td>World Foundation Model</td><td>물리 법칙을 이해하는 AI</td><td>로봇의 물리 상식</td></tr>
+        <tr><td>엣지 컴퓨팅</td><td>현장에서 실시간 AI 처리</td><td>로봇의 반사신경</td></tr>
+        <tr><td>클라우드 인프라</td><td>대규모 학습과 데이터 저장</td><td>로봇의 학교와 도서관</td></tr>
+        <tr><td>액추에이터 (모터, 관절 등)</td><td>물리적 행동 수행</td><td>로봇의 팔, 다리</td></tr>
+      </table>
+
+      <!-- ==================== 6. Value Chain ==================== -->
+      <h2>6. Physical AI Value Chain — 누가 무엇을 만드는가</h2>
+
+      <p>Physical AI는 하나의 기업이 혼자 만들 수 없습니다. 반도체부터 클라우드, AI 모델, 시뮬레이션, 로봇 하드웨어까지 여러 레이어가 맞물려야 합니다. 각 레이어의 핵심 플레이어와 그들의 역할을 살펴봅니다.</p>
+
+      <div class="pa-diagram">
+        <div class="pa-diagram-title">Physical AI Value Chain</div>
+        <div class="pa-flow">
+          <div class="pa-flow-step">L1 반도체<br><small style="color:var(--muted)">GPU · 엣지칩</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">L2 클라우드<br><small style="color:var(--muted)">학습 · 저장</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">L3 AI 모델<br><small style="color:var(--muted)">VLA · VLM</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">L4 시뮬레이션<br><small style="color:var(--muted)">디지털 트윈</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">L5 로봇 HW<br><small style="color:var(--muted)">휴머노이드 · AMR</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">L6 산업 적용<br><small style="color:var(--muted)">제조 · 물류</small></div>
+        </div>
+      </div>
+
+      <div class="pa-vc">
+        <!-- Layer 1 -->
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L1</span><span class="pa-vc-title">반도체 · 컴퓨팅 하드웨어</span></div>
+          <p class="pa-vc-desc">Physical AI의 기반. 클라우드에서 대규모 학습을 수행하는 GPU와, 로봇에 탑재되어 실시간 추론을 처리하는 엣지 칩이 모두 필요합니다.</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>NVIDIA</h5><p>H100/B200 (학습용 GPU), Jetson Thor/Orin (로봇 엣지 AI 컴퓨터). Physical AI 전체 스택의 핵심 하드웨어 공급자.</p></div>
+            <div class="pa-vc-player"><h5>Qualcomm</h5><p>Robotics RB 시리즈. 저전력 엣지 AI 칩으로 소형 로봇과 드론에 탑재.</p></div>
+            <div class="pa-vc-player"><h5>Intel</h5><p>Gaudi 가속기, RealSense 깊이 카메라. 산업용 비전 시스템.</p></div>
+          </div>
+        </div>
+
+        <!-- Layer 2 -->
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L2</span><span class="pa-vc-title">클라우드 인프라 · 데이터 플랫폼</span></div>
+          <p class="pa-vc-desc">대규모 AI 모델 학습, 시뮬레이션 실행, 페타바이트 규모의 센서 데이터 저장과 처리를 담당합니다. 로봇이 현장에서 수집한 데이터를 클라우드로 보내 모델을 개선하는 피드백 루프의 중심입니다.</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>AWS</h5><p>SageMaker HyperPod (대규모 학습), AWS Batch (병렬 시뮬레이션), Bedrock (AI 모델 접근), IoT Greengrass (엣지 배포), S3/EFS (데이터 저장). NVIDIA와의 깊은 통합으로 Cloud-to-Edge 풀스택 연결.</p></div>
+            <div class="pa-vc-player"><h5>Microsoft Azure</h5><p>Azure AI, Azure Digital Twins. NVIDIA와 협력하여 제조업 Physical AI 솔루션 제공.</p></div>
+            <div class="pa-vc-player"><h5>Google Cloud</h5><p>Vertex AI, TPU 클러스터. DeepMind 연구와 연계된 로봇 AI 학습 인프라.</p></div>
+          </div>
+        </div>
+
+        <!-- Layer 3 -->
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L3</span><span class="pa-vc-title">AI 모델 · 파운데이션 모델</span></div>
+          <p class="pa-vc-desc">로봇의 두뇌. 환경을 인식하고(VLM), 행동을 생성하며(VLA), 물리 세계를 이해하는(World Model) 핵심 AI 모델을 개발합니다.</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>NVIDIA</h5><p>GR00T N1/N1.5 (휴머노이드 VLA), Cosmos (World Foundation Model), Eagle-2 (VLM). 가장 포괄적인 모델 스택.</p></div>
+            <div class="pa-vc-player"><h5>Google DeepMind</h5><p>Gemini Robotics 1.5 (VLA), PaliGemma 2 (VLM). "생각하고 행동하는" 추론 중심 접근.</p></div>
+            <div class="pa-vc-player"><h5>Physical Intelligence</h5><p>π0 / π0.5. 범용 로봇 제어 VLA. $600M+ 투자 유치. 빨래 개기, 테이블 정리 같은 복잡한 일상 작업 수행.</p></div>
+            <div class="pa-vc-player"><h5>Hugging Face</h5><p>SmolVLA (450M, 초경량). LeRobot 데이터셋. 오픈소스 생태계의 중심.</p></div>
+            <div class="pa-vc-player"><h5>Stanford / UC Berkeley</h5><p>OpenVLA (7B, 오픈소스), Octo (27M~93M). 학계 주도의 오픈 연구.</p></div>
+          </div>
+        </div>
+
+        <!-- Layer 4 -->
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L4</span><span class="pa-vc-title">시뮬레이션 · 디지털 트윈</span></div>
+          <p class="pa-vc-desc">현실을 가상으로 복제하여 로봇을 안전하고 저렴하게 훈련시키는 플랫폼. 합성 데이터 생성, 강화 학습, Sim-to-Real 전이의 핵심 인프라입니다.</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>NVIDIA Omniverse</h5><p>디지털 트윈 구축 플랫폼. 실제 공장을 3D로 복제. 여러 팀이 동시에 같은 가상 환경에서 협업.</p></div>
+            <div class="pa-vc-player"><h5>NVIDIA Isaac Sim / Lab</h5><p>Isaac Sim: 로봇 시뮬레이션 환경. Isaac Lab: GPU 가속 강화학습 프레임워크. 수천 대 로봇 동시 훈련.</p></div>
+            <div class="pa-vc-player"><h5>MathWorks (Simulink)</h5><p>제어 시스템 시뮬레이션. 산업용 로봇의 모터, 센서, 제어 알고리즘 설계.</p></div>
+            <div class="pa-vc-player"><h5>Unity / Unreal Engine</h5><p>게임 엔진 기반 시뮬레이션. 시각적으로 사실적인 환경 구축에 강점.</p></div>
+          </div>
+        </div>
+
+        <!-- Layer 5 -->
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L5</span><span class="pa-vc-title">로봇 하드웨어 · 플랫폼</span></div>
+          <p class="pa-vc-desc">AI의 "몸". 휴머노이드, 산업용 로봇 팔, 자율 이동 로봇(AMR), 자율주행차 등 다양한 형태의 물리적 플랫폼입니다.</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>Tesla</h5><p>Optimus 휴머노이드. 2026년 5만~10만 대 생산 목표. 자동차 공장에 우선 투입.</p></div>
+            <div class="pa-vc-player"><h5>Boston Dynamics</h5><p>Atlas (전기 구동 휴머노이드). Google DeepMind AI 탑재. 가장 진보된 이족보행 기술.</p></div>
+            <div class="pa-vc-player"><h5>Figure AI</h5><p>Figure 02/03. BMW 공장 배치. 범용 휴머노이드. 기업가치 약 $39B.</p></div>
+            <div class="pa-vc-player"><h5>Agility Robotics</h5><p>Digit. 물류 창고용 이족보행 로봇. Amazon 창고에서 테스트 중.</p></div>
+            <div class="pa-vc-player"><h5>ABB / FANUC / KUKA</h5><p>산업용 로봇 팔. 기존 산업 로봇에 Physical AI 기능 통합. 전 세계 공장의 주력.</p></div>
+            <div class="pa-vc-player"><h5>Universal Robots</h5><p>협동 로봇(Cobot). 사람과 함께 일하는 소형 로봇. 중소기업 제조 현장.</p></div>
+            <div class="pa-vc-player"><h5>ANYbotics</h5><p>ANYmal 사족보행 로봇. 석유·가스 시설, 위험 환경 자율 점검.</p></div>
+          </div>
+        </div>
+
+        <!-- Layer 6 -->
+        <div class="pa-vc-layer">
+          <div class="pa-vc-header"><span class="pa-vc-num">L6</span><span class="pa-vc-title">산업 적용 · 시스템 통합</span></div>
+          <p class="pa-vc-desc">Physical AI를 실제 산업 현장에 배포하고 운영하는 레이어. 도메인 전문성과 시스템 통합 역량이 핵심입니다.</p>
+          <div class="pa-vc-players">
+            <div class="pa-vc-player"><h5>Amazon</h5><p>100만+ Physical AI 로봇을 물류 창고에서 운영. 피킹, 분류, 포장 자동화의 최대 규모 실전 배포.</p></div>
+            <div class="pa-vc-player"><h5>BMW</h5><p>Figure AI 휴머노이드를 공장에 배치. AI 로봇으로 연간 ~$1M 절감. 제조업 Physical AI 선도.</p></div>
+            <div class="pa-vc-player"><h5>Waymo / Zoox</h5><p>레벨 4 자율주행 로보택시. 도로 위의 Physical AI. 센서 융합 + AI 판단 + 차량 제어의 통합.</p></div>
+            <div class="pa-vc-player"><h5>Bedrock Robotics</h5><p>건설 현장 자율 중장비. Qwen2.5-VL 적용으로 +60% 정확도 향상.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pa-highlight">
+        <h3>NVIDIA의 독보적 위치</h3>
+        <p>NVIDIA는 L1(GPU, 엣지칩) → L3(GR00T, Cosmos) → L4(Omniverse, Isaac) 세 레이어를 동시에 장악한 유일한 기업입니다. 젠슨 황 CEO가 CES 2025에서 "Physical AI의 ChatGPT 순간이 왔다"고 선언한 배경에는 이 수직 통합 전략이 있습니다. ABB, FANUC, KUKA, Figure AI, Agility 등 글로벌 로봇 기업들이 NVIDIA 플랫폼 위에서 Physical AI를 개발하고 있습니다.</p>
+      </div>
+
+      <!-- ==================== 7. 산업별 적용 ==================== -->
+      <h2>7. Physical AI가 적용되는 산업과 이점</h2>
+
+      <div class="pa-chain">
+        <div class="pa-chain-item"><span class="pa-chain-icon">🏭</span><div class="pa-chain-content"><h4>제조업 — 스마트 팩토리의 완성</h4><p>부품 인식·자동 조립, AI 비전 품질 검사(사람보다 높은 정확도), 설비 이상 자동 보정. BMW는 AI 로봇으로 연간 약 100만 달러 절감. 새 제품 라인 전환 시 재프로그래밍 없이 AI가 적응합니다. 24시간 무중단 운영이 가능합니다.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">📦</span><div class="pa-chain-content"><h4>물류/유통 — 창고의 혁명</h4><p>Amazon은 이미 100만 대 이상의 Physical AI 로봇을 창고에서 운영. 피킹(집기), 분류, 포장 자동화. 냉동 창고 등 열악한 환경에서의 인력 부족 문제 해결. 물류 AI 시장은 2033년까지 5,490억 달러 규모로 성장 전망.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🚗</span><div class="pa-chain-content"><h4>자동차/자율주행 — 움직이는 Physical AI</h4><p>레벨 4~5 자율주행 차량(Waymo, Zoox), 자동차 제조 공정의 AI 로봇(용접, 도장, 조립), 차량 품질 검사 자동화(UVeye). Rivian은 AWS를 활용해 페타바이트 규모의 자율주행 데이터를 처리합니다.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🏥</span><div class="pa-chain-content"><h4>헬스케어 — 더 정밀한 의료</h4><p>수술 보조 로봇(더 정밀한 절개와 봉합), 병원 내 물품 운반 로봇, 재활 보조 로봇. AI 의료 기기로 효율성 116% 향상 사례. 의료진의 반복 업무 부담을 줄입니다.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">⚡</span><div class="pa-chain-content"><h4>에너지/인프라 — 위험한 곳을 로봇이 대신</h4><p>ANYbotics의 ANYmal 로봇이 석유·가스 시설 자율 점검. 풍력 터빈, 송전탑 등 위험 시설 검사. 24시간 연속 모니터링. 작업자 안전 확보(위험 환경 진입 불필요).</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🌾</span><div class="pa-chain-content"><h4>농업 — 정밀 농업의 실현</h4><p>자율 수확 로봇, 드론 기반 작물 모니터링, 잡초 제거 로봇. 노동력 부족 해결, 농약 사용량 감소(정밀 살포), 수확량 최적화.</p></div></div>
+      </div>
+
+      <!-- ==================== 8. 큰 그림 ==================== -->
+      <h2>8. Physical AI가 가져올 변화 — 큰 그림</h2>
+
+      <p>Physical AI는 약 <em>50조 달러</em> 규모의 물리적 산업 경제를 변화시킬 잠재력을 가지고 있습니다.</p>
+
+      <div class="pa-diagram">
+        <div class="pa-diagram-title">전 세계에는...</div>
+        <div class="pa-flow">
+          <div class="pa-flow-step">🏭 1,000만 개<br><small style="color:var(--muted)">공장</small></div>
+          <div class="pa-flow-step">📦 20만 개<br><small style="color:var(--muted)">물류 창고</small></div>
+          <div class="pa-flow-step">🚗 15억 대<br><small style="color:var(--muted)">자동차·트럭</small></div>
+          <div class="pa-flow-step">📹 15억 대<br><small style="color:var(--muted)">상업용 카메라</small></div>
+          <div class="pa-flow-step">🤖 수십억 대<br><small style="color:var(--muted)">미래 휴머노이드</small></div>
+        </div>
+      </div>
+
+      <p>이 모든 곳에 Physical AI가 적용될 수 있습니다.</p>
+
+      <p>2026년 현재: 로보틱스 분야는 2025년에 약 379억 유로의 투자를 유치했고, 휴머노이드 로봇 시장은 2035년까지 380억 달러 규모로 성장할 전망입니다. Deloitte는 Physical AI가 "실험 단계에서 대규모 배포 단계로 전환 중"이라고 분석했습니다. CES 2026에서 38개 휴머노이드 로봇 기업이 전시된 것은 역대 최다 기록입니다.</p>
+
+      <!-- ==================== 9. 정리 ==================== -->
+      <h2>9. 정리: Physical AI를 한눈에</h2>
 
       <div class="pa-diagram">
         <div class="pa-diagram-title">Physical AI 핵심 구조</div>
         <div class="pa-flow">
-          <div class="pa-flow-step">인식<br><small style="color:var(--muted)">카메라·센서</small></div>
+          <div class="pa-flow-step">인식<br><small style="color:var(--muted)">카메라·LiDAR·센서</small></div>
           <span class="pa-flow-arrow">→</span>
           <div class="pa-flow-step">판단<br><small style="color:var(--muted)">VLA/VLM 모델</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">행동<br><small style="color:var(--muted)">로봇 팔·바퀴</small></div>
+          <div class="pa-flow-step">행동<br><small style="color:var(--muted)">로봇 팔·바퀴·관절</small></div>
           <span class="pa-flow-arrow">→</span>
-          <div class="pa-flow-step">학습<br><small style="color:var(--muted)">경험 데이터</small></div>
+          <div class="pa-flow-step">학습<br><small style="color:var(--muted)">경험 데이터 수집</small></div>
           <span class="pa-flow-arrow">↻</span>
         </div>
       </div>
 
+      <div class="pa-highlight">
+        <h3>핵심 메시지</h3>
+        <p>Physical AI는 단순히 "더 똑똑한 로봇"이 아닙니다. AI가 디지털 세계의 울타리를 넘어 우리가 사는 물리적 세계에서 <em>직접 보고, 판단하고, 행동하는 새로운 시대의 시작</em>입니다.</p>
+        <p>공장, 창고, 도로, 병원, 농장 — 우리 삶의 모든 물리적 공간이 더 안전하고, 효율적이고, 지능적으로 변화하고 있습니다.</p>
+      </div>
+
+      <!-- References -->
+      <h2>참고 출처</h2>
+      <div class="pa-refs">
+        <div class="pa-ref">NVIDIA Physical AI Partners — <a href="https://nvidianews.nvidia.com/news/nvidia-and-global-robotics-leaders-take-physical-ai-to-the-real-world" target="_blank" rel="noopener" style="color:var(--ai)">nvidianews.nvidia.com</a></div>
+        <div class="pa-ref">Deloitte, "Physical AI: The moment of acceleration" (2026) — <a href="https://www.deloitte.com/ap/en/about/press-room/physical-ai-powering-smart-manufacturing.html" target="_blank" rel="noopener" style="color:var(--ai)">deloitte.com</a></div>
+        <div class="pa-ref">BCG, "How Physical AI Is Reshaping Robotics Today" (2026) — <a href="https://www.bcg.com/publications/2026/how-physical-ai-is-reshaping-robotics-today" target="_blank" rel="noopener" style="color:var(--ai)">bcg.com</a></div>
+        <div class="pa-ref">MIT Technology Review, "Why physical AI is becoming manufacturing's next advantage" (2026) — <a href="https://www.technologyreview.com/2026/03/13/1134184/why-physical-ai-is-becoming-manufacturings-next-advantage/" target="_blank" rel="noopener" style="color:var(--ai)">technologyreview.com</a></div>
+        <div class="pa-ref">NVIDIA Cosmos World Foundation Models — <a href="https://developer.nvidia.com/cosmos" target="_blank" rel="noopener" style="color:var(--ai)">developer.nvidia.com</a></div>
+        <div class="pa-ref">NVIDIA GR00T N1.5 — <a href="https://research.nvidia.com/labs/gear/gr00t-n1_5/" target="_blank" rel="noopener" style="color:var(--ai)">research.nvidia.com</a></div>
+        <div class="pa-ref">Physical Intelligence π0 / π0.5 — <a href="https://physicalintelligence.company/blog/pi05" target="_blank" rel="noopener" style="color:var(--ai)">physicalintelligence.company</a></div>
+        <div class="pa-ref">Google DeepMind Gemini Robotics 1.5 — <a href="https://deepmind.google/discover/blog/gemini-robotics-15-brings-ai-agents-into-the-physical-world/" target="_blank" rel="noopener" style="color:var(--ai)">deepmind.google</a></div>
+        <div class="pa-ref">OpenVLA — <a href="https://openvla.github.io/" target="_blank" rel="noopener" style="color:var(--ai)">openvla.github.io</a></div>
+        <div class="pa-ref">Hugging Face SmolVLA — <a href="https://huggingface.co/blog/smolvla" target="_blank" rel="noopener" style="color:var(--ai)">huggingface.co</a></div>
+      </div>
+
       <div class="pa-tags">
-        <span class="pa-tag">#PhysicalAI</span><span class="pa-tag">#Robotics</span><span class="pa-tag">#VLA</span><span class="pa-tag">#VLM</span><span class="pa-tag">#NVIDIA</span><span class="pa-tag">#Humanoid</span><span class="pa-tag">#DigitalTwin</span><span class="pa-tag">#AutonomousDriving</span><span class="pa-tag">#SmartFactory</span><span class="pa-tag">#AI</span>
+        <span class="pa-tag">#PhysicalAI</span><span class="pa-tag">#Robotics</span><span class="pa-tag">#VLA</span><span class="pa-tag">#VLM</span><span class="pa-tag">#NVIDIA</span><span class="pa-tag">#Humanoid</span><span class="pa-tag">#DigitalTwin</span><span class="pa-tag">#SimToReal</span><span class="pa-tag">#AutonomousDriving</span><span class="pa-tag">#SmartFactory</span><span class="pa-tag">#Cosmos</span><span class="pa-tag">#GR00T</span><span class="pa-tag">#ValueChain</span>
       </div>
     </article>
   </main>
