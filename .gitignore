@@ -1,6 +1,18 @@
+# macOS
 .DS_Store
-*.DS_Store
-__pycache__/
-*.pyc
-.env
+._*
+
+# IDE / Editor
+.vscode/
+.claude/
+
+# Work files (not for deployment)
+WORK-LOG.md
+TRAFFIC-STRATEGY.md
+Physical_AI_쉽게_이해하기.md
+하네스엔지니어링/
+
+# CES work files
+ces2026/create_ppt.py
+ces2026/CES_2026_Report.pptx
 github-token.json
