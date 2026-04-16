@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Physical AI Explained — When AI Leaves the Screen and Enters the Real World | Jihwan Woo</title>
+  <meta name="description" content="What is Physical AI? AI that sees, decides, and acts in the physical world. VLA/VLM models, core components, and industry applications explained simply.">
+  <meta property="og:title" content="Physical AI Explained — When AI Leaves the Screen and Enters the Real World">
+  <meta property="og:description" content="ChatGPT explains how to make coffee. Physical AI actually makes it. The technology poised to transform $50T in physical industries.">
+  <meta property="og:type" content="article">
+  <link rel="canonical" href="https://jihwanw.github.io/en/insights/physical-ai/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <style>
+    html{scroll-padding-top:4rem}
+    .pa-hero{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 1.5rem 3rem;position:relative}
+    .pa-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(108,99,255,.10) 0%,transparent 70%);pointer-events:none}
+    .pa-badge{display:inline-block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.15em;color:var(--ai);border:1px solid var(--ai-border);background:var(--ai-bg);padding:.3rem 1rem;border-radius:20px;margin-bottom:1.2rem}
+    .pa-hero h1{font-size:2.4rem;letter-spacing:-.03em;margin-bottom:.6rem;line-height:1.25}
+    .pa-hero h1 span{color:var(--ai)}
+    .pa-subtitle{color:var(--muted);font-size:1.05rem;max-width:640px;margin:0 auto 1rem;line-height:1.7}
+    .pa-meta{color:var(--muted);font-size:.82rem;opacity:.6}
+    .pa-article{max-width:760px;margin:0 auto;padding:0 1.5rem 4rem}
+    .pa-article h2{font-size:1.35rem;margin:3rem 0 1rem;padding-bottom:.5rem;border-bottom:2px solid var(--ai-border);color:var(--text)}
+    .pa-article h3{font-size:1.1rem;margin:2rem 0 .8rem;color:var(--text)}
+    .pa-article p{color:var(--muted);font-size:.94rem;line-height:1.9;margin-bottom:1.2rem}
+    .pa-article em{color:var(--text);font-style:normal;font-weight:600}
+    .pa-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0}
+    .pa-stat{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:1.5rem;text-align:center;transition:border-color .3s,transform .2s}
+    .pa-stat:hover{transform:translateY(-2px);border-color:var(--ai-border)}
+    .pa-stat-number{font-size:1.8rem;font-weight:800;color:var(--ai);display:block}
+    .pa-stat-label{font-size:.78rem;color:var(--muted);margin-top:.3rem;display:block}
+    .pa-highlight{background:linear-gradient(135deg,var(--ai-bg),var(--strategy-bg));border:1px solid var(--border);border-radius:12px;padding:1.8rem;margin:2rem 0}
+    .pa-highlight h3{font-size:1.05rem;margin:0 0 .8rem;color:var(--text)}
+    .pa-highlight p{color:var(--muted);font-size:.92rem;line-height:1.8;margin-bottom:.8rem}
+    .pa-highlight p:last-child{margin-bottom:0}
+    .pa-chain{display:flex;flex-direction:column;gap:.8rem;margin:1.5rem 0}
+    .pa-chain-item{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color .3s}
+    .pa-chain-item:hover{border-color:var(--ai-border)}
+    .pa-chain-icon{font-size:1.3rem;flex-shrink:0;line-height:1;margin-top:.1rem}
+    .pa-chain-content h4{font-size:.95rem;margin-bottom:.3rem;color:var(--text)}
+    .pa-chain-content p{color:var(--muted);font-size:.85rem;line-height:1.7;margin:0}
+    .pa-diagram{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:2rem;margin:2rem 0;text-align:center}
+    .pa-diagram-title{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--ai);margin-bottom:1.2rem}
+    .pa-flow{display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap}
+    .pa-flow-step{background:var(--ai-bg);border:1px solid var(--ai-border);border-radius:8px;padding:.6rem 1rem;font-size:.82rem;font-weight:600;color:var(--text)}
+    .pa-flow-arrow{color:var(--ai);font-size:1.1rem}
+    .pa-table{width:100%;border-collapse:collapse;margin:1.5rem 0;font-size:.85rem}
+    .pa-table th{background:var(--ai-bg);color:var(--text);font-weight:700;padding:.6rem .8rem;text-align:left;border:1px solid var(--border)}
+    .pa-table td{padding:.6rem .8rem;border:1px solid var(--border);color:var(--muted);vertical-align:top}
+    .pa-table tr:hover td{background:var(--surface)}
+    .pa-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin:2rem 0 1rem}
+    .pa-tag{font-size:.72rem;color:var(--muted);background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:.25rem .8rem}
+    .back-home{display:inline-flex;align-items:center;gap:.4rem;color:var(--ai);text-decoration:none;font-size:.88rem;margin-bottom:2rem;transition:opacity .2s}
+    .back-home:hover{opacity:.7}
+    @media(max-width:600px){.pa-hero h1{font-size:1.8rem}.pa-stats{grid-template-columns:1fr}.pa-flow{flex-direction:column}.pa-flow-arrow{transform:rotate(90deg)}.pa-table{font-size:.75rem}}
+  </style>
+</head>
+<body>
+  <header><nav>
+    <a href="../../index.html" class="nav-link">Home</a>
+    <a href="../../index.html#insights" class="nav-link">Insights</a>
+    <span class="nav-divider"></span>
+    <a href="../../../insights/physical-ai/index.html" class="nav-link nav-lang">KR</a>
+  </nav></header>
+  <main>
+    <section class="pa-hero"><div>
+      <span class="pa-badge">Physical AI · Explained</span>
+      <h1><span>Physical AI</span> —<br>When AI Leaves the Screen<br>and Enters the Real World</h1>
+      <p class="pa-subtitle">ChatGPT explains how to make coffee. Physical AI actually makes it. The technology poised to transform $50 trillion in physical industries, explained simply.</p>
+      <p class="pa-meta">Jihwan Woo · April 2026</p>
+    </div></section>
+    <article class="pa-article">
+      <a href="../../index.html#insights" class="back-home">← Home</a>
+      <div class="pa-stats">
+        <div class="pa-stat"><span class="pa-stat-number">$50T</span><span class="pa-stat-label">Physical Industry Economy</span></div>
+        <div class="pa-stat"><span class="pa-stat-number">10M</span><span class="pa-stat-label">Factories Worldwide</span></div>
+        <div class="pa-stat"><span class="pa-stat-number">1.5B</span><span class="pa-stat-label">Cars & Trucks</span></div>
+      </div>
+
+      <h2>What Is Physical AI?</h2>
+      <p>When you ask ChatGPT to "make me coffee," it explains the process beautifully. But it can't actually brew a cup — because ChatGPT exists only in the digital world.</p>
+      <p><em>Physical AI</em> breaks through this limitation. AI that sees with eyes (cameras, sensors), thinks with a brain (AI models), and acts with hands and feet (robot arms, wheels). That's Physical AI.</p>
+
+      <table class="pa-table">
+        <tr><th>Type</th><th>What It Does</th><th>Examples</th></tr>
+        <tr><td>Traditional AI (ChatGPT, etc.)</td><td>Generates digital outputs</td><td>Writing, drawing, coding</td></tr>
+        <tr><td>Physical AI</td><td>Acts directly in the real world</td><td>Picking objects, autonomous driving, factory assembly</td></tr>
+      </table>
+
+      <div class="pa-highlight">
+        <h3>One-Sentence Definition</h3>
+        <p>Physical AI is an intelligent system that <em>perceives the environment through sensors</em>, <em>makes decisions with AI</em>, and <em>takes direct action in the physical world through actuators</em>.</p>
+      </div>
+
+      <h2>How Is It Different from Robotics and Agentic AI?</h2>
+
+      <table class="pa-table">
+        <tr><th></th><th>Traditional Robotics</th><th>Agentic AI</th><th>Physical AI</th></tr>
+        <tr><td>Analogy</td><td>Chef who only follows recipes</td><td>Manager who plans menus and takes orders (outside the kitchen)</td><td>Chef who improvises based on the situation</td></tr>
+        <tr><td>Perception</td><td>❌ Fixed coordinates only</td><td>✅ Digital data</td><td>✅ Physical environment (cameras, sensors)</td></tr>
+        <tr><td>Decision</td><td>❌ Pre-programmed sequence</td><td>✅ Autonomous</td><td>✅ Autonomous</td></tr>
+        <tr><td>Action</td><td>✅ Physical (repetitive only)</td><td>❌ Digital only</td><td>✅ Physical (adaptive)</td></tr>
+        <tr><td>Adaptability</td><td>❌ Cannot handle change</td><td>✅ Digital environment</td><td>✅ Physical environment</td></tr>
+      </table>
+
+      <p>The key difference in one line: <em>Physical AI = Agentic AI's brain + Robotics' body</em></p>
+
+      <h2>5 Core Stages of Building Physical AI</h2>
+
+      <div class="pa-diagram">
+        <div class="pa-diagram-title">Physical AI Flywheel</div>
+        <div class="pa-flow">
+          <div class="pa-flow-step">① Data Collection</div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">② Model Training</div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">③ Simulation</div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">④ Sim-to-Real</div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">⑤ Autonomous Ops</div>
+          <span class="pa-flow-arrow">↻</span>
+        </div>
+      </div>
+
+      <div class="pa-chain">
+        <div class="pa-chain-item"><span class="pa-chain-icon">📊</span><div class="pa-chain-content"><h4>① Data — Gathering Experience</h4><p>Collecting real data (factory cameras, sensors, LiDAR) and synthetic data (AI-generated in virtual environments). NVIDIA's Cosmos World Foundation Model auto-generates thousands of scenario variations from small amounts of real footage.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🧠</span><div class="pa-chain-content"><h4>② Training — Learning Skills</h4><p>Training VLA models through imitation learning (learning from human demonstrations) and reinforcement learning (finding optimal methods through trial and error). VLA integrates Vision + Language + Action.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🎮</span><div class="pa-chain-content"><h4>③ Simulation — Practicing in Virtual Worlds</h4><p>Extensive practice in digital twins (virtual replicas of reality). Like pilots training hundreds of hours in flight simulators before actual flights.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🌉</span><div class="pa-chain-content"><h4>④ Sim-to-Real — Bridging the Gap</h4><p>Reducing the subtle differences between virtual and real worlds (Sim-to-Real Gap) through Domain Randomization, then deploying optimized models to robot edge computers.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🤖</span><div class="pa-chain-content"><h4>⑤ Agentic Orchestration — Autonomous Operation</h4><p>Multiple AI agents collaborate for task planning, anomaly detection, human-robot cooperation, and self-improvement to autonomously handle complex operations.</p></div></div>
+      </div>
+
+      <h2>The Brain of Physical AI: VLM and VLA</h2>
+
+      <div class="pa-highlight">
+        <h3>VLM vs VLA — The Core Difference</h3>
+        <p><em>VLM (Vision-Language Model)</em> — "AI that sees and understands." The commentator analyzing the game. Sees images, responds with text.</p>
+        <p><em>VLA (Vision-Language-Action Model)</em> — "AI that sees, understands, and acts." The player on the field. Takes images and instructions, generates robot action commands.</p>
+        <p>In real systems, VLM sees the big picture and plans (the coach), while VLA executes the actions (the player).</p>
+      </div>
+
+      <h3>Key VLA Models Compared</h3>
+      <table class="pa-table">
+        <tr><th>Model</th><th>Developer</th><th>Key Feature</th><th>Best For</th></tr>
+        <tr><td>GR00T N1/N1.5</td><td>NVIDIA</td><td>Dual system (slow thinking + fast reflexes)</td><td>Humanoid robots</td></tr>
+        <tr><td>π0 / π0.5</td><td>Physical Intelligence</td><td>One model controls diverse robots</td><td>General-purpose, home</td></tr>
+        <tr><td>Gemini Robotics 1.5</td><td>Google DeepMind</td><td>"Think then act" reasoning</td><td>Complex decision tasks</td></tr>
+        <tr><td>OpenVLA</td><td>Stanford, UC Berkeley</td><td>7B params, fully open-source</td><td>Research, prototyping</td></tr>
+        <tr><td>SmolVLA</td><td>Hugging Face</td><td>450M params, runs on laptops</td><td>Low-cost, education</td></tr>
+        <tr><td>Octo</td><td>UC Berkeley</td><td>27M–93M, flexible generalist policy</td><td>Research, multi-platform</td></tr>
+      </table>
+
+      <h2>Industry Applications</h2>
+      <div class="pa-chain">
+        <div class="pa-chain-item"><span class="pa-chain-icon">🏭</span><div class="pa-chain-content"><h4>Manufacturing — Completing the Smart Factory</h4><p>Part recognition and auto-assembly, AI vision quality inspection, automatic equipment calibration. BMW saves ~$1M annually with AI robots. New product lines adapt without reprogramming.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">📦</span><div class="pa-chain-content"><h4>Logistics — The Warehouse Revolution</h4><p>Amazon already operates 1M+ Physical AI robots in warehouses. Automated picking, sorting, packing. Logistics AI market projected to reach $549B by 2033.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🚗</span><div class="pa-chain-content"><h4>Automotive — Physical AI in Motion</h4><p>Level 4–5 autonomous driving, AI robots in manufacturing, automated vehicle inspection. Rivian processes petabytes of autonomous driving data on AWS.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🏥</span><div class="pa-chain-content"><h4>Healthcare — More Precise Medicine</h4><p>Surgical assistance robots, hospital logistics robots, rehabilitation aids. AI medical devices achieving 116% efficiency improvement.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">⚡</span><div class="pa-chain-content"><h4>Energy/Infrastructure — Robots in Dangerous Places</h4><p>ANYbotics' ANYmal autonomously inspects oil & gas facilities. Wind turbines, power lines. 24/7 continuous monitoring.</p></div></div>
+        <div class="pa-chain-item"><span class="pa-chain-icon">🌾</span><div class="pa-chain-content"><h4>Agriculture — Precision Farming Realized</h4><p>Autonomous harvesting robots, drone-based crop monitoring, weed removal robots. Solving labor shortages and reducing pesticide use.</p></div></div>
+      </div>
+
+      <h2>Key Players</h2>
+      <table class="pa-table">
+        <tr><th>Company</th><th>Role</th><th>Key Products/Services</th></tr>
+        <tr><td>NVIDIA</td><td>Core Platform Provider</td><td>Omniverse, Isaac Sim, Cosmos, GR00T, Jetson Thor</td></tr>
+        <tr><td>AWS</td><td>Cloud Infrastructure</td><td>SageMaker HyperPod, Bedrock, IoT Greengrass</td></tr>
+        <tr><td>Google DeepMind</td><td>AI Research Frontier</td><td>Gemini Robotics, Boston Dynamics collaboration</td></tr>
+        <tr><td>Tesla</td><td>Humanoid Mass Production</td><td>Optimus (50K–100K units target for 2026)</td></tr>
+        <tr><td>Figure AI</td><td>General-Purpose Humanoid</td><td>Figure 02/03, deployed at BMW factories</td></tr>
+        <tr><td>Physical Intelligence</td><td>General-Purpose VLA</td><td>π0 / π0.5</td></tr>
+      </table>
+
+      <div class="pa-highlight">
+        <h3>The Big Picture</h3>
+        <p>Physical AI isn't just "smarter robots." It's the beginning of a new era where AI crosses the boundary of the digital world to <em>directly see, decide, and act in the physical world we live in</em>.</p>
+        <p>10 million factories, 200,000 warehouses, 1.5 billion vehicles worldwide — Physical AI can be applied to all of them. CES 2026 featured a record 38 humanoid robot companies.</p>
+      </div>
+
+      <div class="pa-diagram">
+        <div class="pa-diagram-title">Physical AI Core Architecture</div>
+        <div class="pa-flow">
+          <div class="pa-flow-step">Perceive<br><small style="color:var(--muted)">Cameras · Sensors</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">Decide<br><small style="color:var(--muted)">VLA/VLM Models</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">Act<br><small style="color:var(--muted)">Robot Arms · Wheels</small></div>
+          <span class="pa-flow-arrow">→</span>
+          <div class="pa-flow-step">Learn<br><small style="color:var(--muted)">Experience Data</small></div>
+          <span class="pa-flow-arrow">↻</span>
+        </div>
+      </div>
+
+      <div class="pa-tags">
+        <span class="pa-tag">#PhysicalAI</span><span class="pa-tag">#Robotics</span><span class="pa-tag">#VLA</span><span class="pa-tag">#VLM</span><span class="pa-tag">#NVIDIA</span><span class="pa-tag">#Humanoid</span><span class="pa-tag">#DigitalTwin</span><span class="pa-tag">#AutonomousDriving</span><span class="pa-tag">#SmartFactory</span><span class="pa-tag">#AI</span>
+      </div>
+    </article>
+  </main>
+  <footer style="text-align:center;padding:2rem 1.5rem;color:var(--muted);font-size:.78rem;border-top:1px solid var(--border);">© 2026 Jihwan Woo · <a href="../../index.html" style="color:var(--ai);text-decoration:none;">jihwanw.github.io</a></footer>
+</body>
+</html>
