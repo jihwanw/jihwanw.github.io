@@ -210,3 +210,11 @@
   - 중복 방지: Harness Engineering(실행 안정성)과 구분해 지식 축적·RAG 대비 중심 구성
 - 메인 KR/EN Latest Insights 그리드 최상단에 카드 2개씩 추가
 - sitemap.xml에 4개 URL 추가
+
+## 12. Insight PDF 리포트 첨부 (2026-08-21)
+- 자체 제작 PDF 2건을 assets/docs에 추가: kimi-k3-report.pdf (k3.pdf 최신본), llm-wiki-report.pdf
+- insight 페이지 4개(KR/EN)에 "보고서 전문 보기 (PDF)" 버튼 추가 (하네스 페이지와 동일 패턴)
+- 메인 KR/EN insight 카드에 PDF 링크 병기 (DBR 카드 패턴)
+- GA4 향상된 측정의 file_download 이벤트로 다운로드 추적 가능
+- GA4 이벤트 태깅 추가: 모든 PDF 링크 18개에 file_download 이벤트 (file_name, link_location 파라미터)
+- EC2 SSH 장애 대응: 사내 SSH egress IP 로테이션으로 접속 불가 → SG에 15.248.4.0/23 (corp NAT 대역) 추가로 해결
