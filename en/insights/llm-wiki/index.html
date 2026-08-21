@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XW0TCQDB5V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XW0TCQDB5V');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Wiki — When AI Writes Its Own Wiki, Knowledge Compounds | Jihwan Woo</title>
+  <meta name="description" content="An explainer on Karpathy's LLM Wiki concept: moving beyond RAG's start-from-scratch retrieval to AI-maintained wikis that accumulate knowledge, with five practical use cases.">
+  <meta property="og:title" content="LLM Wiki — When AI Writes Its Own Wiki, Knowledge Compounds">
+  <meta property="og:description" content="A knowledge-management paradigm where AI writes and maintains its own wiki.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://jihwanw.github.io/assets/images/profile/photo_jhwoo.jpeg">
+  <link rel="canonical" href="https://jihwanw.github.io/en/insights/llm-wiki/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <style>
+    html { scroll-padding-top: 4rem; }
+    .tq-hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 1.5rem 3rem; position: relative; }
+    .tq-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(108,99,255,0.10) 0%, transparent 70%); pointer-events: none; }
+    .tq-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ai); border: 1px solid var(--ai-border); background: var(--ai-bg); padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
+    .tq-hero h1 { font-size: 2.4rem; letter-spacing: -0.03em; margin-bottom: 0.6rem; line-height: 1.25; }
+    .tq-hero h1 span { color: var(--ai); }
+    .tq-subtitle { color: var(--muted); font-size: 1.05rem; max-width: 620px; margin: 0 auto 1rem; line-height: 1.7; }
+    .tq-meta { color: var(--muted); font-size: 0.82rem; opacity: 0.6; }
+    .tq-article { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .tq-article h2 { font-size: 1.35rem; margin: 3rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--ai-border); color: var(--text); }
+    .tq-article h3 { font-size: 1.1rem; margin: 2rem 0 0.8rem; color: var(--text); }
+    .tq-article p { color: var(--muted); font-size: 0.94rem; line-height: 1.9; margin-bottom: 1.2rem; }
+    .tq-article em { color: var(--text); font-style: normal; font-weight: 600; }
+    .tq-highlight { background: linear-gradient(135deg, var(--ai-bg), var(--strategy-bg)); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; margin: 2rem 0; }
+    .tq-highlight h3 { font-size: 1.05rem; margin: 0 0 0.8rem; color: var(--text); }
+    .tq-highlight p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.8rem; }
+    .tq-highlight p:last-child { margin-bottom: 0; }
+    .tq-chain { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.5rem 0; }
+    .tq-chain-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.3s; }
+    .tq-chain-item:hover { border-color: var(--ai-border); }
+    .tq-chain-num { font-size: 0.75rem; font-weight: 700; color: var(--ai); background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 6px; padding: 0.3rem 0.6rem; flex-shrink: 0; margin-top: 0.1rem; white-space: nowrap; }
+    .tq-chain-content h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--text); }
+    .tq-chain-content p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin: 0; }
+    .tq-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+    .tq-table th { text-align: left; padding: 0.7rem 0.8rem; border-bottom: 2px solid var(--ai-border); color: var(--text); font-size: 0.8rem; }
+    .tq-table td { padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--muted); line-height: 1.6; }
+    .tq-diagram { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+    .tq-diagram-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ai); margin-bottom: 1.2rem; }
+    .tq-flow { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+    .tq-flow-step { background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.82rem; font-weight: 600; color: var(--text); }
+    .tq-flow-arrow { color: var(--ai); font-size: 1.1rem; }
+    .tq-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 2rem 0 1rem; }
+    .tq-tag { font-size: 0.72rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.8rem; }
+    .back-home { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--ai); text-decoration: none; font-size: 0.88rem; margin-bottom: 2rem; transition: opacity 0.2s; }
+    .back-home:hover { opacity: 0.7; }
+    @media (max-width: 600px) {
+      .tq-hero h1 { font-size: 1.8rem; }
+      .tq-flow { flex-direction: column; }
+      .tq-flow-arrow { transform: rotate(90deg); }
+      .tq-table { font-size: 0.75rem; }
+      .tq-table th, .tq-table td { padding: 0.5rem 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../index.html#insights" class="nav-link">Insights</a>
+      <span class="nav-divider"></span>
+      <a href="../../../insights/llm-wiki/index.html" class="nav-link nav-lang">KR</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tq-hero">
+      <div>
+        <span class="tq-badge">AI Knowledge Management · Tech Brief</span>
+        <h1><span>LLM Wiki</span> — When AI Writes Its Own Wiki,<br>Knowledge Compounds</h1>
+        <p class="tq-subtitle">Beyond RAG's start-from-scratch retrieval: a knowledge-management paradigm where AI writes and maintains its own wiki — what improves, and when to choose which.</p>
+        <p class="tq-meta">Jihwan Woo · May 2026</p>
+      </div>
+    </section>
+
+    <article class="tq-article">
+      <a href="../../index.html#insights" class="back-home">← Back to Home</a>
+
+      <h2>"I Asked Yesterday — Why Is It Searching from Scratch Again?"</h2>
+      <p>Ever uploaded documents to ChatGPT or Claude and asked questions? At first it feels magical. But after a few days comes a subtly frustrating moment: yesterday the AI synthesized five sources into a great answer, and today, on a similar question, it is <em>digging through the sources from scratch again</em>. Yesterday's conclusion survives nowhere.</p>
+      <p>Most AI document workflows today use RAG (Retrieval-Augmented Generation). Picture a library: every time you ask, a librarian pulls books off the shelves, summarizes an answer, reshelves the books — and <em>takes no notes</em>. No matter how much you ask, knowledge never accumulates. You are earning simple interest, never compound.</p>
+
+      <h2>The New Approach: AI Writes the Wiki Itself</h2>
+      <p>Proposed by Andrej Karpathy — OpenAI co-founder and former Tesla AI lead — the <em>LLM Wiki</em> flips the problem: instead of reassembling sources on every question, have the AI build a curated wiki and keep updating it.</p>
+      <p>Back to the library: this time, whenever the librarian pulls a book, she writes key points in a notebook. New books update existing notes, contradictions get flagged, related entries get linked. Over time, the notebook becomes a map of the entire library.</p>
+
+      <div class="tq-diagram">
+        <div class="tq-diagram-title">Three-Layer Structure</div>
+        <div class="tq-flow">
+          <span class="tq-flow-step">Raw Sources</span>
+          <span class="tq-flow-arrow">→</span>
+          <span class="tq-flow-step">Wiki (LLM-written Markdown)</span>
+          <span class="tq-flow-arrow">→</span>
+          <span class="tq-flow-step">Schema (operating rules)</span>
+        </div>
+      </div>
+
+      <div class="tq-chain">
+        <div class="tq-chain-item"><span class="tq-chain-num">Ingest</span><div class="tq-chain-content"><h4>New material updates related pages together</h4><p>The LLM reads, summarizes, and updates related pages — a single source can touch 10–15 pages at once.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">Query</span><div class="tq-chain-content"><h4>Exploration itself becomes knowledge</h4><p>Answers draw on the wiki, and good answers are saved back as new wiki pages.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">Lint</span><div class="tq-chain-content"><h4>Periodic cleanup of contradictions and broken links</h4><p>Regular checks for inter-page contradictions, orphan pages, and missing cross-references.</p></div></div>
+      </div>
+
+      <h2>Why Humans Couldn't Do This Themselves</h2>
+      <p>Wikis are not a new invention — yet personal and small-team wikis almost always fail. The reason is simple: <em>maintenance is too tedious</em>. Every new source means touching 5–10 related pages, correcting outdated information, fixing broken links. After a month or two, people give up, and the wiki rots in a half-current state.</p>
+      <p>LLMs are the exact opposite: they never get bored, never forget to update cross-references, and can edit 15 files at once. With maintenance costs far below human levels, <em>the wiki gains value as it grows</em> — the main reason humans abandoned wikis is neutralized. Karpathy reported running a wiki of ~100 sources and hundreds of pages with nothing but Markdown files and a single index. Note this is an n=1 self-report; generalization to organizational settings requires separate validation.</p>
+
+      <h2>How It Differs from Naive RAG</h2>
+      <table class="tq-table">
+        <thead><tr><th>Dimension</th><th>Naive RAG</th><th>LLM Wiki</th></tr></thead>
+        <tbody>
+          <tr><td>Knowledge accumulation</td><td>From scratch every time</td><td>Keeps compounding</td></tr>
+          <tr><td>Repeated questions</td><td>Re-derives the answer</td><td>Answers from curated conclusions</td></tr>
+          <tr><td>Contradictory information</td><td>Goes unnoticed</td><td>Flagged by the AI</td></tr>
+          <tr><td>Human burden</td><td>Sources, questions, review — all of it</td><td>Curation and review only</td></tr>
+          <tr><td>Integrating new sources</td><td>Simple indexing</td><td>Auto-updates related pages</td></tr>
+        </tbody>
+      </table>
+      <p>This complements rather than replaces RAG. Precision search over millions of documents, real-time data, and access control remain RAG territory. In practice, the realistic answer is a hybrid: the wiki holds "curated conclusions" while RAG handles "precision search over originals."</p>
+
+      <h2>Who Uses It: Five Representative Scenarios</h2>
+      <div class="tq-chain">
+        <div class="tq-chain-item"><span class="tq-chain-num">01</span><div class="tq-chain-content"><h4>PhD research wiki</h4><p>After 100+ papers, you no longer remember what you saw where. When every new paper generates a summary page auto-linked to authors, methods, and results, citations and comparisons are instantly retrievable at submission time.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">02</span><div class="tq-chain-content"><h4>Startup technology decision wiki</h4><p>For teams whose decision rationales are scattered across Slack and Notion — a living record where decisions and their reasoning accumulate.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">03</span><div class="tq-chain-content"><h4>Consulting firm's per-client knowledge base</h4><p>Client context that used to live only in a departing consultant's head becomes an organization-readable synthesis.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">04</span><div class="tq-chain-content"><h4>Engineering team's incident retrospective wiki</h4><p>Postmortems stop sleeping as isolated documents and grow into a cross-linked knowledge web of similar incidents, root causes, and preventions.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">05</span><div class="tq-chain-content"><h4>Medical/legal case database</h4><p>In domains where judgment sharpens as cases accumulate, curated case comparisons become instantly retrievable assets.</p></div></div>
+      </div>
+
+      <div class="tq-highlight">
+        <h3>A Different Layer from Agentic AI</h3>
+        <p>If agents are "hands that do work for you," the LLM Wiki is the <em>"organizational memory"</em> those hands consult. Where agent harnesses address execution reliability, the LLM Wiki ensures that each task's results and context are reused — compounding — in the next task. When the two layers combine — agents do the work, results accumulate in the wiki, and the next agent starts by reading it — an organization's AI usage shifts from simple to compound interest.</p>
+      </div>
+
+      <h2>Conclusion: Not "Which Is Better" but "When to Use Which"</h2>
+      <p>The LLM Wiki is not a RAG replacement; it fills a layer that has been empty — <em>the accumulation of curated knowledge</em>. If your sources number in the dozens to hundreds, you ask repeatedly about the same topics, and reusing conclusions matters, the wiki is your answer. If you need precision search over millions of documents with real-time freshness, that is RAG. And most organizations will end up using both.</p>
+
+      <div class="tq-tags">
+        <span class="tq-tag">LLM Wiki</span>
+        <span class="tq-tag">Knowledge Management</span>
+        <span class="tq-tag">RAG</span>
+        <span class="tq-tag">Karpathy</span>
+        <span class="tq-tag">Agentic AI</span>
+        <span class="tq-tag">Tech Brief</span>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2026 Jihwan Woo</p>
+  </footer>
+</body>
+</html>

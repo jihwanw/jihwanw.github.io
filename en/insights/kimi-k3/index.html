@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XW0TCQDB5V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XW0TCQDB5V');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kimi K3 — What Happens to the Industry When Frontier AI Goes Open | Jihwan Woo</title>
+  <meta name="description" content="Analysis of Moonshot AI's 2.8-trillion-parameter open-weight model Kimi K3: linear attention (KDA), extreme-sparsity MoE, 4-bit training, and the economics of 'free models that cost money to run.'">
+  <meta property="og:title" content="Kimi K3 — What Happens to the Industry When Frontier AI Goes Open">
+  <meta property="og:description" content="The technology and value-chain implications of the largest open-weight model ever released.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://jihwanw.github.io/assets/images/profile/photo_jhwoo.jpeg">
+  <link rel="canonical" href="https://jihwanw.github.io/en/insights/kimi-k3/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <style>
+    html { scroll-padding-top: 4rem; }
+    .tq-hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 1.5rem 3rem; position: relative; }
+    .tq-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(108,99,255,0.10) 0%, transparent 70%); pointer-events: none; }
+    .tq-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ai); border: 1px solid var(--ai-border); background: var(--ai-bg); padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
+    .tq-hero h1 { font-size: 2.4rem; letter-spacing: -0.03em; margin-bottom: 0.6rem; line-height: 1.25; }
+    .tq-hero h1 span { color: var(--ai); }
+    .tq-subtitle { color: var(--muted); font-size: 1.05rem; max-width: 620px; margin: 0 auto 1rem; line-height: 1.7; }
+    .tq-meta { color: var(--muted); font-size: 0.82rem; opacity: 0.6; }
+    .tq-article { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .tq-article h2 { font-size: 1.35rem; margin: 3rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--ai-border); color: var(--text); }
+    .tq-article h3 { font-size: 1.1rem; margin: 2rem 0 0.8rem; color: var(--text); }
+    .tq-article p { color: var(--muted); font-size: 0.94rem; line-height: 1.9; margin-bottom: 1.2rem; }
+    .tq-article em { color: var(--text); font-style: normal; font-weight: 600; }
+    .tq-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+    .tq-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; transition: border-color 0.3s, transform 0.2s; }
+    .tq-stat:hover { transform: translateY(-2px); border-color: var(--ai-border); }
+    .tq-stat-number { font-size: 2rem; font-weight: 800; color: var(--ai); display: block; }
+    .tq-stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; display: block; }
+    .tq-highlight { background: linear-gradient(135deg, var(--ai-bg), var(--strategy-bg)); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; margin: 2rem 0; }
+    .tq-highlight h3 { font-size: 1.05rem; margin: 0 0 0.8rem; color: var(--text); }
+    .tq-highlight p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.8rem; }
+    .tq-highlight p:last-child { margin-bottom: 0; }
+    .tq-chain { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.5rem 0; }
+    .tq-chain-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.3s; }
+    .tq-chain-item:hover { border-color: var(--ai-border); }
+    .tq-chain-num { font-size: 0.75rem; font-weight: 700; color: var(--ai); background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 6px; padding: 0.3rem 0.6rem; flex-shrink: 0; margin-top: 0.1rem; white-space: nowrap; }
+    .tq-chain-content h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--text); }
+    .tq-chain-content p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin: 0; }
+    .tq-figure { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin: 2rem 0; text-align: center; }
+    .tq-figure img { max-width: 100%; border-radius: 8px; }
+    .tq-figure figcaption { font-size: 0.8rem; color: var(--muted); margin-top: 0.8rem; line-height: 1.6; }
+    .tq-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+    .tq-table th { text-align: left; padding: 0.7rem 0.8rem; border-bottom: 2px solid var(--ai-border); color: var(--text); font-size: 0.8rem; }
+    .tq-table td { padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--muted); line-height: 1.6; }
+    .tq-table-note { font-size: 0.75rem; color: var(--muted); opacity: 0.7; line-height: 1.6; margin-top: -0.8rem; margin-bottom: 1.5rem; }
+    .tq-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 2rem 0 1rem; }
+    .tq-tag { font-size: 0.72rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.8rem; }
+    .back-home { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--ai); text-decoration: none; font-size: 0.88rem; margin-bottom: 2rem; transition: opacity 0.2s; }
+    .back-home:hover { opacity: 0.7; }
+    @media (max-width: 600px) {
+      .tq-hero h1 { font-size: 1.8rem; }
+      .tq-stats { grid-template-columns: 1fr; }
+      .tq-table { font-size: 0.75rem; }
+      .tq-table th, .tq-table td { padding: 0.5rem 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../index.html#insights" class="nav-link">Insights</a>
+      <span class="nav-divider"></span>
+      <a href="../../../insights/kimi-k3/index.html" class="nav-link nav-lang">KR</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tq-hero">
+      <div>
+        <span class="tq-badge">Open-Weight AI · Deep Dive</span>
+        <h1><span>Kimi K3</span> — What Happens to the Industry<br>When Frontier AI Goes Open</h1>
+        <p class="tq-subtitle">Inside the largest open-weight model ever released — 2.8 trillion parameters — and the economics of "free models that cost money to run."</p>
+        <p class="tq-meta">Jihwan Woo · IITP Weekly Technology Trends · August 2026</p>
+      </div>
+    </section>
+
+    <article class="tq-article">
+      <a href="../../index.html#insights" class="back-home">← Back to Home</a>
+
+      <h2>A Second DeepSeek? A Different Kind of Shock</h2>
+      <p>If DeepSeek's arrival in early 2025 was a <em>cost shock</em> — "frontier AI can be built this cheaply" — then Kimi K3, released by China's Moonshot AI in July 2026, delivers a different kind of shock: <em>openness</em>. A model approaching top US frontier performance was released in a form anyone can download and run.</p>
+      <p>Markets reacted immediately — the Nasdaq dipped roughly 1% and semiconductor stocks sold off after the announcement. Nature reported that some academics are calling it a "Sputnik moment."</p>
+
+      <div class="tq-stats">
+        <div class="tq-stat"><span class="tq-stat-number">2.8T</span><span class="tq-stat-label">Total parameters — largest open-weight model ever</span></div>
+        <div class="tq-stat"><span class="tq-stat-number">#3</span><span class="tq-stat-label">Artificial Analysis Intelligence Index (57 pts)</span></div>
+        <div class="tq-stat"><span class="tq-stat-number">1.8%</span><span class="tq-stat-label">Active parameters per token</span></div>
+      </div>
+
+      <h2>What "Open-Weight" Means</h2>
+      <p>The key distinction is whether you can download the model weights. <em>Closed models</em> keep weights private; users can only call an API. <em>Open-weight models</em> publish the weight files, so anyone can download them, run them on their own infrastructure, or fine-tune them. Note that open-weight is not the same as open-source — training data and the full development process are not disclosed.</p>
+
+      <figure class="tq-figure">
+        <img src="fig1_openweight.png" alt="Closed vs open-weight model architecture comparison" loading="lazy">
+        <figcaption>Closed vs. open-weight models — with closed models, only API access is possible; with open-weight models, you can self-host the downloaded weights or choose a hosting provider's API.</figcaption>
+      </figure>
+
+      <h2>Core Technology: Three Ways of Saving Compute at Once</h2>
+      <p>K3's novelty is not any single new technique, but <em>pulling off multiple compute-saving choices simultaneously at frontier scale</em>. US semiconductor export controls limit Chinese firms' access to the latest GPUs. If you cannot buy more compute, you must extract more from the same compute — K3's entire design is that answer. "Scarcity bred invention," as academics have put it.</p>
+
+      <div class="tq-chain">
+        <div class="tq-chain-item">
+          <span class="tq-chain-num">01</span>
+          <div class="tq-chain-content">
+            <h4>Stable LatentMoE — 2.8T parameters, but never all at once</h4>
+            <p>The model contains 896 expert modules; each token activates only the 16 most relevant — about 1.8% of total parameters, the lowest activation ratio in the industry. Total parameters approximate the model's knowledge capacity; active parameters approximate the cost of each response.</p>
+          </div>
+        </div>
+        <div class="tq-chain-item">
+          <span class="tq-chain-num">02</span>
+          <div class="tq-chain-content">
+            <h4>Kimi Delta Attention — processing long inputs cheaply</h4>
+            <p>Conventional attention scales quadratically: 10× longer input means 100× more compute. K3 applies linear attention (KDA) to three-quarters of its attention layers, making compute scale proportionally with input length. It is the first case demonstrating that linear attention works without quality loss at frontier scale — the structural basis for its low-cost 1M-token context.</p>
+          </div>
+        </div>
+        <div class="tq-chain-item">
+          <span class="tq-chain-num">03</span>
+          <div class="tq-chain-content">
+            <h4>MXFP4 — trained in 4-bit from the start</h4>
+            <p>Most models train at high precision and compress (quantize) just before deployment, losing quality in the process. K3 trains with 4-bit precision as a premise, so deployment-time quality loss is minimal and it runs more easily on memory-constrained hardware.</p>
+          </div>
+        </div>
+      </div>
+
+      <figure class="tq-figure">
+        <img src="fig2_moe.png" alt="K3's selective MoE activation structure" loading="lazy">
+        <figcaption>K3's selective MoE activation — 16 of 896 experts activate per token. (Author's rendering based on Moonshot AI's technical blog)</figcaption>
+      </figure>
+
+      <figure class="tq-figure">
+        <img src="fig3_kda.png" alt="Attention compute scaling and K3's layer composition" loading="lazy">
+        <figcaption>Compute scaling by attention type (left) and K3's attention layer composition (right). (Author's rendering based on Moonshot AI's blog and Hugging Face community analysis)</figcaption>
+      </figure>
+
+      <h2>Performance: Not "Ahead of the US," but Firmly in the Race</h2>
+      <p>K3 scores 57 on the Artificial Analysis Intelligence Index — third overall, behind Claude Fable 5 (60) and GPT-5.6 Sol (59), but ahead of Claude Opus 4.8 (56) and GPT-5.5. No open-weight model has ever placed this high.</p>
+      <p>Caveats apply: the developer's showcase demos (24-hour autonomous code optimization, a small AI chip designed in 48 hours) are curated; output speed is a sluggish ~40 tokens/second; and Moonshot itself admits a noticeable user-experience gap versus top closed models. The claim "China has surpassed US AI" is premature — but "an open model has entered the top tier" is supported by multiple independent evaluations.</p>
+
+      <h2>The "Free to Use" Illusion: The Self-Hosting Wall</h2>
+      <p>Open weights do not make operation easy. K3's weight file is roughly <em>1.56TB</em> even in its most compressed 4-bit form — too large for even NVIDIA's latest 8-GPU DGX B200 server. Moonshot recommends supernode environments of 64+ accelerators for efficient serving.</p>
+
+      <table class="tq-table">
+        <thead>
+          <tr><th>GPU configuration</th><th>Total memory</th><th>Can run K3?</th><th>Hourly cost</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>H100 × 8</td><td>0.64 TB</td><td>No</td><td>$42</td></tr>
+          <tr><td>H200 × 8</td><td>1.13 TB</td><td>No</td><td>$55</td></tr>
+          <tr><td>B200 × 8</td><td>1.44 TB</td><td>Effectively no</td><td>$99</td></tr>
+          <tr><td>B300 × 8</td><td>2.30 TB</td><td>Minimum viable</td><td>$112</td></tr>
+          <tr><td>B300 × 64</td><td>18.4 TB</td><td>Recommended</td><td>$899</td></tr>
+        </tbody>
+      </table>
+      <p class="tq-table-note">On-demand per-GPU pricing from major cloud providers as of July 2026. Long-term commitments reduce rates by 30–60%.</p>
+
+      <p>At $899/hour for the recommended configuration, the realistic path for most enterprises is not self-hosting but buying tokens from cloud or specialized inference providers hosting K3.</p>
+
+      <h2>The Paradox of Paying for a Free Model</h2>
+      <p>To be clear: if you download the weights and run them on your own infrastructure, you owe Moonshot nothing. Per-token pricing applies only when using Moonshot's hosted API — at roughly half the rate of GPT-5.6 Sol and a third of Claude Fable 5 for equivalent workloads.</p>
+      <p>But cheap unit prices do not guarantee cheap total costs. K3 reasons through long internal deliberation, which is also billed as tokens, so it consumes more tokens per task than competitors. Adoption decisions should compare <em>total cost of ownership per completed task</em>, not token prices. In Artificial Analysis's measurements, K3's cost per evaluation task ($0.95) was nearly identical to the higher-priced GPT-5.6 Sol ($1.04).</p>
+
+      <div class="tq-highlight">
+        <h3>The Bigger Picture — Better Open Weights, Bigger Compute Market</h3>
+        <p><em>The model is free, but running it is not.</em> As open-weight models improve, the point of monetization shifts from model sales to GPU infrastructure, hosting, and operations. Rising performance raises the infrastructure bar — K3 is the first open model demanding the latest 288GB-class GPUs — and only cloud providers can own and operate that at scale.</p>
+        <p>The gap between fixed self-hosting costs and per-token pricing creates space for specialized intermediaries, and calculating which side of the API-vs-self-hosting break-even point your workload falls on becomes homework for every adopting enterprise.</p>
+      </div>
+
+      <h2>Where Open Weights Win Despite the Performance Gap</h2>
+      <p>The practical question is not "which model is smartest" but "which model is good enough while satisfying my constraints." Open weights hold structural advantages in specific territories:</p>
+      <div class="tq-chain">
+        <div class="tq-chain-item"><span class="tq-chain-num">Data</span><div class="tq-chain-content"><h4>Workloads where data cannot leave</h4><p>Medical records, financial transactions, defense and public-sector data — where external API calls are impossible, "can it run on our infrastructure" is the first gate, and open weights are effectively the only option.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">Cost</span><div class="tq-chain-content"><h4>High-volume, repetitive task optimization</h4><p>Document classification, summarization, data extraction — low difficulty, high volume. Using a top-tier model is over-investment; "good enough" open weights lower unit costs.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">Tuning</span><div class="tq-chain-content"><h4>Domains where fine-tuning flips the gap</h4><p>Legal documents, internal codebases, industry terminology — a fine-tuned open-weight model can outperform a general-purpose frontier model. An option that only weight access unlocks.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">Tiering</span><div class="tq-chain-content"><h4>Tiered architectures and vendor-risk hedging</h4><p>Route most requests to low-cost open weights and escalate only hard cases to closed frontier models. Also insurance against single-vendor dependency and access-cutoff risk.</p></div></div>
+      </div>
+
+      <h2>Conclusion: The Axis of Competition Shifts from Models to Ecosystems</h2>
+      <p>K3's bigger question is about industry structure, not technology. As top-tier performance arrives in open form at lower prices, competition broadens from model performance alone to <em>who provides the environment that more enterprises and developers choose and can operate</em>. The more models open up, the more value migrates from model sales to infrastructure, hosting, and operations. What grows as open weights improve is not the model market — it is the <em>compute market</em>.</p>
+      <p>Kimi K3 is not a story of "China beating America." It means enterprises adopting AI have more choices — and must now build their own criteria for choosing what fits their workloads.</p>
+
+      <div class="tq-tags">
+        <span class="tq-tag">Kimi K3</span>
+        <span class="tq-tag">Open-Weight</span>
+        <span class="tq-tag">Moonshot AI</span>
+        <span class="tq-tag">MoE</span>
+        <span class="tq-tag">Linear Attention</span>
+        <span class="tq-tag">AI Economics</span>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2026 Jihwan Woo</p>
+  </footer>
+</body>
+</html>

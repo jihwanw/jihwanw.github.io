@@ -201,3 +201,12 @@
 - 기사: 우지환 AWS "에이전틱 AI, 시작부터 명확해야 성공한다" [월간AX 6월호] (IT조선, 2026-06-30, 권용만 기자)
 - 내용: 월간AX 6월 세미나에서 엔터프라이즈 AI 에이전트 트렌드와 글로벌 적용 사례 발표
 - KR/EN In the Press 목록 최상단(최신순)에 추가
+
+## 11. Insights 신규 게재: Kimi K3 + LLM Wiki (2026-08-21)
+- 주간기술동향 폴더 미소개 원고 2건을 insight 페이지로 제작 (KR/EN 4개 페이지)
+- insights/kimi-k3/ — Kimi K3 오픈웨이트 모델 분석 (주간기술동향 2026-08 기고 기반, 그림 3장 포함)
+  - 중복 방지: TurboQuant(KV 캐시)와 겹치지 않게 오픈웨이트 경제학·산업 구조 중심 구성
+- insights/llm-wiki/ — LLM Wiki 지식 관리 패러다임 해설 (Karpathy 제안, 테크 브리프 기반)
+  - 중복 방지: Harness Engineering(실행 안정성)과 구분해 지식 축적·RAG 대비 중심 구성
+- 메인 KR/EN Latest Insights 그리드 최상단에 카드 2개씩 추가
+- sitemap.xml에 4개 URL 추가

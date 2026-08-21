@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XW0TCQDB5V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XW0TCQDB5V');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LLM Wiki — AI가 직접 위키를 쓰면 지식은 복리로 쌓인다 | Jihwan Woo</title>
+  <meta name="description" content="카파시가 제안한 LLM Wiki 개념 해설. 매번 처음부터 검색하는 RAG의 한계를 넘어, AI가 스스로 위키를 쓰고 갱신하는 지식 관리 패러다임과 실전 활용 사례 5가지.">
+  <meta property="og:title" content="LLM Wiki — AI가 직접 위키를 쓰면 지식은 복리로 쌓인다">
+  <meta property="og:description" content="AI가 스스로 위키를 쓰고 갱신하는 지식 관리 패러다임 해설.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://jihwanw.github.io/assets/images/profile/photo_jhwoo.jpeg">
+  <link rel="canonical" href="https://jihwanw.github.io/insights/llm-wiki/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
+  <link rel="stylesheet" href="../../assets/css/style.css">
+  <style>
+    html { scroll-padding-top: 4rem; }
+    .tq-hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 1.5rem 3rem; position: relative; }
+    .tq-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(108,99,255,0.10) 0%, transparent 70%); pointer-events: none; }
+    .tq-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ai); border: 1px solid var(--ai-border); background: var(--ai-bg); padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
+    .tq-hero h1 { font-size: 2.4rem; letter-spacing: -0.03em; margin-bottom: 0.6rem; line-height: 1.25; }
+    .tq-hero h1 span { color: var(--ai); }
+    .tq-subtitle { color: var(--muted); font-size: 1.05rem; max-width: 620px; margin: 0 auto 1rem; line-height: 1.7; }
+    .tq-meta { color: var(--muted); font-size: 0.82rem; opacity: 0.6; }
+    .tq-article { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .tq-article h2 { font-size: 1.35rem; margin: 3rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--ai-border); color: var(--text); }
+    .tq-article h3 { font-size: 1.1rem; margin: 2rem 0 0.8rem; color: var(--text); }
+    .tq-article p { color: var(--muted); font-size: 0.94rem; line-height: 1.9; margin-bottom: 1.2rem; }
+    .tq-article em { color: var(--text); font-style: normal; font-weight: 600; }
+    .tq-highlight { background: linear-gradient(135deg, var(--ai-bg), var(--strategy-bg)); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; margin: 2rem 0; }
+    .tq-highlight h3 { font-size: 1.05rem; margin: 0 0 0.8rem; color: var(--text); }
+    .tq-highlight p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.8rem; }
+    .tq-highlight p:last-child { margin-bottom: 0; }
+    .tq-chain { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.5rem 0; }
+    .tq-chain-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.3s; }
+    .tq-chain-item:hover { border-color: var(--ai-border); }
+    .tq-chain-num { font-size: 0.75rem; font-weight: 700; color: var(--ai); background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 6px; padding: 0.3rem 0.6rem; flex-shrink: 0; margin-top: 0.1rem; white-space: nowrap; }
+    .tq-chain-content h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--text); }
+    .tq-chain-content p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin: 0; }
+    .tq-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.85rem; }
+    .tq-table th { text-align: left; padding: 0.7rem 0.8rem; border-bottom: 2px solid var(--ai-border); color: var(--text); font-size: 0.8rem; }
+    .tq-table td { padding: 0.7rem 0.8rem; border-bottom: 1px solid var(--border); color: var(--muted); line-height: 1.6; }
+    .tq-diagram { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; margin: 2rem 0; text-align: center; }
+    .tq-diagram-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ai); margin-bottom: 1.2rem; }
+    .tq-flow { display: flex; align-items: center; justify-content: center; gap: 0.5rem; flex-wrap: wrap; }
+    .tq-flow-step { background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 8px; padding: 0.6rem 1rem; font-size: 0.82rem; font-weight: 600; color: var(--text); }
+    .tq-flow-arrow { color: var(--ai); font-size: 1.1rem; }
+    .tq-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 2rem 0 1rem; }
+    .tq-tag { font-size: 0.72rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.8rem; }
+    .back-home { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--ai); text-decoration: none; font-size: 0.88rem; margin-bottom: 2rem; transition: opacity 0.2s; }
+    .back-home:hover { opacity: 0.7; }
+    @media (max-width: 600px) {
+      .tq-hero h1 { font-size: 1.8rem; }
+      .tq-flow { flex-direction: column; }
+      .tq-flow-arrow { transform: rotate(90deg); }
+      .tq-table { font-size: 0.75rem; }
+      .tq-table th, .tq-table td { padding: 0.5rem 0.4rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../index.html#insights" class="nav-link">Insights</a>
+      <span class="nav-divider"></span>
+      <a href="../../en/insights/llm-wiki/index.html" class="nav-link nav-lang">EN</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tq-hero">
+      <div>
+        <span class="tq-badge">AI Knowledge Management · Tech Brief</span>
+        <h1><span>LLM Wiki</span> — AI가 직접 위키를 쓰면<br>지식은 복리로 쌓인다</h1>
+        <p class="tq-subtitle">매번 처음부터 검색하는 RAG의 한계를 넘어, AI가 스스로 위키를 쓰고 갱신하는 지식 관리 패러다임을 해설합니다. 무엇이 좋아지고, 언제 무엇을 선택해야 하는지까지.</p>
+        <p class="tq-meta">우지환 · 2026년 5월</p>
+      </div>
+    </section>
+
+    <article class="tq-article">
+      <a href="../../index.html#insights" class="back-home">← 홈으로</a>
+
+      <h2>어제 물어봤는데, 또 처음부터 찾고 있네</h2>
+      <p>ChatGPT나 Claude에 자료를 올려놓고 질문해 본 적 있으신가요? 처음에는 신기하지만, 며칠 쓰다 보면 묘하게 답답한 순간이 옵니다. 어제 다섯 개 자료를 종합해서 좋은 답을 받았는데, 오늘 비슷한 걸 물어보면 AI가 <em>또 처음부터 자료를 뒤지고 있습니다</em>. 어제의 결론이 어디에도 남아 있지 않기 때문입니다.</p>
+      <p>지금 대부분의 AI 문서 활용은 RAG(Retrieval-Augmented Generation) 방식입니다. 도서관에 비유하면, 질문할 때마다 사서가 서가에서 책을 뽑아 와 답을 정리해 주고는 책을 다시 꽂고 <em>메모도 남기지 않는</em> 것과 같습니다. 아무리 많이 물어봐도 지식이 쌓이지 않습니다. 매번 단리 이자를 받는 셈입니다.</p>
+
+      <h2>새로운 방식: AI가 직접 위키를 쓴다</h2>
+      <p>OpenAI 공동 창립자이자 테슬라 AI 총괄을 지낸 안드레이 카파시(Andrej Karpathy)가 제안한 <em>LLM Wiki</em>는 이 문제를 정면으로 뒤집습니다. 질문할 때마다 자료를 다시 조립하지 말고, AI가 미리 정리한 위키를 만들어 계속 업데이트하게 하자는 것입니다.</p>
+      <p>같은 도서관 비유로, 이번에는 사서가 책을 뽑을 때마다 노트에 핵심을 적어둡니다. 새 책이 들어오면 기존 노트를 갱신하고, 모순되는 내용은 표시하고, 관련 항목끼리 연결합니다. 시간이 지날수록 이 노트는 도서관 전체를 안내하는 지도가 됩니다.</p>
+
+      <div class="tq-diagram">
+        <div class="tq-diagram-title">세 층 구조</div>
+        <div class="tq-flow">
+          <span class="tq-flow-step">원본 자료 (Raw Sources)</span>
+          <span class="tq-flow-arrow">→</span>
+          <span class="tq-flow-step">위키 (LLM이 쓰는 마크다운)</span>
+          <span class="tq-flow-arrow">→</span>
+          <span class="tq-flow-step">스키마 (운영 규칙)</span>
+        </div>
+      </div>
+
+      <div class="tq-chain">
+        <div class="tq-chain-item"><span class="tq-chain-num">Ingest</span><div class="tq-chain-content"><h4>통합 — 새 자료가 오면 관련 페이지를 함께 갱신</h4><p>새 자료를 넣으면 LLM이 읽고 요약하고 관련 페이지를 갱신합니다. 하나의 자료가 10~15개 페이지를 동시에 건드릴 수 있습니다.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">Query</span><div class="tq-chain-content"><h4>질의 — 탐색 자체가 지식이 된다</h4><p>위키 기반으로 질문에 답하고, 좋은 답변은 다시 위키에 새 페이지로 저장됩니다.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">Lint</span><div class="tq-chain-content"><h4>점검 — 모순과 끊긴 링크를 주기적으로 청소</h4><p>페이지 간 모순, 고아 페이지, 빠진 교차 참조를 주기적으로 점검합니다.</p></div></div>
+      </div>
+
+      <h2>왜 사람이 직접 못 했을까</h2>
+      <p>위키 자체는 새로운 발명이 아닙니다. 그런데 개인이나 작은 팀의 위키는 거의 다 실패합니다. 이유는 단순합니다 — <em>유지보수가 너무 귀찮기 때문입니다</em>. 새 자료가 오면 관련 페이지 5~10개를 함께 손봐야 하고, 옛 정보를 바꾸고, 끊긴 링크를 이어야 합니다. 한두 달이면 손을 놓게 되고, 위키는 절반만 최신인 상태로 방치됩니다.</p>
+      <p>LLM은 이 부분에서 사람과 정반대입니다. 지루함을 느끼지 않고, 교차 참조 갱신을 까먹지 않으며, 한 번에 15개 파일을 동시에 손볼 수 있습니다. 유지보수 비용이 사람보다 훨씬 낮아지니, <em>위키가 커질수록 가치가 올라갑니다</em>. 카파시 본인이 약 100건의 자료, 수백 페이지 규모의 위키를 복잡한 검색 시스템 없이 마크다운 파일과 인덱스 하나만으로 운영했다고 보고했습니다. 다만 이는 1인 실험(n=1)의 사례 보고로, 조직 환경에서의 일반화는 별도 검증이 필요합니다.</p>
+
+      <h2>Naive RAG와 무엇이 다른가</h2>
+      <table class="tq-table">
+        <thead><tr><th>구분</th><th>Naive RAG</th><th>LLM Wiki</th></tr></thead>
+        <tbody>
+          <tr><td>지식 축적</td><td>매번 처음부터</td><td>계속 쌓임</td></tr>
+          <tr><td>같은 질문 반복 시</td><td>매번 새로 답 만듦</td><td>정리된 결론에서 답</td></tr>
+          <tr><td>모순된 정보</td><td>발견 못 함</td><td>AI가 표시</td></tr>
+          <tr><td>사람의 부담</td><td>자료, 질문, 검토 모두</td><td>큐레이션과 검토만</td></tr>
+          <tr><td>새 자료 통합</td><td>단순 색인</td><td>관련 페이지 자동 갱신</td></tr>
+        </tbody>
+      </table>
+      <p>다만 RAG를 대체하는 것이 아니라 보완하는 관계입니다. 수백만 건 문서의 정밀 검색, 실시간 데이터, 접근 권한 통제가 필요한 영역은 여전히 RAG(및 그 변형)가 잘하는 자리입니다. 실전에서는 위키가 "정리된 결론"을, RAG가 "원본 정밀 검색"을 맡는 하이브리드가 현실적인 답입니다.</p>
+
+      <h2>누가 어떻게 쓰는가: 5가지 대표 시나리오</h2>
+      <div class="tq-chain">
+        <div class="tq-chain-item"><span class="tq-chain-num">01</span><div class="tq-chain-content"><h4>박사 과정 리서치 위키</h4><p>100편 이상의 논문을 읽어도 한 달 후면 어디서 무엇을 봤는지 기억나지 않습니다. 새 논문을 읽을 때마다 LLM이 요약 페이지를 만들고 저자·방법론·결과 페이지와 자동 연결하면, 논문 제출 시점에 인용과 비교 분석을 즉시 회수할 수 있습니다.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">02</span><div class="tq-chain-content"><h4>스타트업 기술 의사결정 위키</h4><p>기술 선택의 근거가 슬랙과 노션 곳곳에 흩어져 "왜 이걸 골랐더라"를 반복하는 팀에게, 결정과 근거가 축적되는 살아있는 기록이 됩니다.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">03</span><div class="tq-chain-content"><h4>컨설팅 펌의 클라이언트별 지식 베이스</h4><p>프로젝트가 끝나면 담당자의 머릿속에만 남던 클라이언트 맥락을, 조직이 읽을 수 있는 종합 문서로 전환합니다.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">04</span><div class="tq-chain-content"><h4>엔지니어링 팀의 장애 회고 위키</h4><p>포스트모템이 개별 문서로 잠들지 않고, 유사 장애·근본 원인·재발 방지책이 교차 연결된 지식망으로 자랍니다.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">05</span><div class="tq-chain-content"><h4>의료/법률 사례 데이터베이스</h4><p>사례가 쌓일수록 판단 기준이 정교해지는 도메인에서, 정리된 사례 비교가 즉시 회수 가능한 자산이 됩니다.</p></div></div>
+      </div>
+
+      <div class="tq-highlight">
+        <h3>Agentic AI와는 다른 계층의 도구</h3>
+        <p>에이전트가 "일을 대신 해주는 손"이라면, LLM Wiki는 그 손이 참조하는 <em>"조직의 기억"</em>입니다. 에이전트 하네스가 작업 실행의 안정성을 다룬다면, LLM Wiki는 작업의 결과와 맥락이 다음 작업에 복리로 재사용되게 만듭니다. 두 계층이 결합될 때 — 에이전트가 일을 하고, 그 결과가 위키에 쌓이고, 다음 에이전트가 위키를 읽고 시작할 때 — 조직의 AI 활용은 단리에서 복리로 바뀝니다.</p>
+      </div>
+
+      <h2>결론: 질문은 "무엇이 더 좋은가"가 아니라 "언제 무엇을 쓰는가"</h2>
+      <p>LLM Wiki는 RAG의 대체재가 아니라, 그동안 비어 있던 계층 — <em>정리된 지식의 축적</em> — 을 채우는 도구입니다. 자료가 수십~수백 건 규모이고, 같은 주제로 반복해서 질문하며, 결론의 재사용이 중요한 워크로드라면 위키가 답입니다. 수백만 건의 정밀 검색과 실시간성이 필요하면 RAG입니다. 그리고 대부분의 조직은 결국 둘을 함께 쓰게 될 것입니다.</p>
+
+      <div class="tq-tags">
+        <span class="tq-tag">LLM Wiki</span>
+        <span class="tq-tag">지식 관리</span>
+        <span class="tq-tag">RAG</span>
+        <span class="tq-tag">Karpathy</span>
+        <span class="tq-tag">Agentic AI</span>
+        <span class="tq-tag">Tech Brief</span>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2026 Jihwan Woo</p>
+  </footer>
+</body>
+</html>
