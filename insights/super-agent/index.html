@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XW0TCQDB5V"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XW0TCQDB5V');
+</script>
+<meta name="description" content="금융 슈퍼에이전트 — UI Native 슈퍼앱 트래픽 경쟁에서 고객의 목적을 대행하는 Agent Native로. 금융그룹의 위기와 기회, 레퍼런스 아키텍처와 임베디드 전략을 담은 인사이트 덱.">
+<meta property="og:title" content="금융 슈퍼에이전트 — UI Native에서 Agent Native로">
+<meta property="og:description" content="슈퍼앱 트래픽 경쟁에서 AI 에이전트로의 주도권 이동. 금융그룹의 전략과 레퍼런스 아키텍처.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://jihwanw.github.io/assets/images/profile/photo_jhwoo.jpeg">
+<link rel="canonical" href="https://jihwanw.github.io/insights/super-agent/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>금융 슈퍼에이전트, UI Native에서 Agent Native로</title>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --bg:#0a0f1e; --bg2:#101830; --panel:#151f3d; --panel2:#1a2648;
+  --ink:#eef2ff; --sub:#94a3c7; --dim:#5c6b94;
+  --acc:#4f8cff; --acc2:#2dd4bf; --warn:#f59e0b; --danger:#f4577a; --good:#34d399;
+  --grad:linear-gradient(100deg,#4f8cff,#2dd4bf);
+  --awsml:#01a88d; --awssec:#dd344c; --awsdb:#527fff; --awsint:#e7157b; --awscmp:#ed7100; --awsnet:#8c4fff;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;background:#000;font-family:'Pretendard Variable',Pretendard,-apple-system,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:var(--ink);overflow:hidden}
+#stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+#deck{width:1280px;height:720px;position:relative;transform-origin:center center}
+.slide{position:absolute;inset:0;padding:58px 84px 46px;display:none;flex-direction:column;background:radial-gradient(1200px 800px at 80% -10%,#16224a 0%,var(--bg) 55%);overflow:hidden}
+.slide.active{display:flex;animation:in .45s ease}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.kicker{font-size:14px;font-weight:800;letter-spacing:.18em;color:var(--acc2);text-transform:uppercase;margin-bottom:16px}
+.kicker .n{color:var(--dim);margin-right:10px}
+h1{font-size:40px;font-weight:800;line-height:1.35;letter-spacing:-.01em;white-space:nowrap}
+.center h1,.wrap h1{white-space:normal}
+h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{margin-top:12px;font-size:17px;color:var(--sub);line-height:1.55}
+.viz{flex:1;display:flex;align-items:center;justify-content:center;min-height:0;margin-top:22px}
+.caption{font-size:14px;color:var(--dim);margin-top:14px;text-align:center}
+.grid{display:grid;gap:18px;width:100%}
+.card{background:var(--panel);border:1px solid #26335c;border-radius:16px;padding:22px 24px}
+.card h3{font-size:19px;font-weight:800;margin-bottom:8px}
+.card p{font-size:15px;color:var(--sub);line-height:1.55}
+.card .tag{display:inline-block;font-size:12px;font-weight:800;letter-spacing:.08em;padding:3px 10px;border-radius:999px;margin-bottom:10px}
+.tag.b{background:#1d3a6e;color:#8db6ff}.tag.t{background:#123f3b;color:#5eead4}.tag.o{background:#4a3312;color:#fbbf24}.tag.r{background:#4a1a2b;color:#fb7ea1}
+.big{font-size:60px;font-weight:800;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1.1}
+.flow{display:flex;align-items:center;gap:0;width:100%;justify-content:center}
+.fbox{background:var(--panel);border:1px solid #2c3a68;border-radius:14px;padding:18px 20px;text-align:center;flex:1;min-width:0}
+.fbox b{display:block;font-size:18px;margin-bottom:6px}
+.fbox span{font-size:13.5px;color:var(--sub);line-height:1.45;display:block}
+.farrow{font-size:26px;color:var(--acc);padding:0 14px;flex:0 0 auto}
+.hl{color:var(--acc2);font-weight:800}
+.hd{color:var(--danger);font-weight:800}
+.footer{position:absolute;bottom:22px;left:84px;right:84px;display:flex;justify-content:space-between;font-size:12px;color:#3c4a75}
+#bar{position:fixed;top:0;left:0;height:3px;background:var(--grad);z-index:10;transition:width .3s}
+#pn{position:fixed;bottom:14px;right:20px;font-size:12.5px;color:#55628c;z-index:10;font-variant-numeric:tabular-nums}
+.center{align-items:center;justify-content:center;text-align:center}
+.center h1{font-size:54px}
+ul.pts{list-style:none;font-size:18px;line-height:1.6}
+ul.pts li{padding:10px 0 10px 34px;position:relative}
+ul.pts li::before{content:"";position:absolute;left:6px;top:20px;width:9px;height:9px;border-radius:50%;background:var(--acc)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:26px;width:100%;align-items:stretch}
+.vs{position:relative}
+.vs::after{content:"VS";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:var(--bg);border:2px solid var(--acc);color:var(--acc);font-weight:800;font-size:15px;border-radius:999px;padding:8px 12px;z-index:2}
+table.tbl{width:100%;border-collapse:collapse;font-size:16.5px}
+table.tbl td{padding:13px 16px;border-bottom:1px solid #202c52;color:var(--sub);line-height:1.45}
+table.tbl td:first-child{color:var(--ink);font-weight:700}
+table.tbl td.a{color:var(--acc2);font-weight:700}
+.pill{display:inline-flex;align-items:center;gap:8px;background:var(--panel);border:1px solid #2c3a68;border-radius:999px;padding:8px 16px;font-size:14px;color:var(--sub)}
+.stack{display:flex;flex-direction:column;gap:11px;width:100%}
+.layer{display:grid;grid-template-columns:190px 1fr;gap:16px;align-items:stretch}
+.layer .lab{background:#1d2b55;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;padding:12px;text-align:center;line-height:1.35}
+.layer .lab small{margin-left:7px}
+.layer .body{background:var(--panel);border:1px solid #2c3a68;border-radius:12px;padding:11px 15px;display:flex;gap:9px;flex-wrap:wrap;align-items:center}
+.chip{background:#0f1a38;border:1px solid #33406e;border-radius:9px;padding:7px 13px;font-size:13.5px;color:#c3d0f0;font-weight:600;display:inline-flex;align-items:center;gap:8px}
+.chip.g{border-color:var(--acc2);color:var(--acc2)}
+.chip.w{border-color:var(--warn);color:var(--warn)}
+.aws{width:20px;height:20px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:9.5px;font-weight:800;color:#fff;flex:0 0 auto;font-family:'Pretendard Variable',sans-serif}
+.aws.ml{background:linear-gradient(135deg,#01a88d,#026e5c)}
+.aws.sec{background:linear-gradient(135deg,#dd344c,#8a1f30)}
+.aws.db{background:linear-gradient(135deg,#527fff,#2f4fb5)}
+.aws.int{background:linear-gradient(135deg,#e7157b,#93104f)}
+.aws.cmp{background:linear-gradient(135deg,#ed7100,#9a4a00)}
+.aws.net{background:linear-gradient(135deg,#8c4fff,#5a2fb0)}
+svg text{font-family:inherit}
+.qbig{font-size:40px;font-weight:800;line-height:1.5}
+.reflist{list-style:none;font-size:15px;color:var(--sub);line-height:1.5;columns:2;column-gap:44px}
+.reflist li{padding:9px 0 9px 26px;position:relative;break-inside:avoid}
+.reflist li::before{content:"▸";position:absolute;left:4px;color:var(--acc)}
+</style>
+</head>
+<body>
+<a href="../../index.html#insights" style="position:fixed;top:12px;left:16px;z-index:20;color:#94a3c7;text-decoration:none;font-size:12.5px;font-family:inherit;opacity:.75;">← jihwanw.github.io</a>
+
+<div id="bar"></div><div id="pn"></div>
+<div id="stage"><div id="deck">
+
+<!-- ═══════ 0. 표지 ═══════ -->
+<section class="slide center">
+  <div class="kicker">FINANCIAL SUPER-AGENT STRATEGY · 2026</div>
+  <h1 style="font-size:58px">앱의 시대가 저물고,<br><em>에이전트의 시대</em>가 오고 있습니다</h1>
+  <p style="margin-top:26px;font-size:21px;color:var(--sub)">UI Native에서 Agent Native로. 금융그룹 앞에 놓인 위기와 기회, 그리고 하나의 설계도</p>
+  <div style="margin-top:44px;display:flex;gap:12px">
+    <span class="pill">패러다임 전환</span><span class="pill">해외 사례</span><span class="pill">아키텍처</span><span class="pill">임베디드 전략</span>
+  </div>
+  <div class="footer"><span>금융 슈퍼에이전트 전략 세미나</span><span>60 min</span></div>
+</section>
+
+<!-- ═══════ 1. 오프닝 질문 ═══════ -->
+<section class="slide center">
+  <div class="kicker"><span class="n">Q</span>하나의 질문에서 시작하겠습니다</div>
+  <p class="qbig">"5년 뒤에도 고객은<br>우리 <em style="font-style:normal;color:var(--acc)">앱을 열어서</em> 메뉴를 누르고 있을까요?"</p>
+  <p style="margin-top:30px;font-size:19px;color:var(--sub)">아니면, 고객의 AI 에이전트가 우리를 <b class="hd">대신 호출</b>하고 있을까요?<br><br>
+  <span style="font-size:17px;color:var(--dim)">단정하기는 이릅니다만, 제가 지켜본 변화의 신호들을 근거와 함께 말씀드리고자 합니다.</span></p>
+</section>
+
+<!-- ═══════ 2. 로드맵 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">AGENDA</span>미리 말씀드리는 결론</div>
+  <h1>결론부터: 접점은 앱에서 <em>에이전트</em>로 이동합니다</h1>
+  <p class="sub">금융그룹은 신뢰받는 대행자가 되거나, 보이지 않는 공급자가 될 것입니다. 그 근거를 네 단계로 살펴보겠습니다.</p>
+  <div class="viz"><div class="flow">
+    <div class="fbox"><b style="color:var(--acc)">① 패러다임 전환</b><span>메뉴·버튼에서<br>목적 대행으로<br><i style="color:var(--dim)">15분</i></span></div>
+    <div class="farrow">→</div>
+    <div class="fbox"><b style="color:var(--danger)">② 금융사의 위기</b><span>접점을 잃으면<br>백엔드 공급자로<br><i style="color:var(--dim)">15분</i></span></div>
+    <div class="farrow">→</div>
+    <div class="fbox"><b style="color:var(--good)">③ 기회와 해외 사례</b><span>금융 슈퍼에이전트,<br>앞서간 회사들<br><i style="color:var(--dim)">15분</i></span></div>
+    <div class="farrow">→</div>
+    <div class="fbox"><b style="color:var(--acc2)">④ 아키텍처 &amp; 임베디드</b><span>설계도와<br>고객 삶 속의 전략<br><i style="color:var(--dim)">15분</i></span></div>
+  </div></div>
+</section>
+
+<!-- ═══════ PART 1 표지 ═══════ -->
+<section class="slide center">
+  <div class="kicker">PART 1</div>
+  <h1 style="font-size:56px">패러다임의 전환</h1>
+  <p style="margin-top:22px;font-size:22px;color:var(--sub)">메뉴와 버튼의 경쟁에서, <b class="hl">목적 대행</b>의 경쟁으로</p>
+</section>
+
+<!-- ═══════ 4. 슈퍼앱 전쟁 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">1-1</span>지난 10년의 게임</div>
+  <h1>지난 10년, 승부처는 <em>고객의 손가락</em>이었습니다</h1>
+  <p class="sub">더 많은 방문, 더 긴 체류. 국내외 모든 슈퍼앱이 같은 트랙 위에서 경쟁해 왔습니다.</p>
+  <div class="viz">
+    <svg viewBox="0 0 1100 320" width="100%">
+      <rect x="60" y="10" width="180" height="300" rx="22" fill="#151f3d" stroke="#2c3a68" stroke-width="2"/>
+      <rect x="80" y="40" width="140" height="34" rx="8" fill="#1d3a6e"/><text x="150" y="62" fill="#8db6ff" font-size="14" text-anchor="middle" font-weight="700">홈 · 배너 · 광고</text>
+      <g font-size="12" fill="#94a3c7" text-anchor="middle">
+        <rect x="80" y="86" width="64" height="52" rx="8" fill="#0f1a38"/><text x="112" y="116">조회</text>
+        <rect x="156" y="86" width="64" height="52" rx="8" fill="#0f1a38"/><text x="188" y="116">이체</text>
+        <rect x="80" y="148" width="64" height="52" rx="8" fill="#0f1a38"/><text x="112" y="178">대출</text>
+        <rect x="156" y="148" width="64" height="52" rx="8" fill="#0f1a38"/><text x="188" y="178">보험</text>
+        <rect x="80" y="210" width="64" height="52" rx="8" fill="#0f1a38"/><text x="112" y="240">쇼핑</text>
+        <rect x="156" y="210" width="64" height="52" rx="8" fill="#0f1a38"/><text x="188" y="240">배달</text>
+      </g>
+      <text x="150" y="292" fill="#5c6b94" font-size="13" text-anchor="middle">메뉴 · 버튼 · 탭 = UI Native</text>
+      <g text-anchor="middle">
+        <text x="420" y="70" fill="#eef2ff" font-size="20" font-weight="800">경쟁의 룰</text>
+        <rect x="320" y="95" width="200" height="46" rx="10" fill="#151f3d" stroke="#2c3a68"/><text x="420" y="124" fill="#94a3c7" font-size="15">MAU · DAU</text>
+        <rect x="320" y="151" width="200" height="46" rx="10" fill="#151f3d" stroke="#2c3a68"/><text x="420" y="180" fill="#94a3c7" font-size="15">체류시간 · 트래픽</text>
+        <rect x="320" y="207" width="200" height="46" rx="10" fill="#151f3d" stroke="#2c3a68"/><text x="420" y="236" fill="#94a3c7" font-size="15">앱 안에 기능 집적</text>
+      </g>
+      <g text-anchor="middle">
+        <text x="800" y="70" fill="#eef2ff" font-size="20" font-weight="800">모두가 같은 게임을 했습니다</text>
+        <g font-size="14" fill="#c3d0f0">
+          <rect x="600" y="95" width="120" height="44" rx="10" fill="#1d2b55"/><text x="660" y="122">WeChat</text>
+          <rect x="735" y="95" width="120" height="44" rx="10" fill="#1d2b55"/><text x="795" y="122">Alipay</text>
+          <rect x="870" y="95" width="120" height="44" rx="10" fill="#1d2b55"/><text x="930" y="122">Grab</text>
+          <rect x="600" y="151" width="120" height="44" rx="10" fill="#1d2b55"/><text x="660" y="178">Gojek</text>
+          <rect x="735" y="151" width="120" height="44" rx="10" fill="#1d2b55"/><text x="795" y="178">Revolut</text>
+          <rect x="870" y="151" width="120" height="44" rx="10" fill="#1d2b55"/><text x="930" y="178">토스·카카오</text>
+        </g>
+        <text x="795" y="235" fill="#5c6b94" font-size="14">국내 금융지주의 슈퍼앱들도 같은 트랙 위에 있습니다</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════ 5. 균열의 신호 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">1-2</span>균열의 신호</div>
+  <h1>고객은 이제 '찾지' 않고, <em>'시키기'</em> 시작했습니다</h1>
+  <p class="sub">개별 수치보다, 세 지표가 같은 방향을 가리키고 있다는 점에 주목할 필요가 있습니다.</p>
+  <div class="viz"><div class="grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card" style="text-align:center">
+      <div class="big">+1,200%</div>
+      <h3 style="margin-top:8px">생성형 AI발(發) 리테일 트래픽</h3>
+      <p>미국 리테일 사이트로 유입되는 AI 소스 트래픽 증가율 (Adobe Analytics, '24.7→'25.2)</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div class="big">42%</div>
+      <h3 style="margin-top:8px">"AI가 대신 쇼핑해도 좋다"</h3>
+      <p>최소 1개 카테고리에서 AI 에이전트에게 구매를 맡기겠다는 소비자 (CBA 백서, 2026.1)</p>
+    </div>
+    <div class="card" style="text-align:center">
+      <div class="big">1.2억 건</div>
+      <h3 style="margin-top:8px">단 1주일의 AI 결제</h3>
+      <p>Alipay AI Pay 주간 처리 건수 (2026.2, Ant Group). 에이전트 결제는 이미 일상이 되고 있습니다</p>
+    </div>
+  </div></div>
+  <p class="caption">'검색과 탐색'이 '위임과 대행'으로 바뀌는 흐름은, 통계로 이미 확인되고 있습니다.</p>
+</section>
+
+<!-- ═══════ 6. UI Native vs Agent Native ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">1-3</span>두 패러다임</div>
+  <h1>경쟁의 단위가 기능에서 <em>과업의 완결</em>로 바뀝니다</h1>
+  <div class="viz"><div class="two vs">
+    <div class="card" style="border-color:#3c4a75">
+      <span class="tag b">UI NATIVE, 어제까지의 세계</span>
+      <table class="tbl">
+        <tr><td>주인공</td><td>화면 · 메뉴 · 버튼</td></tr>
+        <tr><td>고객 역할</td><td>직접 탐색하고 조작</td></tr>
+        <tr><td>승부처</td><td>트래픽 · 체류시간</td></tr>
+        <tr><td>단위</td><td>"기능(Feature)"</td></tr>
+        <tr><td>예시</td><td>"환전 메뉴가 어디였지?"</td></tr>
+      </table>
+    </div>
+    <div class="card" style="border-color:var(--acc2)">
+      <span class="tag t">AGENT NATIVE, 다가오는 세계</span>
+      <table class="tbl">
+        <tr><td>주인공</td><td class="a">목적(Intent) · 대화</td></tr>
+        <tr><td>고객 역할</td><td class="a">목적만 말하고 위임</td></tr>
+        <tr><td>승부처</td><td class="a">신뢰 · 실행 권한(위임)</td></tr>
+        <tr><td>단위</td><td class="a">"과업 완결(Outcome)"</td></tr>
+        <tr><td>예시</td><td class="a">"다음주 오사카, 알아서 준비해줘"</td></tr>
+      </table>
+    </div>
+  </div></div>
+  <p class="caption">"몇 명이 들어왔는가"에서 "몇 개의 목적을 대신 완수했는가"로, KPI 자체가 달라집니다.</p>
+</section>
+
+<!-- ═══════ 7. 인터페이스의 역사 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">1-4</span>역사의 참고</div>
+  <h1>접점이 바뀔 때마다, <em>주도권도 함께 움직였습니다</em></h1>
+  <p class="sub">역사가 그대로 반복된다고 단정할 수는 없습니다. 다만 두 번의 전환에서 금융권은 추격자였고, 이번에는 다를 수 있다는 점이 중요합니다.</p>
+  <div class="viz">
+    <svg viewBox="0 0 1100 300" width="100%">
+      <line x1="60" y1="235" x2="1050" y2="235" stroke="#2c3a68" stroke-width="2"/>
+      <g text-anchor="middle">
+        <circle cx="170" cy="235" r="8" fill="#4f8cff"/>
+        <text x="170" y="272" fill="#94a3c7" font-size="15" font-weight="700">1995~ 웹 브라우저</text>
+        <rect x="90" y="80" width="160" height="120" rx="14" fill="#151f3d" stroke="#2c3a68"/>
+        <text x="170" y="112" fill="#eef2ff" font-size="15" font-weight="800">포털·검색의 시대</text>
+        <text x="170" y="140" fill="#94a3c7" font-size="13">주도: Google, Naver</text>
+        <text x="170" y="165" fill="#5c6b94" font-size="12.5">은행은 '인터넷뱅킹'으로</text>
+        <text x="170" y="183" fill="#5c6b94" font-size="12.5">뒤이어 적응</text>
+        <circle cx="470" cy="235" r="8" fill="#4f8cff"/>
+        <text x="470" y="272" fill="#94a3c7" font-size="15" font-weight="700">2008~ 스마트폰 앱</text>
+        <rect x="390" y="80" width="160" height="120" rx="14" fill="#151f3d" stroke="#2c3a68"/>
+        <text x="470" y="112" fill="#eef2ff" font-size="15" font-weight="800">앱·슈퍼앱의 시대</text>
+        <text x="470" y="140" fill="#94a3c7" font-size="13">주도: Apple, 위챗, 토스</text>
+        <text x="470" y="165" fill="#5c6b94" font-size="12.5">은행은 '모바일뱅킹'으로</text>
+        <text x="470" y="183" fill="#5c6b94" font-size="12.5">다시 한 번 추격</text>
+        <circle cx="800" cy="235" r="11" fill="#2dd4bf"/>
+        <circle cx="800" cy="235" r="18" fill="none" stroke="#2dd4bf" stroke-opacity=".4" stroke-width="2"/>
+        <text x="800" y="272" fill="#2dd4bf" font-size="15" font-weight="800">2025~ AI 에이전트</text>
+        <rect x="700" y="60" width="200" height="140" rx="14" fill="#123f3b" stroke="#2dd4bf"/>
+        <text x="800" y="94" fill="#eef2ff" font-size="15" font-weight="800">대행(Agency)의 시대</text>
+        <text x="800" y="122" fill="#5eead4" font-size="13">주도: 아직 정해지지 않음</text>
+        <text x="800" y="150" fill="#94a3c7" font-size="12.5">추격이 아니라 선점이</text>
+        <text x="800" y="168" fill="#94a3c7" font-size="12.5">가능한 첫 전환기</text>
+      </g>
+      <text x="1000" y="225" fill="#5c6b94" font-size="13" text-anchor="middle">▶ 시간</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════ 8. OS 에이전트 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">1-5</span>이미 일어난 변화</div>
+  <h1>가장 가까운 자리에 <em>이미 에이전트가 앉았습니다</em></h1>
+  <p class="sub">OS, 브라우저, 메신저. 접점 중의 접점을 빅테크의 에이전트가 차지해 가고 있습니다.</p>
+  <div class="viz"><div class="grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card"><span class="tag o">OPENAI</span>
+      <h3>ChatGPT Agent / Operator</h3>
+      <p>웹사이트를 사람처럼 탐색·클릭·로그인·구매까지 수행하는 Computer-Using Agent. 앱의 화면을 <b class="hd">사람 대신 조작</b>합니다.</p></div>
+    <div class="card"><span class="tag o">APPLE × GOOGLE</span>
+      <h3>Siri + Gemini (WWDC 2026)</h3>
+      <p>커스텀 Gemini 기반의 새 Siri. 수억 대의 iPhone에 <b class="hd">OS 레벨 에이전트</b>가 기본 탑재됩니다.</p></div>
+    <div class="card"><span class="tag o">GOOGLE / ANTHROPIC</span>
+      <h3>Gemini · Claude + MCP/A2A</h3>
+      <p>에이전트가 외부 서비스를 도구처럼 호출하는 <b class="hd">표준 프로토콜</b> 생태계가 빠르게 자리잡고 있습니다.</p></div>
+  </div></div>
+  <p class="caption">금융이 그 '뒤'에 설지, '옆'에 설지는 지금부터의 선택에 달려 있다고 봅니다.</p>
+</section>
+
+<!-- ═══════ 9. Part1 정리 ═══════ -->
+<section class="slide center">
+  <div class="kicker">PART 1 정리</div>
+  <p class="qbig">고객의 '시간'을 뺏는 경쟁에서,<br>고객의 '권한'을 위임받는 경쟁으로<br><br>
+  <span style="color:var(--dim);font-size:26px">트래픽 (Traffic)</span><br><span style="font-size:30px;color:var(--dim)">↓</span><br><em style="font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">위임 (Delegation)</em></p>
+</section>
+
+<!-- ═══════ PART 2 표지 ═══════ -->
+<section class="slide center">
+  <div class="kicker">PART 2</div>
+  <h1 style="font-size:56px;color:var(--danger)">금융사의 위기</h1>
+  <p style="margin-top:22px;font-size:22px;color:var(--sub)">접점을 잃으면, <b class="hd">'백엔드 상품 공급자'</b>로 밀려날 수 있습니다</p>
+</section>
+<!-- ═══════ 11. 탈중개화 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">2-1</span>위기의 구조</div>
+  <h1>접점을 잃은 은행은 <em>익명의 공급자</em>가 됩니다</h1>
+  <div class="viz">
+    <svg viewBox="0 0 1100 330" width="100%">
+      <text x="60" y="28" fill="#94a3c7" font-size="16" font-weight="800">지금까지</text>
+      <g text-anchor="middle" font-size="14.5">
+        <rect x="60" y="46" width="150" height="60" rx="12" fill="#151f3d" stroke="#2c3a68"/><text x="135" y="82" fill="#eef2ff">고객</text>
+        <text x="255" y="82" fill="#4f8cff" font-size="22">→</text>
+        <rect x="300" y="46" width="220" height="60" rx="12" fill="#1d3a6e" stroke="#4f8cff"/><text x="410" y="74" fill="#8db6ff" font-weight="800">은행 앱 (우리 브랜드)</text><text x="410" y="94" fill="#5c6b94" font-size="12">관계 · 데이터 · 교차판매</text>
+        <text x="565" y="82" fill="#4f8cff" font-size="22">→</text>
+        <rect x="610" y="46" width="180" height="60" rx="12" fill="#151f3d" stroke="#2c3a68"/><text x="700" y="82" fill="#eef2ff">금융 상품</text>
+      </g>
+      <text x="60" y="174" fill="#fb7ea1" font-size="16" font-weight="800">Agent Native 세계, 대응하지 않을 경우</text>
+      <g text-anchor="middle" font-size="14.5">
+        <rect x="60" y="192" width="150" height="60" rx="12" fill="#151f3d" stroke="#2c3a68"/><text x="135" y="228" fill="#eef2ff">고객</text>
+        <text x="255" y="228" fill="#f4577a" font-size="22">→</text>
+        <rect x="300" y="192" width="220" height="60" rx="12" fill="#4a1a2b" stroke="#f4577a"/><text x="410" y="220" fill="#fb7ea1" font-weight="800">빅테크 / OS 에이전트</text><text x="410" y="240" fill="#c98a9c" font-size="12">관계 · 데이터 · 선택권 독점</text>
+        <text x="565" y="228" fill="#f4577a" font-size="22">→</text>
+        <rect x="610" y="192" width="180" height="60" rx="12" fill="#10182f" stroke="#33406e" stroke-dasharray="6 4"/><text x="700" y="220" fill="#5c6b94">은행 A·B·C…</text><text x="700" y="240" fill="#3c4a75" font-size="12">비교당하는 API 상품</text>
+      </g>
+      <rect x="830" y="110" width="240" height="140" rx="14" fill="#1a0f18" stroke="#f4577a"/>
+      <text x="950" y="142" fill="#fb7ea1" font-size="15" font-weight="800" text-anchor="middle">잃게 되는 세 가지</text>
+      <text x="950" y="174" fill="#e2b6c4" font-size="13.5" text-anchor="middle">① 고객 관계 · 브랜드</text>
+      <text x="950" y="200" fill="#e2b6c4" font-size="13.5" text-anchor="middle">② 행동 데이터</text>
+      <text x="950" y="226" fill="#e2b6c4" font-size="13.5" text-anchor="middle">③ 가격 결정력 (마진)</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════ 12. 통신사 데자뷰 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">2-2</span>이미 본 영화</div>
+  <h1>규제라는 방패도 <em>접점의 상실은 막지 못했습니다</em></h1>
+  <p class="sub">통신산업의 경험은 겸허하게 참고할 가치가 있습니다. 물론 금융과 통신은 다릅니다만, 구조적 유사성은 부인하기 어렵습니다.</p>
+  <div class="viz"><div class="two">
+    <div class="card">
+      <span class="tag r">통신사 (2007~)</span>
+      <h3>스마트폰 이후의 통신사</h3>
+      <p style="font-size:16px">고객 접점(문자·통화·미디어)을 앱 생태계에 내주고,<br><br>
+      <b class="hd">"트래픽을 나르는 인프라"</b>로 물러났습니다.<br><br>
+      메신저가 문자를, 스트리밍이 미디어를, 앱스토어가 유통을 가져갔고, 수익은 정체되고 밸류에이션은 유틸리티 수준에 머물렀습니다.</p>
+    </div>
+    <div class="card">
+      <span class="tag r">은행 (2026~?)</span>
+      <h3>에이전트 이후의 은행?</h3>
+      <p style="font-size:16px">고객 접점(조회·이체·상담·추천)을 OS 에이전트에 내준다면,<br><br>
+      <b class="hd">"자본을 나르는 인프라"</b>로 물러날 수 있습니다.<br><br>
+      McKinsey도 같은 우려를 내놓았습니다. "3~5년 내 AI 에이전트가 뱅킹 상호작용의 기본 채널이 되면, 리테일 은행은 고객관계의 주도권을 잃을 수 있다."</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- ═══════ 13. 결제 레일 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">2-3</span>문 앞에 온 신호</div>
+  <h1>카드 네트워크는 이미 <em>에이전트에게 지갑</em>을 쥐여줬습니다</h1>
+  <p class="sub">인프라 표준은 은행을 기다려주지 않습니다. 레일은 지금 깔리고 있습니다.</p>
+  <div class="viz"><div class="grid" style="grid-template-columns:repeat(2,1fr)">
+    <div class="card"><span class="tag b">VISA</span><h3>Visa Intelligent Commerce</h3>
+      <p>"AI-Ready Card". 카드정보를 토큰화된 자격증명으로 대체하여, <b class="hl">특정 에이전트에게 한도 내 결제 권한을 위임</b>. 100여 개 파트너와 출시.</p></div>
+    <div class="card"><span class="tag b">MASTERCARD</span><h3>Agent Pay → "Agent Pay for Machines"</h3>
+      <p>Agentic Token 기반. 2026년 미국 전체 카드홀더로 확대. <b class="hl">기계간(M2M) 초고속 마이크로결제</b>까지 선언했습니다.</p></div>
+    <div class="card"><span class="tag b">GOOGLE 진영</span><h3>AP2 (Agent Payments Protocol)</h3>
+      <p>Visa·Mastercard·Stripe가 모두 참여. 에이전트의 결제 의사를 검증하는 <b class="hl">'위임 증명' 표준</b>이 만들어지고 있습니다.</p></div>
+    <div class="card"><span class="tag b">STRIPE</span><h3>에이전트 전용 지갑 · 1회용 카드</h3>
+      <p>에이전트가 스스로 지갑을 보유하고 1회용 카드를 발급하며 실시간 마이크로페이먼트를 처리합니다. <b class="hl">'에이전트가 고객'</b>인 시대의 인프라입니다.</p></div>
+  </div></div>
+</section>
+
+<!-- ═══════ 14. 갈림길 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">2-4</span>전략적 갈림길</div>
+  <h1>세 번째 길의 자격은 <em>금융그룹에게 있습니다</em></h1>
+  <div class="viz"><div class="grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card" style="border-color:#f4577a">
+      <span class="tag r">시나리오 A · 전락</span><h3>백엔드 공급자</h3>
+      <p>빅테크 에이전트 뒤의 익명 API.<br>가격 비교만 당하는 커머디티.<br><br><b class="hd">마진↓ 데이터↓ 브랜드↓</b></p></div>
+    <div class="card" style="border-color:#f59e0b">
+      <span class="tag o">시나리오 B · 종속</span><h3>제휴 입점자</h3>
+      <p>타사 에이전트 생태계에 '공식 파트너'로 입점. 접점은 없지만 선택 우선권은 확보.<br><br><b style="color:var(--warn)">생존하되, 주도하지 못함</b></p></div>
+    <div class="card" style="border-color:#2dd4bf;background:#0f2a28">
+      <span class="tag t">시나리오 C · 주도</span><h3>슈퍼에이전트 운영자</h3>
+      <p>그룹의 신뢰·데이터·라이선스로 <b class="hl">고객의 금융 에이전트를 직접 운영</b>하고, 타 생태계에도 동시에 임베드.<br><br><b class="hl">접점과 공급을 함께 지킴</b></p></div>
+  </div></div>
+  <p class="caption">셋 중 무엇이 될지는 시장이 아니라, 지금부터의 우리 선택이 정한다고 생각합니다.</p>
+</section>
+
+<!-- ═══════ PART 3 표지 ═══════ -->
+<section class="slide center">
+  <div class="kicker">PART 3</div>
+  <h1 style="font-size:56px;color:var(--good)">기회, 금융 슈퍼에이전트</h1>
+  <p style="margin-top:22px;font-size:22px;color:var(--sub)">위기의 이유가 곧 기회의 이유입니다: <b class="hl">신뢰, 데이터, 라이선스</b></p>
+</section>
+
+<!-- ═══════ 16. 왜 금융그룹인가 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">3-1</span>금융그룹의 자산</div>
+  <h1>본질은 지능이 아니라 <em>신뢰할 수 있는 실행</em>입니다</h1>
+  <p class="sub">그리고 그것은 오래전부터 금융업의 본업이었습니다. 빅테크가 단기간에 갖추기 어려운 세 가지가 있습니다.</p>
+  <div class="viz"><div class="grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card"><div class="big" style="font-size:40px">🛡</div><h3>신뢰와 책임 (Trust)</h3>
+      <p>돈이 오가는 대행에는 <b class="hl">'틀렸을 때 책임지는 주체'</b>가 필요합니다. 예금자보호·금융규제·수십 년의 신뢰는 하루아침에 만들어지지 않습니다.</p></div>
+    <div class="card"><div class="big" style="font-size:40px">◈</div><h3>돈의 데이터 (Data)</h3>
+      <p>수입·지출·자산·부채·보험. 고객의 재무 전체를 아는 드문 사업자입니다. 에이전트의 품질은 <b class="hl">컨텍스트의 품질</b>이 좌우합니다.</p></div>
+    <div class="card"><div class="big" style="font-size:40px">⚖</div><h3>실행 라이선스 (License)</h3>
+      <p>추천은 누구나 할 수 있지만, <b class="hl">계좌 개설·대출 실행·보험 인수</b>는 라이선스 사업자만 가능합니다. 마지막 1마일은 우리에게 있습니다.</p></div>
+  </div></div>
+</section>
+
+<!-- ═══════ 17. 정의 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">3-2</span>비전의 정의</div>
+  <h1>앱의 합집합이 아니라 <em>고객당 하나의 지능형 접점</em></h1>
+  <p class="sub">금융 슈퍼에이전트란, 고객 삶의 재무적 목적을 통째로 맡는 단일 대행자입니다.</p>
+  <div class="viz">
+    <svg viewBox="0 0 1100 330" width="100%">
+      <circle cx="550" cy="165" r="88" fill="#123f3b" stroke="#2dd4bf" stroke-width="2.5"/>
+      <text x="550" y="156" fill="#5eead4" font-size="19" font-weight="800" text-anchor="middle">금융</text>
+      <text x="550" y="183" fill="#5eead4" font-size="19" font-weight="800" text-anchor="middle">슈퍼에이전트</text>
+      <g text-anchor="middle" font-size="14.5">
+        <line x1="550" y1="77" x2="550" y2="48" stroke="#2dd4bf" stroke-opacity=".5"/>
+        <rect x="440" y="8" width="220" height="42" rx="10" fill="#151f3d" stroke="#2c3a68"/><text x="550" y="35" fill="#c3d0f0">자산관리, "돈을 불려줘"</text>
+        <line x1="470" y1="210" x2="330" y2="258" stroke="#2dd4bf" stroke-opacity=".5"/>
+        <rect x="160" y="252" width="220" height="42" rx="10" fill="#151f3d" stroke="#2c3a68"/><text x="270" y="279" fill="#c3d0f0">대출, "가장 좋은 조건으로"</text>
+        <line x1="630" y1="210" x2="770" y2="258" stroke="#2dd4bf" stroke-opacity=".5"/>
+        <rect x="720" y="252" width="220" height="42" rx="10" fill="#151f3d" stroke="#2c3a68"/><text x="830" y="279" fill="#c3d0f0">보험, "빈틈을 채워줘"</text>
+        <line x1="465" y1="140" x2="325" y2="105" stroke="#2dd4bf" stroke-opacity=".5"/>
+        <rect x="110" y="82" width="220" height="42" rx="10" fill="#151f3d" stroke="#2c3a68"/><text x="220" y="109" fill="#c3d0f0">지출·결제, "알아서 아껴줘"</text>
+        <line x1="635" y1="140" x2="775" y2="105" stroke="#2dd4bf" stroke-opacity=".5"/>
+        <rect x="770" y="82" width="230" height="42" rx="10" fill="#151f3d" stroke="#2c3a68"/><text x="885" y="109" fill="#c3d0f0">라이프, 여행·주거·차·건강</text>
+      </g>
+      <text x="550" y="322" fill="#5c6b94" font-size="14" text-anchor="middle">계열사별 앱과 메뉴가 아니라, 그룹 전체가 하나의 대화 안에서 움직입니다</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════ 18. 사례 지도 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">3-3</span>글로벌 선행 사례</div>
+  <h1>세계는 네 트랙에서 뛰고, <em>교차점은 아직 비어 있습니다</em></h1>
+  <div class="viz"><div class="grid" style="grid-template-columns:repeat(2,1fr)">
+    <div class="card"><span class="tag t">TRACK 1 · 그룹 내부의 에이전트화</span>
+      <h3>JPMorgan, Morgan Stanley</h3><p>업무·자문·운영을 에이전트로 재구축하며 역량을 축적</p></div>
+    <div class="card"><span class="tag t">TRACK 2 · 고객 접점의 에이전트화</span>
+      <h3>Ant Group(支小宝), Klarna, NatWest</h3><p>고객 대면 AI를 메인 인터페이스로 전환</p></div>
+    <div class="card"><span class="tag t">TRACK 3 · 에이전트 결제 인프라</span>
+      <h3>Visa, Mastercard, Stripe, Alipay</h3><p>에이전트가 돈을 쓰게 하는 레일을 구축</p></div>
+    <div class="card"><span class="tag t">TRACK 4 · 외부 에이전트에 개방</span>
+      <h3>Morgan Stanley (외부 에이전트 수용)</h3><p>타사의 에이전트가 우리 서비스를 부르게 하는 개방 전략</p></div>
+  </div></div>
+  <p class="caption">네 트랙을 모두 뛰는 회사는 아직 없습니다. '슈퍼에이전트'는 이 네 트랙의 교차점에 있다고 봅니다.</p>
+</section>
+
+<!-- ═══════ 19. JPMorgan ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">CASE 1</span>미국 · JPMorgan Chase</div>
+  <h1>슈퍼에이전트는 <em>조직 운영 방식</em>에서 출발합니다</h1>
+  <div class="viz"><div class="two">
+    <div class="card">
+      <h3>무엇을 했는가</h3>
+      <ul class="pts" style="font-size:15.5px">
+        <li>사내 LLM Suite를 전 직원에 배포 → 에이전트 오케스트레이션으로 확장</li>
+        <li>기업 자금관리(Treasury)에 에이전틱 AI 적용, 현금흐름 예측·집행 자동화</li>
+        <li>결제 부문은 에이전틱 커머스의 <b class="hl">신뢰·책임(liability) 모델</b>을 선제적으로 설계 중</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:var(--acc2)">
+      <h3>참고할 점</h3>
+      <p style="font-size:16px;line-height:1.7">"고객용 챗봇 하나"가 아니라 <b class="hl">회사 전체를 에이전트 중심으로</b> 바꾸는 접근입니다.<br><br>
+      내부에서 에이전트를 대규모로 운영해 본 조직이라야, 고객의 돈을 맡는 에이전트도 안전하게 내놓을 수 있습니다.<br><br>
+      → <b>순서: 내부 검증 → 고객 대면 → 개방</b></p>
+    </div>
+  </div></div>
+</section>
+
+<!-- ═══════ 20. Morgan Stanley ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">CASE 2</span>미국 · Morgan Stanley</div>
+  <h1>지키는 길은 <em>먼저 문을 여는 것</em>일 수 있습니다</h1>
+  <div class="viz"><div class="two">
+    <div class="card">
+      <h3>1단계, 내부: AI @ Morgan Stanley</h3>
+      <p style="font-size:16px;line-height:1.7">OpenAI 제휴로 자산관리 어드바이저에게 리서치·회의록·후속조치를 대행하는 어시스턴트(Debrief 등)를 배포했습니다.<br><br>어드바이저 1인의 서비스 커버리지가 크게 늘며 <b class="hl">사람 + 에이전트 하이브리드 자문</b> 모델이 자리잡았습니다.</p>
+    </div>
+    <div class="card" style="border-color:var(--acc2)">
+      <h3>2단계, 외부: 에이전트에게 퍼널 개방 (2026)</h3>
+      <p style="font-size:16px;line-height:1.7">수천 개 기업의 <b class="hl">외부 AI 에이전트가 자사 자산관리 퍼널로 직접 진입</b>하도록 개방했습니다. 월가에서 손꼽히는 이른 시도입니다 (CNBC).<br><br>"에이전트가 고객을 데려오는 시대"의 유통망을 선점하려는 포석으로 읽힙니다.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- ═══════ 21. Ant Group ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">CASE 3</span>중국 · Ant Group (Alipay)</div>
+  <h1>슈퍼앱의 원조가 <em>스스로 슈퍼앱을 해체하고 있습니다</em></h1>
+  <p class="sub">메뉴의 시대가 끝나간다는 데에, 슈퍼앱 챔피언 스스로가 베팅했다는 점이 시사적입니다.</p>
+  <div class="viz"><div class="grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card"><span class="tag t">支小宝 (즈샤오바오)</span><h3>생활 금융 에이전트</h3>
+      <p>대화 한 번으로 결제·조회·예약·자산관리. 앱 내 수백 개 미니앱을 <b class="hl">에이전트가 대신 조작</b>합니다.</p></div>
+    <div class="card"><span class="tag t">AI Pay · Token Pay</span><h3>에이전트 결제 인프라</h3>
+      <p>주간 <b class="hl">1.2억 건</b>의 AI 결제 처리 (2026.2). AI 지갑·토큰 결제로 에이전트 경제의 레일을 자처합니다.</p></div>
+    <div class="card"><span class="tag t">머천트 에이전트</span><h3>의도(Intent) 생태계</h3>
+      <p>수백만 상점이 자체 에이전트로 입점. "에이전트가 <b class="hl">사용자와 상점 사이의 새로운 매체</b>"라는 것이 Ant CEO의 표현입니다.</p></div>
+  </div></div>
+</section>
+
+<!-- ═══════ 22. NatWest + Klarna ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">CASE 4 · 5</span>유럽 · NatWest &amp; Klarna</div>
+  <h1>목표는 비용이 아니라 <em>고객 성과와 신뢰</em>여야 합니다</h1>
+  <p class="sub">먼저 뛴 회사의 성과와, 먼저 넘어진 회사의 교훈을 함께 보시죠.</p>
+  <div class="viz"><div class="two">
+    <div class="card" style="border-color:var(--good)">
+      <span class="tag t">NATWEST (영국)</span>
+      <h3>OpenAI와의 전략 제휴</h3>
+      <p style="font-size:16px;line-height:1.7">디지털 어시스턴트 Cora를 단순 챗봇에서 <b class="hl">계좌 실행형 에이전트</b>로 진화시키는 중입니다. 사기 대응·취약고객 지원까지 에이전트화.<br><br>포인트는 분업입니다. <b>모델은 빌리고, 고객관계는 지킨다</b>.</p>
+    </div>
+    <div class="card" style="border-color:var(--warn)">
+      <span class="tag o">KLARNA (스웨덴), 반면교사</span>
+      <h3>AI 상담 전면 대체 → 일부 회귀</h3>
+      <p style="font-size:16px;line-height:1.7">상담의 75%를 AI로 전환하여 2년간 <b class="hl">$60M 절감</b>, 건당 비용 40% 감소. 그러나 품질 불만이 급증했고, CEO가 "비용을 과도하게 우선했다"고 인정한 뒤 재채용에 나섰습니다.<br><br><b class="hd">비용 절감형 AI와 신뢰 획득형 에이전트는 다른 것</b>이었습니다.</p>
+    </div>
+  </div></div>
+</section>
+
+<!-- ═══════ 23. Part3 정리 ═══════ -->
+<section class="slide center">
+  <div class="kicker">PART 3 정리</div>
+  <p class="qbig">부분 최적화가 아니라,<br>네 조각을 하나의 아키텍처로 묶는 것<br><br>
+  <span style="font-size:24px;color:var(--sub)">내부 에이전트화 (JPM) &nbsp;+&nbsp; 접점 전환 (Ant·NatWest)<br>+&nbsp; 결제 레일 (Visa·MC) &nbsp;+&nbsp; 외부 개방 (MS)</span><br><br>
+  <em style="font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">= 금융 슈퍼에이전트</em></p>
+</section>
+
+<!-- ═══════ PART 4 표지 ═══════ -->
+<section class="slide center">
+  <div class="kicker">PART 4</div>
+  <h1 style="font-size:56px"><em>아키텍처</em> &amp; 임베디드 전략</h1>
+  <p style="margin-top:22px;font-size:22px;color:var(--sub)">무엇을 짓고, 고객 삶의 어디에 자리 잡을 것인가</p>
+</section>
+<!-- ═══════ 25. 개념 아키텍처 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">4-1</span>레퍼런스 아키텍처 (개념)</div>
+  <h1>차별점은 지능이 아니라 <em>신뢰 레이어</em>에 있습니다</h1>
+  <p class="sub">5개 레이어 가운데 ②지능은 시간이 지나면 평준화됩니다. ④위임·한도·인증·감사가 금융 에이전트의 해자입니다.</p>
+  <div class="viz"><div class="stack">
+    <div class="layer" style="grid-template-columns:280px 1fr"><div class="lab" style="background:#123f3b;color:#5eead4;white-space:nowrap">① 경험 레이어 <small style="font-weight:600;color:#3f8f85">Surface</small></div>
+      <div class="body"><span class="chip g">우리 앱 (대화형 홈)</span><span class="chip">음성 · 메신저</span><span class="chip">차량 · 워치 · IoT</span><span class="chip w">타사 에이전트 (ChatGPT·Siri·Gemini)</span></div></div>
+    <div class="layer" style="grid-template-columns:280px 1fr"><div class="lab" style="white-space:nowrap">② 슈퍼에이전트 <small style="font-weight:600;color:#5c6b94">Orchestrator</small></div>
+      <div class="body"><span class="chip g">의도 이해 · 계획 수립</span><span class="chip">고객 컨텍스트 메모리</span><span class="chip">전문 에이전트 라우팅</span><span class="chip">승인·확인 UX</span></div></div>
+    <div class="layer" style="grid-template-columns:280px 1fr"><div class="lab" style="white-space:nowrap">③ 전문 에이전트 <small style="font-weight:600;color:#5c6b94">Domain Agents</small></div>
+      <div class="body"><span class="chip">자산관리</span><span class="chip">대출·심사</span><span class="chip">보험 설계</span><span class="chip">카드·지출</span><span class="chip">라이프 (여행·주거·차)</span><span class="chip w">외부 제휴 에이전트 (A2A)</span></div></div>
+    <div class="layer" style="grid-template-columns:280px 1fr"><div class="lab" style="background:#123f3b;color:#5eead4;white-space:nowrap">④ 신뢰 레이어 <small style="font-weight:600;color:#3f8f85">Trust &amp; Control</small></div>
+      <div class="body"><span class="chip g">위임장 · 한도 관리 (Mandate)</span><span class="chip g">본인·에이전트 인증 (AP2 등)</span><span class="chip">이상거래 탐지</span><span class="chip">감사 로그 · 설명가능성</span><span class="chip">규제 준수 게이트</span></div></div>
+    <div class="layer" style="grid-template-columns:280px 1fr"><div class="lab" style="white-space:nowrap">⑤ 실행 · 데이터 <small style="font-weight:600;color:#5c6b94">Core &amp; Data</small></div>
+      <div class="body"><span class="chip">그룹 통합 고객 데이터 (Customer 360)</span><span class="chip">계열사 코어 API (계좌·대출·보험·카드)</span><span class="chip">MCP 도구 서버</span><span class="chip">마이데이터 · 외부 데이터</span></div></div>
+  </div></div>
+</section>
+
+<!-- ═══════ 25b. AWS 구현 아키텍처 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">4-2</span>레퍼런스 아키텍처 (구현 예시, AWS 기준)</div>
+  <h1>이 설계도는 오늘 <em>실제 서비스로 조립 가능</em>합니다</h1>
+  <p class="sub" style="margin-top:8px;font-size:15px">하이퍼스케일러의 관리형 서비스로 매핑한 예시입니다. AWS 기준이며 GCP·Azure도 등가 구성이 가능합니다.</p>
+  <div class="viz" style="margin-top:14px"><div class="stack" style="gap:8px">
+    <div class="layer" style="grid-template-columns:260px 1fr;gap:12px"><div class="lab" style="font-size:13.5px;padding:8px;white-space:nowrap">① 경험 <small style="font-weight:600;color:#5c6b94">Surface</small></div>
+      <div class="body" style="padding:8px 12px;gap:7px"><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws net">CF</span>CloudFront · Amplify</span><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws ml">LEX</span>Lex · Connect (음성·상담)</span><span class="chip w" style="font-size:12px;padding:5px 10px"><span class="aws net">GW</span>외부 에이전트 진입점 (MCP)</span></div></div>
+    <div class="layer" style="grid-template-columns:260px 1fr;gap:12px"><div class="lab" style="background:#0d2e29;color:#5eead4;font-size:13.5px;padding:8px;white-space:nowrap">② 슈퍼에이전트 <small style="font-weight:600;color:#3f8f85">Orchestrator</small></div>
+      <div class="body" style="padding:8px 12px;gap:7px"><span class="chip g" style="font-size:12px;padding:5px 10px"><span class="aws ml">BR</span>Bedrock (멀티 모델)</span><span class="chip g" style="font-size:12px;padding:5px 10px"><span class="aws ml">AC</span>AgentCore (런타임·메모리)</span><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws int">SF</span>Step Functions (워크플로)</span></div></div>
+    <div class="layer" style="grid-template-columns:260px 1fr;gap:12px"><div class="lab" style="font-size:13.5px;padding:8px;white-space:nowrap">③ 전문 에이전트 <small style="font-weight:600;color:#5c6b94">Domain Agents</small></div>
+      <div class="body" style="padding:8px 12px;gap:7px"><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws cmp">EKS</span>EKS · Lambda</span><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws ml">SDK</span>Strands Agents</span><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws db">OS</span>OpenSearch (벡터)</span><span class="chip w" style="font-size:12px;padding:5px 10px"><span class="aws int">A2A</span>A2A·MCP 커넥터</span></div></div>
+    <div class="layer" style="grid-template-columns:260px 1fr;gap:12px"><div class="lab" style="background:#3a1420;color:#fb7ea1;font-size:13.5px;padding:8px;white-space:nowrap">④ 신뢰 <small style="font-weight:600;color:#a3536a">Trust &amp; Control</small></div>
+      <div class="body" style="padding:8px 12px;gap:7px"><span class="chip g" style="font-size:12px;padding:5px 10px"><span class="aws sec">GR</span>Guardrails</span><span class="chip g" style="font-size:12px;padding:5px 10px"><span class="aws sec">VP</span>Verified Permissions (위임·한도)</span><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws sec">IAM</span>Cognito · IAM</span><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws sec">CT</span>CloudTrail (감사)</span><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws sec">FD</span>Fraud Detector</span><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws sec">KMS</span>KMS</span></div></div>
+    <div class="layer" style="grid-template-columns:260px 1fr;gap:12px"><div class="lab" style="font-size:13.5px;padding:8px;white-space:nowrap">⑤ 실행·데이터 <small style="font-weight:600;color:#5c6b94">Core &amp; Data</small></div>
+      <div class="body" style="padding:8px 12px;gap:7px"><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws int">API</span>API Gateway (코어 API)</span><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws int">EB</span>EventBridge (이벤트 감지)</span><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws db">AU</span>Aurora · DynamoDB</span><span class="chip" style="font-size:12px;padding:5px 10px"><span class="aws db">S3</span>S3 · Lake Formation (C360)</span></div></div>
+  </div></div>
+  <p class="caption" style="margin-top:10px">②·③은 관리형 서비스로 빠르게 확보하고, ④신뢰 레이어의 정책과 데이터는 우리가 직접 소유해야 합니다.</p>
+</section>
+
+<!-- ═══════ 25c. AWS 상세 다이어그램 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">4-3</span>레퍼런스 아키텍처 (요청 흐름)</div>
+  <h1>한 번의 요청이 <em>신뢰 게이트를 통과하는 경로</em>입니다</h1>
+  <div class="viz">
+    <svg viewBox="0 0 1120 470" width="100%">
+      <defs>
+        <marker id="ar" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#4f8cff" stroke-width="1.6"/></marker>
+        <marker id="ar2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L8,4.5 L0,9" fill="none" stroke="#f4577a" stroke-width="1.6"/></marker>
+      </defs>
+      <!-- 좌: 고객/외부 -->
+      <g text-anchor="middle" font-size="13.5">
+        <rect x="20" y="60" width="150" height="64" rx="12" fill="#151f3d" stroke="#2c3a68"/>
+        <text x="95" y="88" fill="#eef2ff" font-weight="800">고객</text><text x="95" y="108" fill="#5c6b94" font-size="11.5">앱 · 음성 · 워치</text>
+        <rect x="20" y="150" width="150" height="64" rx="12" fill="#2b2410" stroke="#f59e0b"/>
+        <text x="95" y="178" fill="#fbbf24" font-weight="800">외부 에이전트</text><text x="95" y="198" fill="#8a7a3d" font-size="11.5">ChatGPT · Siri · Gemini</text>
+      </g>
+      <!-- 진입 -->
+      <g text-anchor="middle" font-size="13.5">
+        <rect x="230" y="100" width="150" height="76" rx="12" fill="#1c1030" stroke="#8c4fff"/>
+        <rect x="244" y="114" width="24" height="24" rx="6" fill="#8c4fff"/><text x="256" y="131" fill="#fff" font-size="9.5" font-weight="800">GW</text>
+        <text x="318" y="130" fill="#c9b3ff" font-weight="800" font-size="13">API Gateway</text>
+        <text x="305" y="152" fill="#5c6b94" font-size="11.5">인증 · MCP Endpoint</text>
+      </g>
+      <path d="M170 92 L222 118" stroke="#4f8cff" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+      <path d="M170 182 L222 158" stroke="#4f8cff" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+      <!-- 오케스트레이터 -->
+      <g text-anchor="middle">
+        <rect x="440" y="60" width="230" height="156" rx="14" fill="#0d2e29" stroke="#2dd4bf" stroke-width="2"/>
+        <rect x="456" y="76" width="26" height="26" rx="6" fill="#01a88d"/><text x="469" y="94" fill="#fff" font-size="9.5" font-weight="800">AC</text>
+        <text x="575" y="94" fill="#5eead4" font-weight="800" font-size="15">슈퍼에이전트</text>
+        <text x="558" y="118" fill="#94a3c7" font-size="12">Bedrock AgentCore</text>
+        <g font-size="11.5" fill="#c3d0f0">
+          <rect x="456" y="132" width="94" height="30" rx="7" fill="#0f1a38" stroke="#33406e"/><text x="503" y="151">의도 이해</text>
+          <rect x="560" y="132" width="94" height="30" rx="7" fill="#0f1a38" stroke="#33406e"/><text x="607" y="151">계획 수립</text>
+          <rect x="456" y="170" width="198" height="30" rx="7" fill="#0f1a38" stroke="#33406e"/><text x="555" y="189">고객 컨텍스트 메모리</text>
+        </g>
+      </g>
+      <path d="M380 138 L432 138" stroke="#4f8cff" stroke-width="1.8" fill="none" marker-end="url(#ar)"/>
+      <!-- 도메인 에이전트 -->
+      <g text-anchor="middle" font-size="12.5">
+        <rect x="730" y="30" width="170" height="46" rx="10" fill="#151f3d" stroke="#2c3a68"/><text x="815" y="58" fill="#c3d0f0">자산관리 에이전트</text>
+        <rect x="730" y="86" width="170" height="46" rx="10" fill="#151f3d" stroke="#2c3a68"/><text x="815" y="114" fill="#c3d0f0">대출·심사 에이전트</text>
+        <rect x="730" y="142" width="170" height="46" rx="10" fill="#151f3d" stroke="#2c3a68"/><text x="815" y="170" fill="#c3d0f0">보험 설계 에이전트</text>
+        <rect x="730" y="198" width="170" height="46" rx="10" fill="#2b2410" stroke="#f59e0b"/><text x="815" y="226" fill="#fbbf24">라이프 제휴 (A2A)</text>
+        <text x="815" y="16" fill="#5c6b94" font-size="12" font-weight="700">③ 도메인 에이전트 (EKS · Lambda)</text>
+      </g>
+      <path d="M670 110 L722 58" stroke="#4f8cff" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+      <path d="M670 130 L722 110" stroke="#4f8cff" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+      <path d="M670 155 L722 165" stroke="#4f8cff" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+      <path d="M670 180 L722 218" stroke="#4f8cff" stroke-width="1.6" fill="none" marker-end="url(#ar)"/>
+      <!-- 신뢰 게이트 -->
+      <g text-anchor="middle">
+        <rect x="940" y="30" width="160" height="214" rx="14" fill="#3a1420" stroke="#f4577a" stroke-width="2"/>
+        <text x="1020" y="58" fill="#fb7ea1" font-weight="800" font-size="14">④ 신뢰 게이트</text>
+        <g font-size="11.5" fill="#e2b6c4">
+          <rect x="954" y="72" width="132" height="28" rx="7" fill="#1a0f18" stroke="#6e2a3c"/><text x="1020" y="90">Guardrails</text>
+          <rect x="954" y="106" width="132" height="28" rx="7" fill="#1a0f18" stroke="#6e2a3c"/><text x="1020" y="124">위임장 · 한도 검증</text>
+          <rect x="954" y="140" width="132" height="28" rx="7" fill="#1a0f18" stroke="#6e2a3c"/><text x="1020" y="158">이상거래 탐지</text>
+          <rect x="954" y="174" width="132" height="28" rx="7" fill="#1a0f18" stroke="#6e2a3c"/><text x="1020" y="192">감사 로그 (CloudTrail)</text>
+          <rect x="954" y="208" width="132" height="28" rx="7" fill="#1a0f18" stroke="#6e2a3c"/><text x="1020" y="226">고위험 → 사람 확인</text>
+        </g>
+      </g>
+      <path d="M900 137 L932 137" stroke="#f4577a" stroke-width="2" fill="none" marker-end="url(#ar2)"/>
+      <text x="916" y="126" fill="#fb7ea1" font-size="11" text-anchor="middle" font-weight="700">실행 전</text>
+      <!-- 하단: 코어/데이터 -->
+      <g text-anchor="middle" font-size="12.5">
+        <rect x="230" y="330" width="200" height="60" rx="12" fill="#101a38" stroke="#527fff"/>
+        <text x="330" y="356" fill="#8db6ff" font-weight="800">Customer 360</text><text x="330" y="376" fill="#5c6b94" font-size="11.5">S3 · Lake Formation</text>
+        <rect x="460" y="330" width="200" height="60" rx="12" fill="#101a38" stroke="#527fff"/>
+        <text x="560" y="356" fill="#8db6ff" font-weight="800">계열사 코어 API</text><text x="560" y="376" fill="#5c6b94" font-size="11.5">계좌 · 대출 · 보험 · 카드</text>
+        <rect x="690" y="330" width="200" height="60" rx="12" fill="#101a38" stroke="#527fff"/>
+        <text x="790" y="356" fill="#8db6ff" font-weight="800">이벤트 감지</text><text x="790" y="376" fill="#5c6b94" font-size="11.5">EventBridge (라이프 이벤트)</text>
+      </g>
+      <path d="M555 224 L555 322" stroke="#4f8cff" stroke-width="1.6" fill="none" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+      <text x="573" y="280" fill="#5c6b94" font-size="11">컨텍스트 조회</text>
+      <path d="M1020 252 L1020 300 L568 300 L565 322" stroke="#f4577a" stroke-width="1.8" fill="none" marker-end="url(#ar2)"/>
+      <text x="800" y="292" fill="#fb7ea1" font-size="11.5" text-anchor="middle" font-weight="700">승인된 요청만 코어 실행</text>
+      <path d="M790 322 L672 216" stroke="#4f8cff" stroke-width="1.4" fill="none" stroke-dasharray="5 4" marker-end="url(#ar)"/>
+      <text x="762" y="270" fill="#5c6b94" font-size="11">선제 제안 트리거</text>
+      <!-- 범례 -->
+      <g font-size="11.5" fill="#5c6b94">
+        <line x1="20" y1="430" x2="52" y2="430" stroke="#4f8cff" stroke-width="1.8"/><text x="60" y="434">요청 · 위임 흐름</text>
+        <line x1="185" y1="430" x2="217" y2="430" stroke="#f4577a" stroke-width="1.8"/><text x="225" y="434">신뢰 게이트 통과 후 실행</text>
+        <line x1="420" y1="430" x2="452" y2="430" stroke="#4f8cff" stroke-width="1.6" stroke-dasharray="5 4"/><text x="460" y="434">데이터 · 이벤트 흐름</text>
+      </g>
+    </svg>
+  </div>
+  <p class="caption">어떤 표면에서 들어와도, 어떤 에이전트가 수행해도, 돈이 움직이는 실행은 반드시 신뢰 게이트를 지나갑니다.</p>
+</section>
+
+<!-- ═══════ 25d. 하이퍼스케일러 협력 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">4-4</span>그래서, 우리는 무엇을 해야 하는가</div>
+  <h1>결론은 하이퍼스케일러와의 <em>동행, 단 조건부</em>입니다</h1>
+  <p class="sub">모든 것을 자체 구축하기에는 늦고, 모든 것을 맡기기에는 위험합니다. '빌릴 것'과 '지킬 것'의 경계가 전략의 전부라고 생각합니다.</p>
+  <div class="viz"><div class="two">
+    <div class="card" style="border-color:var(--acc2)">
+      <span class="tag t">빌릴 것 (하이퍼스케일러에서)</span>
+      <ul class="pts" style="font-size:15.5px">
+        <li><b class="hl">모델과 에이전트 런타임</b>: 모델은 6개월마다 세대교체됩니다. 직접 만들 영역이 아닙니다</li>
+        <li><b class="hl">에이전트 인프라</b>: 게이트웨이·메모리·관측성은 이미 관리형 서비스로 상품화되었습니다</li>
+        <li><b class="hl">보안·컴플라이언스 빌딩블록</b>: 암호화·감사·격리는 검증된 것을 씁니다</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:var(--warn)">
+      <span class="tag o">지킬 것 (반드시 내재화)</span>
+      <ul class="pts" style="font-size:15.5px">
+        <li><b style="color:var(--warn)">고객 데이터와 컨텍스트 메모리</b>: 에이전트 품질의 원천이자 협상력의 원천입니다</li>
+        <li><b style="color:var(--warn)">신뢰 레이어의 정책</b>: 위임·한도·책임 규칙은 우리의 라이선스와 직결됩니다</li>
+        <li><b style="color:var(--warn)">도메인 에이전트의 노하우</b>: 심사·설계 로직은 경쟁력 그 자체입니다</li>
+      </ul>
+    </div>
+  </div></div>
+  <p class="caption">유의점 세 가지: ① 멀티모델 전략으로 특정 모델 종속 회피 ② 국내 클라우드·망분리 규제와 데이터 주권 검토 선행 ③ 계약에 이그레스(이전) 조건 명시</p>
+</section>
+
+<!-- ═══════ 26. 위임의 사다리 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">4-5</span>신뢰 레이어, 조금 더 들어가 보면</div>
+  <h1>"얼마나 똑똑한가"보다 <em>"얼마나 맡길 수 있는가"</em></h1>
+  <p class="sub">위임은 기능이 아니라 관계입니다. 신뢰가 쌓이는 만큼 권한을 올리는 설계가 락인(Lock-in)을 만든다고 봅니다.</p>
+  <div class="viz">
+    <svg viewBox="0 0 1100 310" width="100%">
+      <g text-anchor="middle">
+        <text x="550" y="24" fill="#94a3c7" font-size="15" font-weight="700">위임의 사다리 (Ladder of Delegation)</text>
+        <g font-size="14">
+          <rect x="70" y="220" width="230" height="70" rx="12" fill="#151f3d" stroke="#2c3a68"/>
+          <text x="185" y="250" fill="#eef2ff" font-weight="800">Lv.1 알림·제안</text><text x="185" y="274" fill="#5c6b94" font-size="12.5">"이 적금이 만기예요"</text>
+          <rect x="320" y="175" width="230" height="70" rx="12" fill="#151f3d" stroke="#2c3a68"/>
+          <text x="435" y="205" fill="#eef2ff" font-weight="800">Lv.2 준비 대행</text><text x="435" y="229" fill="#5c6b94" font-size="12.5">비교·서류·시뮬레이션 후 제시</text>
+          <rect x="570" y="130" width="230" height="70" rx="12" fill="#1d3a6e" stroke="#4f8cff"/>
+          <text x="685" y="160" fill="#8db6ff" font-weight="800">Lv.3 승인 후 실행</text><text x="685" y="184" fill="#5c6b94" font-size="12.5">"네" 한 마디로 이체·가입 실행</text>
+          <rect x="820" y="85" width="230" height="70" rx="12" fill="#123f3b" stroke="#2dd4bf"/>
+          <text x="935" y="115" fill="#5eead4" font-weight="800">Lv.4 한도 내 자율 실행</text><text x="935" y="139" fill="#5c6b94" font-size="12.5">월 50만원 내 자동 절약·리밸런싱</text>
+        </g>
+        <path d="M 185 215 L 435 170 L 685 125 L 935 80" stroke="#2dd4bf" stroke-width="2" fill="none" stroke-dasharray="7 5" opacity=".6"/>
+      </g>
+      <text x="70" y="60" fill="#c3d0f0" font-size="14">각 단계에 필요한 장치:</text>
+      <text x="70" y="86" fill="#5eead4" font-size="13.5">✓ 위임장(Mandate)과 한도. 무엇을, 얼마까지, 언제까지</text>
+      <text x="70" y="110" fill="#5eead4" font-size="13.5">✓ 모든 행동의 감사 로그와 1-탭 되돌리기</text>
+      <text x="70" y="134" fill="#5eead4" font-size="13.5">✓ 고위험 행동은 반드시 사람의 확인 (Human-in-the-loop)</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══════ 27. 임베디드 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">4-6</span>임베디드 전략</div>
+  <h1>정답은 <em>고객이 있는 모든 곳</em>입니다</h1>
+  <div class="viz"><div class="grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card" style="border-color:var(--acc2)">
+      <span class="tag t">① OWN, 직접 접점</span>
+      <h3>슈퍼앱을 에이전트 홈으로</h3>
+      <p>메뉴 그리드를 대화·카드형 '오늘의 재무 브리핑'으로. 자산관리·대출·보험이 하나의 대화 안에서 완결됩니다.</p>
+      <p style="margin-top:10px;color:var(--dim)">참고: Alipay 支小宝, NatWest Cora</p></div>
+    <div class="card" style="border-color:var(--acc)">
+      <span class="tag b">② EMBED, 타사 접점 속으로</span>
+      <h3>외부 에이전트의 '공식 금융 도구'로</h3>
+      <p>ChatGPT·Siri·Gemini가 금융 과업을 만나면 우리 에이전트를 호출하도록 MCP/A2A·AP2로 입점합니다. 새로운 유통 채널입니다.</p>
+      <p style="margin-top:10px;color:var(--dim)">참고: Morgan Stanley의 퍼널 개방</p></div>
+    <div class="card" style="border-color:var(--warn)">
+      <span class="tag o">③ AMBIENT, 삶의 순간 속으로</span>
+      <h3>이벤트가 곧 접점</h3>
+      <p>이사·출산·이직·차 구매 같은 라이프 이벤트를 감지해, <b class="hl">고객이 부르기 전에</b> 준비된 제안으로 나타납니다.</p>
+      <p style="margin-top:10px;color:var(--dim)">비금융 제휴 데이터 + 마이데이터</p></div>
+  </div></div>
+  <p class="caption">어느 접점에서 불려도 같은 에이전트, 같은 기억, 같은 신뢰. 이것이 임베디드 전략의 요체입니다.</p>
+</section>
+
+<!-- ═══════ 28. 시나리오 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">4-7</span>고객의 하루, 통합 시나리오</div>
+  <h1>고객이 체감하는 것은 <em>해결된 목적 1개</em>입니다</h1>
+  <p class="sub">"오사카 여행 준비해줘". 이 한 마디의 백스테이지를 그려보면 이렇습니다.</p>
+  <div class="viz">
+    <div class="flow" style="flex-wrap:wrap;gap:14px">
+      <div class="fbox" style="flex:1 1 22%"><b>07:30 · 감지</b><span>캘린더의 여행 일정 감지<br>→ 여행 모드 제안 (Ambient)</span></div>
+      <div class="farrow">→</div>
+      <div class="fbox" style="flex:1 1 22%"><b>07:31 · 계획</b><span>예산 분석 → 환전 최적 시점,<br>여행자보험 3안 설계</span></div>
+      <div class="farrow">→</div>
+      <div class="fbox" style="flex:1 1 22%"><b>07:32 · 승인</b><span>"보험 2안, 환전 진행해줘"<br>→ 한도 내 즉시 실행 (Lv.3)</span></div>
+      <div class="farrow">→</div>
+      <div class="fbox" style="flex:1 1 22%"><b>여행 중 · 자율</b><span>현지 결제 최적 카드 자동 선택,<br>이상거래 실시간 차단 (Lv.4)</span></div>
+    </div>
+  </div>
+  <p class="caption">은행(환전·계좌) + 보험(여행자보험) + 카드(결제·혜택) + 비금융(항공·숙소 제휴)이 <b class="hl">하나의 대화</b>로 완결됩니다. 계열사 앱 4개를 열 일이 없습니다.</p>
+</section>
+
+<!-- ═══════ 29. 로드맵 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">4-8</span>실행 로드맵</div>
+  <h1>기술의 순서가 아니라 <em>신뢰의 순서</em>입니다</h1>
+  <p class="sub">내부 검증 없이 고객 위임은 없고, 고객 위임 없이 생태계 개방은 없다고 생각합니다.</p>
+  <div class="viz"><div class="grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="card">
+      <span class="tag b">PHASE 1 · ~1년</span><h3>기반: 내부부터 에이전트화</h3>
+      <ul class="pts" style="font-size:14.5px">
+        <li>직원용 에이전트로 역량·거버넌스 축적 (JPM 모델)</li>
+        <li>그룹 Customer 360 + 코어 API의 도구화 (MCP)</li>
+        <li>신뢰 레이어(위임·한도·감사)의 선행 구축</li>
+      </ul></div>
+    <div class="card">
+      <span class="tag b">PHASE 2 · 1~2년</span><h3>전환: 접점을 에이전트로</h3>
+      <ul class="pts" style="font-size:14.5px">
+        <li>슈퍼앱 홈 = 대화형 에이전트 (Lv.1→3)</li>
+        <li>자산관리·대출·보험 도메인 에이전트의 통합</li>
+        <li>라이프 이벤트 기반의 선제 제안 시작</li>
+      </ul></div>
+    <div class="card" style="border-color:var(--acc2)">
+      <span class="tag t">PHASE 3 · 2~3년</span><h3>확장: 생태계의 금융 허브</h3>
+      <ul class="pts" style="font-size:14.5px">
+        <li>외부 에이전트(OS·커머스)에 공식 입점 (MS 모델)</li>
+        <li>AP2 등 에이전트 결제 표준에 참여</li>
+        <li>한도 내 자율 실행(Lv.4)으로 위임 심화</li>
+      </ul></div>
+  </div></div>
+</section>
+
+<!-- ═══════ 30. KPI ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">4-9</span>성공의 척도</div>
+  <h1>"체류시간이 줄어드는 것"이 <em>성공일 수 있습니다</em></h1>
+  <p class="sub">고객의 시간을 아껴줄수록 위임은 깊어집니다. 측정하는 것이 바뀌어야 조직이 바뀝니다.</p>
+  <div class="viz"><div class="two vs">
+    <div class="card" style="border-color:#3c4a75">
+      <span class="tag b">UI NATIVE KPI (어제)</span>
+      <ul class="pts" style="font-size:17px">
+        <li>MAU / DAU</li>
+        <li>체류시간, 화면 방문 수</li>
+        <li>배너 클릭률 (CTR)</li>
+        <li>상품별 가입 전환율</li>
+      </ul>
+    </div>
+    <div class="card" style="border-color:var(--acc2)">
+      <span class="tag t">AGENT NATIVE KPI (내일)</span>
+      <ul class="pts" style="font-size:17px">
+        <li><b class="hl">위임률</b>: 자동실행을 허용한 고객 비율</li>
+        <li><b class="hl">과업 완결률</b>: 목적을 끝까지 해결한 비율</li>
+        <li><b class="hl">고객 성과</b>: 절약액·수익률·보장 공백 해소</li>
+        <li><b class="hl">에이전트 경유 AUM/여신</b>: 새 유통망의 성과</li>
+      </ul>
+    </div>
+  </div></div>
+</section>
+
+<!-- ═══════ 31. 리스크 ═══════ -->
+<section class="slide">
+  <div class="kicker"><span class="n">4-10</span>리스크 관리</div>
+  <h1>신뢰 레이어 투자는 비용이 아니라 <em>차별화 자산</em>입니다</h1>
+  <p class="sub">빨리 가되 무너지지 않으려면, 네 가지 리스크를 처음부터 설계에 넣어야 합니다.</p>
+  <div class="viz"><div class="grid" style="grid-template-columns:repeat(2,1fr)">
+    <div class="card"><span class="tag r">리스크 1 · 품질 역풍 (Klarna의 교훈)</span>
+      <p style="font-size:15.5px">비용절감 목표의 AI는 신뢰를 잃습니다 → <b class="hl">고객 성과 KPI</b>로 설계하고, 어려운 순간에는 사람으로 즉시 연결.</p></div>
+    <div class="card"><span class="tag r">리스크 2 · 책임 공백 (Liability)</span>
+      <p style="font-size:15.5px">에이전트가 잘못 실행하면 누가 책임지는가, 업계 표준은 아직 미확정 → <b class="hl">위임장·한도·로그</b>로 책임의 경계를 먼저 계약화.</p></div>
+    <div class="card"><span class="tag r">리스크 3 · 규제 · 설명가능성</span>
+      <p style="font-size:15.5px">금소법·적합성 원칙은 에이전트에도 적용됩니다 → 모든 추천·실행에 <b class="hl">근거 기록과 설명 UI</b>를 기본 탑재.</p></div>
+    <div class="card"><span class="tag r">리스크 4 · 보안 · 에이전트 사칭</span>
+      <p style="font-size:15.5px">프롬프트 주입·사칭 공격이 에이전트를 노립니다 → <b class="hl">에이전트 인증(토큰화 자격증명)</b>과 이상행동 탐지를 신뢰 레이어에 내장.</p></div>
+  </div></div>
+</section>
+
+<!-- ═══════ 32. 클로징 ═══════ -->
+<section class="slide center">
+  <div class="kicker">CLOSING</div>
+  <h1 style="font-size:44px;line-height:1.5">접점은 <span style="color:var(--dim);text-decoration:line-through">앱</span>에서 <em>에이전트</em>로 이동하고 있습니다.<br><br>
+  보이지 않는 공급자가 될 것인가,<br>
+  <em>고객이 삶을 맡기는 대행자</em>가 될 것인가.</h1>
+  <p style="margin-top:34px;font-size:19px;color:var(--sub)">다행히 그 자격, <b class="hl">신뢰 · 데이터 · 라이선스</b>는 이미 여러분의 손에 있습니다.<br>남은 변수는 <b class="hl">속도</b>라고 생각합니다.</p>
+</section>
+
+<!-- ═══════ 33. 토론 질문 1 ═══════ -->
+<section class="slide center">
+  <div class="kicker">DISCUSSION · 1 / 2</div>
+  <p style="font-size:20px;color:var(--dim);margin-bottom:28px">부족한 이야기는 질문과 토론으로 채워주시길 바랍니다. 먼저,</p>
+  <p class="qbig" style="font-size:46px">우리 그룹의 <em style="font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">'위임의 사다리' 1단계</em>는<br>어떤 과업이어야 할까요?</p>
+  <p style="margin-top:36px;font-size:19px;color:var(--sub)">고객이 가장 부담 없이 맡길 수 있으면서, 신뢰가 눈에 보이게 쌓이는 과업.<br><span style="color:var(--dim)">예: 만기·수수료 알림? 환전 타이밍? 카드 혜택 최적화?</span></p>
+</section>
+
+<!-- ═══════ 34. 토론 질문 2 ═══════ -->
+<section class="slide center">
+  <div class="kicker">DISCUSSION · 2 / 2</div>
+  <p style="font-size:20px;color:var(--dim);margin-bottom:28px">그리고 두 번째,</p>
+  <p class="qbig" style="font-size:46px">어떤 <em style="font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent">외부 에이전트 생태계</em>에<br>먼저 입점해야 할까요?</p>
+  <p style="margin-top:36px;font-size:19px;color:var(--sub)">OS 에이전트(Siri·Gemini)? 대화형 AI(ChatGPT)? 커머스·결제(AP2)?<br><span style="color:var(--dim)">어디가 우리 고객이 가장 먼저 이동할 곳인지가 기준이라고 생각합니다.</span></p>
+</section>
+
+<!-- ═══════ 35. 참고 문헌 ═══════ -->
+<section class="slide">
+  <div class="kicker">REFERENCES</div>
+  <h1>참고 문헌 <span style="font-size:20px;color:var(--dim);font-weight:600">(내용은 재구성하였습니다)</span></h1>
+  <div class="viz" style="align-items:flex-start;margin-top:30px">
+    <ul class="reflist">
+      <li>McKinsey &amp; Company, "Agentic AI in retail banking: The customer effect" (2026)</li>
+      <li>CNBC, "Morgan Stanley to open its wealth management funnel to AI agents" (2026.6)</li>
+      <li>Forbes, "How JPMorgan Chase Is Building The AI-Powered Bank Of The Future" (2026.7)</li>
+      <li>American Banker, "Inside JPMorgan Payments' agentic commerce strategy" (2026)</li>
+      <li>Mastercard 보도자료, "Agent Pay for Machines" (2026.6)</li>
+      <li>Forbes, "Visa, Mastercard And Coinbase Are Fighting Over How AI Agents Pay" (2026.6)</li>
+      <li>Ant Group / Businesswire, "Alipay AI Pay: 120M weekly transactions" (2026.2)</li>
+      <li>Ant Group / Businesswire, "Alipay AI Wallet &amp; Token Pay 출시" (2026.5)</li>
+      <li>Consumer Bankers Association, 에이전틱 페이먼트 백서 (2026.1)</li>
+      <li>Adobe Analytics, 생성형 AI발 리테일 트래픽 분석 (2025)</li>
+      <li>Klarna 공개 실적 발표 및 CEO 인터뷰 (2024~2025)</li>
+      <li>NatWest Group, OpenAI 전략 제휴 발표 (2025.10)</li>
+      <li>OpenAI, "Computer-Using Agent" 및 "Introducing ChatGPT agent" (2025~2026)</li>
+      <li>AWS, Amazon Bedrock · Bedrock AgentCore 공식 문서 (2025~2026)</li>
+    </ul>
+  </div>
+  <p class="caption" style="text-align:left">시장 수치와 사례는 발표 시점 기준 공개 자료를 재구성한 것으로, 세부 수치는 이후 업데이트될 수 있습니다.</p>
+</section>
+
+</div></div>
+<script>
+const slides=[...document.querySelectorAll('.slide')];let i=0;
+const pn=document.getElementById('pn'),bar=document.getElementById('bar');
+function show(n){i=Math.max(0,Math.min(slides.length-1,n));slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+pn.textContent=(i+1)+' / '+slides.length;bar.style.width=((i+1)/slides.length*100)+'vw';}
+function fit(){const d=document.getElementById('deck');const s=Math.min(innerWidth/1280,innerHeight/720);d.style.transform='scale('+s+')';}
+addEventListener('resize',fit);fit();show(0);
+addEventListener('keydown',e=>{if(['ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault();show(i+1)}
+if(['ArrowLeft','PageUp'].includes(e.key)){e.preventDefault();show(i-1)}
+if(e.key==='Home')show(0);if(e.key==='End')show(slides.length-1)});
+addEventListener('click',e=>{if(e.clientX>innerWidth/2)show(i+1);else show(i-1)});
+</script>
+</body>
+</html>

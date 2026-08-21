@@ -218,3 +218,10 @@
 - GA4 향상된 측정의 file_download 이벤트로 다운로드 추적 가능
 - GA4 이벤트 태깅 추가: 모든 PDF 링크 18개에 file_download 이벤트 (file_name, link_location 파라미터)
 - EC2 SSH 장애 대응: 사내 SSH egress IP 로테이션으로 접속 불가 → SG에 15.248.4.0/23 (corp NAT 대역) 추가로 해결
+
+## 13. Insights 신규 게재: 금융 슈퍼에이전트 덱 (2026-08-21)
+- 사용자 제작 HTML 슬라이드 덱(39장)을 insights/super-agent/로 호스팅 (덱 디자인 원본 유지)
+- 덱 head에 GA 태그, meta description/OG, canonical, favicon 추가 + 좌상단 홈 복귀 링크
+- PDF 버전을 assets/docs/financial-super-agent-deck.pdf로 추가
+- KR/EN 메인 Latest Insights 최상단에 카드 추가 (PDF 링크 GA 태깅 포함, EN 카드는 한국어 덱 안내)
+- sitemap.xml에 URL 추가
