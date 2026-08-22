@@ -18,6 +18,9 @@
   <meta property="og:type" content="article">
   <meta property="og:image" content="https://jihwanw.github.io/assets/images/profile/photo_jhwoo.jpeg">
   <link rel="canonical" href="https://jihwanw.github.io/insights/harness-engineering/">
+  <link rel="alternate" hreflang="ko" href="https://jihwanw.github.io/insights/harness-engineering/">
+  <link rel="alternate" hreflang="en" href="https://jihwanw.github.io/en/insights/harness-engineering/">
+  <link rel="alternate" hreflang="x-default" href="https://jihwanw.github.io/insights/harness-engineering/">
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
   <link rel="stylesheet" href="../../assets/css/style.css">
   <style>
@@ -69,6 +72,23 @@
     .back-home:hover { opacity: 0.7; }
     @media (max-width: 600px) { .he-hero h1 { font-size: 1.8rem; } .he-stats { grid-template-columns: 1fr; } .he-flow { flex-direction: column; } }
   </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "하네스 엔지니어링 — 모델이 아니라 시스템이 에이전트를 만든다",
+    "description": "AI 에이전트의 성능을 좌우하는 건 모델의 지능이 아니라, 그 지능을 감싸는 시스템 설계다. OpenAI, Anthropic, LangChain의 실험이 증명한 하네스 엔지니어링의 개념과 실전 원칙.",
+    "author": {
+      "@type": "Person",
+      "name": "Jihwan Woo",
+      "url": "https://jihwanw.github.io/"
+    },
+    "datePublished": "2026-04-14",
+    "inLanguage": "ko",
+    "image": "https://jihwanw.github.io/assets/images/profile/photo_jhwoo.jpeg",
+    "mainEntityOfPage": "https://jihwanw.github.io/insights/harness-engineering/"
+  }
+  </script>
 </head>
 <body>
   <header>
@@ -260,7 +280,12 @@
         <span class="he-tag">#ContextRot</span>
         <span class="he-tag">#CodingAgent</span>
       </div>
-    </article>
+          <div style="margin:3rem 0 1rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;">
+        <h3 style="font-size:.95rem;margin:0 0 .8rem;color:var(--text);">관련 글</h3>
+        <a href="../llm-wiki/index.html" style="display:block;color:var(--ai);text-decoration:none;font-size:.88rem;padding:.3rem 0;">LLM Wiki — AI가 직접 위키를 쓰면 지식은 복리로 쌓인다</a>
+        <a href="../kimi-k3/index.html" style="display:block;color:var(--ai);text-decoration:none;font-size:.88rem;padding:.3rem 0;">Kimi K3 — 프런티어 성능의 AI 모델이 공개되면 산업은 어떻게 달라지는가</a>
+      </div>
+</article>
   </main>
   <footer style="text-align:center;padding:2rem 1.5rem;color:var(--muted);font-size:0.78rem;border-top:1px solid var(--border);">
     © 2026 Jihwan Woo · <a href="../../index.html" style="color:var(--ai);text-decoration:none;">jihwanw.github.io</a>

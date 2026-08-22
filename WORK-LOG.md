@@ -225,3 +225,11 @@
 - PDF 버전을 assets/docs/financial-super-agent-deck.pdf로 추가
 - KR/EN 메인 Latest Insights 최상단에 카드 추가 (PDF 링크 GA 태깅 포함, EN 카드는 한국어 덱 안내)
 - sitemap.xml에 URL 추가
+
+## 14. 온사이트 SEO 개선 (2026-08-22)
+- insight 페이지 10개(5쌍 KR/EN)에 TechArticle JSON-LD 추가 (headline/description은 각 페이지 메타 재사용, datePublished 지정)
+- 동일 페이지들에 hreflang(ko/en/x-default) 상호 링크 추가
+- 슈퍼에이전트 덱 SEO 보완: 덱을 deck.html로 이동, index.html에 검색용 요약 아티클 신설 (JSON-LD 포함)
+  - /insights/super-agent/ URL 유지 → 색인 요청 유효, 크롤러가 읽을 수 있는 본문 확보
+- 내부 링크: insight 페이지 10개에 "관련 글" 섹션 추가 (kimi-k3↔turboquant, llm-wiki↔harness 등)
+- 메인 카드: 슈퍼에이전트 "분석 읽기"(아티클) + "덱 보기"(deck.html)로 분리
