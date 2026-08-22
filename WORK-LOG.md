@@ -233,3 +233,9 @@
   - /insights/super-agent/ URL 유지 → 색인 요청 유효, 크롤러가 읽을 수 있는 본문 확보
 - 내부 링크: insight 페이지 10개에 "관련 글" 섹션 추가 (kimi-k3↔turboquant, llm-wiki↔harness 등)
 - 메인 카드: 슈퍼에이전트 "분석 읽기"(아티클) + "덱 보기"(deck.html)로 분리
+
+## 15. Hero 하단 Latest 배너 갱신 (2026-08-22)
+- 3~4월 콘텐츠(Physical AI, 하네스, TurboQuant) 배너 3개를 최신 게재물로 교체 (KR/EN)
+  - 금융 슈퍼에이전트 / Kimi K3 / LLM Wiki (라벨 "New ·")
+- CES 2026 배너는 유지, 기존 글은 Latest Insights 그리드에서 계속 접근 가능
+- 운영 원칙: 신규 insight 게재 시 상단 배너도 함께 갱신할 것
