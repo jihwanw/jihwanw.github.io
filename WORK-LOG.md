@@ -253,3 +253,10 @@
   - jihwanw.github.io/insights + QR(utm_source=linkedin&utm_medium=pdf) + 문의 이메일
 - k3_linkedin_v2.pdf (10p), llm-wiki_v2.pdf (26p) 생성 — CTA 페이지 병합본 (로컬)
 - TRAFFIC-STRATEGY.md \u00a74 LinkedIn 섹션을 PDF 포스트 중심 체크리스트로 갱신
+
+## 18. Industry Report 게재: 한국 협동로봇 시장과 경쟁 구도 (2026-08-22)
+- 자문 프로젝트(#1802328) 주제 관련 전략 보고서 작성 — 웹 리서치 기반, 전 수치 출처 명기
+- 데이터: IFR(로봇 밀도 1,012대 세계 1위), MnM/GVR(한국 CAGR 20%+), 각사 Q2 2026 공시(이데일리 종합)
+- 분석 축: 4사 경쟁력 비교표(두산/레인보우/뉴로메카/HD현대), 글로벌 Top10 구도, 3대 구조 역학(중국 가격 공세·커머디티화·휴머노이드 확장)
+- insights/korea-cobot-market/ KR/EN 게재 (TechArticle 스키마, hreflang, CTA, 관련 글 포함)
+- 게재 체크리스트 수행: 메인 카드+배너(LLM Wiki 배너 교체), /insights/ 인덱스, feed.xml, sitemap.xml
