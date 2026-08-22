@@ -239,3 +239,11 @@
   - 금융 슈퍼에이전트 / Kimi K3 / LLM Wiki (라벨 "New ·")
 - CES 2026 배너는 유지, 기존 글은 Latest Insights 그리드에서 계속 접근 가능
 - 운영 원칙: 신규 insight 게재 시 상단 배너도 함께 갱신할 것
+
+## 16. 사이트 전면 개선: 전환·성능·허브·브랜드·전략 (2026-08-22)
+- 전환: insight 페이지 11개에 강연·기고·자문 CTA 블록 추가 (contact_click GA 이벤트), 메인 mailto 태깅
+- 성능: 책 표지 9장 + 프로필 사진 WebP 변환 (931KB+342KB -> 147KB, 약 88% 절감), img src 교체
+- 허브: /insights/ 인덱스 페이지 신설 (7개 콘텐츠 목록), feed.xml RSS 피드 생성, 메인 head에 RSS 링크
+- Talks: 월간AX 6월 세미나 발표(엔터프라이즈 AI 에이전트) KR/EN 최상단 추가
+- 브랜드: og-default.png (1200x630) 생성, 16개 페이지 og:image 교체
+- 전략: TRAFFIC-STRATEGY.md 수립 (퍼널·키워드 맵·게재 체크리스트·LinkedIn 루틴·월간 점검)
