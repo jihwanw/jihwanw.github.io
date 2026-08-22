@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XW0TCQDB5V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XW0TCQDB5V');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Code Generation & Developer Workflow — Software Development, Rebuilt | Jihwan Woo</title>
+  <meta name="description" content="AI coding market analysis: Cursor's record-fast growth and reported SpaceX acquisition, the Copilot–Cursor–Claude Code triopoly, and the workflow shift from autocomplete to agents.">
+  <meta property="og:title" content="AI Code Generation & Developer Workflow — Software Development, Rebuilt">
+  <meta property="og:description" content="The Copilot–Cursor–Claude Code triopoly and the shift to agent-centric development.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://jihwanw.github.io/assets/images/og-default.png">
+  <link rel="canonical" href="https://jihwanw.github.io/en/insights/ai-coding/">
+  <link rel="alternate" hreflang="ko" href="https://jihwanw.github.io/insights/ai-coding/">
+  <link rel="alternate" hreflang="en" href="https://jihwanw.github.io/en/insights/ai-coding/">
+  <link rel="alternate" hreflang="x-default" href="https://jihwanw.github.io/insights/ai-coding/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "AI Code Generation & Developer Workflow — Software Development, Rebuilt",
+    "description": "The Copilot–Cursor–Claude Code triopoly and the shift to agent-centric development.",
+    "author": {"@type": "Person", "name": "Jihwan Woo", "url": "https://jihwanw.github.io/"},
+    "datePublished": "2026-08-22",
+    "inLanguage": "en",
+    "image": "https://jihwanw.github.io/assets/images/og-default.png",
+    "mainEntityOfPage": "https://jihwanw.github.io/en/insights/ai-coding/"
+  }
+  </script>
+  <style>
+    html { scroll-padding-top: 4rem; }
+    .tq-hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 1.5rem 3rem; position: relative; }
+    .tq-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(108,99,255,0.10) 0%, transparent 70%); pointer-events: none; }
+    .tq-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ai); border: 1px solid var(--ai-border); background: var(--ai-bg); padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
+    .tq-hero h1 { font-size: 2.2rem; letter-spacing: -0.03em; margin-bottom: 0.6rem; line-height: 1.3; }
+    .tq-hero h1 span { color: var(--ai); }
+    .tq-subtitle { color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 auto 1rem; line-height: 1.7; }
+    .tq-meta { color: var(--muted); font-size: 0.82rem; opacity: 0.6; }
+    .tq-article { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .tq-article h2 { font-size: 1.35rem; margin: 3rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--ai-border); color: var(--text); }
+    .tq-article p { color: var(--muted); font-size: 0.94rem; line-height: 1.9; margin-bottom: 1.2rem; }
+    .tq-article em { color: var(--text); font-style: normal; font-weight: 600; }
+    .tq-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+    .tq-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; transition: border-color 0.3s, transform 0.2s; }
+    .tq-stat:hover { transform: translateY(-2px); border-color: var(--ai-border); }
+    .tq-stat-number { font-size: 1.8rem; font-weight: 800; color: var(--ai); display: block; }
+    .tq-stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; display: block; }
+    .tq-highlight { background: linear-gradient(135deg, var(--ai-bg), var(--strategy-bg)); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; margin: 2rem 0; }
+    .tq-highlight h3 { font-size: 1.05rem; margin: 0 0 0.8rem; color: var(--text); }
+    .tq-highlight p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.8rem; }
+    .tq-highlight p:last-child { margin-bottom: 0; }
+    .tq-chain { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.5rem 0; }
+    .tq-chain-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.3s; }
+    .tq-chain-item:hover { border-color: var(--ai-border); }
+    .tq-chain-num { font-size: 0.75rem; font-weight: 700; color: var(--ai); background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 6px; padding: 0.3rem 0.6rem; flex-shrink: 0; margin-top: 0.1rem; white-space: nowrap; }
+    .tq-chain-content h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--text); }
+    .tq-chain-content p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin: 0; }
+    .tq-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.83rem; }
+    .tq-table th { text-align: left; padding: 0.7rem 0.7rem; border-bottom: 2px solid var(--ai-border); color: var(--text); font-size: 0.78rem; }
+    .tq-table td { padding: 0.7rem 0.7rem; border-bottom: 1px solid var(--border); color: var(--muted); line-height: 1.6; vertical-align: top; }
+    .tq-table td:first-child { color: var(--text); font-weight: 600; white-space: nowrap; }
+    .tq-table-note { font-size: 0.75rem; color: var(--muted); opacity: 0.7; line-height: 1.6; margin-top: -0.8rem; margin-bottom: 1.5rem; }
+    .tq-sources { font-size: 0.78rem; color: var(--muted); opacity: 0.75; line-height: 1.8; margin: 2rem 0; padding: 1.2rem 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+    .tq-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 2rem 0 1rem; }
+    .tq-tag { font-size: 0.72rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.8rem; }
+    .back-home { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--ai); text-decoration: none; font-size: 0.88rem; margin-bottom: 2rem; transition: opacity 0.2s; }
+    .back-home:hover { opacity: 0.7; }
+    @media (max-width: 600px) {
+      .tq-hero h1 { font-size: 1.6rem; }
+      .tq-stats { grid-template-columns: 1fr; }
+      .tq-table { font-size: 0.72rem; }
+      .tq-table th, .tq-table td { padding: 0.5rem 0.35rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../index.html#insights" class="nav-link">Insights</a>
+      <span class="nav-divider"></span>
+      <a href="../../../insights/ai-coding/index.html" class="nav-link nav-lang">KR</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tq-hero">
+      <div>
+        <span class="tq-badge">Industry Report · Developer Tools</span>
+        <h1><span>AI Code Generation &amp; Developer Workflow</span><br>— Software Development, Rebuilt</h1>
+        <p class="tq-subtitle">The fastest-growing software company in history came from this market. The Copilot–Cursor–Claude Code triopoly, and the structural shift from autocomplete to agents.</p>
+        <p class="tq-meta">Jihwan Woo · August 2026</p>
+      </div>
+    </section>
+
+    <article class="tq-article">
+      <a href="../../index.html#insights" class="back-home">← Back to Home</a>
+
+      <h2>Executive Summary</h2>
+      <p>AI coding tools are the fastest-moving software market of the decade. Cursor (Anysphere) went from $100M ARR in January 2025 to $2B by February 2026 and $4B by May — <em>the fastest software revenue growth ever measured</em> — with a reported $60B SpaceX acquisition agreement. Google paid $2.4B to reverse-acquihire the Windsurf team; agent-first Cognition raised at a $26B valuation. This report examines the triopoly and argues that the real battleground is shifting from code autocomplete to <em>the working environment where agents operate — the harness</em>.</p>
+
+      <div class="tq-stats">
+        <div class="tq-stat"><span class="tq-stat-number">$4B</span><span class="tq-stat-label">Cursor ARR (May 2026) — from $100M a year earlier</span></div>
+        <div class="tq-stat"><span class="tq-stat-number">64%</span><span class="tq-stat-label">Of Fortune 500 companies using Cursor</span></div>
+        <div class="tq-stat"><span class="tq-stat-number">$2.4B</span><span class="tq-stat-label">Google's Windsurf team reverse-acquihire</span></div>
+      </div>
+
+      <h2>1. A Triopoly with Three Different #1s</h2>
+      <table class="tq-table">
+        <thead><tr><th>Product</th><th>Company</th><th>Scale (as reported)</th><th>Strength</th></tr></thead>
+        <tbody>
+          <tr><td>GitHub Copilot</td><td>Microsoft</td><td>Millions of paid subscribers (reports range 1.8M–4.7M); $500M+ ARR</td><td>Install base and enterprise distribution — GitHub/M365 bundling</td></tr>
+          <tr><td>Cursor</td><td>Anysphere</td><td>$4B ARR (May 2026); 1M+ paying; reported $60B SpaceX deal</td><td>AI-first IDE experience, multi-file editing — revenue leader</td></tr>
+          <tr><td>Claude Code</td><td>Anthropic</td><td>~$2.5B annualized (est. Feb 2026); 42M monthly npm downloads</td><td>Terminal/agent-native; satisfaction leader (46% in JetBrains survey)</td></tr>
+          <tr><td>Cognition (Devin)</td><td>Cognition</td><td>Raised at $26B (May 2026); acquired Windsurf</td><td>Autonomous agent-first architecture</td></tr>
+        </tbody>
+      </table>
+      <p class="tq-table-note">Sources: company announcements and press (2026). Copilot subscriber counts vary widely by report; shown as ranges. Private-company figures are as reported.</p>
+      <p>The striking fact: <em>there are three #1s</em>. Copilot leads users, Cursor leads revenue, Claude Code leads satisfaction (JetBrains April 2026: 46% vs 19% vs 9%). Distribution (Microsoft), product experience (Anysphere), and model quality (Anthropic) each win on their own metric — the market is far from settled.</p>
+
+      <h2>2. The Workflow Shift: Autocomplete → IDE → Agent</h2>
+      <div class="tq-chain">
+        <div class="tq-chain-item"><span class="tq-chain-num">Act 1</span><div class="tq-chain-content"><h4>Autocomplete (2021–2023) — "type less"</h4><p>Copilot opened the market: next-line suggestions at the cursor, with the developer's workflow otherwise unchanged.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">Act 2</span><div class="tq-chain-content"><h4>AI-first IDE (2023–2025) — "edit together"</h4><p>The phase Cursor defined: codebase-aware, multi-file conversational editing, where the skill of giving AI context differentiated developers.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">Act 3</span><div class="tq-chain-content"><h4>Agents (2025–) — "delegate and review"</h4><p>The phase Claude Code and Devin are opening: hand over whole tasks and review results. The developer's role shifts from writer to architect-reviewer — and performance hinges not on the model but on the agent's working environment: tools, context management, verification loops. <em>Harness engineering</em>.</p></div></div>
+      </div>
+      <p>Act 3 poses a structural question: as agents work outside the IDE (terminal, CI, background), <em>the strategic value of owning the IDE itself may erode</em>. Cognition's $26B raise is a bet that agent-first architecture beats IDE tools; the reported SpaceX-Cursor deal and Google's Windsurf reverse-acquihire show how strategically this market's teams and technology are valued.</p>
+
+      <h2>3. Enterprise Adoption: The Numbers and What's Behind Them</h2>
+      <p>With 64% of the Fortune 500 using Cursor, adoption is mainstream. Two realities show up in practice. First, productivity gains are <em>extremely task-dependent</em> — dramatic for boilerplate, tests, and migrations; sometimes offset by review burden in complex domain logic. Second, the organizational bottleneck moves from writing code to <em>code review and architecture decisions</em>. Workflow redesign (review systems, test automation, agent permission policies) matters more than tool selection.</p>
+
+      <div class="tq-highlight">
+        <h3>Strategic Implications</h3>
+        <p><em>For engineering organizations</em> — the question is not "which tool to buy" but "how far down our workflow to delegate." Roll out autocomplete universally; phase in agents starting where test coverage is strong — and invest more than the tool budget in the harness that lets agents work safely: sandboxes, verification loops, permission policies.</p>
+        <p><em>For the industry</em> — three long-term battlegrounds: (1) model ownership — the margin structures of Anthropic/Microsoft versus model-renting Anysphere; (2) the distribution point of the agent era — IDE, terminal, or CI/CD platform; (3) beyond code generation — the remaking of the full software lifecycle from planning to deployment and operations.</p>
+      </div>
+
+      <div class="tq-sources">
+        <strong>Key sources</strong> — Everything-PR "AI Coding Tools Index 2026" · Gradually.ai, Axis Intelligence (Cursor statistics) · IdeaPlan 2026 (JetBrains survey) · TechTimes May 2026 (Cognition raise, SpaceX option) · Taskade (Anysphere history). Private-company figures and acquisition reports are press-based and may differ from final facts; this report is the author's analysis of public information.
+      </div>
+
+      <div class="tq-tags">
+        <span class="tq-tag">AI Coding</span><span class="tq-tag">Cursor</span><span class="tq-tag">GitHub Copilot</span><span class="tq-tag">Claude Code</span><span class="tq-tag">Agentic Coding</span><span class="tq-tag">Industry Report</span>
+      </div>
+
+      <div style="margin:2.5rem 0 1rem;padding:2rem;background:linear-gradient(135deg,var(--ai-bg),var(--strategy-bg));border:1px solid var(--ai-border);border-radius:12px;text-align:center;">
+        <h3 style="font-size:1.05rem;margin:0 0 .6rem;color:var(--text);">Need a talk, article, or advisory on this topic?</h3>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin:0 0 1.2rem;">I deliver executive keynotes, contribute industry reports, and advise on AI strategy.</p>
+        <a href="mailto:jihwan.woo@gmail.com" onclick="gtag('event','contact_click',{link_location:'insight_cta_en',page_path:location.pathname})" style="display:inline-block;color:#fff;background:var(--ai);text-decoration:none;font-size:.92rem;font-weight:600;border-radius:8px;padding:.7rem 1.6rem;">Get in Touch</a>
+      </div>
+
+      <div style="margin:3rem 0 1rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;">
+        <h3 style="font-size:.95rem;margin:0 0 .8rem;color:var(--text);">Related Articles</h3>
+        <a href="../harness-engineering/index.html" style="display:block;color:var(--ai);text-decoration:none;font-size:.88rem;padding:.3rem 0;">Harness Engineering — Systems, Not Models, Make Agents</a>
+        <a href="../ai-inference-market/index.html" style="display:block;color:var(--ai);text-decoration:none;font-size:.88rem;padding:.3rem 0;">The AI Inference Market Landscape</a>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2026 Jihwan Woo</p>
+  </footer>
+</body>
+</html>

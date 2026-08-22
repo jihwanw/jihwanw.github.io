@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XW0TCQDB5V"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XW0TCQDB5V');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AGI Data Platforms — The Data War Behind the Model Race | Jihwan Woo</title>
+  <meta name="description" content="Analysis of the AGI data platform market: Meta's $14.3B Scale AI deal and the market shakeup, the rise of Surge AI and Mercor, and the value chain shift from labeling to expert data and RL environments.">
+  <meta property="og:title" content="AGI Data Platforms — The Data War Behind the Model Race">
+  <meta property="og:description" content="How the AI training data market was reshaped after the Meta-Scale deal.">
+  <meta property="og:type" content="article">
+  <meta property="og:image" content="https://jihwanw.github.io/assets/images/og-default.png">
+  <link rel="canonical" href="https://jihwanw.github.io/en/insights/agi-data-platforms/">
+  <link rel="alternate" hreflang="ko" href="https://jihwanw.github.io/insights/agi-data-platforms/">
+  <link rel="alternate" hreflang="en" href="https://jihwanw.github.io/en/insights/agi-data-platforms/">
+  <link rel="alternate" hreflang="x-default" href="https://jihwanw.github.io/insights/agi-data-platforms/">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='12' fill='%236c63ff'/><text x='50' y='68' font-size='52' font-weight='700' fill='white' text-anchor='middle' font-family='system-ui'>JW</text></svg>">
+  <link rel="stylesheet" href="../../../assets/css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": "AGI Data Platforms — The Data War Behind the Model Race",
+    "description": "How the AI training data market was reshaped after the Meta-Scale deal.",
+    "author": {"@type": "Person", "name": "Jihwan Woo", "url": "https://jihwanw.github.io/"},
+    "datePublished": "2026-08-22",
+    "inLanguage": "en",
+    "image": "https://jihwanw.github.io/assets/images/og-default.png",
+    "mainEntityOfPage": "https://jihwanw.github.io/en/insights/agi-data-platforms/"
+  }
+  </script>
+  <style>
+    html { scroll-padding-top: 4rem; }
+    .tq-hero { min-height: 60vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 6rem 1.5rem 3rem; position: relative; }
+    .tq-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 30%, rgba(108,99,255,0.10) 0%, transparent 70%); pointer-events: none; }
+    .tq-badge { display: inline-block; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ai); border: 1px solid var(--ai-border); background: var(--ai-bg); padding: 0.3rem 1rem; border-radius: 20px; margin-bottom: 1.2rem; }
+    .tq-hero h1 { font-size: 2.2rem; letter-spacing: -0.03em; margin-bottom: 0.6rem; line-height: 1.3; }
+    .tq-hero h1 span { color: var(--ai); }
+    .tq-subtitle { color: var(--muted); font-size: 1.05rem; max-width: 640px; margin: 0 auto 1rem; line-height: 1.7; }
+    .tq-meta { color: var(--muted); font-size: 0.82rem; opacity: 0.6; }
+    .tq-article { max-width: 760px; margin: 0 auto; padding: 0 1.5rem 4rem; }
+    .tq-article h2 { font-size: 1.35rem; margin: 3rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--ai-border); color: var(--text); }
+    .tq-article p { color: var(--muted); font-size: 0.94rem; line-height: 1.9; margin-bottom: 1.2rem; }
+    .tq-article em { color: var(--text); font-style: normal; font-weight: 600; }
+    .tq-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 2rem 0; }
+    .tq-stat { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; text-align: center; transition: border-color 0.3s, transform 0.2s; }
+    .tq-stat:hover { transform: translateY(-2px); border-color: var(--ai-border); }
+    .tq-stat-number { font-size: 1.8rem; font-weight: 800; color: var(--ai); display: block; }
+    .tq-stat-label { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; display: block; }
+    .tq-highlight { background: linear-gradient(135deg, var(--ai-bg), var(--strategy-bg)); border: 1px solid var(--border); border-radius: 12px; padding: 1.8rem; margin: 2rem 0; }
+    .tq-highlight h3 { font-size: 1.05rem; margin: 0 0 0.8rem; color: var(--text); }
+    .tq-highlight p { color: var(--muted); font-size: 0.92rem; line-height: 1.8; margin-bottom: 0.8rem; }
+    .tq-highlight p:last-child { margin-bottom: 0; }
+    .tq-chain { display: flex; flex-direction: column; gap: 0.8rem; margin: 1.5rem 0; }
+    .tq-chain-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; transition: border-color 0.3s; }
+    .tq-chain-item:hover { border-color: var(--ai-border); }
+    .tq-chain-num { font-size: 0.75rem; font-weight: 700; color: var(--ai); background: var(--ai-bg); border: 1px solid var(--ai-border); border-radius: 6px; padding: 0.3rem 0.6rem; flex-shrink: 0; margin-top: 0.1rem; white-space: nowrap; }
+    .tq-chain-content h4 { font-size: 0.95rem; margin-bottom: 0.3rem; color: var(--text); }
+    .tq-chain-content p { color: var(--muted); font-size: 0.85rem; line-height: 1.7; margin: 0; }
+    .tq-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.83rem; }
+    .tq-table th { text-align: left; padding: 0.7rem 0.7rem; border-bottom: 2px solid var(--ai-border); color: var(--text); font-size: 0.78rem; }
+    .tq-table td { padding: 0.7rem 0.7rem; border-bottom: 1px solid var(--border); color: var(--muted); line-height: 1.6; vertical-align: top; }
+    .tq-table td:first-child { color: var(--text); font-weight: 600; white-space: nowrap; }
+    .tq-table-note { font-size: 0.75rem; color: var(--muted); opacity: 0.7; line-height: 1.6; margin-top: -0.8rem; margin-bottom: 1.5rem; }
+    .tq-sources { font-size: 0.78rem; color: var(--muted); opacity: 0.75; line-height: 1.8; margin: 2rem 0; padding: 1.2rem 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+    .tq-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 2rem 0 1rem; }
+    .tq-tag { font-size: 0.72rem; color: var(--muted); background: var(--surface); border: 1px solid var(--border); border-radius: 20px; padding: 0.25rem 0.8rem; }
+    .back-home { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--ai); text-decoration: none; font-size: 0.88rem; margin-bottom: 2rem; transition: opacity 0.2s; }
+    .back-home:hover { opacity: 0.7; }
+    @media (max-width: 600px) {
+      .tq-hero h1 { font-size: 1.6rem; }
+      .tq-stats { grid-template-columns: 1fr; }
+      .tq-table { font-size: 0.72rem; }
+      .tq-table th, .tq-table td { padding: 0.5rem 0.35rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="../../index.html" class="nav-link">Home</a>
+      <a href="../../index.html#insights" class="nav-link">Insights</a>
+      <span class="nav-divider"></span>
+      <a href="../../../insights/agi-data-platforms/index.html" class="nav-link nav-lang">KR</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="tq-hero">
+      <div>
+        <span class="tq-badge">Industry Report · AI Infrastructure</span>
+        <h1><span>AGI Data Platforms</span><br>— The Data War Behind the Model Race</h1>
+        <p class="tq-subtitle">Meta's $14.3B Scale AI deal, the rise of Surge AI and Mercor, and the value chain shifting from labeling to expert data and RL environments.</p>
+        <p class="tq-meta">Jihwan Woo · August 2026</p>
+      </div>
+    </section>
+
+    <article class="tq-article">
+      <a href="../../index.html#insights" class="back-home">← Back to Home</a>
+
+      <h2>Executive Summary</h2>
+      <p>Behind the frontier model race sits a less visible market: the <em>data platforms</em> that supply what models learn. In June 2025, Meta invested $14.3B for a 49% stake in Scale AI and hired away its founder — and the market convulsed. OpenAI, Google, and Microsoft halted or scaled back work with Scale, and Surge AI and Mercor absorbed the vacuum, flipping the leaderboard within a year. The deeper change is in the value chain itself: from low-wage labeling to PhD-level expert data, evaluations, and reinforcement learning environments.</p>
+
+      <div class="tq-stats">
+        <div class="tq-stat"><span class="tq-stat-number">$14.3B</span><span class="tq-stat-label">Meta's investment in Scale AI (49%, June 2025)</span></div>
+        <div class="tq-stat"><span class="tq-stat-number">$2B</span><span class="tq-stat-label">Mercor annualized revenue (June 2026)</span></div>
+        <div class="tq-stat"><span class="tq-stat-number">22.6%</span><span class="tq-stat-label">AI training dataset market CAGR (to $16.3B by 2033, GVR)</span></div>
+      </div>
+
+      <h2>1. The Meta-Scale Deal: One Investment That Reshaped a Market</h2>
+      <p>Scale AI defined industrial data labeling with a global contractor workforce. With 2024 revenue of $870M and projections of $2B for 2025, Meta invested $14.3B at a ~$29B valuation and brought founder Alexandr Wang in to co-lead Meta Superintelligence Labs.</p>
+      <p>The problem: Scale's biggest customers were Meta's competitors. OpenAI, Google, and Microsoft cut ties — no lab could accept its training data pipeline being visible to a rival — and Scale cut 14% of staff. Revenue is recovering under new leadership (projected $1B+ in 2026), but the lesson stands: <em>the neutrality of a data pipeline is itself an asset</em>.</p>
+
+      <h2>2. The Reshaped Landscape</h2>
+      <table class="tq-table">
+        <thead><tr><th>Player</th><th>Position</th><th>Scale (as reported)</th><th>Differentiation</th></tr></thead>
+        <tbody>
+          <tr><td>Scale AI</td><td>Labeling pioneer; Meta 49%</td><td>$870M (2024) → $1B+ recovery projected (2026)</td><td>Scale and operations; neutrality lost</td></tr>
+          <tr><td>Surge AI</td><td>High-quality RLHF and expert data</td><td>Bootstrapped, ~110 staff; reported to have passed Scale in revenue</td><td>Small, elite, frontier-lab focused</td></tr>
+          <tr><td>Mercor</td><td>Expert talent marketplace</td><td>$2B annualized revenue (June 2026); reported $20B valuation talks</td><td>PhD/lawyer/doctor networks; 90% of revenue from foundation model companies</td></tr>
+          <tr><td>Arena &amp; eval platforms</td><td>Model evaluation and rankings</td><td>~$100M ARR (est. June 2026)</td><td>"The Nielsen of LLMs" — evaluation data as training signal</td></tr>
+        </tbody>
+      </table>
+      <p class="tq-table-note">Sources: Forbes, Business Insider, Sacra, HeroHunt (2026). Private-company figures are reported estimates with variance.</p>
+      <p>The essence is not "who won" but <em>which data got expensive</em>. The center of gravity moved from drawing boxes on images to PhD-level experts evaluating outputs, writing preference data, red-teaming, and designing RL environments — from dollars per hour to tens or hundreds of dollars per hour.</p>
+
+      <h2>3. The Value Chain Shift: Labeling → Expert Data → Environments</h2>
+      <div class="tq-chain">
+        <div class="tq-chain-item"><span class="tq-chain-num">Gen 1</span><div class="tq-chain-content"><h4>Pre-training data and labeling (2016–2023)</h4><p>Web data curation and mass low-wage annotation — the market Scale defined. Growth slowed as web data was exhausted and synthetic data rose.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">Gen 2</span><div class="tq-chain-content"><h4>Alignment and expert data (2023–)</h4><p>RLHF, preference data, and domain-expert evaluation became the bottleneck. Math, coding, legal, and medical experts serve as the model's graders and teachers — the territory Surge and Mercor captured.</p></div></div>
+        <div class="tq-chain-item"><span class="tq-chain-num">Gen 3</span><div class="tq-chain-content"><h4>RL environments and eval infrastructure (2025–)</h4><p>Agent-era training data is not static text but <em>environments to act in and get feedback from</em>. RL environment construction, simulators, and agent task evals are the new battleground.</p></div></div>
+      </div>
+
+      <div class="tq-highlight">
+        <h3>Strategic Implications</h3>
+        <p><em>For enterprises</em> — companies that can convert domain expertise into data assets can become suppliers in this value chain. Before relying on external platforms, systematize your internal experts' judgment data: evaluation criteria, preferences, edge-case handling.</p>
+        <p><em>For investors</em> — multiples here are priced on the "essential frontier-lab infrastructure" frame, not labeling outsourcing. Watch customer concentration, labs' in-housing risk, and the speed of transition to Gen 3 (environments and evals).</p>
+      </div>
+
+      <div class="tq-sources">
+        <strong>Key sources</strong> — Forbes (June 2025, deal structure) · Business Insider (Dec 2025, fallout) · Forbes Australia (June 2026, Scale recovery) · Sacra (Mercor/Arena estimates) · Forbes (July 2026, Mercor valuation talks) · Contrary Research · Grand View Research. Private-company figures are reported estimates; this report is the author's analysis of public information.
+      </div>
+
+      <div class="tq-tags">
+        <span class="tq-tag">AGI</span><span class="tq-tag">Data Platforms</span><span class="tq-tag">Scale AI</span><span class="tq-tag">Mercor</span><span class="tq-tag">RLHF</span><span class="tq-tag">Industry Report</span>
+      </div>
+
+      <div style="margin:2.5rem 0 1rem;padding:2rem;background:linear-gradient(135deg,var(--ai-bg),var(--strategy-bg));border:1px solid var(--ai-border);border-radius:12px;text-align:center;">
+        <h3 style="font-size:1.05rem;margin:0 0 .6rem;color:var(--text);">Need a talk, article, or advisory on this topic?</h3>
+        <p style="color:var(--muted);font-size:.9rem;line-height:1.7;margin:0 0 1.2rem;">I deliver executive keynotes, contribute industry reports, and advise on AI strategy.</p>
+        <a href="mailto:jihwan.woo@gmail.com" onclick="gtag('event','contact_click',{link_location:'insight_cta_en',page_path:location.pathname})" style="display:inline-block;color:#fff;background:var(--ai);text-decoration:none;font-size:.92rem;font-weight:600;border-radius:8px;padding:.7rem 1.6rem;">Get in Touch</a>
+      </div>
+
+      <div style="margin:3rem 0 1rem;padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:12px;">
+        <h3 style="font-size:.95rem;margin:0 0 .8rem;color:var(--text);">Related Articles</h3>
+        <a href="../ai-inference-market/index.html" style="display:block;color:var(--ai);text-decoration:none;font-size:.88rem;padding:.3rem 0;">The AI Inference Market Landscape</a>
+        <a href="../llm-wiki/index.html" style="display:block;color:var(--ai);text-decoration:none;font-size:.88rem;padding:.3rem 0;">LLM Wiki — When AI Writes Its Own Wiki, Knowledge Compounds</a>
+      </div>
+    </article>
+  </main>
+
+  <footer>
+    <p>© 2026 Jihwan Woo</p>
+  </footer>
+</body>
+</html>

@@ -260,3 +260,11 @@
 - 분석 축: 4사 경쟁력 비교표(두산/레인보우/뉴로메카/HD현대), 글로벌 Top10 구도, 3대 구조 역학(중국 가격 공세·커머디티화·휴머노이드 확장)
 - insights/korea-cobot-market/ KR/EN 게재 (TechArticle 스키마, hreflang, CTA, 관련 글 포함)
 - 게재 체크리스트 수행: 메인 카드+배너(LLM Wiki 배너 교체), /insights/ 인덱스, feed.xml, sitemap.xml
+
+## 19. Industry Report 3건 게재: AGI 데이터 플랫폼 / AI 추론 시장 / AI 코딩 (2026-08-22)
+- 자문 대비 목적의 시장 소개 보고서 3건 — 웹 리서치 기반, 전 수치 출처 명기 (KR/EN 6페이지)
+- agi-data-platforms: Meta-Scale 딜(4.3B), Surge/Mercor 부상, 라벨링→전문가 데이터→RL 환경 가치사슬
+- ai-inference-market: 컴퓨트 2/3 추론 이동, Cerebras IPO, 토큰 경제학, 5계층 시장 구조
+- ai-coding: Cursor B ARR, 3강 구도(유저 Copilot/매출 Cursor/만족도 Claude Code), 자동완성→IDE→에이전트 3막
+- 섹션 판단: 신규 섹션 대신 Insights에 Industry Report 카테고리로 통합 (허브 SEO 집중)
+- 체크리스트 수행: 메인 카드 6개(KR/EN), /insights/ 인덱스, feed.xml, sitemap.xml
