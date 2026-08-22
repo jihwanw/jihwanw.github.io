@@ -35,12 +35,18 @@ GA4 이벤트 체계:
 7. push 후 Search Console URL 검사 → 색인 생성 요청 (KR/EN)
 8. LinkedIn 포스트 (아래 4번)
 
-## 4. LinkedIn 연계 (주 1~2회)
+## 4. LinkedIn 연계 (주 1~2회) — PDF 포스트 중심
 
-- 새 insight 게재 시: 핵심 인사이트 3줄 + 그래픽 1장 + 사이트 링크
-- 링크는 댓글이 아닌 본문에 (전문가 브랜딩 목적이므로 도달률보다 신뢰 우선)
-- OG 이미지(og-default.png)가 공유 카드에 표시됨 — insight별 전용 OG 이미지는 반응 좋은 글부터 순차 제작
-- 월 1회: 과거 인기 insight 재공유 (다른 각도의 훅으로)
+현행 방식: 콘텐츠를 PDF 문서 포스트로 공유 (링크 공유보다 도달률 높음 — 유지)
+
+게재 체크리스트:
+1. LinkedIn용 PDF 마지막에 **CTA 페이지** 추가 (템플릿: 로컬 기고/linkedin-cta-page.pdf)
+   - jihwanw.github.io/insights + QR(UTM: utm_source=linkedin&utm_medium=pdf) + 문의 이메일
+   - PDF 내 링크는 LinkedIn 뷰어에서 클릭 불가 → 타이핑 가능한 짧은 주소 + QR이 필수
+2. 포스트 본문에 해당 글 URL + UTM 병기:
+   https://jihwanw.github.io/insights/<slug>/?utm_source=linkedin&utm_medium=post
+3. 측정: GA4에서 utm_medium=pdf(QR 유입) vs post(본문 링크) 구분 추적
+4. 월 1회: 과거 인기 insight 재공유 (다른 각도의 훅)
 
 ## 5. 백링크 확보
 

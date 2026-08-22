@@ -247,3 +247,9 @@
 - Talks: 월간AX 6월 세미나 발표(엔터프라이즈 AI 에이전트) KR/EN 최상단 추가
 - 브랜드: og-default.png (1200x630) 생성, 16개 페이지 og:image 교체
 - 전략: TRAFFIC-STRATEGY.md 수립 (퍼널·키워드 맵·게재 체크리스트·LinkedIn 루틴·월간 점검)
+
+## 17. LinkedIn PDF 전략 보완 (2026-08-22)
+- LinkedIn용 PDF에 사이트 URL 부재 확인 → CTA 마지막 페이지 표준 템플릿 제작 (로컬: 기고/linkedin-cta-page.pdf)
+  - jihwanw.github.io/insights + QR(utm_source=linkedin&utm_medium=pdf) + 문의 이메일
+- k3_linkedin_v2.pdf (10p), llm-wiki_v2.pdf (26p) 생성 — CTA 페이지 병합본 (로컬)
+- TRAFFIC-STRATEGY.md \u00a74 LinkedIn 섹션을 PDF 포스트 중심 체크리스트로 갱신
