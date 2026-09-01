@@ -268,3 +268,8 @@
 - ai-coding: Cursor B ARR, 3강 구도(유저 Copilot/매출 Cursor/만족도 Claude Code), 자동완성→IDE→에이전트 3막
 - 섹션 판단: 신규 섹션 대신 Insights에 Industry Report 카테고리로 통합 (허브 SEO 집중)
 - 체크리스트 수행: 메인 카드 6개(KR/EN), /insights/ 인덱스, feed.xml, sitemap.xml
+
+## 9. SEO: /en/ meta description 개선 (2026-09-01)
+- Search Console 데이터 근거: /en/ 노출 48회 대비 클릭 1회(CTR 2.1%)로 저조
+- meta description을 직함·학력 나열에서 수치화된 실적(36+ papers, 30+ patents, 9 books) + 제공 가치(advisory, speaking, writing) 중심으로 교체
+- title, og:description은 유지
