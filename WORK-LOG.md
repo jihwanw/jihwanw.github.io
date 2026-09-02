@@ -278,3 +278,6 @@
 - Search Console 근거: "kimi k3 weights/quantize/open frontier" 등 롱테일 7회 노출, 클릭 0
 - 설명문을 노출 검색어와 정렬: open-weight 2회, quantized 명시, frontier model 반영
 - Hugging Face는 본문에서 인용 1회뿐이라 과장 방지 위해 제외. 모든 문구 본문 실제 내용 기준
+
+## 11. 데이터거래사 자격 추가 (2026-09-02)
+- Certifications에 데이터거래사(과기정통부, 2026) KR/EN 추가. 등록증 원문 검증 완료 (제2026-019-1204호, 2026.07.31)
