@@ -293,3 +293,7 @@
 - Email을 주 버튼("이메일로 문의하기"/"Get in touch by email")으로 승격
 - 목적별 원클릭 mailto 버튼: 강연 문의/기고 문의 (제목 자동 입력) — GA contact_click 위치 라벨 분리(speaking/writing)
 - LinkedIn·Scholar·GitHub는 보조 링크로 유지. KR/EN 동기화
+
+## 14. 신간 <AI 기술 경영> 추가 (2026-09-02)
+- 컴북스 AI총서, 2026-08-26 발행, ISBN 9791143032058 — 출판사 페이지에서 검증
+- KR/EN Books 섹션에 featured 항목 추가 (표지 webp 변환 포함), 권수 10→11 (About stat, capability 문구, 목록 헤더)
