@@ -288,3 +288,8 @@
 - 제목 타이포그래피: h1·h2에 display 서체(Charter/Georgia 스택) 적용
 - 태블릿(769~1024px) 미디어쿼리 신설: 3열 그리드 → 2열
 - 이미지 lazy loading 전면 적용 (KR 13, EN 13, CES 30)
+
+## 13. Contact 섹션 전환 최적화 (2026-09-02, 승인됨)
+- Email을 주 버튼("이메일로 문의하기"/"Get in touch by email")으로 승격
+- 목적별 원클릭 mailto 버튼: 강연 문의/기고 문의 (제목 자동 입력) — GA contact_click 위치 라벨 분리(speaking/writing)
+- LinkedIn·Scholar·GitHub는 보조 링크로 유지. KR/EN 동기화
