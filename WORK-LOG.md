@@ -273,3 +273,8 @@
 - Search Console 데이터 근거: /en/ 노출 48회 대비 클릭 1회(CTR 2.1%)로 저조
 - meta description을 직함·학력 나열에서 수치화된 실적(36+ papers, 30+ patents, 9 books) + 제공 가치(advisory, speaking, writing) 중심으로 교체
 - title, og:description은 유지
+
+## 10. SEO: Kimi K3 글 meta description 검색어 정렬 (2026-09-02)
+- Search Console 근거: "kimi k3 weights/quantize/open frontier" 등 롱테일 7회 노출, 클릭 0
+- 설명문을 노출 검색어와 정렬: open-weight 2회, quantized 명시, frontier model 반영
+- Hugging Face는 본문에서 인용 1회뿐이라 과장 방지 위해 제외. 모든 문구 본문 실제 내용 기준
