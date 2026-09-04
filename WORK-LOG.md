@@ -308,3 +308,13 @@
 - Insights 허브와 KR/EN 상세 글 상단에 IITP 공식 원문 링크 추가
 - 상세 글 저자 메타에 주간기술동향 기고처 명시
 - 영문 메인 카드의 기존 분석 링크가 한국어 글을 가리키던 오류 수정
+
+---
+
+## NVIDIA 허깅페이스 인수 분석 아티클 게재 (2026-09-04)
+- `insights/nvidia-huggingface/` (KR) + `en/insights/nvidia-huggingface/` (EN) 신설
+- 제목: NVIDIA의 허깅페이스 인수 — "오픈소스가 AI의 미래"라는 가장 비싼 자백
+- 구성: 요약 → 스탯 3종($129억/1,800만 개발자/300만+ 모델) → 밸류체인 길목 분석 → 세 가지 인수 동기 → 기업 점검 3항목 테이블 → 커뮤니티 변수 → 균형 시각(애플리케이션 가치)
+- 사실관계: NVIDIA 공식 블로그(2026-09-03 발표, 중립성 공언), CNBC/TechCrunch/Wired 검증 완료
+- 노출: insights 허브 최상단, KR/EN 메인 Latest Insights 최상단, sitemap.xml, feed.xml(RSS) 갱신
+- SEO: canonical/hreflang(ko·en), OG 메타, TechArticle JSON-LD, 검색 키워드 겨냥 description

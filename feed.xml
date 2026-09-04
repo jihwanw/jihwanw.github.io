@@ -7,6 +7,13 @@
   <language>ko</language>
   <atom:link href="https://jihwanw.github.io/feed.xml" rel="self" type="application/rss+xml"/>
   <item>
+    <title>NVIDIA의 허깅페이스 인수 — "오픈소스가 AI의 미래"라는 가장 비싼 자백</title>
+    <link>https://jihwanw.github.io/insights/nvidia-huggingface/</link>
+    <guid>https://jihwanw.github.io/insights/nvidia-huggingface/</guid>
+    <pubDate>Fri, 04 Sep 2026 22:00:00 +0900</pubDate>
+    <description>매출의 80배가 넘는 129억 달러. NVIDIA가 산 것은 매출이 아니라 모델 유통 계층의 '길목'이다. 세 가지 인수 동기, 기업이 점검할 세 가지, 커뮤니티라는 단일 변수.</description>
+  </item>
+  <item>
     <title>AGI 데이터 플랫폼 — 모델 경쟁의 이면에서 벌어지는 데이터 전쟁</title>
     <link>https://jihwanw.github.io/insights/agi-data-platforms/</link>
     <guid>https://jihwanw.github.io/insights/agi-data-platforms/</guid>
